@@ -18,12 +18,23 @@ interface Project {
 
 const projects: Project[] = [
   {
-    titleKey: "projects.crypto.title",
-    descriptionKey: "projects.crypto.description",
-    url: "https://v0-crypto-news-website-peach.vercel.app/",
-    tags: ["Next.js", "Crypto", "News"],
-    category: "web",
-    type: "website",
+    titleKey: "projects.hazechill.title",
+    descriptionKey: "projects.hazechill.description",
+    url: "https://www.instagram.com/haze_and_chill_cafe/",
+    tags: ["Design", "Social Media", "Instagram"],
+    category: "design",
+    type: "social",
+    platform: "instagram",
+    logo: "/images/haze-and-chill-cafe-logo.jpg",
+  },
+  {
+    titleKey: "projects.reel.title",
+    descriptionKey: "projects.reel.description",
+    url: "https://www.instagram.com/reel/DYug1AZoD9L/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    tags: ["Instagram", "Reel", "Content Editing", "Social Media"],
+    category: "social",
+    type: "social",
+    platform: "instagram",
   },
   {
     titleKey: "projects.studio.title",
@@ -42,6 +53,14 @@ const projects: Project[] = [
     type: "website",
   },
   {
+    titleKey: "projects.crypto.title",
+    descriptionKey: "projects.crypto.description",
+    url: "https://v0-crypto-news-website-peach.vercel.app/",
+    tags: ["Next.js", "Crypto", "News"],
+    category: "web",
+    type: "website",
+  },
+  {
     titleKey: "projects.luxury.title",
     descriptionKey: "projects.luxury.description",
     url: "https://v0-luxury-street-chic-website.vercel.app/",
@@ -56,25 +75,6 @@ const projects: Project[] = [
     tags: ["Charity", "Donation", "Website"],
     category: "nonprofit",
     type: "website",
-  },
-  {
-    titleKey: "projects.reel.title",
-    descriptionKey: "projects.reel.description",
-    url: "https://www.instagram.com/reel/DYZ8c51Myqx/",
-    tags: ["Instagram", "Reel", "Content Editing", "Social Media"],
-    category: "social",
-    type: "social",
-    platform: "instagram",
-  },
-  {
-    titleKey: "projects.hazechill.title",
-    descriptionKey: "projects.hazechill.description",
-    url: "https://www.instagram.com/haze_and_chill_cafe/",
-    tags: ["Design", "Social Media", "Instagram"],
-    category: "design",
-    type: "social",
-    platform: "instagram",
-    logo: "/images/haze-and-chill-cafe-logo.jpg",
   },
 ]
 
