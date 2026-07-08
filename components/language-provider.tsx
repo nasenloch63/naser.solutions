@@ -105,7 +105,11 @@ const translations = {
     "projects.donation.title": "Spendenseite Al Salam",
     "projects.donation.description": "Professionelle Spendenwebsite für humanitäre Zwecke mit modernem Design und benutzerfreundlicher Spendenverwaltung.",
     "projects.hazechill.title": "Haze & Chill Cafe",
-    "projects.hazechill.description": "Design und Social-Media-Betreuung für ein trendiges Café – von der Markenidentität bis zum Instagram-Auftritt.",
+    "projects.hazechill.description":
+      "Design und Social-Media-Betreuung für ein trendiges Café – von der Markenidentität bis zum Instagram-Auftritt. Zusätzlich unterstützen wir das Café beim Design der Speisekarte, bei der Korrespondenz mit Werbepartnern sowie aktiv in der Entwicklung und Skalierung des Konzepts.",
+    "projects.reel.title": "Haze & Chill Café – Content Production",
+    "projects.reel.description":
+      "Diese Produktion ist Teil unserer Content-Arbeit für das Haze & Chill Café. Wir entwickeln und produzieren Reels und visuelle Inhalte für den Instagram-Auftritt der Marke.",
 
     // About
     "about.label": "Der Kopf dahinter",
@@ -553,6 +557,12 @@ const translations = {
     "projects.luxury.description": "High-end fashion e-commerce shop with modern design and seamless user experience.",
     "projects.donation.title": "Al Salam Donation Website",
     "projects.donation.description": "Professional donation website for humanitarian purposes with modern design and user-friendly donation management.",
+    "projects.hazechill.title": "Haze & Chill Cafe",
+    "projects.hazechill.description":
+      "Design and social media management for a trendy café – from brand identity to Instagram presence. We also support the café with menu design, correspondence with advertising partners, and actively in developing and scaling the concept.",
+    "projects.reel.title": "Haze & Chill Café – Content Production",
+    "projects.reel.description":
+      "This production is part of our content work for Haze & Chill Café. We develop and produce reels and visual content for the brand's Instagram presence.",
 
     // About
     "about.label": "The mind behind it",
@@ -1797,7 +1807,7 @@ const translations = {
       "Профессиональные и современные сайты, которые оптимально представляют вашу компанию и убеждают клиентов. От концепции до реализации.",
     "services.influencer.title": "Сайты для инфлюенсеров",
     "services.influencer.description":
-      "Уникальное цифровое присутствие для создателей контента и инфлюенсеров с портфолио и интеграцией социальных сетей.",
+      "Уни��альное цифровое присутствие для создателей контента и инфлюенсеров с портфолио и интеграцией социальных сетей.",
     "services.supermarket.title": "Приложения для супермаркетов",
     "services.supermarket.description":
       "Индивидуальные приложения с push-уведомлениями, цифровыми купонами и программами лояльности для розничной торговли.",
