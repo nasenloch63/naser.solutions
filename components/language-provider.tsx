@@ -498,15 +498,19 @@ const translations = {
 
     // Hero
     "hero.badge": "Newly founded 2026",
+    "hero.eyebrow": "We think, design and develop digital solutions",
     "hero.subtitle": "we think, design and develop",
-    "hero.title1": "the future.",
-    "hero.title2": "digital.",
+    "hero.title1": "Websites & Branding,",
+    "hero.title2": "that get visibility and drive sales.",
     "hero.description":
-      "Naser Solutions is an innovative web agency with big ambitions. We combine cutting-edge technology with creative design to create digital experiences that inspire.",
-    "hero.cta": "Let's get started",
+      "For companies, freelancers & creators who want to be taken seriously online and expect results.",
+    "hero.cta": "Start Project",
     "hero.cta2": "Free Initial Consultation",
     "hero.refBtn": "Reference Projects",
     "hero.vision": "Our Vision",
+    "hero.trust": "Successfully implemented for clients across Europe",
+    "hero.languages": "German & English fluent · Arabic & French professional level",
+    "hero.regions": "Projects in Germany, France & Portugal, among others",
 
     // Stats
     "stats.founded": "founded",
@@ -824,15 +828,19 @@ const translations = {
 
     // Hero
     "hero.badge": "Fondée en 2026",
+    "hero.eyebrow": "Nous pensons, concevons et développons des solutions numériques",
     "hero.subtitle": "nous pensons, concevons et développons",
-    "hero.title1": "l'avenir.",
-    "hero.title2": "digital.",
+    "hero.title1": "Sites Web & Branding,",
+    "hero.title2": "qui génèrent de la visibilité et des ventes.",
     "hero.description":
-      "Naser Solutions est une agence web innovante avec de grandes ambitions. Nous combinons technologie de pointe et design créatif pour créer des expériences digitales qui inspirent.",
-    "hero.cta": "Commençons",
+      "Pour les entreprises, les indépendants et les créateurs qui veulent être pris au sérieux en ligne et attendre des résultats.",
+    "hero.cta": "Commencer le projet",
     "hero.cta2": "Consultation Initiale Gratuite",
     "hero.refBtn": "Projets de Référence",
     "hero.vision": "Notre Vision",
+    "hero.trust": "Déjà mis en œuvre avec succès pour des clients à travers l'Europe",
+    "hero.languages": "Allemand et anglais courants · Arabe et français au niveau professionnel",
+    "hero.regions": "Projets notamment en Allemagne, France et Portugal",
 
     // Stats
     "stats.founded": "fondée",
@@ -1153,7 +1161,7 @@ const translations = {
     "contact.form.messagePlaceholder": "أخبرنا عن مشروعك...",
     "contact.form.submit": "إرسال الرسالة",
     "contact.form.sending": "جاري الإرسال...",
-    "contact.form.success": "شكراً لرسالتك! سنرد عليك قريباً.",
+    "contact.form.success": "شكراً لرسا��تك! سنرد عليك قريباً.",
 
     // Footer
     "footer.imprint": "البيانات القانونية",
@@ -1212,7 +1220,7 @@ const translations = {
     "privacy.logfiles.os": "نظام التشغيل",
     "privacy.logfiles.referrer": "عنوان URL المرجعي",
     "privacy.logfiles.pages": "الصفحات المزارة",
-    "privacy.logfiles.purpose": "هذه البيانات ضرورية تقنياً لعرض الموقع وضمان الاستقرار والأمان.",
+    "privacy.logfiles.purpose": "هذه البيانات ضرورية تقنياً لعرض ��لموقع وضمان الاستقرار والأمان.",
     "privacy.cookies.title": "6. ملفات تعريف الارتباط",
     "privacy.cookies.text": "يستخدم موقعنا ملفات تعريف الارتباط الضرورية تقنياً فقط.",
     "privacy.cookies.name": "اسم الكوكي",
@@ -1777,7 +1785,7 @@ const translations = {
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "Интернет-магазин высокой моды с современным дизайном и безупречным пользовательским опытом.",
     "projects.donation.title": "Сайт пожертвований Al Salam",
-    "projects.donation.description": "Профессиональный сайт пожертвований в благотворительных целях с современным дизайном и удобным управлением пожертвованиями.",
+    "projects.donation.description": "Про��ессиональный сайт пожертвований в благотворительных целях с современным дизайном и удобным управлением пожертвованиями.",
 
     // Hero
     "hero.badge": "Основано в 2026",
@@ -2673,7 +2681,7 @@ const translations = {
     "privacy.cookies.langDesc": "Αποθηκεύει την προτιμώμενη ρύθμιση γλώσσας",
     "privacy.cookies.year": "Έτος",
     "privacy.cookies.settings": "Μπορείτε να απενεργοποιήσετε τα cookies ανά πάσα στιγμή στις ρυθμίσεις του browser.",
-    "privacy.contact.title": "7. Φόρμα επικοινωνίας",
+    "privacy.contact.title": "7. Φόρμα επ��κοινωνίας",
     "privacy.contact.text": "Όταν μας επικοινωνείτε μέσω της φόρμας, συλλέγονται τα ακόλουθα δεδομένα:",
     "privacy.contact.name": "Όνομα",
     "privacy.contact.emailData": "Διεύθυνση e-mail",
@@ -3053,7 +3061,7 @@ const translations = {
 
     // Payment
     "payment.badge": "安全的加密货币支付",
-    "payment.title": "使用加密货币支付",
+    "payment.title": "使用加密货币支���",
     "payment.description":
       "我们接受比特币、Solana和Monero支付。选择您喜欢的加密货币：",
     "payment.secure": "100% 安全",
