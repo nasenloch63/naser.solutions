@@ -61,6 +61,14 @@ const projects: Project[] = [
     type: "website",
   },
   {
+    titleKey: "projects.joesgarage.title",
+    descriptionKey: "projects.joesgarage.description",
+    url: "https://www.joes-garage.net",
+    tags: ["Rock Bar", "Webdesign", "Events"],
+    category: "gastro",
+    type: "website",
+  },
+  {
     titleKey: "projects.luxury.title",
     descriptionKey: "projects.luxury.description",
     url: "https://v0-luxury-street-chic-website.vercel.app/",
