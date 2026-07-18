@@ -67,7 +67,6 @@ const projects: Project[] = [
     tags: ["Rock Bar", "Webdesign", "Events"],
     category: "gastro",
     type: "website",
-    logo: "/images/project-joes-garage.png",
   },
   {
     titleKey: "projects.luxury.title",
