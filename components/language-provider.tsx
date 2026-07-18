@@ -100,6 +100,9 @@ const translations = {
     "projects.studio.description": "Elegante Portfolio-Website für ein kreatives Designstudio mit minimalistischer Ästhetik und fließenden Animationen.",
     "projects.porsche.title": "A&A Performance Autohaus Leipzig",
     "projects.porsche.description": "Professioneller Webauftritt für ein Hochleistungs-Autohaus in Leipzig mit modernem Design und Premium-Fahrzeugpräsentation.",
+    "projects.joesgarage.title": "Joe's Garage Kassel",
+    "projects.joesgarage.description":
+      "Moderner Webauftritt für Joe's Garage, Kassels Rock-Bar und Kultkneipe. Die Website verbindet authentisches Bar-Feeling mit Informationen zu Drinks, Events, Live-Musik, Public Viewing, Galerie, Öffnungszeiten und Anfahrt.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "High-End Fashion E-Commerce-Shop mit modernem Design und nahtloser Benutzererfahrung.",
     "projects.donation.title": "Spendenseite Al Salam",
@@ -391,6 +394,9 @@ const translations = {
     "projects.studio.description": "Site de portfólio elegante para um estúdio de design criativo com estética minimalista e animações fluidas.",
     "projects.porsche.title": "A&A Performance Autohaus Leipzig",
     "projects.porsche.description": "Apresentação automotiva de luxo com design imersivo e experiências visuais de alta qualidade.",
+    "projects.joesgarage.title": "Joe's Garage Kassel",
+    "projects.joesgarage.description":
+      "Presença web moderna para Joe's Garage, o icónico rock bar e pub de Kassel. O site combina autêntica atmosfera de bar com informações sobre drinks, eventos, música ao vivo, public viewing, galeria, horários e localização.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "Loja de e-commerce de moda de alto padrão com design moderno e experiência do usuário perfeita.",
     "projects.donation.title": "Site de Doações Al Salam",
@@ -557,6 +563,9 @@ const translations = {
     "projects.studio.description": "Elegant portfolio website for a creative design studio with minimalist aesthetics and fluid animations.",
     "projects.porsche.title": "A&A Performance Autohaus Leipzig",
     "projects.porsche.description": "Professional web presence for a high-performance car dealership in Leipzig with modern design and premium vehicle presentation.",
+    "projects.joesgarage.title": "Joe's Garage Kassel",
+    "projects.joesgarage.description":
+      "Modern web presence for Joe's Garage, Kassel's iconic rock bar and pub. The website combines an authentic bar atmosphere with information on drinks, events, live music, public viewing, gallery, opening hours and location.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "High-end fashion e-commerce shop with modern design and seamless user experience.",
     "projects.donation.title": "Al Salam Donation Website",
@@ -821,6 +830,9 @@ const translations = {
     "projects.studio.description": "Site portfolio élégant pour un studio de design créatif avec une esthétique minimaliste et des animations fluides.",
     "projects.porsche.title": "A&A Performance Autohaus Leipzig",
     "projects.porsche.description": "Présence web professionnelle pour un concessionnaire haute performance à Leipzig avec un design moderne et une présentation premium des véhicules.",
+    "projects.joesgarage.title": "Joe's Garage Kassel",
+    "projects.joesgarage.description":
+      "Présence web moderne pour Joe's Garage, le rock bar emblématique et pub de Kassel. Le site combine une atmosphère de bar authentique avec des informations sur les boissons, événements, musique live, public viewing, galerie, horaires et accès.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "Boutique e-commerce de mode haut de gamme avec un design moderne et une expérience utilisateur fluide.",
     "projects.donation.title": "Site de Dons Al Salam",
@@ -1074,6 +1086,9 @@ const translations = {
     "projects.studio.description": "موقع بورتفوليو أنيق لاستوديو تصميم إبداعي بجمالية بسيطة ورسوم متحركة سلسة.",
     "projects.porsche.title": "A&A Performance Autohaus Leipzig",
     "projects.porsche.description": "حضور ويب احترافي لوكالة سيارات عالية الأداء في لايبزيغ بتصميم حديث وعرض مميز للمركبات.",
+    "projects.joesgarage.title": "Joe's Garage كاسيل",
+    "projects.joesgarage.description":
+      "حضور ويب عصري لـ Joe's Garage، حانة الروك الأيقونية في كاسيل. يجمع الموقع أجواء البار الأصيلة مع معلومات حول المشروبات والفعاليات والموسيقى الحية والمعرض وساعات العمل والوصول.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "متجر إلكتروني للأزياء الراقية بتصميم عصري وتجربة مستخدم سلسة.",
     "projects.donation.title": "موقع التبرعات Al Salam",
@@ -1306,6 +1321,9 @@ const translations = {
     "projects.studio.description": "Minimalist estetik ve akıcı animasyonlarla yaratıcı bir tasarım stüdyosu için şık portfolyo sitesi.",
     "projects.porsche.title": "A&A Performance Autohaus Leipzig",
     "projects.porsche.description": "Leipzig'deki yüksek performanslı bir otomobil bayisi için modern tasarım ve premium araç sunumuyla profesyonel web varlığı.",
+    "projects.joesgarage.title": "Joe's Garage Kassel",
+    "projects.joesgarage.description":
+      "Kassel'in ikonik rock barı Joe's Garage için modern web varlığı. Site, içecekler, etkinlikler, canlı müzik, public viewing, galeri, açılış saatleri ve ulaşım bilgileriyle otantik bar atmosferini bir araya getiriyor.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "Modern tasarım ve kusursuz kullanıcı deneyimi ile üst düzey moda e-ticaret mağazası.",
     "projects.donation.title": "Al Salam Bağış Websitesi",
@@ -1544,6 +1562,9 @@ const translations = {
     "projects.studio.description": "Faqe elegante portfolioje për një studio kreative dizajni me estetikë minimaliste dhe animacione të lëngshme.",
     "projects.porsche.title": "A&A Performance Autohaus Leipzig",
     "projects.porsche.description": "Prani profesionale në ueb për një shitës makinash me performancë të lartë në Lajpcig me dizajn modern dhe prezantim premium të automjeteve.",
+    "projects.joesgarage.title": "Joe's Garage Kassel",
+    "projects.joesgarage.description":
+      "Prania moderne në ueb për Joe's Garage, barin ikonik të rock-ut dhe pub-in e Kasselit. Faqja kombinon atmosferën autentike të barit me informacione mbi pijet, ngjarjet, muzikën live, public viewing, galerinë, oraret dhe udhëzimet.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "Dyqan e-commerce mode të nivelit të lartë me dizajn modern dhe përvojë të përdoruesit pa probleme.",
     "projects.donation.title": "Faqja e Donacioneve Al Salam",
@@ -1782,6 +1803,9 @@ const translations = {
     "projects.studio.description": "Элегантный сайт-портфолио для креативной дизайн-студии с минималистичной эстетикой и плавными анимациями.",
     "projects.porsche.title": "A&A Performance Autohaus Leipzig",
     "projects.porsche.description": "Профессиональное веб-присутствие для высокопроизводительного автосалона в Лейпциге с современным дизайном и премиум-презентацией автомобилей.",
+    "projects.joesgarage.title": "Joe's Garage Кассель",
+    "projects.joesgarage.description":
+      "Современное веб-присутствие для Joe's Garage — культового рок-бара и паба в Касселе. Сайт сочетает аутентичную атмосферу бара с информацией о напитках, событиях, живой музыке, public viewing, галерее, часах работы и маршруте.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "Интернет-магазин высокой моды с современным дизайном и безупречным пользовательским опытом.",
     "projects.donation.title": "Сайт пожертвований Al Salam",
@@ -1936,7 +1960,7 @@ const translations = {
     "privacy.hosting.title": "4. Хостинг",
     "privacy.hosting.text": "Наш веб-сайт размещён на Vercel Inc.",
     "privacy.hosting.dpa":
-      "С Vercel заключено соглашение об обработке данных. Передача данных в США осуществляется на основе стандартных договорных положений ЕС.",
+      "С Vercel заключено соглашение об обработке данных. Передача данных в США осуществляется на основе стандартных договорных пол��жений ЕС.",
     "privacy.logfiles.title": "5. Серверные лог-файлы",
     "privacy.logfiles.text": "При каждом доступе к нашему веб-сайту автоматически собираются следующие данные:",
     "privacy.logfiles.ip": "IP-адрес (анонимизированный)",
@@ -2034,6 +2058,9 @@ const translations = {
     "projects.studio.description": "Sitio web de portafolio elegante para un estudio de diseño creativo con estética minimalista y animaciones fluidas.",
     "projects.porsche.title": "A&A Performance Autohaus Leipzig",
     "projects.porsche.description": "Presencia web profesional para un concesionario de alto rendimiento en Leipzig con diseño moderno y presentación premium de vehículos.",
+    "projects.joesgarage.title": "Joe's Garage Kassel",
+    "projects.joesgarage.description":
+      "Presencia web moderna para Joe's Garage, el icónico bar de rock y pub de Kassel. El sitio combina una auténtica atmósfera de bar con información sobre bebidas, eventos, música en vivo, public viewing, galería, horarios y cómo llegar.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "Tienda e-commerce de moda de alta gama con diseño moderno y experiencia de usuario perfecta.",
     "projects.donation.title": "Sitio de Donaciones Al Salam",
@@ -2511,6 +2538,9 @@ const translations = {
   "projects.studio.description": "Κομψός ιστότοπος portfolio για ένα δημιουργικό στούντιο σχεδιασμού με μινιμαλιστική αισθητική και ρευστές κινήσεις.",
   "projects.porsche.title": "A&A Performance Autohaus Leipzig",
   "projects.porsche.description": "Επαγγελματική διαδικτυακή παρουσία για ένα κατάστημα αυτοκινήτων υψηλής απόδοσης στη Λειψία με μοντέρνο σχεδιασμό και premium παρουσίαση οχημάτων.",
+    "projects.joesgarage.title": "Joe's Garage Κάσελ",
+    "projects.joesgarage.description":
+      "Σύγχρονη διαδικτυακή παρουσία για το Joe's Garage, το εμβληματικό rock bar και pub του Κάσελ. Ο ιστότοπος συνδυάζει αυθεντική ατμόσφαιρα bar με πληροφορίες για ποτά, εκδηλώσεις, ζωντανή μουσική, public viewing, γκαλερί, ωράρια και οδηγίες.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "Ηλεκτρονικό κατάστημα μόδας υψηλής κλάσης με μοντέρνο σχεδιασμό και άψογη εμπειρία χρήστη.",
   "projects.donation.title": "Ιστοσελίδα Δωρεών Al Salam",
@@ -2785,7 +2815,7 @@ const translations = {
     "services.social.title": "社交媒体与广告",
     "services.social.description":
       "在TikTok、Instagram、Facebook和Google Ads上开展专业活动，实现最大覆盖面和可衡量的结果。",
-    "services.design.title": "平面设计与品牌",
+    "services.design.title": "平���设计与品牌",
     "services.design.description":
       "让您的品牌焕发生机的创意设计——从标志到完整的企业设计，具有高辨识度。",
     "services.seo.title": "SEO与性能",
@@ -2815,6 +2845,9 @@ const translations = {
     "projects.luxury.title": "AWD商店",
     "projects.luxury.description":
       "高端时尚电商店铺，现代设计和无缝用户体验。",
+    "projects.joesgarage.title": "Joe's Garage 卡塞尔",
+    "projects.joesgarage.description":
+      "卡塞尔标志性摇滚酒吧Joe's Garage的现代网络形象。网站将真实的酒吧氛围与饮品、活动、现场音乐、公共观看、画廊、营业时间和路线信息相结合。",
     "projects.donation.title": "Al Salam捐赠页面",
     "projects.donation.description":
       "人道主义目的的专业捐赠网站，现代设计和用户友好的捐赠管理。",
