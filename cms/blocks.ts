@@ -189,7 +189,7 @@ export const ContactBlock: Block = {
     { name: 'eyebrow', type: 'text', localized: true },
     { name: 'heading', type: 'text', required: true, localized: true },
     { name: 'description', type: 'textarea', localized: true },
-    { name: 'recipientEmail', type: 'email', required: true, defaultValue: 'info@naser.solutions' },
+    { name: 'recipientEmail', type: 'email', required: true, defaultValue: 'info@naser-solutions.de' },
     { name: 'showForm', type: 'checkbox', defaultValue: true },
     sectionSettings,
   ],

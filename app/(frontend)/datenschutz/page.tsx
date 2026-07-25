@@ -45,8 +45,8 @@ export default function DatenschutzPage() {
                 <br />
                 <br />
                 <span className="text-muted-foreground">{t("privacy.email")}:</span>{" "}
-                <a href="mailto:info@naser.solutions" className="text-foreground hover:underline">
-                  info@naser.solutions
+                <a href="mailto:info@naser-solutions.de" className="text-foreground hover:underline">
+                  info@naser-solutions.de
                 </a>
                 <br />
                 <span className="text-muted-foreground">{t("privacy.phone")}:</span>{" "}

@@ -75,10 +75,10 @@ export function ContactSection() {
                 <div>
                   <p className="text-sm text-muted-foreground">{t("contact.email")}</p>
                   <a
-                    href="mailto:nasen@webdigital.cloud"
+                    href="mailto:info@naser-solutions.de"
                     className="text-foreground hover:text-primary transition-colors"
                   >
-                    nasen@webdigital.cloud
+                    info@naser-solutions.de
                   </a>
                 </div>
               </div>

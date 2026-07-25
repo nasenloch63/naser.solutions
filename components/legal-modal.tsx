@@ -122,8 +122,8 @@ function ImprintContent() {
           <div className="flex flex-col sm:flex-row sm:gap-2">
             <dt className="font-medium text-foreground min-w-[100px]">{t("impressum.email")}:</dt>
             <dd>
-              <a href="mailto:nasen@webdigital.cloud" className="hover:text-foreground transition-colors underline underline-offset-4">
-                nasen@webdigital.cloud
+              <a href="mailto:info@naser-solutions.de" className="hover:text-foreground transition-colors underline underline-offset-4">
+                info@naser-solutions.de
               </a>
             </dd>
           </div>
@@ -206,7 +206,7 @@ function PrivacyContent() {
             35410 Hungen<br />
             Deutschland<br /><br />
             <span className="text-muted-foreground">{t("privacy.email")}:</span>{" "}
-            <a href="mailto:info@naser.solutions" className="text-foreground hover:underline">info@naser.solutions</a><br />
+            <a href="mailto:info@naser-solutions.de" className="text-foreground hover:underline">info@naser-solutions.de</a><br />
             <span className="text-muted-foreground">{t("privacy.phone")}:</span>{" "}
             <a href="tel:+4917647757444" className="text-foreground hover:underline">+49 176 47757444</a>
           </address>
