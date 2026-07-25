@@ -61,10 +61,10 @@ export default function ImpressumPage() {
                     <dt className="font-medium text-foreground min-w-[100px]">{t("impressum.email")}:</dt>
                     <dd>
                       <a
-                        href="mailto:nasen@webdigital.cloud"
+                        href="mailto:info@naser-solutions.de"
                         className="hover:text-foreground transition-colors underline underline-offset-4"
                       >
-                        nasen@webdigital.cloud
+                        info@naser-solutions.de
                       </a>
                     </dd>
                   </div>
