@@ -5,7 +5,7 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
-import { BlogPosts, Footer, Media, Navigation, Pages, Projects, SiteSettings, Users } from './cms/collections'
+import { Footer, Media, Navigation, Pages, Projects, SiteSettings, Users } from './cms/collections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -28,7 +28,7 @@ export default buildConfig({
       description: 'Inhalte und Seiten von Naser Solutions verwalten',
     },
     livePreview: {
-      collections: ['pages', 'blog-posts'],
+      collections: ['pages'],
       breakpoints: [
         { label: 'Mobil', name: 'mobile', width: 390, height: 844 },
         { label: 'Tablet', name: 'tablet', width: 768, height: 1024 },
@@ -36,11 +36,12 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Pages, Projects, BlogPosts],
+  collections: [Users, Media, Pages, Projects],
   globals: [Navigation, Footer, SiteSettings],
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL },
     schemaName: 'payload',
+    push: false,
   }),
   editor: lexicalEditor(),
   localization: {

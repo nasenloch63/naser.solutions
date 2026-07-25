@@ -56,9 +56,6 @@ export function Navbar() {
             <Link href="#ueber-uns" className="text-muted-foreground hover:text-foreground transition-colors">
               {t("nav.about")}
             </Link>
-            <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
-              Journal
-            </Link>
             <Link href="/links" className="text-muted-foreground hover:text-foreground transition-colors">
               Links
             </Link>
@@ -142,13 +139,6 @@ export function Navbar() {
                 onClick={() => setIsOpen(false)}
               >
                 {t("nav.about")}
-              </Link>
-              <Link
-                href="/blog"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Journal
               </Link>
               <Link
                 href="/links"
