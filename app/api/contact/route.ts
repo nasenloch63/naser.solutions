@@ -55,7 +55,6 @@ export async function POST(request: Request) {
 
     const password = process.env.STRATO_SMTP_PASSWORD
     if (!password) {
-      console.error("[v0] STRATO_SMTP_PASSWORD not set")
       return NextResponse.json(
         { success: false, error: "E-Mail-Versand ist nicht konfiguriert." },
         { status: 503 }
@@ -84,8 +83,7 @@ export async function POST(request: Request) {
     transporter.close()
 
     return NextResponse.json({ success: true }, { status: 200 })
-  } catch (error) {
-    console.error("[v0] Contact API error:", error)
+  } catch {
     return NextResponse.json(
       { success: false, error: "Die Nachricht konnte nicht gesendet werden. Bitte versuche es später erneut." },
       { status: 500 }

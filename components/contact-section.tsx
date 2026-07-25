@@ -48,8 +48,7 @@ export function ContactSection() {
       } else {
         setSubmitStatus("error")
       }
-    } catch (err) {
-      console.error("[v0] Contact form error:", err)
+    } catch {
       setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)
