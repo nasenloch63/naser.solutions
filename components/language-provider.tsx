@@ -1956,7 +1956,7 @@ const translations = {
     "privacy.legalBasis.consent": "Согласие (ст. 6 п. 1 лит. a GDPR)",
     "privacy.legalBasis.contract": "Исполнение договора (ст. 6 п. 1 lit. b GDPR)",
     "privacy.legalBasis.legal": "Юридическое обязательство (ст. 6 п. 1 lit. c GDPR)",
-    "privacy.legalBasis.interest": "Законный интерес (ст. 6 п. 1 lit. f GDPR)",
+    "privacy.legalBasis.interest": "Законный и��терес (ст. 6 п. 1 lit. f GDPR)",
     "privacy.hosting.title": "4. Хостинг",
     "privacy.hosting.text": "Наш веб-сайт размещён на Vercel Inc.",
     "privacy.hosting.dpa":
@@ -2958,7 +2958,7 @@ const translations = {
     "agb.portfolio.p1":
       "在完全支付报酬后，承包商向客户授予创建作品的合同约定使用权。除非另有约定，客户将获得简单的、在时间和空间上无限制的使用权。",
     "agb.portfolio.p2":
-      "<strong>作品集使用：</strong>承包商保留将项目中创建的作品（网站、应用、设计、视频、图像）用于自己的营销和展示目的的权利。这特别包括在作品集中、在自己的网站上、在社交媒体中以及作为对潜在新客户的参考的展示。",
+      "<strong>���品集使用：</strong>承包商保留将项目中创建的作品（网站、应用、设计、视频、图像）用于自己的营销和展示目的的权利。这特别包括在作品集中、在自己的网站上、在社交媒体中以及作为对潜在新客户的参考的展示。",
     "agb.portfolio.p3":
       "如果客户明确不希望作品集使用，必须在签订合同前以书面形式通知。在这种情况下，可能会对项目成本收取20%的附加费。",
     "agb.section6.title": "7. 保证",
@@ -3159,7 +3159,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }
 
   const t = (key: string): string => {
-    return translations[language]?.[key] || translations.de[key] || key
+    const currentTranslations = translations[language] as Record<string, string>
+    const defaultTranslations = translations.de as Record<string, string>
+    return currentTranslations[key] || defaultTranslations[key] || key
   }
 
   if (!mounted) {
