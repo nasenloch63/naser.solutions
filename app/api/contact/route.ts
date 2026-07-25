@@ -13,56 +13,82 @@ interface ContactRequest {
   website?: unknown
 }
 
-function normalize(value: unknown) {
+function normalize(value: unknown): string {
   return typeof value === "string" ? value.trim() : ""
 }
 
 export async function POST(request: Request) {
   try {
-    const data = (await request.json()) as ContactRequest
+    const body = await request.json() as ContactRequest
 
-    if (normalize(data.website)) {
-      return NextResponse.json({ success: true })
+    // Spam-Check
+    if (normalize(body.website)) {
+      return NextResponse.json({ success: true }, { status: 200 })
     }
 
-    const name = normalize(data.name)
-    const email = normalize(data.email).toLowerCase()
-    const phone = normalize(data.phone)
-    const message = normalize(data.message)
+    const name = normalize(body.name)
+    const email = normalize(body.email).toLowerCase()
+    const phone = normalize(body.phone)
+    const message = normalize(body.message)
 
-    if (!name || name.length > 120 || !message || message.length > 5000) {
-      return NextResponse.json({ error: "Bitte überprüfe deine Eingaben." }, { status: 400 })
+    // Validation
+    if (!name || name.length > 120) {
+      return NextResponse.json(
+        { success: false, error: "Bitte gib einen gültigen Namen ein." },
+        { status: 400 }
+      )
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
-      return NextResponse.json({ error: "Bitte gib eine gültige E-Mail-Adresse ein." }, { status: 400 })
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
+      return NextResponse.json(
+        { success: false, error: "Bitte gib eine gültige E-Mail-Adresse ein." },
+        { status: 400 }
+      )
     }
 
-    const smtpPassword = process.env.STRATO_SMTP_PASSWORD
-    if (!smtpPassword) {
-      return NextResponse.json({ error: "E-Mail-Versand ist momentan nicht konfiguriert." }, { status: 503 })
+    if (!message || message.length > 5000) {
+      return NextResponse.json(
+        { success: false, error: "Bitte gib eine gültige Nachricht ein." },
+        { status: 400 }
+      )
+    }
+
+    const password = process.env.STRATO_SMTP_PASSWORD
+    if (!password) {
+      console.error("[v0] STRATO_SMTP_PASSWORD not set")
+      return NextResponse.json(
+        { success: false, error: "E-Mail-Versand ist nicht konfiguriert." },
+        { status: 503 }
+      )
     }
 
     const transporter = nodemailer.createTransport({
       host: SMTP_HOST,
       port: SMTP_PORT,
       secure: true,
-      auth: { user: SMTP_USER, pass: smtpPassword },
+      auth: {
+        user: SMTP_USER,
+        pass: password,
+      },
     })
 
+    // Send email
     await transporter.sendMail({
-      from: `Naser Solutions Kontaktformular <${SMTP_USER}>`,
+      from: `${SMTP_USER}`,
       to: SMTP_USER,
       replyTo: email,
       subject: `Neue Kontaktanfrage von ${name}`,
       text: `Name: ${name}\nE-Mail: ${email}\nTelefon: ${phone || "Nicht angegeben"}\n\nNachricht:\n${message}`,
     })
 
-    return NextResponse.json({ success: true })
-  } catch {
+    transporter.close()
+
+    return NextResponse.json({ success: true }, { status: 200 })
+  } catch (error) {
+    console.error("[v0] Contact API error:", error)
     return NextResponse.json(
-      { error: "Die Nachricht konnte nicht gesendet werden. Bitte versuche es erneut." },
-      { status: 500 },
+      { success: false, error: "Die Nachricht konnte nicht gesendet werden. Bitte versuche es später erneut." },
+      { status: 500 }
     )
   }
 }
