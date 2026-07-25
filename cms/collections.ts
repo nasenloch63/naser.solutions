@@ -99,6 +99,50 @@ export const Projects: CollectionConfig = {
   ],
 }
 
+export const BlogPosts: CollectionConfig = {
+  slug: 'blog-posts',
+  labels: { singular: 'Blogbeitrag', plural: 'Blogbeiträge' },
+  admin: {
+    group: 'Inhalte',
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'publishedAt', '_status', 'updatedAt'],
+    livePreview: {
+      url: ({ data }) => {
+        const baseURL = process.env.NEXT_PUBLIC_SERVER_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000')
+        return `${baseURL}/blog/${data?.slug ?? ''}?preview=true`
+      },
+    },
+  },
+  access: { read: publicRead, create: authenticated, update: authenticated, delete: authenticated },
+  versions: { drafts: { autosave: { interval: 500 }, schedulePublish: true }, maxPerDoc: 30 },
+  fields: [
+    { name: 'title', type: 'text', required: true, localized: true },
+    { name: 'slug', type: 'text', required: true, unique: true, index: true, admin: { position: 'sidebar' } },
+    { name: 'excerpt', type: 'textarea', required: true, localized: true, maxLength: 320 },
+    { name: 'content', type: 'richText', required: true, localized: true },
+    { name: 'featuredImage', type: 'upload', relationTo: 'media' },
+    { name: 'author', type: 'text', required: true, defaultValue: 'Yasin Adam Aissani' },
+    { name: 'publishedAt', type: 'date', required: true, admin: { position: 'sidebar' } },
+    {
+      name: 'tags',
+      type: 'array',
+      fields: [{ name: 'label', type: 'text', required: true, localized: true }],
+    },
+    { name: 'featured', type: 'checkbox', defaultValue: false, admin: { position: 'sidebar' } },
+    {
+      name: 'seo',
+      type: 'group',
+      label: 'SEO & Social Media',
+      fields: [
+        { name: 'title', type: 'text', localized: true, maxLength: 70 },
+        { name: 'description', type: 'textarea', localized: true, maxLength: 180 },
+        { name: 'image', type: 'upload', relationTo: 'media' },
+        { name: 'noIndex', type: 'checkbox', defaultValue: false },
+      ],
+    },
+  ],
+}
+
 export const Pages: CollectionConfig = {
   slug: 'pages',
   labels: { singular: 'Seite', plural: 'Seiten' },
