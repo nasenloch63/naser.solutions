@@ -196,7 +196,7 @@ export const SiteSettings: GlobalConfig = {
     { name: 'siteName', type: 'text', required: true, defaultValue: 'Naser Solutions' },
     { name: 'siteDescription', type: 'textarea', localized: true },
     { name: 'defaultSEOImage', type: 'upload', relationTo: 'media' },
-    { name: 'contactEmail', type: 'email', defaultValue: 'info@naser.solutions' },
+    { name: 'contactEmail', type: 'email', defaultValue: 'info@naser-solutions.de' },
     { name: 'phone', type: 'text' },
     { name: 'address', type: 'textarea' },
     { name: 'cookieNotice', type: 'richText', localized: true },

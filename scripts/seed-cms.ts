@@ -92,7 +92,7 @@ async function seed() {
             eyebrow: localized('Kontakt'),
             heading: localized('Lassen Sie uns gemeinsam etwas Starkes entwickeln.'),
             description: localized('Schreiben Sie uns – wir melden uns persönlich bei Ihnen.'),
-            recipientEmail: 'info@naser.solutions',
+            recipientEmail: 'info@naser-solutions.de',
             showForm: true,
             settings: { anchor: 'kontakt', theme: 'default', spacing: 'normal' },
           },
@@ -121,7 +121,7 @@ async function seed() {
     data: {
       siteName: 'Naser Solutions',
       siteDescription: 'Digitale Lösungen, Webdesign und Entwicklung aus Kassel.',
-      contactEmail: 'info@naser.solutions',
+      contactEmail: 'info@naser-solutions.de',
       phone: '+49 15560 729886',
       address: 'Kassel, Deutschland',
     },
