@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X, Moon, Sun, Instagram, Wallet } from "lucide-react"
+import { Menu, X, Moon, Sun, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "@/components/theme-provider"
 import { useLanguage } from "@/components/language-provider"
@@ -69,15 +69,6 @@ export function Navbar() {
               <Instagram className="h-5 w-5" />
               <span className="text-sm">@naser.solutions</span>
             </a>
-            <Link href="/zahlung">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 border-border text-muted-foreground hover:bg-secondary hover:text-foreground bg-transparent"
-              >
-                <Wallet className="h-4 w-4" />
-                <span>{t("nav.cryptoPayment")}</span>
-              </Button>
-            </Link>
             <LanguageSwitcher />
             <button
               onClick={toggleTheme}
@@ -97,14 +88,6 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
-            <Link href="/zahlung">
-              <button
-                className="p-2 rounded-lg hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground"
-                aria-label={t("nav.cryptoPayment")}
-              >
-                <Wallet className="h-5 w-5" />
-              </button>
-            </Link>
             <a
               href="https://instagram.com/naser.solutions"
               target="_blank"
@@ -174,14 +157,6 @@ export function Navbar() {
                 <Instagram className="h-5 w-5" />
                 <span>@naser.solutions</span>
               </a>
-              <Link
-                href="/zahlung"
-                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                <Wallet className="h-5 w-5" />
-                <span>{t("nav.cryptoPayment")}</span>
-              </Link>
               <Link href="#kontakt" onClick={() => setIsOpen(false)}>
                 <Button className="w-full">{t("nav.contact")}</Button>
               </Link>

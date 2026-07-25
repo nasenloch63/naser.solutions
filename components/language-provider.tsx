@@ -36,7 +36,6 @@ const translations = {
     "nav.about": "Über uns",
     "nav.vision": "Vision",
     "nav.contact": "Kontakt",
-    "nav.cryptoPayment": "Krypto-Zahlung",
 
     // Hero
     "hero.badge": "Neu gegründet 2026",
@@ -175,8 +174,6 @@ const translations = {
     "footer.privacy": "Datenschutz",
     "footer.agb": "AGB",
     "footer.rights": "Alle Rechte vorbehalten.",
-    "footer.cryptoAccepted": "Krypto akzeptiert",
-    "footer.payment": "Zahlung",
 
     // Modal
     "modal.backToSite": "Zurück zur Seite",
@@ -201,7 +198,7 @@ const translations = {
     "agb.section4.p2": "Der Auftraggeber ist verpflichtet, die vom Auftragnehmer erstellten Entwürfe und Zwischenergebnisse zeitnah zu prüfen und Änderungswünsche mitzuteilen.",
     "agb.section5.title": "5. Preise und Zahlungsbedingungen",
     "agb.section5.p1": "Alle Preise verstehen sich zuzüglich der gesetzlichen Umsatzsteuer. Die Zahlung erfolgt nach Rechnungsstellung innerhalb von 14 Tagen ohne Abzug. Bei Projekten mit längerer Laufzeit können Teilzahlungen vereinbart werden.",
-    "agb.section5.p2": "Wir akzeptieren Zahlungen in Bitcoin (BTC), Solana (SOL), Monero (XMR) sowie per Banküberweisung. Bei Zahlungsverzug werden Verzugszinsen in Höhe von 9 Prozentpunkten über dem Basiszinssatz berechnet.",
+    "agb.section5.p2": "Wir akzeptieren Zahlungen per Banküberweisung. Bei Zahlungsverzug werden Verzugszinsen in Höhe von 9 Prozentpunkten über dem Basiszinssatz berechnet.",
     "agb.portfolio.title": "6. Nutzungsrechte und Portfolio-Verwendung",
     "agb.portfolio.p1": "Der Auftragnehmer räumt dem Auftraggeber nach vollständiger Zahlung der Vergütung die vertraglich vereinbarten Nutzungsrechte an den erstellten Werken ein. Sofern nicht anders vereinbart, erhält der Auftraggeber ein einfaches, zeitlich und räumlich unbeschränktes Nutzungsrecht.",
     "agb.portfolio.p2": "<strong>Portfolio-Verwendung:</strong> Der Auftragnehmer behält sich das Recht vor, die im Rahmen des Projekts erstellten Arbeiten (Websites, Apps, Designs, Videos, Bilder) für eigene Marketing- und Präsentationszwecke zu verwenden. Dies umfasst insbesondere die Darstellung in Portfolio, auf der eigenen Website, in Social Media sowie gegenüber potenziellen Neukunden als Referenz.",
@@ -325,30 +322,6 @@ const translations = {
     "privacy.backHome": "Zurück zur Startseite",
 
     // Payment Page
-    "payment.badge": "Sichere Krypto-Zahlungen",
-    "payment.title": "Bezahlen mit Krypto",
-    "payment.description":
-      "Wir akzeptieren Bitcoin, Solana und Monero für schnelle, sichere und globale Zahlungen ohne Zwischenhändler.",
-    "payment.secure": "100% Sicher",
-    "payment.fast": "Schnelle Transaktionen",
-    "payment.global": "Weltweit verfügbar",
-    "payment.walletAddress": "Wallet-Adresse",
-    "payment.showQR": "QR-Code",
-    "payment.hideQR": "Ausblenden",
-    "payment.copy": "Kopieren",
-    "payment.copied": "Kopiert!",
-    "payment.scanQR": "QR-Code scannen zum Bezahlen",
-    "payment.questions": "Fragen zur Zahlung?",
-    "payment.contactUs": "Kontaktiere uns",
-    "payment.btc.benefit1": "Lightning Network für sofortige Zahlungen",
-    "payment.btc.benefit2": "On-Chain für größere Beträge",
-    "payment.btc.benefit3": "Weltweit akzeptierter Standard",
-    "payment.sol.benefit1": "Ultra-schnelle Transaktionen (<1 Sek.)",
-    "payment.sol.benefit2": "Minimale Gebühren (~$0.00025)",
-    "payment.sol.benefit3": "Hohe Skalierbarkeit",
-    "payment.xmr.benefit1": "Maximale Privatsphäre",
-    "payment.xmr.benefit2": "Vollständige Anonymität",
-    "payment.xmr.benefit3": "Keine Transaktions-Nachverfolgung",
   },
   pt: {
     // Navbar
@@ -357,7 +330,6 @@ const translations = {
     "nav.about": "Sobre nós",
     "nav.vision": "Visão",
     "nav.contact": "Contato",
-    "nav.cryptoPayment": "Pagamento Cripto",
 
     // Hero
     "hero.badge": "Fundada em 2026",
@@ -461,37 +433,11 @@ const translations = {
     "footer.imprint": "Impressum",
     "footer.privacy": "Privacidade",
     "footer.rights": "Todos os direitos reservados.",
-    "footer.cryptoAccepted": "Cripto aceito",
-    "footer.payment": "Pagamento",
 
     // Modal
     "modal.backToSite": "Voltar ao site",
 
     // Payment Page
-    "payment.badge": "Pagamentos Cripto Seguros",
-    "payment.title": "Pagar com Cripto",
-    "payment.description":
-      "Aceitamos Bitcoin, Solana e Monero para pagamentos rápidos, seguros e globais sem intermediários.",
-    "payment.secure": "100% Seguro",
-    "payment.fast": "Transações Rápidas",
-    "payment.global": "Disponível Globalmente",
-    "payment.walletAddress": "Endereço da Carteira",
-    "payment.showQR": "Código QR",
-    "payment.hideQR": "Ocultar",
-    "payment.copy": "Copiar",
-    "payment.copied": "Copiado!",
-    "payment.scanQR": "Escaneie o código QR para pagar",
-    "payment.questions": "Dúvidas sobre pagamento?",
-    "payment.contactUs": "Entre em contato conosco",
-    "payment.btc.benefit1": "Lightning Network para pagamentos instantâneos",
-    "payment.btc.benefit2": "On-Chain para valores maiores",
-    "payment.btc.benefit3": "Padrão aceito mundialmente",
-    "payment.sol.benefit1": "Transações ultra-rápidas (<1 seg)",
-    "payment.sol.benefit2": "Taxas mínimas (~$0.00025)",
-    "payment.sol.benefit3": "Alta escalabilidade",
-    "payment.xmr.benefit1": "Privacidade máxima",
-    "payment.xmr.benefit2": "Anonimato completo",
-    "payment.xmr.benefit3": "Sem rastreamento de transações",
   },
   en: {
     // Navbar
@@ -500,7 +446,6 @@ const translations = {
     "nav.about": "About us",
     "nav.vision": "Vision",
     "nav.contact": "Contact",
-    "nav.cryptoPayment": "Crypto Payment",
 
     // Hero
     "hero.badge": "Newly founded 2026",
@@ -635,8 +580,6 @@ const translations = {
     "footer.privacy": "Privacy",
     "footer.agb": "Terms",
     "footer.rights": "All rights reserved.",
-    "footer.cryptoAccepted": "Crypto accepted",
-    "footer.payment": "Payment",
 
     // Modal
     "modal.backToSite": "Back to site",
@@ -661,7 +604,7 @@ const translations = {
     "agb.section4.p2": "The Client is obligated to promptly review drafts and intermediate results created by the Contractor and communicate any change requests.",
     "agb.section5.title": "5. Prices and Payment Terms",
     "agb.section5.p1": "All prices are exclusive of statutory VAT. Payment is due within 14 days of invoicing without deduction. For projects with longer duration, partial payments can be agreed.",
-    "agb.section5.p2": "We accept payments in Bitcoin (BTC), Solana (SOL), Monero (XMR) as well as bank transfer. In case of payment default, default interest of 9 percentage points above the base rate will be charged.",
+    "agb.section5.p2": "We accept payments by bank transfer. In case of payment default, default interest of 9 percentage points above the base rate will be charged.",
     "agb.portfolio.title": "6. Usage Rights and Portfolio Use",
     "agb.portfolio.p1": "The Contractor grants the Client the contractually agreed usage rights to the created works after full payment of the fee. Unless otherwise agreed, the Client receives a simple, temporally and geographically unlimited right of use.",
     "agb.portfolio.p2": "<strong>Portfolio Use:</strong> The Contractor reserves the right to use the work created within the project (websites, apps, designs, videos, images) for their own marketing and presentation purposes. This includes in particular the presentation in portfolio, on their own website, on social media, and to potential new clients as a reference.",
@@ -783,30 +726,6 @@ const translations = {
     "privacy.backHome": "Back to homepage",
 
     // Payment Page
-    "payment.badge": "Secure Crypto Payments",
-    "payment.title": "Pay with Crypto",
-    "payment.description":
-      "We accept Bitcoin, Solana, and Monero for fast, secure, and global payments without intermediaries.",
-    "payment.secure": "100% Secure",
-    "payment.fast": "Fast Transactions",
-    "payment.global": "Available Worldwide",
-    "payment.walletAddress": "Wallet Address",
-    "payment.showQR": "QR Code",
-    "payment.hideQR": "Hide",
-    "payment.copy": "Copy",
-    "payment.copied": "Copied!",
-    "payment.scanQR": "Scan QR code to pay",
-    "payment.questions": "Questions about payment?",
-    "payment.contactUs": "Contact us",
-    "payment.btc.benefit1": "Lightning Network for instant payments",
-    "payment.btc.benefit2": "On-Chain for larger amounts",
-    "payment.btc.benefit3": "Globally accepted standard",
-    "payment.sol.benefit1": "Ultra-fast transactions (<1 sec)",
-    "payment.sol.benefit2": "Minimal fees (~$0.00025)",
-    "payment.sol.benefit3": "High scalability",
-    "payment.xmr.benefit1": "Maximum privacy",
-    "payment.xmr.benefit2": "Complete anonymity",
-    "payment.xmr.benefit3": "No transaction tracking",
   },
   fr: {
     // Navbar
@@ -815,7 +734,6 @@ const translations = {
     "nav.about": "À propos",
     "nav.vision": "Vision",
     "nav.contact": "Contact",
-    "nav.cryptoPayment": "Paiement Crypto",
 
     // Projects
     "projects.badge": "En développement",
@@ -940,8 +858,6 @@ const translations = {
     "footer.imprint": "Mentions légales",
     "footer.privacy": "Confidentialité",
     "footer.rights": "Tous droits réservés.",
-    "footer.cryptoAccepted": "Crypto acceptée",
-    "footer.payment": "Paiement",
 
     // Modal
     "modal.backToSite": "Retour au site",
@@ -1039,30 +955,6 @@ const translations = {
     "privacy.backHome": "Retour à l'accueil",
 
     // Payment Page
-    "payment.badge": "Paiements crypto sécurisés",
-    "payment.title": "Payer en crypto",
-    "payment.description":
-      "Nous acceptons Bitcoin, Solana et Monero pour des paiements rapides, sécurisés et mondiaux sans intermédiaires.",
-    "payment.secure": "100% Sécurisé",
-    "payment.fast": "Transactions rapides",
-    "payment.global": "Disponible mondialement",
-    "payment.walletAddress": "Adresse du portefeuille",
-    "payment.showQR": "Code QR",
-    "payment.hideQR": "Masquer",
-    "payment.copy": "Copier",
-    "payment.copied": "Copié!",
-    "payment.scanQR": "Scanner le code QR pour payer",
-    "payment.questions": "Questions sur le paiement?",
-    "payment.contactUs": "Contactez-nous",
-    "payment.btc.benefit1": "Lightning Network pour paiements instantanés",
-    "payment.btc.benefit2": "On-Chain pour montants plus importants",
-    "payment.btc.benefit3": "Standard accepté mondialement",
-    "payment.sol.benefit1": "Transactions ultra-rapides (<1 sec)",
-    "payment.sol.benefit2": "Frais minimaux (~$0.00025)",
-    "payment.sol.benefit3": "Haute évolutivité",
-    "payment.xmr.benefit1": "Confidentialité maximale",
-    "payment.xmr.benefit2": "Anonymat complet",
-    "payment.xmr.benefit3": "Aucun suivi des transactions",
   },
   ar: {
     // Navbar
@@ -1071,7 +963,6 @@ const translations = {
     "nav.about": "من نحن",
     "nav.vision": "الرؤية",
     "nav.contact": "اتصل بنا",
-    "nav.cryptoPayment": "الدفع بالعملات المشفرة",
 
     // Projects
     "projects.badge": "قيد التطوير",
@@ -1182,8 +1073,6 @@ const translations = {
     "footer.imprint": "البيانات القانونية",
     "footer.privacy": "سياسة الخصوصية",
     "footer.rights": "جميع الحقوق محفوظة.",
-    "footer.cryptoAccepted": "نقبل العملات المشفرة",
-    "footer.payment": "الدفع",
 
     // Modal
     "modal.backToSite": "العودة للموقع",
@@ -1275,29 +1164,6 @@ const translations = {
     "privacy.backHome": "العودة للصفحة الرئيسية",
 
     // Payment Page
-    "payment.badge": "مدفوعات آمنة بالعملات المشفرة",
-    "payment.title": "ادفع بالعملات المشفرة",
-    "payment.description": "نقبل البيتكوين وسولانا ومونيرو للمدفوعات السريعة والآمنة والعالمية بدون وسطاء.",
-    "payment.secure": "آمن 100%",
-    "payment.fast": "معاملات سريعة",
-    "payment.global": "متاح عالمياً",
-    "payment.walletAddress": "عنوان المحفظة",
-    "payment.showQR": "رمز QR",
-    "payment.hideQR": "إخفاء",
-    "payment.copy": "نسخ",
-    "payment.copied": "تم النسخ!",
-    "payment.scanQR": "امسح رمز QR للدفع",
-    "payment.questions": "أسئلة حول الدفع؟",
-    "payment.contactUs": "تواصل معنا",
-    "payment.btc.benefit1": "شبكة Lightning للمدفوعات الفورية",
-    "payment.btc.benefit2": "On-Chain للمبالغ الكبيرة",
-    "payment.btc.benefit3": "معيار مقبول عالمياً",
-    "payment.sol.benefit1": "معاملات فائقة السرعة (<1 ثانية)",
-    "payment.sol.benefit2": "رسوم ضئيلة (~$0.00025)",
-    "payment.sol.benefit3": "قابلية توسع عالية",
-    "payment.xmr.benefit1": "أقصى درجات الخصوصية",
-    "payment.xmr.benefit2": "إخفاء هوية كامل",
-    "payment.xmr.benefit3": "لا تتبع للمعاملات",
   },
   tr: {
     // Navbar
@@ -1306,7 +1172,6 @@ const translations = {
     "nav.about": "Hakkımızda",
     "nav.vision": "Vizyon",
     "nav.contact": "İletişim",
-    "nav.cryptoPayment": "Kripto Ödeme",
 
     // Projects
     "projects.badge": "Geliştirme Aşamasında",
@@ -1422,8 +1287,6 @@ const translations = {
     "footer.imprint": "Yasal Bilgiler",
     "footer.privacy": "Gizlilik Politikası",
     "footer.rights": "Tüm hakları saklıdır.",
-    "footer.cryptoAccepted": "Kripto kabul edilir",
-    "footer.payment": "Ödeme",
 
     // Modal
     "modal.backToSite": "Siteye dön",
@@ -1516,29 +1379,6 @@ const translations = {
     "privacy.backHome": "Ana sayfaya dön",
 
     // Payment Page
-    "payment.badge": "Güvenli Kripto Ödemeleri",
-    "payment.title": "Kripto ile Öde",
-    "payment.description": "Aracısız hızlı, güvenli ve küresel ödemeler için Bitcoin, Solana ve Monero kabul ediyoruz.",
-    "payment.secure": "%100 Güvenli",
-    "payment.fast": "Hızlı İşlemler",
-    "payment.global": "Dünya Çapında Geçerli",
-    "payment.walletAddress": "Cüzdan Adresi",
-    "payment.showQR": "QR Kodu",
-    "payment.hideQR": "Gizle",
-    "payment.copy": "Kopyala",
-    "payment.copied": "Kopyalandı!",
-    "payment.scanQR": "Ödeme için QR kodu tarayın",
-    "payment.questions": "Ödeme hakkında sorularınız mı var?",
-    "payment.contactUs": "Bize ulaşın",
-    "payment.btc.benefit1": "Anında ödemeler için Lightning Network",
-    "payment.btc.benefit2": "Büyük tutarlar için On-Chain",
-    "payment.btc.benefit3": "Küresel olarak kabul gören standart",
-    "payment.sol.benefit1": "Ultra hızlı işlemler (<1 sn)",
-    "payment.sol.benefit2": "Minimum ücretler (~$0.00025)",
-    "payment.sol.benefit3": "Yüksek ölçeklenebilirlik",
-    "payment.xmr.benefit1": "Maksimum gizlilik",
-    "payment.xmr.benefit2": "Tam anonimlik",
-    "payment.xmr.benefit3": "İşlem takibi yok",
   },
   sq: {
     // Navbar
@@ -1547,7 +1387,6 @@ const translations = {
     "nav.about": "Rreth nesh",
     "nav.vision": "Vizioni",
     "nav.contact": "Kontakti",
-    "nav.cryptoPayment": "Pagesa Kripto",
 
     // Projects
     "projects.badge": "Në Zhvillim",
@@ -1663,8 +1502,6 @@ const translations = {
     "footer.imprint": "Impresum",
     "footer.privacy": "Politika e Privatësisë",
     "footer.rights": "Të gjitha të drejtat e rezervuara.",
-    "footer.cryptoAccepted": "Kripto e pranuar",
-    "footer.payment": "Pagesa",
 
     // Modal
     "modal.backToSite": "Kthehu në faqe",
@@ -1756,30 +1593,6 @@ const translations = {
     "privacy.backHome": "Kthehu në faqen kryesore",
 
     // Payment Page
-    "payment.badge": "Pagesa të sigurta me Kripto",
-    "payment.title": "Paguaj me Kripto",
-    "payment.description":
-      "Ne pranojmë Bitcoin, Solana dhe Monero për pagesa të shpejta, të sigurta dhe globale pa ndërmjetës.",
-    "payment.secure": "100% E sigurt",
-    "payment.fast": "Transaksione të shpejta",
-    "payment.global": "E disponueshme globalisht",
-    "payment.walletAddress": "Adresa e Portofolit",
-    "payment.showQR": "Kodi QR",
-    "payment.hideQR": "Fshih",
-    "payment.copy": "Kopjo",
-    "payment.copied": "U kopjua!",
-    "payment.scanQR": "Skanoni kodin QR për të paguar",
-    "payment.questions": "Pyetje rreth pagesës?",
-    "payment.contactUs": "Na kontaktoni",
-    "payment.btc.benefit1": "Lightning Network për pagesa të menjëhershme",
-    "payment.btc.benefit2": "On-Chain për shuma më të mëdha",
-    "payment.btc.benefit3": "Standard i pranuar globalisht",
-    "payment.sol.benefit1": "Transaksione ultra të shpejta (<1 sek)",
-    "payment.sol.benefit2": "Tarifa minimale (~$0.00025)",
-    "payment.sol.benefit3": "Shkallëzueshmëri e lartë",
-    "payment.xmr.benefit1": "Privatësi maksimale",
-    "payment.xmr.benefit2": "Anonimitet i plotë",
-    "payment.xmr.benefit3": "Pa gjurmim të transaksioneve",
   },
   ru: {
     // Navbar
@@ -1788,7 +1601,6 @@ const translations = {
     "nav.about": "О нас",
     "nav.vision": "Видение",
     "nav.contact": "Контакт",
-    "nav.cryptoPayment": "Крипто-оплата",
 
     // Projects
     "projects.badge": "В разработке",
@@ -1911,8 +1723,6 @@ const translations = {
     "footer.imprint": "Импрессум",
     "footer.privacy": "Конфиденциальность",
     "footer.rights": "Все права защищены.",
-    "footer.cryptoAccepted": "Криптовалюта принимается",
-    "footer.payment": "Оплата",
 
     // Modal
     "modal.backToSite": "Вернуться на сайт",
@@ -2011,30 +1821,6 @@ const translations = {
     "privacy.backHome": "Вернуться на главную",
 
     // Payment Page
-    "payment.badge": "Безопасные криптоплатежи",
-    "payment.title": "Оплата криптовалютой",
-    "payment.description":
-      "Мы принимаем Bitcoin, Solana и Monero для быстрых, безопасных и глобальных платежей без посредников.",
-    "payment.secure": "100% безопасно",
-    "payment.fast": "Быстрые транзакции",
-    "payment.global": "Доступно по всему миру",
-    "payment.walletAddress": "Адрес кошелька",
-    "payment.showQR": "QR-код",
-    "payment.hideQR": "Скрыть",
-    "payment.copy": "Копировать",
-    "payment.copied": "Скопировано!",
-    "payment.scanQR": "Отсканируйте QR-код для оплаты",
-    "payment.questions": "Вопросы по оплате?",
-    "payment.contactUs": "Свяжитесь с нами",
-    "payment.btc.benefit1": "Lightning Network для мгновенных платежей",
-    "payment.btc.benefit2": "On-Chain для крупных сумм",
-    "payment.btc.benefit3": "Общепринятый мировой стандарт",
-    "payment.sol.benefit1": "Сверхбыстрые транзакции (<1 сек.)",
-    "payment.sol.benefit2": "Минимальные комиссии (~$0.00025)",
-    "payment.sol.benefit3": "Высокая масштабируемость",
-    "payment.xmr.benefit1": "Максимальная конфиденциальность",
-    "payment.xmr.benefit2": "Полная анонимность",
-    "payment.xmr.benefit3": "Нет отслеживания транзакций",
   },
   es: {
     // Navbar
@@ -2043,7 +1829,6 @@ const translations = {
     "nav.about": "Sobre nosotros",
     "nav.vision": "Visión",
     "nav.contact": "Contacto",
-    "nav.cryptoPayment": "Pago Cripto",
 
     // Projects
     "projects.badge": "En Desarrollo",
@@ -2165,8 +1950,6 @@ const translations = {
     "footer.imprint": "Aviso legal",
     "footer.privacy": "Privacidad",
     "footer.rights": "Todos los derechos reservados.",
-    "footer.cryptoAccepted": "Aceptamos cripto",
-    "footer.payment": "Pago",
 
     // Modal
     "modal.backToSite": "Volver al sitio",
@@ -2263,30 +2046,6 @@ const translations = {
     "privacy.backHome": "Volver al inicio",
 
     // Payment
-    "payment.badge": "Pagos seguros con cripto",
-    "payment.title": "Pagar con Cripto",
-    "payment.description":
-      "Aceptamos Bitcoin, Solana y Monero para pagos rápidos, seguros y globales sin intermediarios.",
-    "payment.secure": "100% Seguro",
-    "payment.fast": "Transacciones rápidas",
-    "payment.global": "Disponible mundialmente",
-    "payment.walletAddress": "Dirección de billetera",
-    "payment.showQR": "Código QR",
-    "payment.hideQR": "Ocultar",
-    "payment.copy": "Copiar",
-    "payment.copied": "¡Copiado!",
-    "payment.scanQR": "Escanea el código QR para pagar",
-    "payment.questions": "¿Preguntas sobre el pago?",
-    "payment.contactUs": "Contáctanos",
-    "payment.btc.benefit1": "Lightning Network para pagos instantáneos",
-    "payment.btc.benefit2": "On-Chain para cantidades mayores",
-    "payment.btc.benefit3": "Estándar aceptado mundialmente",
-    "payment.sol.benefit1": "Transacciones ultra rápidas (<1 seg.)",
-    "payment.sol.benefit2": "Tarifas mínimas (~$0.00025)",
-    "payment.sol.benefit3": "Alta escalabilidad",
-    "payment.xmr.benefit1": "Máxima privacidad",
-    "payment.xmr.benefit2": "Anonimato completo",
-    "payment.xmr.benefit3": "Sin rastreo de transacciones",
   },
   it: {
     // Navbar
@@ -2294,7 +2053,6 @@ const translations = {
     "nav.about": "Chi siamo",
     "nav.vision": "Visione",
     "nav.contact": "Contatto",
-    "nav.cryptoPayment": "Pagamento Crypto",
 
     // Hero
     "hero.badge": "Fondata nel 2026",
@@ -2395,8 +2153,6 @@ const translations = {
     "footer.imprint": "Note legali",
     "footer.privacy": "Privacy",
     "footer.rights": "Tutti i diritti riservati.",
-    "footer.cryptoAccepted": "Accettiamo crypto",
-    "footer.payment": "Pagamento",
 
     // Modal
     "modal.backToSite": "Torna al sito",
@@ -2492,30 +2248,6 @@ const translations = {
     "privacy.backHome": "Torna alla home",
 
     // Payment
-    "payment.badge": "Pagamenti crypto sicuri",
-    "payment.title": "Paga con Crypto",
-    "payment.description":
-      "Accettiamo Bitcoin, Solana e Monero per pagamenti veloci, sicuri e globali senza intermediari.",
-    "payment.secure": "100% Sicuro",
-    "payment.fast": "Transazioni veloci",
-    "payment.global": "Disponibile in tutto il mondo",
-    "payment.walletAddress": "Indirizzo wallet",
-    "payment.showQR": "Codice QR",
-    "payment.hideQR": "Nascondi",
-    "payment.copy": "Copia",
-    "payment.copied": "Copiato!",
-    "payment.scanQR": "Scansiona il codice QR per pagare",
-    "payment.questions": "Domande sul pagamento?",
-    "payment.contactUs": "Contattaci",
-    "payment.btc.benefit1": "Lightning Network per pagamenti istantanei",
-    "payment.btc.benefit2": "On-Chain per importi maggiori",
-    "payment.btc.benefit3": "Standard accettato a livello mondiale",
-    "payment.sol.benefit1": "Transazioni ultra veloci (<1 sec.)",
-    "payment.sol.benefit2": "Commissioni minime (~$0.00025)",
-    "payment.sol.benefit3": "Alta scalabilità",
-    "payment.xmr.benefit1": "Massima privacy",
-    "payment.xmr.benefit2": "Anonimato completo",
-    "payment.xmr.benefit3": "Nessun tracciamento delle transazioni",
   },
   el: {
   // Navbar
@@ -2646,8 +2378,6 @@ const translations = {
     "footer.imprint": "Νομικές πληροφορίες",
     "footer.privacy": "Απόρρητο",
     "footer.rights": "Όλα τα δικαιώματα κατοχυρωμένα.",
-    "footer.cryptoAccepted": "Δεχόμαστε crypto",
-    "footer.payment": "Πληρωμή",
 
     // Modal
     "modal.backToSite": "Επιστροφή στον ιστότοπο",
@@ -2742,30 +2472,6 @@ const translations = {
     "privacy.backHome": "Επιστροφή στην αρχική",
 
     // Payment
-    "payment.badge": "Ασφαλείς πληρωμές crypto",
-    "payment.title": "Πληρωμή με Crypto",
-    "payment.description":
-      "Δεχόμαστε Bitcoin, Solana και Monero για γρήγορες, ασφαλείς και παγκόσμιες πληρωμές χωρίς μεσάζοντες.",
-    "payment.secure": "100% Ασφαλές",
-    "payment.fast": "Γρήγορες συναλλαγές",
-    "payment.global": "Διαθέσιμο παγκοσμίως",
-    "payment.walletAddress": "Διεύθυνση wallet",
-    "payment.showQR": "Κωδικός QR",
-    "payment.hideQR": "Απόκρυψη",
-    "payment.copy": "Αντιγραφή",
-    "payment.copied": "Αντιγράφηκε!",
-    "payment.scanQR": "Σαρώστε τον κωδικό QR για πληρωμή",
-    "payment.questions": "Ερωτήσεις σχετικά με την πληρωμή;",
-    "payment.contactUs": "Επικοινωνήστε μαζί μας",
-    "payment.btc.benefit1": "Lightning Network για άμεσες πληρωμές",
-    "payment.btc.benefit2": "On-Chain για μεγαλύτερα ποσά",
-    "payment.btc.benefit3": "Παγκοσμίως αποδεκτό πρότυπο",
-    "payment.sol.benefit1": "Υπερ-γρήγορες συναλλαγές (<1 δευτ.)",
-    "payment.sol.benefit2": "Ελάχιστα τέλη (~$0.00025)",
-    "payment.sol.benefit3": "Υψηλή επεκτασιμότητα",
-    "payment.xmr.benefit1": "Μέγιστη ιδιωτικότητα",
-    "payment.xmr.benefit2": "Πλήρης ανωνυμία",
-    "payment.xmr.benefit3": "Χωρίς παρακολούθηση συναλλαγών",
   },
 
   zh: {
@@ -2775,7 +2481,6 @@ const translations = {
     "nav.about": "关于我们",
     "nav.vision": "愿景",
     "nav.contact": "联系",
-    "nav.cryptoPayment": "加密货币支付",
 
     // Hero
     "hero.badge": "成立于2026年",
@@ -2915,8 +2620,6 @@ const translations = {
     "footer.privacy": "隐私政策",
     "footer.agb": "条款",
     "footer.rights": "保留所有权利。",
-    "footer.cryptoAccepted": "接受加密货币",
-    "footer.payment": "支付",
 
     // Modal
     "modal.backToSite": "返回网站",
@@ -3093,30 +2796,6 @@ const translations = {
     "privacy.backHome": "返回首页",
 
     // Payment
-    "payment.badge": "安全的加密货币支付",
-    "payment.title": "使用加密货币支���",
-    "payment.description":
-      "我们接受比特币、Solana和Monero支付。选择您喜欢的加密货币：",
-    "payment.secure": "100% 安全",
-    "payment.fast": "快速交易",
-    "payment.global": "全球可用",
-    "payment.walletAddress": "钱包地址",
-    "payment.showQR": "二维码",
-    "payment.hideQR": "隐藏",
-    "payment.copy": "复制",
-    "payment.copied": "已复制！",
-    "payment.scanQR": "扫描二维码支付",
-    "payment.questions": "有关支付的问题？",
-    "payment.contactUs": "联系我们",
-    "payment.btc.benefit1": "闪电网络支持即时支付",
-    "payment.btc.benefit2": "链上支持大额交易",
-    "payment.btc.benefit3": "全球接受的标准",
-    "payment.sol.benefit1": "超快速交易（少于1秒）",
-    "payment.sol.benefit2": "极低费用（约$0.00025）",
-    "payment.sol.benefit3": "高可扩展性",
-    "payment.xmr.benefit1": "最大隐私保护",
-    "payment.xmr.benefit2": "完全匿名",
-    "payment.xmr.benefit3": "无交易追踪",
   }
 }
 
