@@ -38,13 +38,18 @@ export function ContactSection() {
         body: JSON.stringify(data),
       })
 
-      if (response.ok) {
+      const result = await response.json() as { success?: boolean; error?: string }
+
+      if (response.status === 200 && result.success === true) {
         setSubmitStatus("success")
         e.currentTarget.reset()
+        // Auto-clear success message after 5 seconds
+        setTimeout(() => setSubmitStatus("idle"), 5000)
       } else {
         setSubmitStatus("error")
       }
-    } catch {
+    } catch (err) {
+      console.error("[v0] Contact form error:", err)
       setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)
