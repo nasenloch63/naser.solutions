@@ -107,14 +107,10 @@ function ProjectThumbnail({ url, title }: { url: string; title: string }) {
   )
   const [src, setSrc] = useState<string>(cached ? cached.src : sources[0])
 
-  console.log("[v0] Thumbnail render:", { url: url.substring(0, 40), attemptIndex, status })
-
   const handleLoad = useCallback(
     (e: React.SyntheticEvent<HTMLImageElement>) => {
       const img = e.target as HTMLImageElement
-      console.log("[v0] onLoad:", { url: url.substring(0, 40), attemptIndex, w: img.naturalWidth, h: img.naturalHeight })
       if (img.naturalWidth < 10 || img.naturalHeight < 10) {
-        console.log("[v0] Image too small, trying next")
         const next = attemptIndex + 1
         if (next < sources.length) {
           setAttemptIndex(next)
@@ -125,7 +121,6 @@ function ProjectThumbnail({ url, title }: { url: string; title: string }) {
         }
         return
       }
-      console.log("[v0] Thumbnail SUCCESS:", url.substring(0, 40))
       setStatus("loaded")
       thumbnailCache.set(url, { src, status: "loaded" })
     },
@@ -133,14 +128,11 @@ function ProjectThumbnail({ url, title }: { url: string; title: string }) {
   )
 
   const handleError = useCallback(() => {
-    console.log("[v0] onError:", { url: url.substring(0, 40), attemptIndex, src: src.substring(0, 50) })
     const next = attemptIndex + 1
     if (next < sources.length) {
-      console.log("[v0] Trying next source:", sources[next].substring(0, 50))
       setAttemptIndex(next)
       setSrc(sources[next])
     } else {
-      console.log("[v0] ALL FAILED:", url.substring(0, 40))
       setStatus("error")
       thumbnailCache.set(url, { src, status: "error" })
     }
