@@ -2,7 +2,7 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-   CREATE TYPE "public"."_locales" AS ENUM('de', 'en', 'fr', 'pt', 'es', 'tr', 'sq', 'ru', 'el', 'ar', 'zh');
+   CREATE TYPE "public"."_cms_locales" AS ENUM('de', 'en', 'fr', 'pt', 'es', 'tr', 'sq', 'ru', 'el', 'ar', 'zh');
   CREATE TYPE "public"."enum_users_role" AS ENUM('admin', 'editor');
   CREATE TYPE "public"."enum_pages_blocks_hero_actions_style" AS ENUM('primary', 'secondary', 'link');
   CREATE TYPE "public"."enum_pages_blocks_hero_settings_theme" AS ENUM('default', 'dark', 'light', 'accent');
@@ -115,11 +115,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"sizes_hero_filename" varchar
   );
   
-  CREATE TABLE "media_locales" (
+  CREATE TABLE "media_cms_locales" (
   	"alt" varchar NOT NULL,
   	"caption" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -132,10 +132,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"new_tab" boolean DEFAULT false
   );
   
-  CREATE TABLE "pages_blocks_hero_actions_locales" (
+  CREATE TABLE "pages_blocks_hero_actions_cms_locales" (
   	"label" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -151,13 +151,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "pages_blocks_hero_locales" (
+  CREATE TABLE "pages_blocks_hero_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"highlight" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -173,12 +173,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "pages_blocks_content_locales" (
+  CREATE TABLE "pages_blocks_content_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"content" jsonb,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -195,10 +195,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "pages_blocks_media_locales" (
+  CREATE TABLE "pages_blocks_media_cms_locales" (
   	"caption" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -210,11 +210,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"link" varchar
   );
   
-  CREATE TABLE "pages_blocks_feature_grid_items_locales" (
+  CREATE TABLE "pages_blocks_feature_grid_items_cms_locales" (
   	"title" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -229,12 +229,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "pages_blocks_feature_grid_locales" (
+  CREATE TABLE "pages_blocks_feature_grid_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -250,12 +250,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "pages_blocks_projects_locales" (
+  CREATE TABLE "pages_blocks_projects_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -266,11 +266,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"value" varchar
   );
   
-  CREATE TABLE "pages_blocks_stats_items_locales" (
+  CREATE TABLE "pages_blocks_stats_items_cms_locales" (
   	"label" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -291,11 +291,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"id" varchar PRIMARY KEY NOT NULL
   );
   
-  CREATE TABLE "pages_blocks_faq_items_locales" (
+  CREATE TABLE "pages_blocks_faq_items_cms_locales" (
   	"question" varchar,
   	"answer" jsonb,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -310,10 +310,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "pages_blocks_faq_locales" (
+  CREATE TABLE "pages_blocks_faq_cms_locales" (
   	"heading" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -326,10 +326,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"new_tab" boolean DEFAULT false
   );
   
-  CREATE TABLE "pages_blocks_cta_actions_locales" (
+  CREATE TABLE "pages_blocks_cta_actions_cms_locales" (
   	"label" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -344,11 +344,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "pages_blocks_cta_locales" (
+  CREATE TABLE "pages_blocks_cta_cms_locales" (
   	"heading" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -365,12 +365,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "pages_blocks_contact_locales" (
+  CREATE TABLE "pages_blocks_contact_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -384,12 +384,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_status" "enum_pages_status" DEFAULT 'draft'
   );
   
-  CREATE TABLE "pages_locales" (
+  CREATE TABLE "pages_cms_locales" (
   	"title" varchar,
   	"seo_title" varchar,
   	"seo_description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -411,10 +411,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_uuid" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_hero_actions_locales" (
+  CREATE TABLE "_pages_v_blocks_hero_actions_cms_locales" (
   	"label" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -431,13 +431,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_hero_locales" (
+  CREATE TABLE "_pages_v_blocks_hero_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"highlight" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -454,12 +454,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_content_locales" (
+  CREATE TABLE "_pages_v_blocks_content_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"content" jsonb,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -477,10 +477,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_media_locales" (
+  CREATE TABLE "_pages_v_blocks_media_cms_locales" (
   	"caption" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -493,11 +493,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_uuid" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_feature_grid_items_locales" (
+  CREATE TABLE "_pages_v_blocks_feature_grid_items_cms_locales" (
   	"title" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -513,12 +513,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_feature_grid_locales" (
+  CREATE TABLE "_pages_v_blocks_feature_grid_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -535,12 +535,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_projects_locales" (
+  CREATE TABLE "_pages_v_blocks_projects_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -552,11 +552,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_uuid" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_stats_items_locales" (
+  CREATE TABLE "_pages_v_blocks_stats_items_cms_locales" (
   	"label" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -579,11 +579,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_uuid" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_faq_items_locales" (
+  CREATE TABLE "_pages_v_blocks_faq_items_cms_locales" (
   	"question" varchar,
   	"answer" jsonb,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -599,10 +599,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_faq_locales" (
+  CREATE TABLE "_pages_v_blocks_faq_cms_locales" (
   	"heading" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -616,10 +616,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_uuid" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_cta_actions_locales" (
+  CREATE TABLE "_pages_v_blocks_cta_actions_cms_locales" (
   	"label" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -635,11 +635,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_cta_locales" (
+  CREATE TABLE "_pages_v_blocks_cta_cms_locales" (
   	"heading" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -657,12 +657,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"block_name" varchar
   );
   
-  CREATE TABLE "_pages_v_blocks_contact_locales" (
+  CREATE TABLE "_pages_v_blocks_contact_cms_locales" (
   	"eyebrow" varchar,
   	"heading" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -683,12 +683,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"autosave" boolean
   );
   
-  CREATE TABLE "_pages_v_locales" (
+  CREATE TABLE "_pages_v_cms_locales" (
   	"version_title" varchar,
   	"version_seo_title" varchar,
   	"version_seo_description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -706,10 +706,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"id" varchar PRIMARY KEY NOT NULL
   );
   
-  CREATE TABLE "projects_tags_locales" (
+  CREATE TABLE "projects_tags_cms_locales" (
   	"label" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -727,11 +727,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_status" "enum_projects_status" DEFAULT 'draft'
   );
   
-  CREATE TABLE "projects_locales" (
+  CREATE TABLE "projects_cms_locales" (
   	"title" varchar,
   	"description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -742,10 +742,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_uuid" varchar
   );
   
-  CREATE TABLE "_projects_v_version_tags_locales" (
+  CREATE TABLE "_projects_v_version_tags_cms_locales" (
   	"label" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -770,11 +770,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"autosave" boolean
   );
   
-  CREATE TABLE "_projects_v_locales" (
+  CREATE TABLE "_projects_v_cms_locales" (
   	"version_title" varchar,
   	"version_description" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -863,10 +863,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"new_tab" boolean DEFAULT false
   );
   
-  CREATE TABLE "navigation_items_locales" (
+  CREATE TABLE "navigation_items_cms_locales" (
   	"label" varchar NOT NULL,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -878,10 +878,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone
   );
   
-  CREATE TABLE "navigation_locales" (
+  CREATE TABLE "navigation_cms_locales" (
   	"cta_label" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -892,10 +892,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"url" varchar NOT NULL
   );
   
-  CREATE TABLE "footer_links_locales" (
+  CREATE TABLE "footer_links_cms_locales" (
   	"label" varchar NOT NULL,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" varchar NOT NULL
   );
   
@@ -913,11 +913,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone
   );
   
-  CREATE TABLE "footer_locales" (
+  CREATE TABLE "footer_cms_locales" (
   	"claim" varchar,
   	"copyright" varchar,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
@@ -932,92 +932,92 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone
   );
   
-  CREATE TABLE "site_settings_locales" (
+  CREATE TABLE "site_settings_cms_locales" (
   	"site_description" varchar,
   	"cookie_notice" jsonb,
   	"id" serial PRIMARY KEY NOT NULL,
-  	"_locale" "_locales" NOT NULL,
+  	"_locale" "_cms_locales" NOT NULL,
   	"_parent_id" integer NOT NULL
   );
   
   ALTER TABLE "users_sessions" ADD CONSTRAINT "users_sessions_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "media_locales" ADD CONSTRAINT "media_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."media"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "media_cms_locales" ADD CONSTRAINT "media_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."media"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_hero_actions" ADD CONSTRAINT "pages_blocks_hero_actions_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_hero"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_hero_actions_locales" ADD CONSTRAINT "pages_blocks_hero_actions_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_hero_actions"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_hero_actions_cms_locales" ADD CONSTRAINT "pages_blocks_hero_actions_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_hero_actions"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_hero" ADD CONSTRAINT "pages_blocks_hero_image_id_media_id_fk" FOREIGN KEY ("image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "pages_blocks_hero" ADD CONSTRAINT "pages_blocks_hero_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_hero_locales" ADD CONSTRAINT "pages_blocks_hero_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_hero"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_hero_cms_locales" ADD CONSTRAINT "pages_blocks_hero_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_hero"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_content" ADD CONSTRAINT "pages_blocks_content_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_content_locales" ADD CONSTRAINT "pages_blocks_content_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_content"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_content_cms_locales" ADD CONSTRAINT "pages_blocks_content_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_content"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_media" ADD CONSTRAINT "pages_blocks_media_media_id_media_id_fk" FOREIGN KEY ("media_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "pages_blocks_media" ADD CONSTRAINT "pages_blocks_media_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_media_locales" ADD CONSTRAINT "pages_blocks_media_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_media"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_media_cms_locales" ADD CONSTRAINT "pages_blocks_media_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_media"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_feature_grid_items" ADD CONSTRAINT "pages_blocks_feature_grid_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_feature_grid"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_feature_grid_items_locales" ADD CONSTRAINT "pages_blocks_feature_grid_items_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_feature_grid_items"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_feature_grid_items_cms_locales" ADD CONSTRAINT "pages_blocks_feature_grid_items_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_feature_grid_items"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_feature_grid" ADD CONSTRAINT "pages_blocks_feature_grid_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_feature_grid_locales" ADD CONSTRAINT "pages_blocks_feature_grid_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_feature_grid"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_feature_grid_cms_locales" ADD CONSTRAINT "pages_blocks_feature_grid_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_feature_grid"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_projects" ADD CONSTRAINT "pages_blocks_projects_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_projects_locales" ADD CONSTRAINT "pages_blocks_projects_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_projects"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_projects_cms_locales" ADD CONSTRAINT "pages_blocks_projects_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_projects"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_stats_items" ADD CONSTRAINT "pages_blocks_stats_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_stats"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_stats_items_locales" ADD CONSTRAINT "pages_blocks_stats_items_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_stats_items"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_stats_items_cms_locales" ADD CONSTRAINT "pages_blocks_stats_items_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_stats_items"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_stats" ADD CONSTRAINT "pages_blocks_stats_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_faq_items" ADD CONSTRAINT "pages_blocks_faq_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_faq"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_faq_items_locales" ADD CONSTRAINT "pages_blocks_faq_items_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_faq_items"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_faq_items_cms_locales" ADD CONSTRAINT "pages_blocks_faq_items_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_faq_items"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_faq" ADD CONSTRAINT "pages_blocks_faq_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_faq_locales" ADD CONSTRAINT "pages_blocks_faq_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_faq"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_faq_cms_locales" ADD CONSTRAINT "pages_blocks_faq_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_faq"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_cta_actions" ADD CONSTRAINT "pages_blocks_cta_actions_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_cta"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_cta_actions_locales" ADD CONSTRAINT "pages_blocks_cta_actions_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_cta_actions"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_cta_actions_cms_locales" ADD CONSTRAINT "pages_blocks_cta_actions_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_cta_actions"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_cta" ADD CONSTRAINT "pages_blocks_cta_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_cta_locales" ADD CONSTRAINT "pages_blocks_cta_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_cta"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_cta_cms_locales" ADD CONSTRAINT "pages_blocks_cta_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_cta"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_blocks_contact" ADD CONSTRAINT "pages_blocks_contact_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "pages_blocks_contact_locales" ADD CONSTRAINT "pages_blocks_contact_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_contact"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_blocks_contact_cms_locales" ADD CONSTRAINT "pages_blocks_contact_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_contact"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages" ADD CONSTRAINT "pages_seo_image_id_media_id_fk" FOREIGN KEY ("seo_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "pages_locales" ADD CONSTRAINT "pages_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pages_cms_locales" ADD CONSTRAINT "pages_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_rels" ADD CONSTRAINT "pages_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "pages_rels" ADD CONSTRAINT "pages_rels_projects_fk" FOREIGN KEY ("projects_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_hero_actions" ADD CONSTRAINT "_pages_v_blocks_hero_actions_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_hero"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_hero_actions_locales" ADD CONSTRAINT "_pages_v_blocks_hero_actions_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_hero_actions"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_hero_actions_cms_locales" ADD CONSTRAINT "_pages_v_blocks_hero_actions_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_hero_actions"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_hero" ADD CONSTRAINT "_pages_v_blocks_hero_image_id_media_id_fk" FOREIGN KEY ("image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_hero" ADD CONSTRAINT "_pages_v_blocks_hero_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_hero_locales" ADD CONSTRAINT "_pages_v_blocks_hero_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_hero"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_hero_cms_locales" ADD CONSTRAINT "_pages_v_blocks_hero_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_hero"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_content" ADD CONSTRAINT "_pages_v_blocks_content_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_content_locales" ADD CONSTRAINT "_pages_v_blocks_content_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_content"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_content_cms_locales" ADD CONSTRAINT "_pages_v_blocks_content_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_content"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_media" ADD CONSTRAINT "_pages_v_blocks_media_media_id_media_id_fk" FOREIGN KEY ("media_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_media" ADD CONSTRAINT "_pages_v_blocks_media_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_media_locales" ADD CONSTRAINT "_pages_v_blocks_media_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_media"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_media_cms_locales" ADD CONSTRAINT "_pages_v_blocks_media_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_media"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_feature_grid_items" ADD CONSTRAINT "_pages_v_blocks_feature_grid_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_feature_grid"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_feature_grid_items_locales" ADD CONSTRAINT "_pages_v_blocks_feature_grid_items_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_feature_grid_items"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_feature_grid_items_cms_locales" ADD CONSTRAINT "_pages_v_blocks_feature_grid_items_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_feature_grid_items"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_feature_grid" ADD CONSTRAINT "_pages_v_blocks_feature_grid_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_feature_grid_locales" ADD CONSTRAINT "_pages_v_blocks_feature_grid_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_feature_grid"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_feature_grid_cms_locales" ADD CONSTRAINT "_pages_v_blocks_feature_grid_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_feature_grid"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_projects" ADD CONSTRAINT "_pages_v_blocks_projects_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_projects_locales" ADD CONSTRAINT "_pages_v_blocks_projects_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_projects"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_projects_cms_locales" ADD CONSTRAINT "_pages_v_blocks_projects_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_projects"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_stats_items" ADD CONSTRAINT "_pages_v_blocks_stats_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_stats"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_stats_items_locales" ADD CONSTRAINT "_pages_v_blocks_stats_items_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_stats_items"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_stats_items_cms_locales" ADD CONSTRAINT "_pages_v_blocks_stats_items_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_stats_items"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_stats" ADD CONSTRAINT "_pages_v_blocks_stats_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_faq_items" ADD CONSTRAINT "_pages_v_blocks_faq_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_faq"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_faq_items_locales" ADD CONSTRAINT "_pages_v_blocks_faq_items_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_faq_items"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_faq_items_cms_locales" ADD CONSTRAINT "_pages_v_blocks_faq_items_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_faq_items"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_faq" ADD CONSTRAINT "_pages_v_blocks_faq_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_faq_locales" ADD CONSTRAINT "_pages_v_blocks_faq_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_faq"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_faq_cms_locales" ADD CONSTRAINT "_pages_v_blocks_faq_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_faq"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_cta_actions" ADD CONSTRAINT "_pages_v_blocks_cta_actions_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_cta"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_cta_actions_locales" ADD CONSTRAINT "_pages_v_blocks_cta_actions_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_cta_actions"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_cta_actions_cms_locales" ADD CONSTRAINT "_pages_v_blocks_cta_actions_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_cta_actions"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_cta" ADD CONSTRAINT "_pages_v_blocks_cta_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_cta_locales" ADD CONSTRAINT "_pages_v_blocks_cta_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_cta"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_cta_cms_locales" ADD CONSTRAINT "_pages_v_blocks_cta_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_cta"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_blocks_contact" ADD CONSTRAINT "_pages_v_blocks_contact_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_pages_v_blocks_contact_locales" ADD CONSTRAINT "_pages_v_blocks_contact_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_contact"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_blocks_contact_cms_locales" ADD CONSTRAINT "_pages_v_blocks_contact_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v_blocks_contact"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v" ADD CONSTRAINT "_pages_v_parent_id_pages_id_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."pages"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "_pages_v" ADD CONSTRAINT "_pages_v_version_seo_image_id_media_id_fk" FOREIGN KEY ("version_seo_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "_pages_v_locales" ADD CONSTRAINT "_pages_v_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pages_v_cms_locales" ADD CONSTRAINT "_pages_v_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_rels" ADD CONSTRAINT "_pages_v_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."_pages_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pages_v_rels" ADD CONSTRAINT "_pages_v_rels_projects_fk" FOREIGN KEY ("projects_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "projects_tags" ADD CONSTRAINT "projects_tags_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "projects_tags_locales" ADD CONSTRAINT "projects_tags_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."projects_tags"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "projects_tags_cms_locales" ADD CONSTRAINT "projects_tags_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."projects_tags"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "projects" ADD CONSTRAINT "projects_thumbnail_id_media_id_fk" FOREIGN KEY ("thumbnail_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "projects_locales" ADD CONSTRAINT "projects_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "projects_cms_locales" ADD CONSTRAINT "projects_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_projects_v_version_tags" ADD CONSTRAINT "_projects_v_version_tags_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_projects_v"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "_projects_v_version_tags_locales" ADD CONSTRAINT "_projects_v_version_tags_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_projects_v_version_tags"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_projects_v_version_tags_cms_locales" ADD CONSTRAINT "_projects_v_version_tags_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_projects_v_version_tags"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_projects_v" ADD CONSTRAINT "_projects_v_parent_id_projects_id_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."projects"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "_projects_v" ADD CONSTRAINT "_projects_v_version_thumbnail_id_media_id_fk" FOREIGN KEY ("version_thumbnail_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "_projects_v_locales" ADD CONSTRAINT "_projects_v_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_projects_v"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_projects_v_cms_locales" ADD CONSTRAINT "_projects_v_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_projects_v"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_jobs_log" ADD CONSTRAINT "payload_jobs_log_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."payload_jobs"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_locked_documents"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
@@ -1027,15 +1027,15 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_preferences"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "navigation_items" ADD CONSTRAINT "navigation_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."navigation"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "navigation_items_locales" ADD CONSTRAINT "navigation_items_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."navigation_items"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "navigation_items_cms_locales" ADD CONSTRAINT "navigation_items_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."navigation_items"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "navigation" ADD CONSTRAINT "navigation_logo_id_media_id_fk" FOREIGN KEY ("logo_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "navigation_locales" ADD CONSTRAINT "navigation_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."navigation"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "navigation_cms_locales" ADD CONSTRAINT "navigation_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."navigation"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "footer_links" ADD CONSTRAINT "footer_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."footer"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "footer_links_locales" ADD CONSTRAINT "footer_links_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."footer_links"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "footer_links_cms_locales" ADD CONSTRAINT "footer_links_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."footer_links"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "footer_social_links" ADD CONSTRAINT "footer_social_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."footer"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "footer_locales" ADD CONSTRAINT "footer_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."footer"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "footer_cms_locales" ADD CONSTRAINT "footer_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."footer"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "site_settings" ADD CONSTRAINT "site_settings_default_s_e_o_image_id_media_id_fk" FOREIGN KEY ("default_s_e_o_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "site_settings_locales" ADD CONSTRAINT "site_settings_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."site_settings"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "site_settings_cms_locales" ADD CONSTRAINT "site_settings_cms_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."site_settings"("id") ON DELETE cascade ON UPDATE no action;
   CREATE INDEX "users_sessions_order_idx" ON "users_sessions" USING btree ("_order");
   CREATE INDEX "users_sessions_parent_id_idx" ON "users_sessions" USING btree ("_parent_id");
   CREATE INDEX "users_updated_at_idx" ON "users" USING btree ("updated_at");
@@ -1047,121 +1047,121 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "media_sizes_thumbnail_sizes_thumbnail_filename_idx" ON "media" USING btree ("sizes_thumbnail_filename");
   CREATE INDEX "media_sizes_card_sizes_card_filename_idx" ON "media" USING btree ("sizes_card_filename");
   CREATE INDEX "media_sizes_hero_sizes_hero_filename_idx" ON "media" USING btree ("sizes_hero_filename");
-  CREATE UNIQUE INDEX "media_locales_locale_parent_id_unique" ON "media_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "media_cms_locales_locale_parent_id_unique" ON "media_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_hero_actions_order_idx" ON "pages_blocks_hero_actions" USING btree ("_order");
   CREATE INDEX "pages_blocks_hero_actions_parent_id_idx" ON "pages_blocks_hero_actions" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "pages_blocks_hero_actions_locales_locale_parent_id_unique" ON "pages_blocks_hero_actions_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_hero_actions_cms_locales_locale_parent_id_unique" ON "pages_blocks_hero_actions_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_hero_order_idx" ON "pages_blocks_hero" USING btree ("_order");
   CREATE INDEX "pages_blocks_hero_parent_id_idx" ON "pages_blocks_hero" USING btree ("_parent_id");
   CREATE INDEX "pages_blocks_hero_path_idx" ON "pages_blocks_hero" USING btree ("_path");
   CREATE INDEX "pages_blocks_hero_image_idx" ON "pages_blocks_hero" USING btree ("image_id");
-  CREATE UNIQUE INDEX "pages_blocks_hero_locales_locale_parent_id_unique" ON "pages_blocks_hero_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_hero_cms_locales_locale_parent_id_unique" ON "pages_blocks_hero_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_content_order_idx" ON "pages_blocks_content" USING btree ("_order");
   CREATE INDEX "pages_blocks_content_parent_id_idx" ON "pages_blocks_content" USING btree ("_parent_id");
   CREATE INDEX "pages_blocks_content_path_idx" ON "pages_blocks_content" USING btree ("_path");
-  CREATE UNIQUE INDEX "pages_blocks_content_locales_locale_parent_id_unique" ON "pages_blocks_content_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_content_cms_locales_locale_parent_id_unique" ON "pages_blocks_content_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_media_order_idx" ON "pages_blocks_media" USING btree ("_order");
   CREATE INDEX "pages_blocks_media_parent_id_idx" ON "pages_blocks_media" USING btree ("_parent_id");
   CREATE INDEX "pages_blocks_media_path_idx" ON "pages_blocks_media" USING btree ("_path");
   CREATE INDEX "pages_blocks_media_media_idx" ON "pages_blocks_media" USING btree ("media_id");
-  CREATE UNIQUE INDEX "pages_blocks_media_locales_locale_parent_id_unique" ON "pages_blocks_media_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_media_cms_locales_locale_parent_id_unique" ON "pages_blocks_media_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_feature_grid_items_order_idx" ON "pages_blocks_feature_grid_items" USING btree ("_order");
   CREATE INDEX "pages_blocks_feature_grid_items_parent_id_idx" ON "pages_blocks_feature_grid_items" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "pages_blocks_feature_grid_items_locales_locale_parent_id_uni" ON "pages_blocks_feature_grid_items_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_feature_grid_items_cms_locales_locale_parent_id_uni" ON "pages_blocks_feature_grid_items_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_feature_grid_order_idx" ON "pages_blocks_feature_grid" USING btree ("_order");
   CREATE INDEX "pages_blocks_feature_grid_parent_id_idx" ON "pages_blocks_feature_grid" USING btree ("_parent_id");
   CREATE INDEX "pages_blocks_feature_grid_path_idx" ON "pages_blocks_feature_grid" USING btree ("_path");
-  CREATE UNIQUE INDEX "pages_blocks_feature_grid_locales_locale_parent_id_unique" ON "pages_blocks_feature_grid_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_feature_grid_cms_locales_locale_parent_id_unique" ON "pages_blocks_feature_grid_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_projects_order_idx" ON "pages_blocks_projects" USING btree ("_order");
   CREATE INDEX "pages_blocks_projects_parent_id_idx" ON "pages_blocks_projects" USING btree ("_parent_id");
   CREATE INDEX "pages_blocks_projects_path_idx" ON "pages_blocks_projects" USING btree ("_path");
-  CREATE UNIQUE INDEX "pages_blocks_projects_locales_locale_parent_id_unique" ON "pages_blocks_projects_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_projects_cms_locales_locale_parent_id_unique" ON "pages_blocks_projects_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_stats_items_order_idx" ON "pages_blocks_stats_items" USING btree ("_order");
   CREATE INDEX "pages_blocks_stats_items_parent_id_idx" ON "pages_blocks_stats_items" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "pages_blocks_stats_items_locales_locale_parent_id_unique" ON "pages_blocks_stats_items_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_stats_items_cms_locales_locale_parent_id_unique" ON "pages_blocks_stats_items_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_stats_order_idx" ON "pages_blocks_stats" USING btree ("_order");
   CREATE INDEX "pages_blocks_stats_parent_id_idx" ON "pages_blocks_stats" USING btree ("_parent_id");
   CREATE INDEX "pages_blocks_stats_path_idx" ON "pages_blocks_stats" USING btree ("_path");
   CREATE INDEX "pages_blocks_faq_items_order_idx" ON "pages_blocks_faq_items" USING btree ("_order");
   CREATE INDEX "pages_blocks_faq_items_parent_id_idx" ON "pages_blocks_faq_items" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "pages_blocks_faq_items_locales_locale_parent_id_unique" ON "pages_blocks_faq_items_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_faq_items_cms_locales_locale_parent_id_unique" ON "pages_blocks_faq_items_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_faq_order_idx" ON "pages_blocks_faq" USING btree ("_order");
   CREATE INDEX "pages_blocks_faq_parent_id_idx" ON "pages_blocks_faq" USING btree ("_parent_id");
   CREATE INDEX "pages_blocks_faq_path_idx" ON "pages_blocks_faq" USING btree ("_path");
-  CREATE UNIQUE INDEX "pages_blocks_faq_locales_locale_parent_id_unique" ON "pages_blocks_faq_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_faq_cms_locales_locale_parent_id_unique" ON "pages_blocks_faq_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_cta_actions_order_idx" ON "pages_blocks_cta_actions" USING btree ("_order");
   CREATE INDEX "pages_blocks_cta_actions_parent_id_idx" ON "pages_blocks_cta_actions" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "pages_blocks_cta_actions_locales_locale_parent_id_unique" ON "pages_blocks_cta_actions_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_cta_actions_cms_locales_locale_parent_id_unique" ON "pages_blocks_cta_actions_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_cta_order_idx" ON "pages_blocks_cta" USING btree ("_order");
   CREATE INDEX "pages_blocks_cta_parent_id_idx" ON "pages_blocks_cta" USING btree ("_parent_id");
   CREATE INDEX "pages_blocks_cta_path_idx" ON "pages_blocks_cta" USING btree ("_path");
-  CREATE UNIQUE INDEX "pages_blocks_cta_locales_locale_parent_id_unique" ON "pages_blocks_cta_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_cta_cms_locales_locale_parent_id_unique" ON "pages_blocks_cta_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_blocks_contact_order_idx" ON "pages_blocks_contact" USING btree ("_order");
   CREATE INDEX "pages_blocks_contact_parent_id_idx" ON "pages_blocks_contact" USING btree ("_parent_id");
   CREATE INDEX "pages_blocks_contact_path_idx" ON "pages_blocks_contact" USING btree ("_path");
-  CREATE UNIQUE INDEX "pages_blocks_contact_locales_locale_parent_id_unique" ON "pages_blocks_contact_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_blocks_contact_cms_locales_locale_parent_id_unique" ON "pages_blocks_contact_cms_locales" USING btree ("_locale","_parent_id");
   CREATE UNIQUE INDEX "pages_slug_idx" ON "pages" USING btree ("slug");
   CREATE INDEX "pages_seo_seo_image_idx" ON "pages" USING btree ("seo_image_id");
   CREATE INDEX "pages_updated_at_idx" ON "pages" USING btree ("updated_at");
   CREATE INDEX "pages_created_at_idx" ON "pages" USING btree ("created_at");
   CREATE INDEX "pages__status_idx" ON "pages" USING btree ("_status");
-  CREATE UNIQUE INDEX "pages_locales_locale_parent_id_unique" ON "pages_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "pages_cms_locales_locale_parent_id_unique" ON "pages_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "pages_rels_order_idx" ON "pages_rels" USING btree ("order");
   CREATE INDEX "pages_rels_parent_idx" ON "pages_rels" USING btree ("parent_id");
   CREATE INDEX "pages_rels_path_idx" ON "pages_rels" USING btree ("path");
   CREATE INDEX "pages_rels_projects_id_idx" ON "pages_rels" USING btree ("projects_id");
   CREATE INDEX "_pages_v_blocks_hero_actions_order_idx" ON "_pages_v_blocks_hero_actions" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_hero_actions_parent_id_idx" ON "_pages_v_blocks_hero_actions" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "_pages_v_blocks_hero_actions_locales_locale_parent_id_unique" ON "_pages_v_blocks_hero_actions_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_hero_actions_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_hero_actions_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_hero_order_idx" ON "_pages_v_blocks_hero" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_hero_parent_id_idx" ON "_pages_v_blocks_hero" USING btree ("_parent_id");
   CREATE INDEX "_pages_v_blocks_hero_path_idx" ON "_pages_v_blocks_hero" USING btree ("_path");
   CREATE INDEX "_pages_v_blocks_hero_image_idx" ON "_pages_v_blocks_hero" USING btree ("image_id");
-  CREATE UNIQUE INDEX "_pages_v_blocks_hero_locales_locale_parent_id_unique" ON "_pages_v_blocks_hero_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_hero_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_hero_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_content_order_idx" ON "_pages_v_blocks_content" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_content_parent_id_idx" ON "_pages_v_blocks_content" USING btree ("_parent_id");
   CREATE INDEX "_pages_v_blocks_content_path_idx" ON "_pages_v_blocks_content" USING btree ("_path");
-  CREATE UNIQUE INDEX "_pages_v_blocks_content_locales_locale_parent_id_unique" ON "_pages_v_blocks_content_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_content_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_content_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_media_order_idx" ON "_pages_v_blocks_media" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_media_parent_id_idx" ON "_pages_v_blocks_media" USING btree ("_parent_id");
   CREATE INDEX "_pages_v_blocks_media_path_idx" ON "_pages_v_blocks_media" USING btree ("_path");
   CREATE INDEX "_pages_v_blocks_media_media_idx" ON "_pages_v_blocks_media" USING btree ("media_id");
-  CREATE UNIQUE INDEX "_pages_v_blocks_media_locales_locale_parent_id_unique" ON "_pages_v_blocks_media_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_media_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_media_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_feature_grid_items_order_idx" ON "_pages_v_blocks_feature_grid_items" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_feature_grid_items_parent_id_idx" ON "_pages_v_blocks_feature_grid_items" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "_pages_v_blocks_feature_grid_items_locales_locale_parent_id_" ON "_pages_v_blocks_feature_grid_items_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_feature_grid_items_cms_locales_locale_parent_id_" ON "_pages_v_blocks_feature_grid_items_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_feature_grid_order_idx" ON "_pages_v_blocks_feature_grid" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_feature_grid_parent_id_idx" ON "_pages_v_blocks_feature_grid" USING btree ("_parent_id");
   CREATE INDEX "_pages_v_blocks_feature_grid_path_idx" ON "_pages_v_blocks_feature_grid" USING btree ("_path");
-  CREATE UNIQUE INDEX "_pages_v_blocks_feature_grid_locales_locale_parent_id_unique" ON "_pages_v_blocks_feature_grid_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_feature_grid_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_feature_grid_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_projects_order_idx" ON "_pages_v_blocks_projects" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_projects_parent_id_idx" ON "_pages_v_blocks_projects" USING btree ("_parent_id");
   CREATE INDEX "_pages_v_blocks_projects_path_idx" ON "_pages_v_blocks_projects" USING btree ("_path");
-  CREATE UNIQUE INDEX "_pages_v_blocks_projects_locales_locale_parent_id_unique" ON "_pages_v_blocks_projects_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_projects_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_projects_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_stats_items_order_idx" ON "_pages_v_blocks_stats_items" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_stats_items_parent_id_idx" ON "_pages_v_blocks_stats_items" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "_pages_v_blocks_stats_items_locales_locale_parent_id_unique" ON "_pages_v_blocks_stats_items_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_stats_items_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_stats_items_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_stats_order_idx" ON "_pages_v_blocks_stats" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_stats_parent_id_idx" ON "_pages_v_blocks_stats" USING btree ("_parent_id");
   CREATE INDEX "_pages_v_blocks_stats_path_idx" ON "_pages_v_blocks_stats" USING btree ("_path");
   CREATE INDEX "_pages_v_blocks_faq_items_order_idx" ON "_pages_v_blocks_faq_items" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_faq_items_parent_id_idx" ON "_pages_v_blocks_faq_items" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "_pages_v_blocks_faq_items_locales_locale_parent_id_unique" ON "_pages_v_blocks_faq_items_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_faq_items_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_faq_items_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_faq_order_idx" ON "_pages_v_blocks_faq" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_faq_parent_id_idx" ON "_pages_v_blocks_faq" USING btree ("_parent_id");
   CREATE INDEX "_pages_v_blocks_faq_path_idx" ON "_pages_v_blocks_faq" USING btree ("_path");
-  CREATE UNIQUE INDEX "_pages_v_blocks_faq_locales_locale_parent_id_unique" ON "_pages_v_blocks_faq_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_faq_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_faq_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_cta_actions_order_idx" ON "_pages_v_blocks_cta_actions" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_cta_actions_parent_id_idx" ON "_pages_v_blocks_cta_actions" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "_pages_v_blocks_cta_actions_locales_locale_parent_id_unique" ON "_pages_v_blocks_cta_actions_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_cta_actions_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_cta_actions_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_cta_order_idx" ON "_pages_v_blocks_cta" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_cta_parent_id_idx" ON "_pages_v_blocks_cta" USING btree ("_parent_id");
   CREATE INDEX "_pages_v_blocks_cta_path_idx" ON "_pages_v_blocks_cta" USING btree ("_path");
-  CREATE UNIQUE INDEX "_pages_v_blocks_cta_locales_locale_parent_id_unique" ON "_pages_v_blocks_cta_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_cta_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_cta_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_blocks_contact_order_idx" ON "_pages_v_blocks_contact" USING btree ("_order");
   CREATE INDEX "_pages_v_blocks_contact_parent_id_idx" ON "_pages_v_blocks_contact" USING btree ("_parent_id");
   CREATE INDEX "_pages_v_blocks_contact_path_idx" ON "_pages_v_blocks_contact" USING btree ("_path");
-  CREATE UNIQUE INDEX "_pages_v_blocks_contact_locales_locale_parent_id_unique" ON "_pages_v_blocks_contact_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_blocks_contact_cms_locales_locale_parent_id_unique" ON "_pages_v_blocks_contact_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_parent_idx" ON "_pages_v" USING btree ("parent_id");
   CREATE INDEX "_pages_v_version_version_slug_idx" ON "_pages_v" USING btree ("version_slug");
   CREATE INDEX "_pages_v_version_seo_version_seo_image_idx" ON "_pages_v" USING btree ("version_seo_image_id");
@@ -1174,24 +1174,24 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "_pages_v_published_locale_idx" ON "_pages_v" USING btree ("published_locale");
   CREATE INDEX "_pages_v_latest_idx" ON "_pages_v" USING btree ("latest");
   CREATE INDEX "_pages_v_autosave_idx" ON "_pages_v" USING btree ("autosave");
-  CREATE UNIQUE INDEX "_pages_v_locales_locale_parent_id_unique" ON "_pages_v_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_pages_v_cms_locales_locale_parent_id_unique" ON "_pages_v_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_pages_v_rels_order_idx" ON "_pages_v_rels" USING btree ("order");
   CREATE INDEX "_pages_v_rels_parent_idx" ON "_pages_v_rels" USING btree ("parent_id");
   CREATE INDEX "_pages_v_rels_path_idx" ON "_pages_v_rels" USING btree ("path");
   CREATE INDEX "_pages_v_rels_projects_id_idx" ON "_pages_v_rels" USING btree ("projects_id");
   CREATE INDEX "projects_tags_order_idx" ON "projects_tags" USING btree ("_order");
   CREATE INDEX "projects_tags_parent_id_idx" ON "projects_tags" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "projects_tags_locales_locale_parent_id_unique" ON "projects_tags_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "projects_tags_cms_locales_locale_parent_id_unique" ON "projects_tags_cms_locales" USING btree ("_locale","_parent_id");
   CREATE UNIQUE INDEX "projects_slug_idx" ON "projects" USING btree ("slug");
   CREATE INDEX "projects_thumbnail_idx" ON "projects" USING btree ("thumbnail_id");
   CREATE INDEX "projects_order_idx" ON "projects" USING btree ("order");
   CREATE INDEX "projects_updated_at_idx" ON "projects" USING btree ("updated_at");
   CREATE INDEX "projects_created_at_idx" ON "projects" USING btree ("created_at");
   CREATE INDEX "projects__status_idx" ON "projects" USING btree ("_status");
-  CREATE UNIQUE INDEX "projects_locales_locale_parent_id_unique" ON "projects_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "projects_cms_locales_locale_parent_id_unique" ON "projects_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_projects_v_version_tags_order_idx" ON "_projects_v_version_tags" USING btree ("_order");
   CREATE INDEX "_projects_v_version_tags_parent_id_idx" ON "_projects_v_version_tags" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "_projects_v_version_tags_locales_locale_parent_id_unique" ON "_projects_v_version_tags_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_projects_v_version_tags_cms_locales_locale_parent_id_unique" ON "_projects_v_version_tags_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "_projects_v_parent_idx" ON "_projects_v" USING btree ("parent_id");
   CREATE INDEX "_projects_v_version_version_slug_idx" ON "_projects_v" USING btree ("version_slug");
   CREATE INDEX "_projects_v_version_version_thumbnail_idx" ON "_projects_v" USING btree ("version_thumbnail_id");
@@ -1205,7 +1205,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "_projects_v_published_locale_idx" ON "_projects_v" USING btree ("published_locale");
   CREATE INDEX "_projects_v_latest_idx" ON "_projects_v" USING btree ("latest");
   CREATE INDEX "_projects_v_autosave_idx" ON "_projects_v" USING btree ("autosave");
-  CREATE UNIQUE INDEX "_projects_v_locales_locale_parent_id_unique" ON "_projects_v_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "_projects_v_cms_locales_locale_parent_id_unique" ON "_projects_v_cms_locales" USING btree ("_locale","_parent_id");
   CREATE UNIQUE INDEX "payload_kv_key_idx" ON "payload_kv" USING btree ("key");
   CREATE INDEX "payload_jobs_log_order_idx" ON "payload_jobs_log" USING btree ("_order");
   CREATE INDEX "payload_jobs_log_parent_id_idx" ON "payload_jobs_log" USING btree ("_parent_id");
@@ -1239,17 +1239,17 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_migrations_created_at_idx" ON "payload_migrations" USING btree ("created_at");
   CREATE INDEX "navigation_items_order_idx" ON "navigation_items" USING btree ("_order");
   CREATE INDEX "navigation_items_parent_id_idx" ON "navigation_items" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "navigation_items_locales_locale_parent_id_unique" ON "navigation_items_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "navigation_items_cms_locales_locale_parent_id_unique" ON "navigation_items_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "navigation_logo_idx" ON "navigation" USING btree ("logo_id");
-  CREATE UNIQUE INDEX "navigation_locales_locale_parent_id_unique" ON "navigation_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "navigation_cms_locales_locale_parent_id_unique" ON "navigation_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "footer_links_order_idx" ON "footer_links" USING btree ("_order");
   CREATE INDEX "footer_links_parent_id_idx" ON "footer_links" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "footer_links_locales_locale_parent_id_unique" ON "footer_links_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "footer_links_cms_locales_locale_parent_id_unique" ON "footer_links_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "footer_social_links_order_idx" ON "footer_social_links" USING btree ("_order");
   CREATE INDEX "footer_social_links_parent_id_idx" ON "footer_social_links" USING btree ("_parent_id");
-  CREATE UNIQUE INDEX "footer_locales_locale_parent_id_unique" ON "footer_locales" USING btree ("_locale","_parent_id");
+  CREATE UNIQUE INDEX "footer_cms_locales_locale_parent_id_unique" ON "footer_cms_locales" USING btree ("_locale","_parent_id");
   CREATE INDEX "site_settings_default_s_e_o_image_idx" ON "site_settings" USING btree ("default_s_e_o_image_id");
-  CREATE UNIQUE INDEX "site_settings_locales_locale_parent_id_unique" ON "site_settings_locales" USING btree ("_locale","_parent_id");`)
+  CREATE UNIQUE INDEX "site_settings_cms_locales_locale_parent_id_unique" ON "site_settings_cms_locales" USING btree ("_locale","_parent_id");`)
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
@@ -1257,75 +1257,75 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
    DROP TABLE "users_sessions" CASCADE;
   DROP TABLE "users" CASCADE;
   DROP TABLE "media" CASCADE;
-  DROP TABLE "media_locales" CASCADE;
+  DROP TABLE "media_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_hero_actions" CASCADE;
-  DROP TABLE "pages_blocks_hero_actions_locales" CASCADE;
+  DROP TABLE "pages_blocks_hero_actions_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_hero" CASCADE;
-  DROP TABLE "pages_blocks_hero_locales" CASCADE;
+  DROP TABLE "pages_blocks_hero_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_content" CASCADE;
-  DROP TABLE "pages_blocks_content_locales" CASCADE;
+  DROP TABLE "pages_blocks_content_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_media" CASCADE;
-  DROP TABLE "pages_blocks_media_locales" CASCADE;
+  DROP TABLE "pages_blocks_media_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_feature_grid_items" CASCADE;
-  DROP TABLE "pages_blocks_feature_grid_items_locales" CASCADE;
+  DROP TABLE "pages_blocks_feature_grid_items_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_feature_grid" CASCADE;
-  DROP TABLE "pages_blocks_feature_grid_locales" CASCADE;
+  DROP TABLE "pages_blocks_feature_grid_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_projects" CASCADE;
-  DROP TABLE "pages_blocks_projects_locales" CASCADE;
+  DROP TABLE "pages_blocks_projects_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_stats_items" CASCADE;
-  DROP TABLE "pages_blocks_stats_items_locales" CASCADE;
+  DROP TABLE "pages_blocks_stats_items_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_stats" CASCADE;
   DROP TABLE "pages_blocks_faq_items" CASCADE;
-  DROP TABLE "pages_blocks_faq_items_locales" CASCADE;
+  DROP TABLE "pages_blocks_faq_items_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_faq" CASCADE;
-  DROP TABLE "pages_blocks_faq_locales" CASCADE;
+  DROP TABLE "pages_blocks_faq_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_cta_actions" CASCADE;
-  DROP TABLE "pages_blocks_cta_actions_locales" CASCADE;
+  DROP TABLE "pages_blocks_cta_actions_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_cta" CASCADE;
-  DROP TABLE "pages_blocks_cta_locales" CASCADE;
+  DROP TABLE "pages_blocks_cta_cms_locales" CASCADE;
   DROP TABLE "pages_blocks_contact" CASCADE;
-  DROP TABLE "pages_blocks_contact_locales" CASCADE;
+  DROP TABLE "pages_blocks_contact_cms_locales" CASCADE;
   DROP TABLE "pages" CASCADE;
-  DROP TABLE "pages_locales" CASCADE;
+  DROP TABLE "pages_cms_locales" CASCADE;
   DROP TABLE "pages_rels" CASCADE;
   DROP TABLE "_pages_v_blocks_hero_actions" CASCADE;
-  DROP TABLE "_pages_v_blocks_hero_actions_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_hero_actions_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_hero" CASCADE;
-  DROP TABLE "_pages_v_blocks_hero_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_hero_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_content" CASCADE;
-  DROP TABLE "_pages_v_blocks_content_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_content_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_media" CASCADE;
-  DROP TABLE "_pages_v_blocks_media_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_media_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_feature_grid_items" CASCADE;
-  DROP TABLE "_pages_v_blocks_feature_grid_items_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_feature_grid_items_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_feature_grid" CASCADE;
-  DROP TABLE "_pages_v_blocks_feature_grid_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_feature_grid_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_projects" CASCADE;
-  DROP TABLE "_pages_v_blocks_projects_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_projects_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_stats_items" CASCADE;
-  DROP TABLE "_pages_v_blocks_stats_items_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_stats_items_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_stats" CASCADE;
   DROP TABLE "_pages_v_blocks_faq_items" CASCADE;
-  DROP TABLE "_pages_v_blocks_faq_items_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_faq_items_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_faq" CASCADE;
-  DROP TABLE "_pages_v_blocks_faq_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_faq_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_cta_actions" CASCADE;
-  DROP TABLE "_pages_v_blocks_cta_actions_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_cta_actions_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_cta" CASCADE;
-  DROP TABLE "_pages_v_blocks_cta_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_cta_cms_locales" CASCADE;
   DROP TABLE "_pages_v_blocks_contact" CASCADE;
-  DROP TABLE "_pages_v_blocks_contact_locales" CASCADE;
+  DROP TABLE "_pages_v_blocks_contact_cms_locales" CASCADE;
   DROP TABLE "_pages_v" CASCADE;
-  DROP TABLE "_pages_v_locales" CASCADE;
+  DROP TABLE "_pages_v_cms_locales" CASCADE;
   DROP TABLE "_pages_v_rels" CASCADE;
   DROP TABLE "projects_tags" CASCADE;
-  DROP TABLE "projects_tags_locales" CASCADE;
+  DROP TABLE "projects_tags_cms_locales" CASCADE;
   DROP TABLE "projects" CASCADE;
-  DROP TABLE "projects_locales" CASCADE;
+  DROP TABLE "projects_cms_locales" CASCADE;
   DROP TABLE "_projects_v_version_tags" CASCADE;
-  DROP TABLE "_projects_v_version_tags_locales" CASCADE;
+  DROP TABLE "_projects_v_version_tags_cms_locales" CASCADE;
   DROP TABLE "_projects_v" CASCADE;
-  DROP TABLE "_projects_v_locales" CASCADE;
+  DROP TABLE "_projects_v_cms_locales" CASCADE;
   DROP TABLE "payload_kv" CASCADE;
   DROP TABLE "payload_jobs_log" CASCADE;
   DROP TABLE "payload_jobs" CASCADE;
@@ -1335,17 +1335,17 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "payload_preferences_rels" CASCADE;
   DROP TABLE "payload_migrations" CASCADE;
   DROP TABLE "navigation_items" CASCADE;
-  DROP TABLE "navigation_items_locales" CASCADE;
+  DROP TABLE "navigation_items_cms_locales" CASCADE;
   DROP TABLE "navigation" CASCADE;
-  DROP TABLE "navigation_locales" CASCADE;
+  DROP TABLE "navigation_cms_locales" CASCADE;
   DROP TABLE "footer_links" CASCADE;
-  DROP TABLE "footer_links_locales" CASCADE;
+  DROP TABLE "footer_links_cms_locales" CASCADE;
   DROP TABLE "footer_social_links" CASCADE;
   DROP TABLE "footer" CASCADE;
-  DROP TABLE "footer_locales" CASCADE;
+  DROP TABLE "footer_cms_locales" CASCADE;
   DROP TABLE "site_settings" CASCADE;
-  DROP TABLE "site_settings_locales" CASCADE;
-  DROP TYPE "public"."_locales";
+  DROP TABLE "site_settings_cms_locales" CASCADE;
+  DROP TYPE "public"."_cms_locales";
   DROP TYPE "public"."enum_users_role";
   DROP TYPE "public"."enum_pages_blocks_hero_actions_style";
   DROP TYPE "public"."enum_pages_blocks_hero_settings_theme";
