@@ -476,7 +476,7 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
-  status?: ('showcase' | 'development' | 'live') | null;
+  projectStatus?: ('showcase' | 'development' | 'live') | null;
   featured?: boolean | null;
   order?: number | null;
   updatedAt: string;
@@ -963,7 +963,7 @@ export interface ProjectsSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
-  status?: T;
+  projectStatus?: T;
   featured?: T;
   order?: T;
   updatedAt?: T;

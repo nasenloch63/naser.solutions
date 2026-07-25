@@ -84,7 +84,8 @@ export const Projects: CollectionConfig = {
     },
     { name: 'tags', type: 'array', fields: [{ name: 'label', type: 'text', required: true, localized: true }] },
     {
-      name: 'status',
+      name: 'projectStatus',
+      label: 'Projektstatus',
       type: 'select',
       defaultValue: 'showcase',
       options: [
