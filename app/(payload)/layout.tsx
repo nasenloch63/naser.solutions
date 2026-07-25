@@ -4,6 +4,9 @@ import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 import type { ServerFunctionClient } from 'payload'
 import { importMap } from './admin/importMap'
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 const serverFunction: ServerFunctionClient = async (args) => {
   'use server'
   return handleServerFunctions({
