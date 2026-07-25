@@ -1,4 +1,4 @@
-import CMSPage, { generateMetadata as generateCMSMetadata } from './(frontend)/[...slug]/page'
+import CMSPage, { generateMetadata as generateCMSMetadata } from './[...slug]/page'
 
 const params = Promise.resolve<{ slug?: string[] }>({})
 

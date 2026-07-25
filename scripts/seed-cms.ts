@@ -5,6 +5,28 @@ const localized = <T>(value: T) => value
 
 async function seed() {
   const payload = await getPayload({ config })
+  const password = process.env.PAYLOAD_SEED_PASSWORD
+
+  if (!password) throw new Error('PAYLOAD_SEED_PASSWORD ist nicht gesetzt.')
+
+  const existingAdmin = await payload.find({
+    collection: 'users',
+    limit: 1,
+    where: { email: { equals: 'yasin.aissani@gmx.de' } },
+  })
+
+  if (!existingAdmin.docs.length) {
+    await payload.create({
+      collection: 'users',
+      data: {
+        email: 'yasin.aissani@gmx.de',
+        password,
+        name: 'Yasin Adam Aissani',
+        role: 'admin',
+      },
+    })
+  }
+
   const existing = await payload.find({ collection: 'pages', limit: 1, where: { slug: { equals: 'home' } } })
 
   if (!existing.docs.length) {
@@ -84,9 +106,9 @@ async function seed() {
   }
 
   const projects = [
-    { title: 'Naser Solutions', slug: 'naser-solutions', description: 'Mehrsprachiger Agenturauftritt mit klarem Fokus auf Leistung, Projekte und direkte Kontaktwege.', url: 'https://www.naser.solutions', category: 'web' as const, status: 'live' as const, featured: true, order: 1 },
-    { title: 'Digitale Markenwelt', slug: 'digitale-markenwelt', description: 'Konzeptstudie für einen konsistenten digitalen Markenauftritt über Website und Social Media.', url: '#kontakt', category: 'design' as const, status: 'showcase' as const, featured: true, order: 2 },
-    { title: 'E-Commerce Experience', slug: 'ecommerce-experience', description: 'Conversion-orientiertes Storefront-Konzept mit schneller Produktsuche und reduzierter Kaufstrecke.', url: '#kontakt', category: 'ecommerce' as const, status: 'showcase' as const, featured: true, order: 3 },
+    { title: 'Naser Solutions', slug: 'naser-solutions', description: 'Mehrsprachiger Agenturauftritt mit klarem Fokus auf Leistung, Projekte und direkte Kontaktwege.', url: 'https://www.naser.solutions', category: 'web' as const, projectStatus: 'live' as const, featured: true, order: 1 },
+    { title: 'Digitale Markenwelt', slug: 'digitale-markenwelt', description: 'Konzeptstudie für einen konsistenten digitalen Markenauftritt über Website und Social Media.', url: '#kontakt', category: 'design' as const, projectStatus: 'showcase' as const, featured: true, order: 2 },
+    { title: 'E-Commerce Experience', slug: 'ecommerce-experience', description: 'Conversion-orientiertes Storefront-Konzept mit schneller Produktsuche und reduzierter Kaufstrecke.', url: '#kontakt', category: 'ecommerce' as const, projectStatus: 'showcase' as const, featured: true, order: 3 },
   ]
 
   for (const project of projects) {
@@ -106,10 +128,12 @@ async function seed() {
   })
 
   console.info('[v0] CMS-Anfangsinhalte wurden erstellt.')
-  process.exit(0)
 }
 
-seed().catch((error) => {
+try {
+  await seed()
+  process.exit(0)
+} catch (error) {
   console.error('[v0] CMS-Seeding fehlgeschlagen:', error)
   process.exit(1)
-})
+}
