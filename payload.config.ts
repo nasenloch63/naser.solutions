@@ -40,7 +40,7 @@ export default buildConfig({
   globals: [Navigation, Footer, SiteSettings],
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL },
-    push: process.env.NODE_ENV !== 'production',
+    localesSuffix: '_cms_locales',
   }),
   editor: lexicalEditor(),
   localization: {
