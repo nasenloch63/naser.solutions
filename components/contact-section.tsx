@@ -42,7 +42,7 @@ export function ContactSection() {
         body: JSON.stringify(data),
       })
 
-      const result = (await response.json().catch(() => null)) as ContactFormResponse | null
+      const result = (await response.json()) as ContactFormResponse
       const isSuccess = response.ok && result?.success === true
 
       if (isSuccess) {
