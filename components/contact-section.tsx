@@ -10,20 +10,24 @@ import { Label } from "@/components/ui/label"
 import { Mail, MapPin, Phone, MessageCircle } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
+import type { ContactFormResponse } from "@/lib/contact-form"
+
+type FormStatus = "idle" | "loading" | "success" | "error"
 
 export function ContactSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
   const { t } = useLanguage()
-
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [status, setStatus] = useState<FormStatus>("idle")
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus("idle")
 
-    const formData = new FormData(e.currentTarget)
+    if (status === "loading") return
+
+    const form = e.currentTarget
+    setStatus("loading")
+
+    const formData = new FormData(form)
     const data = {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
@@ -38,20 +42,18 @@ export function ContactSection() {
         body: JSON.stringify(data),
       })
 
-      const result = await response.json() as { success?: boolean; error?: string }
+      const result = (await response.json().catch(() => null)) as ContactFormResponse | null
+      const isSuccess = response.ok && result?.success === true
 
-      if (response.status === 200 && result.success === true) {
-        setSubmitStatus("success")
-        e.currentTarget.reset()
-        // Auto-clear success message after 5 seconds
-        setTimeout(() => setSubmitStatus("idle"), 5000)
-      } else {
-        setSubmitStatus("error")
+      if (isSuccess) {
+        form.reset()
+        setStatus("success")
+        return
       }
+
+      setStatus("error")
     } catch {
-      setSubmitStatus("error")
-    } finally {
-      setIsSubmitting(false)
+      setStatus("error")
     }
   }
 
@@ -152,20 +154,28 @@ export function ContactSection() {
                   required
                 />
               </div>
-              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? t("contact.form.sending") : t("contact.form.submit")}
+              <Button type="submit" size="lg" className="w-full" disabled={status === "loading"}>
+                {status === "loading" ? t("contact.form.sending") : t("contact.form.submit")}
               </Button>
 
-              {submitStatus === "success" && (
-                <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+              {status === "success" && (
+                <div
+                  className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg"
+                  role="status"
+                  aria-live="polite"
+                >
                   <p className="text-green-600 dark:text-green-400 text-sm text-center">
                     {t("contact.form.success")}
                   </p>
                 </div>
               )}
 
-              {submitStatus === "error" && (
-                <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+              {status === "error" && (
+                <div
+                  className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg"
+                  role="alert"
+                  aria-live="assertive"
+                >
                   <p className="text-red-600 dark:text-red-400 text-sm text-center">
                     {t("contact.form.error")}
                   </p>
