@@ -1,5 +1,12 @@
-import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
+import type { ContactFormResponse } from "@/lib/contact-form"
+
+const SUCCESS_MESSAGE = "Kontaktanfrage erfolgreich! Wir melden uns schnellstmöglich bei dir."
+const ERROR_MESSAGE = "Ein Fehler ist aufgetreten. Bitte versuche es erneut oder kontaktiere uns direkt."
+
+function jsonResponse(data: ContactFormResponse, status: number) {
+  return Response.json(data, { status })
+}
 
 const SMTP_HOST = "smtp.strato.de"
 const SMTP_PORT = 465
@@ -23,7 +30,7 @@ export async function POST(request: Request) {
 
     // Spam-Check
     if (normalize(body.website)) {
-      return NextResponse.json({ success: true }, { status: 200 })
+      return jsonResponse({ success: true, message: SUCCESS_MESSAGE }, 200)
     }
 
     const name = normalize(body.name)
@@ -33,32 +40,20 @@ export async function POST(request: Request) {
 
     // Validation
     if (!name || name.length > 120) {
-      return NextResponse.json(
-        { success: false, error: "Bitte gib einen gültigen Namen ein." },
-        { status: 400 }
-      )
+      return jsonResponse({ success: false, message: ERROR_MESSAGE }, 400)
     }
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
-      return NextResponse.json(
-        { success: false, error: "Bitte gib eine gültige E-Mail-Adresse ein." },
-        { status: 400 }
-      )
+      return jsonResponse({ success: false, message: ERROR_MESSAGE }, 400)
     }
 
     if (!message || message.length > 5000) {
-      return NextResponse.json(
-        { success: false, error: "Bitte gib eine gültige Nachricht ein." },
-        { status: 400 }
-      )
+      return jsonResponse({ success: false, message: ERROR_MESSAGE }, 400)
     }
 
     const password = process.env.STRATO_SMTP_PASSWORD
     if (!password) {
-      return NextResponse.json(
-        { success: false, error: "E-Mail-Versand ist nicht konfiguriert." },
-        { status: 503 }
-      )
+      return jsonResponse({ success: false, message: ERROR_MESSAGE }, 500)
     }
 
     const transporter = nodemailer.createTransport({
@@ -82,11 +77,8 @@ export async function POST(request: Request) {
 
     transporter.close()
 
-    return NextResponse.json({ success: true }, { status: 200 })
+    return jsonResponse({ success: true, message: SUCCESS_MESSAGE }, 200)
   } catch {
-    return NextResponse.json(
-      { success: false, error: "Die Nachricht konnte nicht gesendet werden. Bitte versuche es später erneut." },
-      { status: 500 }
-    )
+    return jsonResponse({ success: false, message: ERROR_MESSAGE }, 500)
   }
 }
