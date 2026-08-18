@@ -1,12 +1,21 @@
 import type { CollectionConfig, GlobalConfig } from 'payload'
 import { pageBlocks } from './blocks'
 
-const publicRead = ({ req: { user } }: { req: { user: unknown } }) => {
-  if (user) return true
+type CMSUser = { id: number | string; role?: 'admin' | 'editor' | 'client' } | null
+
+const isStaff = (user: CMSUser) => user?.role === 'admin' || user?.role === 'editor'
+const isAdmin = (user: CMSUser) => user?.role === 'admin'
+const isClient = (user: CMSUser) => user?.role === 'client'
+
+const staffOnly = ({ req: { user } }: { req: { user: CMSUser } }) => isStaff(user)
+const adminOnly = ({ req: { user } }: { req: { user: CMSUser } }) => isAdmin(user)
+const publicUnlessClient = ({ req: { user } }: { req: { user: CMSUser } }) => !isClient(user)
+
+const publicRead = ({ req: { user } }: { req: { user: CMSUser } }) => {
+  if (isStaff(user)) return true
+  if (isClient(user)) return false
   return { _status: { equals: 'published' } }
 }
-
-const authenticated = ({ req: { user } }: { req: { user: unknown } }) => Boolean(user)
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -17,11 +26,19 @@ export const Users: CollectionConfig = {
     group: 'System',
   },
   access: {
-    create: authenticated,
-    read: authenticated,
-    update: authenticated,
-    delete: ({ req }) => req.user?.role === 'admin',
-    admin: authenticated,
+    create: staffOnly,
+    read: ({ req: { user } }) => {
+      if (isStaff(user as CMSUser)) return true
+      if (isClient(user as CMSUser)) return { id: { equals: user?.id } }
+      return false
+    },
+    update: ({ req: { user } }) => {
+      if (isStaff(user as CMSUser)) return true
+      if (isClient(user as CMSUser)) return { id: { equals: user?.id } }
+      return false
+    },
+    delete: adminOnly,
+    admin: staffOnly,
   },
   fields: [
     { name: 'name', type: 'text', required: true },
@@ -31,9 +48,11 @@ export const Users: CollectionConfig = {
       required: true,
       defaultValue: 'editor',
       saveToJWT: true,
+      access: { create: staffOnly, update: adminOnly },
       options: [
         { label: 'Administrator', value: 'admin' },
         { label: 'Redakteur', value: 'editor' },
+        { label: 'Kunde', value: 'client' },
       ],
     },
   ],
@@ -43,7 +62,7 @@ export const Media: CollectionConfig = {
   slug: 'media',
   labels: { singular: 'Medium', plural: 'Medien' },
   admin: { group: 'Inhalte', useAsTitle: 'alt' },
-  access: { read: () => true, create: authenticated, update: authenticated, delete: authenticated },
+  access: { read: publicUnlessClient, create: staffOnly, update: staffOnly, delete: staffOnly },
   upload: {
     mimeTypes: ['image/*', 'video/*', 'application/pdf'],
     imageSizes: [
@@ -68,7 +87,7 @@ export const Projects: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'status', 'updatedAt'],
   },
-  access: { read: publicRead, create: authenticated, update: authenticated, delete: authenticated },
+  access: { read: publicRead, create: staffOnly, update: staffOnly, delete: staffOnly },
   versions: { drafts: { autosave: { interval: 500 } }, maxPerDoc: 30 },
   fields: [
     { name: 'title', type: 'text', required: true, localized: true },
@@ -113,7 +132,7 @@ export const Pages: CollectionConfig = {
       },
     },
   },
-  access: { read: publicRead, create: authenticated, update: authenticated, delete: authenticated },
+  access: { read: publicRead, create: staffOnly, update: staffOnly, delete: staffOnly },
   versions: { drafts: { autosave: { interval: 500 }, schedulePublish: true }, maxPerDoc: 50 },
   fields: [
     { name: 'title', type: 'text', required: true, localized: true },
@@ -139,11 +158,90 @@ export const Pages: CollectionConfig = {
   ],
 }
 
+export const ClientProjects: CollectionConfig = {
+  slug: 'client-projects',
+  labels: { singular: 'Kundenprojekt', plural: 'Kundenprojekte' },
+  admin: {
+    group: 'Kundenportal',
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'domain', 'status', 'updatedAt'],
+  },
+  access: {
+    admin: staffOnly,
+    create: staffOnly,
+    read: ({ req: { user } }) => {
+      if (isStaff(user as CMSUser)) return true
+      if (isClient(user as CMSUser)) return { client: { equals: user?.id } }
+      return false
+    },
+    update: ({ req: { user } }) => {
+      if (isStaff(user as CMSUser)) return true
+      if (isClient(user as CMSUser)) return { client: { equals: user?.id } }
+      return false
+    },
+    delete: staffOnly,
+  },
+  fields: [
+    {
+      name: 'name',
+      label: 'Projektname',
+      type: 'text',
+      required: true,
+      access: { update: staffOnly },
+    },
+    {
+      name: 'domain',
+      label: 'Domain',
+      type: 'text',
+      required: true,
+      unique: true,
+      index: true,
+      access: { update: staffOnly },
+    },
+    {
+      name: 'client',
+      label: 'Kunde',
+      type: 'relationship',
+      relationTo: 'users',
+      required: true,
+      index: true,
+      filterOptions: { role: { equals: 'client' } },
+      access: { read: staffOnly, update: staffOnly },
+    },
+    {
+      name: 'status',
+      label: 'Status',
+      type: 'select',
+      required: true,
+      defaultValue: 'active',
+      options: [
+        { label: 'In Vorbereitung', value: 'preparation' },
+        { label: 'In Bearbeitung', value: 'active' },
+        { label: 'Veröffentlicht', value: 'live' },
+        { label: 'Pausiert', value: 'paused' },
+      ],
+      access: { update: staffOnly },
+    },
+    {
+      name: 'notes',
+      label: 'Interne Notizen',
+      type: 'textarea',
+      access: { read: staffOnly, update: staffOnly },
+    },
+    {
+      name: 'clientFeedback',
+      label: 'Feedback / Änderungswünsche',
+      type: 'textarea',
+      maxLength: 5000,
+    },
+  ],
+}
+
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
   label: 'Navigation',
   admin: { group: 'Globale Inhalte' },
-  access: { read: () => true, update: authenticated },
+  access: { read: publicUnlessClient, update: staffOnly },
   fields: [
     { name: 'logo', type: 'upload', relationTo: 'media' },
     {
@@ -164,7 +262,7 @@ export const Footer: GlobalConfig = {
   slug: 'footer',
   label: 'Footer',
   admin: { group: 'Globale Inhalte' },
-  access: { read: () => true, update: authenticated },
+  access: { read: publicUnlessClient, update: staffOnly },
   fields: [
     { name: 'claim', type: 'textarea', localized: true },
     {
@@ -191,7 +289,7 @@ export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   label: 'Website-Einstellungen',
   admin: { group: 'Globale Inhalte' },
-  access: { read: () => true, update: authenticated },
+  access: { read: publicUnlessClient, update: staffOnly },
   fields: [
     { name: 'siteName', type: 'text', required: true, defaultValue: 'Naser Solutions' },
     { name: 'siteDescription', type: 'textarea', localized: true },
