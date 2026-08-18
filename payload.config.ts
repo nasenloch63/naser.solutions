@@ -5,7 +5,16 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
-import { Footer, Media, Navigation, Pages, Projects, SiteSettings, Users } from './cms/collections'
+import {
+  ClientProjects,
+  Footer,
+  Media,
+  Navigation,
+  Pages,
+  Projects,
+  SiteSettings,
+  Users,
+} from './cms/collections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -36,7 +45,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Pages, Projects],
+  collections: [Users, Media, Pages, Projects, ClientProjects],
   globals: [Navigation, Footer, SiteSettings],
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL },

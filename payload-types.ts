@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     pages: Page;
     projects: Project;
+    'client-projects': ClientProject;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
@@ -83,6 +84,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    'client-projects': ClientProjectsSelect<false> | ClientProjectsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -149,7 +151,7 @@ export interface UserAuthOperations {
 export interface User {
   id: number;
   name: string;
-  role: 'admin' | 'editor';
+  role: 'admin' | 'editor' | 'client';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -485,6 +487,21 @@ export interface Project {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "client-projects".
+ */
+export interface ClientProject {
+  id: number;
+  name: string;
+  domain: string;
+  client: number | User;
+  status: 'preparation' | 'active' | 'live' | 'paused';
+  notes?: string | null;
+  clientFeedback?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -614,6 +631,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'client-projects';
+        value: number | ClientProject;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -969,6 +990,20 @@ export interface ProjectsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "client-projects_select".
+ */
+export interface ClientProjectsSelect<T extends boolean = true> {
+  name?: T;
+  domain?: T;
+  client?: T;
+  status?: T;
+  notes?: T;
+  clientFeedback?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
