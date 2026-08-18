@@ -15,20 +15,26 @@ export function PortalLoginForm() {
     setIsPending(true)
 
     const form = new FormData(event.currentTarget)
-    const response = await fetch('/api/users/login', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: form.get('email'), password: form.get('password') }),
-    })
 
-    if (!response.ok) {
-      setError('E-Mail-Adresse oder Passwort ist nicht korrekt.')
+    try {
+      const response = await fetch('/api/users/login', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.get('email'), password: form.get('password') }),
+      })
+
+      if (!response.ok) {
+        setError('E-Mail-Adresse oder Passwort ist nicht korrekt.')
+        setIsPending(false)
+        return
+      }
+
+      router.refresh()
+    } catch {
+      setError('Die Anmeldung ist momentan nicht möglich. Bitte versuchen Sie es erneut.')
       setIsPending(false)
-      return
     }
-
-    router.refresh()
   }
 
   return (

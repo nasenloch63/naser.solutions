@@ -26,17 +26,13 @@ export const Users: CollectionConfig = {
     group: 'System',
   },
   access: {
-    create: staffOnly,
+    create: adminOnly,
     read: ({ req: { user } }) => {
       if (isStaff(user as CMSUser)) return true
       if (isClient(user as CMSUser)) return { id: { equals: user?.id } }
       return false
     },
-    update: ({ req: { user } }) => {
-      if (isStaff(user as CMSUser)) return true
-      if (isClient(user as CMSUser)) return { id: { equals: user?.id } }
-      return false
-    },
+    update: staffOnly,
     delete: adminOnly,
     admin: staffOnly,
   },
@@ -48,7 +44,7 @@ export const Users: CollectionConfig = {
       required: true,
       defaultValue: 'editor',
       saveToJWT: true,
-      access: { create: staffOnly, update: adminOnly },
+      access: { create: adminOnly, update: adminOnly },
       options: [
         { label: 'Administrator', value: 'admin' },
         { label: 'Redakteur', value: 'editor' },
