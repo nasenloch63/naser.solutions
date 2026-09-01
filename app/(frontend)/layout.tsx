@@ -1,55 +1,48 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL, SOCIAL_IMAGE } from "@/lib/seo"
 import "../globals.css"
 
 const _inter = Inter({ subsets: ["latin"] })
 const _spaceGrotesk = Space_Grotesk({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Naser Solutions - Die Zukunft deiner digitalen Präsenz",
-  description:
-    "Innovative Webagentur gegründet 2026. Wir entwickeln zukunftsweisende Websites, Apps und digitale Erlebnisse für visionäre Unternehmen.",
-  keywords: ["Webagentur", "Kassel", "Webdesign", "App Entwicklung", "Innovation", "Digital", "2026"],
-  generator: "v0.app",
-  metadataBase: new URL("https://www.naser.solutions"),
+  metadataBase: new URL(SITE_URL),
+  title: { default: DEFAULT_TITLE, template: `%s | ${SITE_NAME}` },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  alternates: { canonical: SITE_URL },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "Naser Solutions - Die Zukunft deiner digitalen Präsenz",
-    description:
-      "Innovative Webagentur gegründet 2026. Wir entwickeln zukunftsweisende Websites, Apps und digitale Erlebnisse für visionäre Unternehmen.",
-    url: "https://www.naser.solutions",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: SITE_URL,
     type: "website",
-    siteName: "Naser Solutions",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Naser Solutions - Web Agency",
-        type: "image/png",
-      },
-    ],
+    locale: "de_DE",
+    siteName: SITE_NAME,
+    images: [{ url: SOCIAL_IMAGE, width: 1200, height: 630, alt: "Naser Solutions – Digitalagentur aus Kassel" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Naser Solutions - Die Zukunft deiner digitalen Präsenz",
-    description:
-      "Innovative Webagentur gegründet 2026. Wir entwickeln zukunftsweisende Websites, Apps und digitale Erlebnisse für visionäre Unternehmen.",
-    images: ["/og-image.png"],
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [SOCIAL_IMAGE],
   },
   icons: {
-    icon: [
-      {
-        url: "/favicon.png",
-        sizes: "any",
-        type: "image/png",
-      },
-    ],
+    icon: [{ url: "/favicon.png", sizes: "any", type: "image/png" }],
     apple: "/favicon.png",
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+  colorScheme: "light dark",
 }
 
 export default function RootLayout({
@@ -58,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="de" suppressHydrationWarning>
+    <html className="bg-background" lang="de-DE" suppressHydrationWarning>
       <body className={`font-sans antialiased`}>
         <ThemeProvider>
           <LanguageProvider>{children}</LanguageProvider>

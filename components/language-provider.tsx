@@ -36,15 +36,16 @@ const translations = {
     "nav.about": "Über uns",
     "nav.vision": "Vision",
     "nav.contact": "Kontakt",
+    "language.select": "Sprache auswählen",
 
     // Hero
     "hero.badge": "Neu gegründet 2026",
-    "hero.eyebrow": "Wir denken, gestalten und entwickeln digitale Lösungen",
+    "hero.eyebrow": "Digitalagentur aus Kassel",
     "hero.subtitle": "wir denken, gestalten und entwickeln",
-    "hero.title1": "Websites & Branding,",
+    "hero.title1": "Webdesign & digitale Lösungen,",
     "hero.title2": "die sichtbar machen und verkaufen.",
     "hero.description":
-      "Für Unternehmen, Selbstständige & Creator, die online ernst genommen werden wollen und Ergebnisse erwarten.",
+      "Naser Solutions entwickelt in Kassel Websites, Markenauftritte, SEO- und Social-Media-Lösungen für Unternehmen, Selbstständige und Creator.",
     "hero.cta": "Projekt starten",
     "hero.cta2": "Kostenloses Erstgespräch",
     "hero.refBtn": "Referenzprojekte",
@@ -63,10 +64,10 @@ const translations = {
     "services.label": "Leistungen",
     "services.title": "Was wir für dich tun.",
     "services.description":
-      "Von der Idee bis zur fertigen Lösung – wir begleiten dich in allen Phasen deines digitalen Projekts.",
+      "Von der Strategie bis zum laufenden Auftritt verbinden wir Webdesign, Entwicklung, Sichtbarkeit und Inhalte zu einer digitalen Lösung.",
     "services.web.title": "Webdesign & Webentwicklung",
     "services.web.description":
-      "Professionelle und moderne Websites, die Ihr Unternehmen optimal präsentieren und Kunden überzeugen. Von der Konzeption bis zur Umsetzung.",
+      "Webdesign und Webentwicklung aus Kassel: Wir konzipieren und realisieren schnelle, zugängliche Websites, die Unternehmen klar präsentieren und Anfragen erleichtern.",
     "services.influencer.title": "Influencer-Websites",
     "services.influencer.description":
       "Einzigartige digitale Präsenzen für Content Creator und Influencer mit Portfolio-Showcases und nahtloser Social Media Integration.",
@@ -75,13 +76,13 @@ const translations = {
       "Maßgeschneiderte Apps mit Push-Notifications, digitalen Coupons und Treueprogrammen für den Einzelhandel – mehr Kundenbindung, mehr Umsatz.",
     "services.social.title": "Social Media & Ads",
     "services.social.description":
-      "Professionelle Kampagnen auf TikTok, Instagram, Facebook und Google Ads für maximale Reichweite und messbare Ergebnisse.",
+      "Social Media aus Kassel: Strategie, Inhalte und Kampagnen für TikTok, Instagram, Facebook und Google Ads – passend zu Marke, Zielgruppe und Zielsetzung.",
     "services.design.title": "Grafikdesign & Branding",
     "services.design.description":
       "Kreatives Design, das Ihre Marke zum Leben erweckt – von Logos bis zu kompletten Corporate Designs mit Wiedererkennungswert.",
     "services.seo.title": "SEO & Performance",
     "services.seo.description":
-      "Suchmaschinenoptimierung und technische Performance-Optimierung für beste Sichtbarkeit und schnelle Ladezeiten.",
+      "SEO aus Kassel: Wir verbessern technische Grundlagen, Inhalte und Ladezeiten, damit Websites für Menschen und Suchmaschinen verständlich und auffindbar werden.",
     "services.ai.title": "KI-gestützte Video & Bildbearbeitung",
     "services.ai.description":
       "Professionelle Video- und Bildbearbeitung mit KI-Technologie für atemberaubende visuelle Inhalte – schnell, effizient und hochwertig.",
@@ -117,7 +118,7 @@ const translations = {
     "about.label": "Der Kopf dahinter",
     "about.title": "Vision trifft Umsetzung.",
     "about.description":
-      "Unter der Leitung von <strong>Yasin Adam Aissani</strong> steht Naser Solutions für Innovation und Qualität. Als frisch gegründete Agentur bringen wir frischen Wind in die Branche – mit dem Hunger, Außergewöhnliches zu schaffen und uns durch exzellente Arbeit zu beweisen.",
+      "Naser Solutions ist eine Digitalagentur aus Kassel unter der Leitung von <strong>Yasin Adam Aissani</strong>. Wir verbinden Webdesign, Webentwicklung, SEO, Social Media und Branding zu klaren digitalen Auftritten für Unternehmen, Selbstständige und Creator.",
     "about.benefit1": "Frische Perspektiven & innovative Ideen",
     "about.benefit2": "Modernste Technologien & Frameworks",
     "about.benefit3": "Persönliche Betreuung von Anfang an",
@@ -1305,7 +1306,7 @@ const translations = {
     "impressum.liabilityContentText": "Hizmet sağlayıcı olarak bu sayfalardaki kendi içeriğimizden sorumluyuz.",
     "impressum.liabilityLinks": "Bağlantı Sorumluluğu",
     "impressum.liabilityLinksText":
-      "Web sitemiz, içerikleri üzerinde etkimiz olmayan harici sitelere bağlantılar içerir.",
+      "Web sitemiz, i��erikleri üzerinde etkimiz olmayan harici sitelere bağlantılar içerir.",
     "impressum.copyright": "Telif Hakkı",
     "impressum.copyrightText": "Bu sayfalardaki içerik ve eserler Alman telif hakkı yasasına tabidir.",
     "impressum.dispute": "Uyuşmazlık Çözümü",
@@ -1609,7 +1610,7 @@ const translations = {
     "projects.preview": "Доступен живой предпросмотр",
     "projects.viewProject": "Смотреть проект",
     "projects.moreComingSoon": "Скоро будет больше проектов...",
-    "projects.crypto.title": "Крипто Новостной Портал",
+    "projects.crypto.title": "Крипто Но��остной Портал",
     "projects.crypto.description": "Современный новостной портал дл�� криптовалют с обновлениями в реальном времени, анализом рынка и отраслевыми новостями.",
     "projects.studio.title": "Studio Glacé",
     "projects.studio.description": "Элегантный сайт-портфолио для креативной дизайн-студии с минималистичной эстетикой и плавными анимациями.",
@@ -1652,7 +1653,7 @@ const translations = {
     "services.influencer.title": "Сайты для инфлюенсеров",
     "services.influencer.description":
       "Уни��альное цифровое присутствие для создателей контента и инфлюенсеров с портфолио и интеграцией социальных сетей.",
-    "services.supermarket.title": "Приложения для супермаркетов",
+    "services.supermarket.title": "Прил��жения для супермаркетов",
     "services.supermarket.description":
       "Индивидуальные приложения с push-уведомлениями, цифровыми купонами и программами лояльности для розничной торговли.",
     "services.social.title": "Социальные сети и реклама",
@@ -1748,7 +1749,7 @@ const translations = {
       "Контент и работы, созданные операторами сайта на этих страницах, защищены немецким авторским правом.",
     "impressum.dispute": "Разрешение споров",
     "impressum.disputeText":
-      "Европейская комиссия предоставляет платформу для онлайн-разрешения споров (OS): https://ec.europa.eu/consumers/odr/. Мы не готовы или не обязаны участвовать в процедурах разрешения споров перед посредническим органом по делам потребителей.",
+      "Европейская комиссия предоставляет платформу для онлайн-разрешения споров (OS): https://ec.europa.eu/consumers/odr/. Мы не готовы или не обязаны участвовать в процедурах разрешения сп��ров перед посредническим органом по делам потребителей.",
     "impressum.backHome": "Вернуться на главную",
 
     // Privacy Policy
@@ -1789,7 +1790,7 @@ const translations = {
     "privacy.cookies.themeDesc": "Сохраняет ваши предпочтения светлой/тёмной темы",
     "privacy.cookies.langDesc": "Сохраняет предпочтительный язык",
     "privacy.cookies.year": "год",
-    "privacy.cookies.settings": "Вы можете отключить cookies в настройках браузера в любое время.",
+    "privacy.cookies.settings": "Вы можете отключить cookies в настройках браузера в люб��е время.",
     "privacy.contact.title": "7. Контактная форма",
     "privacy.contact.text": "При о��ращении через контактную форму собираются следующие данные:",
     "privacy.contact.name": "Имя",
@@ -1802,7 +1803,7 @@ const translations = {
     "privacy.rights.access": "Право на доступ (ст. 15 GDPR)",
     "privacy.rights.accessDesc": "Вы имеете право запросить информацию о ваших персональных данных.",
     "privacy.rights.rectification": "Право на исправление (ст. 16 GDPR)",
-    "privacy.rights.rectificationDesc": "Вы имеете право требовать исправления неточных данных.",
+    "privacy.rights.rectificationDesc": "Вы имеете право требовать исправления неточных данны��.",
     "privacy.rights.erasure": "Право на удаление (ст. 17 GDPR)",
     "privacy.rights.erasureDesc": "Вы имеете право требовать удаления ваших данных.",
     "privacy.rights.restriction": "Ограничение обработки (ст. 18 GDPR)",
@@ -1897,7 +1898,7 @@ const translations = {
     "about.label": "La mente detrás",
     "about.title": "Visión y ejecución.",
     "about.description":
-      "Dirigida por <strong>Yasin Adam Aissani</strong>, Naser Solutions representa innovación y calidad. Como agencia recién fundada, traemos aire fresco a la industria – con el hambre de crear cosas extraordinarias y demostrar nuestro valor a través de un trabajo excelente.",
+      "Dirigida por <strong>Yasin Adam Aissani</strong>, Naser Solutions representa innovación y calidad. Como agencia recién fundada, traemos aire fresco a la industria – con el hambre de crear cosas extraordinarias y demostrar nuestro valor a trav��s de un trabajo excelente.",
     "about.benefit1": "Perspectivas frescas e ideas innovadoras",
     "about.benefit2": "Últimas tecnologías y frameworks",
     "about.benefit3": "Atención personal desde el inicio",
@@ -2274,7 +2275,7 @@ const translations = {
     "projects.joesgarage.description":
       "Σύγχρονη διαδικτυακή παρουσία για το Joe's Garage, το εμβληματικό rock bar και pub του Κάσελ. Ο ιστότοπος συνδυάζει αυθεντική ατμόσφαιρα bar με πληροφορίες για ποτά, εκδηλώσεις, ζωντανή μουσική, public viewing, γκαλερί, ωράρια και οδηγίες.",
     "projects.luxury.title": "AWD Shop",
-    "projects.luxury.description": "Ηλεκτρονικό κατάστημα μόδας υψηλής κλάσης με μοντέρνο σχεδιασμό και άψογη εμπειρία χρήστη.",
+    "projects.luxury.description": "Ηλεκτρονικό κατάσ��ημα μόδας υψηλής κλάσης με μοντέρνο σχεδιασμό και άψογη εμπειρία χρήστη.",
   "projects.donation.title": "Ιστοσελίδα Δωρεών Al Salam",
   "projects.donation.description": "Επαγγελματική ιστοσελίδα δωρεών για ανθρωπιστικούς σκοπούς με σύγχρονο σχεδιασμό και εύκολη διαχείριση δωρεών.",
 
@@ -2799,10 +2800,13 @@ const translations = {
   }
 }
 
+const translateGerman = (key: string): string =>
+  (translations.de as Record<string, string>)[key] || key
+
 const defaultContextValue: LanguageContextType = {
   language: "de",
   setLanguage: () => {},
-  t: (key: string) => key,
+  t: translateGerman,
   dir: "ltr",
   isRTL: false,
 }
@@ -2827,7 +2831,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (mounted) {
-      document.documentElement.lang = language
+      document.documentElement.lang = language === "de" ? "de-DE" : language
       document.documentElement.dir = dir
     }
   }, [language, dir, mounted])
@@ -2841,10 +2845,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const currentTranslations = translations[language] as Record<string, string>
     const defaultTranslations = translations.de as Record<string, string>
     return currentTranslations[key] || defaultTranslations[key] || key
-  }
-
-  if (!mounted) {
-    return <>{children}</>
   }
 
   return (
