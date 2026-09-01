@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState, useMemo, useCallback } from "react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
@@ -14,17 +15,18 @@ interface Project {
   type?: "website" | "social"
   platform?: "instagram"
   logo?: string
+  previewImage?: string
+  previewAlt?: string
 }
 
 const projects: Project[] = [
   {
     titleKey: "projects.hazechill.title",
     descriptionKey: "projects.hazechill.description",
-    url: "https://www.instagram.com/haze_and_chill_cafe/",
+    url: "https://www.haze-chill.com/links",
     tags: ["Design", "Social Media", "Instagram"],
     category: "design",
-    type: "social",
-    platform: "instagram",
+    type: "website",
     logo: "/images/haze-and-chill-cafe-logo.jpg",
   },
   {
@@ -35,6 +37,8 @@ const projects: Project[] = [
     category: "social",
     type: "social",
     platform: "instagram",
+    previewImage: "/projects/haze-chill-instagram.png",
+    previewAlt: "Haze & Chill Café Instagram Social Media Content",
   },
   {
     titleKey: "projects.studio.title",
@@ -45,12 +49,14 @@ const projects: Project[] = [
     type: "website",
   },
   {
-    titleKey: "projects.porsche.title",
-    descriptionKey: "projects.porsche.description",
-    url: "https://aa-performance.net/",
-    tags: ["Automotive", "Performance", "Autohaus"],
-    category: "showcase",
+    titleKey: "projects.joesgarage.title",
+    descriptionKey: "projects.joesgarage.description",
+    url: "https://www.joes-garage.net",
+    tags: ["Rock Bar", "Webdesign", "Events"],
+    category: "gastro",
     type: "website",
+    previewImage: "/images/project-joes-garage.png",
+    previewAlt: "Joe's Garage Kassel Website-Projekt",
   },
   {
     titleKey: "projects.crypto.title",
@@ -58,14 +64,6 @@ const projects: Project[] = [
     url: "https://v0-crypto-news-website-peach.vercel.app/",
     tags: ["Next.js", "Crypto", "News"],
     category: "web",
-    type: "website",
-  },
-  {
-    titleKey: "projects.joesgarage.title",
-    descriptionKey: "projects.joesgarage.description",
-    url: "https://www.joes-garage.net",
-    tags: ["Rock Bar", "Webdesign", "Events"],
-    category: "gastro",
     type: "website",
   },
   {
@@ -165,6 +163,21 @@ function ProjectThumbnail({ url, title }: { url: string; title: string }) {
         </div>
       )}
       {/* Hover overlay */}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+    </div>
+  )
+}
+
+function StaticThumbnail({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="absolute inset-0 bg-zinc-900">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(min-width: 1280px) 608px, (min-width: 768px) 50vw, 100vw"
+        className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+      />
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
     </div>
   )
@@ -299,7 +312,9 @@ export function ProjectsSection() {
             >
               {/* Thumbnail */}
               <div className={`${viewMode === "grid" ? "aspect-video" : "sm:aspect-[3/1]"} relative overflow-hidden`}>
-                {project.logo ? (
+                {project.previewImage ? (
+                  <StaticThumbnail src={project.previewImage} alt={project.previewAlt || t(project.titleKey)} />
+                ) : project.logo ? (
                   <LogoThumbnail logo={project.logo} title={t(project.titleKey)} />
                 ) : (
                   <ProjectThumbnail url={project.url} title={t(project.titleKey)} />
