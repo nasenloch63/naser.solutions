@@ -27,7 +27,6 @@ const projects: Project[] = [
     tags: ["Design", "Social Media", "Instagram"],
     category: "design",
     type: "website",
-    logo: "/images/haze-and-chill-cafe-logo.jpg",
   },
   {
     titleKey: "projects.reel.title",
@@ -55,8 +54,6 @@ const projects: Project[] = [
     tags: ["Rock Bar", "Webdesign", "Events"],
     category: "gastro",
     type: "website",
-    previewImage: "/images/project-joes-garage.png",
-    previewAlt: "Joe's Garage Kassel Website-Projekt",
   },
   {
     titleKey: "projects.crypto.title",
