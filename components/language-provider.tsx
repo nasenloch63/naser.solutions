@@ -98,8 +98,6 @@ const translations = {
     "projects.crypto.description": "Ein modernes Nachrichtenportal für Kryptowährungen mit Echtzeit-Updates, Marktanalysen und Branchennews.",
     "projects.studio.title": "Studio Glacé",
     "projects.studio.description": "Elegante Portfolio-Website für ein kreatives Designstudio mit minimalistischer Ästhetik und fließenden Animationen.",
-    "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-    "projects.porsche.description": "Professioneller Webauftritt für ein Hochleistungs-Autohaus in Leipzig mit modernem Design und Premium-Fahrzeugpräsentation.",
     "projects.joesgarage.title": "Joe's Garage Kassel",
     "projects.joesgarage.description":
       "Moderner Webauftritt für Joe's Garage, Kassels Rock-Bar und Kultkneipe. Die Website verbindet authentisches Bar-Feeling mit Informationen zu Drinks, Events, Live-Musik, Public Viewing, Galerie, Öffnungszeiten und Anfahrt.",
@@ -365,8 +363,6 @@ const translations = {
     "projects.crypto.description": "Um portal de notícias moderno para criptomoedas com atualizações em tempo real, análises de mercado e notícias da indústria.",
     "projects.studio.title": "Studio Glacé",
     "projects.studio.description": "Site de portfólio elegante para um estúdio de design criativo com estética minimalista e animações fluidas.",
-    "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-    "projects.porsche.description": "Apresentação automotiva de luxo com design imersivo e experiências visuais de alta qualidade.",
     "projects.joesgarage.title": "Joe's Garage Kassel",
     "projects.joesgarage.description":
       "Presença web moderna para Joe's Garage, o icónico rock bar e pub de Kassel. O site combina autêntica atmosfera de bar com informações sobre drinks, eventos, música ao vivo, public viewing, galeria, horários e localização.",
@@ -507,8 +503,6 @@ const translations = {
     "projects.crypto.description": "A modern news portal for cryptocurrencies with real-time updates, market analysis, and industry news.",
     "projects.studio.title": "Studio Glacé",
     "projects.studio.description": "Elegant portfolio website for a creative design studio with minimalist aesthetics and fluid animations.",
-    "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-    "projects.porsche.description": "Professional web presence for a high-performance car dealership in Leipzig with modern design and premium vehicle presentation.",
     "projects.joesgarage.title": "Joe's Garage Kassel",
     "projects.joesgarage.description":
       "Modern web presence for Joe's Garage, Kassel's iconic rock bar and pub. The website combines an authentic bar atmosphere with information on drinks, events, live music, public viewing, gallery, opening hours and location.",
@@ -747,8 +741,6 @@ const translations = {
     "projects.crypto.description": "Un portail d'actualités moderne pour les cryptomonnaies avec des mises à jour en temps réel, des analyses de marché et des nouvelles de l'industrie.",
     "projects.studio.title": "Studio Glacé",
     "projects.studio.description": "Site portfolio élégant pour un studio de design créatif avec une esthétique minimaliste et des animations fluides.",
-    "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-    "projects.porsche.description": "Présence web professionnelle pour un concessionnaire haute performance à Leipzig avec un design moderne et une présentation premium des véhicules.",
     "projects.joesgarage.title": "Joe's Garage Kassel",
     "projects.joesgarage.description":
       "Présence web moderne pour Joe's Garage, le rock bar emblématique et pub de Kassel. Le site combine une atmosphère de bar authentique avec des informations sur les boissons, événements, musique live, public viewing, galerie, horaires et accès.",
@@ -976,8 +968,6 @@ const translations = {
     "projects.crypto.description": "بوابة أخبار حديثة للعملات المشفرة مع تحديثات فورية وتحليلات السوق وأخبار الصناعة.",
     "projects.studio.title": "ستوديو غلاسيه",
     "projects.studio.description": "موقع بورتفوليو أنيق لاستوديو تصميم إبداعي بجمالية بسيطة ورسوم متحركة سلسة.",
-    "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-    "projects.porsche.description": "حضور ويب احترافي لوكالة سيارات عالية الأداء في لايبزيغ بتصميم حديث وعرض مميز للمركبات.",
     "projects.joesgarage.title": "Joe's Garage كاسيل",
     "projects.joesgarage.description":
       "حضور ويب عصري لـ Joe's Garage، حانة الروك الأيقونية في كاسيل. يجمع الموقع أجواء البار الأصيلة مع معلومات حول المشروبات والفعاليات والموسيقى الحية والمعرض وساعات العمل والوصول.",
@@ -1161,7 +1151,7 @@ const translations = {
     "privacy.security.title": "9. أمان البيانات",
     "privacy.security.text": "نستخدم تشفير SSL/TLS لنقل البيانات بشكل آمن.",
     "privacy.changes.title": "10. التغييرات على هذه السياسة",
-    "privacy.changes.text": "نحتفظ بالحق في تعديل سياسة الخصوصية هذه حسب الحاجة.",
+    "privacy.changes.text": "نحتفظ بالحق في تعديل سياسة الخصو��ية هذه حسب الحاجة.",
     "privacy.backHome": "العودة للصفحة الرئيسية",
 
     // Payment Page
@@ -1185,8 +1175,6 @@ const translations = {
     "projects.crypto.description": "Gerçek zamanlı güncellemeler, piyasa analizleri ve sektör haberleri içeren modern bir kripto para haber portalı.",
     "projects.studio.title": "Studio Glacé",
     "projects.studio.description": "Minimalist estetik ve akıcı animasyonlarla yaratıcı bir tasarım stüdyosu için şık portfolyo sitesi.",
-    "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-    "projects.porsche.description": "Leipzig'deki yüksek performanslı bir otomobil bayisi için modern tasarım ve premium araç sunumuyla profesyonel web varlığı.",
     "projects.joesgarage.title": "Joe's Garage Kassel",
     "projects.joesgarage.description":
       "Kassel'in ikonik rock barı Joe's Garage için modern web varlığı. Site, içecekler, etkinlikler, canlı müzik, public viewing, galeri, açılış saatleri ve ulaşım bilgileriyle otantik bar atmosferini bir araya getiriyor.",
@@ -1400,8 +1388,6 @@ const translations = {
     "projects.crypto.description": "Një portal modern i lajmeve për kriptovalutat me përditësime në kohë reale, analiza tregu dhe lajme të industrisë.",
     "projects.studio.title": "Studio Glacé",
     "projects.studio.description": "Faqe elegante portfolioje për një studio kreative dizajni me estetikë minimaliste dhe animacione të lëngshme.",
-    "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-    "projects.porsche.description": "Prani profesionale në ueb për një shitës makinash me performancë të lartë në Lajpcig me dizajn modern dhe prezantim premium të automjeteve.",
     "projects.joesgarage.title": "Joe's Garage Kassel",
     "projects.joesgarage.description":
       "Prania moderne në ueb për Joe's Garage, barin ikonik të rock-ut dhe pub-in e Kasselit. Faqja kombinon atmosferën autentike të barit me informacione mbi pijet, ngjarjet, muzikën live, public viewing, galerinë, oraret dhe udhëzimet.",
@@ -1614,8 +1600,6 @@ const translations = {
     "projects.crypto.description": "Современный новостной портал дл�� криптовалют с обновлениями в реальном времени, анализом рынка и отраслевыми новостями.",
     "projects.studio.title": "Studio Glacé",
     "projects.studio.description": "Элегантный сайт-портфолио для креативной дизайн-студии с минималистичной эстетикой и плавными анимациями.",
-    "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-    "projects.porsche.description": "Профессиональное веб-присутствие для высокопроизводительного автосалона в Лейпциге с современным дизайном и премиум-презентацией автомобилей.",
     "projects.joesgarage.title": "Joe's Garage Кассель",
     "projects.joesgarage.description":
       "Современное веб-присутствие для Joe's Garage — культового рок-бара и паба в Касселе. Сайт сочетает аутентичную атмосферу бара с информацией о напитках, событиях, живой музыке, public viewing, галерее, часах работы и маршруте.",
@@ -1749,7 +1733,7 @@ const translations = {
       "Контент и работы, созданные операторами сайта на этих страницах, защищены немецким авторским правом.",
     "impressum.dispute": "Разрешение споров",
     "impressum.disputeText":
-      "Европейская комиссия предоставляет платформу для онлайн-разрешения споров (OS): https://ec.europa.eu/consumers/odr/. Мы не готовы или не обязаны участвовать в процедурах разрешения сп��ров перед посредническим органом по делам потребителей.",
+      "Европейская комиссия предоставляет платформу для онлай��-разрешения споров (OS): https://ec.europa.eu/consumers/odr/. Мы не готовы или не обязаны участвовать в процедурах разрешения сп��ров перед посредническим органом по делам потребителей.",
     "impressum.backHome": "Вернуться на главную",
 
     // Privacy Policy
@@ -1842,8 +1826,6 @@ const translations = {
     "projects.crypto.description": "Un portal de noticias moderno para criptomonedas con actualizaciones en tiempo real, análisis de mercado y noticias de la industria.",
     "projects.studio.title": "Studio Glacé",
     "projects.studio.description": "Sitio web de portafolio elegante para un estudio de diseño creativo con estética minimalista y animaciones fluidas.",
-    "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-    "projects.porsche.description": "Presencia web profesional para un concesionario de alto rendimiento en Leipzig con diseño moderno y presentación premium de vehículos.",
     "projects.joesgarage.title": "Joe's Garage Kassel",
     "projects.joesgarage.description":
       "Presencia web moderna para Joe's Garage, el icónico bar de rock y pub de Kassel. El sitio combina una auténtica atmósfera de bar con información sobre bebidas, eventos, música en vivo, public viewing, galería, horarios y cómo llegar.",
@@ -2269,11 +2251,10 @@ const translations = {
   "projects.crypto.description": "Μ��α σύγχρονη πύλη ειδήσεων για κρυπτονομίσματα με ενημερώσεις σε πραγματικό χρόνο, ανάλυση αγοράς και ειδήσεις του κλάδου.",
   "projects.studio.title": "Studio Glacé",
   "projects.studio.description": "Κομψός ιστότοπος portfolio για ένα δημιουργικό στούντιο σχεδιασμού με μινιμαλιστική αισθητική και ρευστές κινήσεις.",
-  "projects.porsche.title": "A&A Performance Autohaus Leipzig",
-  "projects.porsche.description": "Επαγγελματική διαδικτυακή παρουσία για ένα κατάστημα αυτοκινήτων υψηλής απόδοσης στη Λειψία με μοντέρνο σχεδιασμό και premium παρουσίαση οχημάτων.",
+
     "projects.joesgarage.title": "Joe's Garage Κάσελ",
     "projects.joesgarage.description":
-      "Σύγχρονη διαδικτυακή παρουσία για το Joe's Garage, το εμβληματικό rock bar και pub του Κάσελ. Ο ιστότοπος συνδυάζει αυθεντική ατμόσφαιρα bar με πληροφορίες για ποτά, εκδηλώσεις, ζωντανή μουσική, public viewing, γκαλερί, ωράρια και οδηγίες.",
+      "Σύγχρονη διαδικτυακή παρουσία για το Joe's Garage, το εμβληματικό rock bar και pub του Κάσελ. Ο ιστότοπος συνδυάζει αυθεντική ατμόσφαιρα bar με πληροφορίες για ποτά, εκδηλώσεις, ζωνταν�� μουσική, public viewing, γκαλερί, ωράρια και οδηγίες.",
     "projects.luxury.title": "AWD Shop",
     "projects.luxury.description": "Ηλεκτρονικό κατάσ��ημα μόδας υψηλής κλάσης με μοντέρνο σχεδιασμό και άψογη εμπειρία χρήστη.",
   "projects.donation.title": "Ιστοσελίδα Δωρεών Al Salam",
@@ -2545,9 +2526,6 @@ const translations = {
     "projects.studio.title": "Glacé工作室",
     "projects.studio.description":
       "为创意设计工作室打造的优雅作品集网站，采用极简美学和流畅动画。",
-    "projects.porsche.title": "A&amp;A Performance 莱比锡汽车经销商",
-    "projects.porsche.description":
-      "莱比锡高性能汽车经销商的专业网站，现代设计和优质车辆展示。",
     "projects.luxury.title": "AWD商店",
     "projects.luxury.description":
       "高端时尚电商店铺，现代设计和无缝用户体验。",
