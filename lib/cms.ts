@@ -19,6 +19,19 @@ export const getPageBySlug = cache(async (slug: string, draft = false): Promise<
   return result.docs[0] ?? null
 })
 
+export const getPublishedPages = cache(async (): Promise<Page[]> => {
+  const payload = await getCMS()
+  const result = await payload.find({
+    collection: 'pages',
+    depth: 1,
+    limit: 100,
+    sort: 'slug',
+    where: { _status: { equals: 'published' } },
+  })
+
+  return result.docs
+})
+
 export const getProjects = cache(async (): Promise<Project[]> => {
   const payload = await getCMS()
   const result = await payload.find({

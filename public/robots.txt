@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /api/
+Disallow: /portal/
+Disallow: /preview/
+Disallow: /thumbnail/
 
-Sitemap: https://www.naser.solutions/sitemap.xml
+Sitemap: https://www.naser-solutions.de/sitemap.xml

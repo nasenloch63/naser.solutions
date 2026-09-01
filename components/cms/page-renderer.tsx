@@ -64,7 +64,7 @@ function ProjectCards({ projects }: { projects: Project[] }) {
           <article key={project.id} className="overflow-hidden rounded-2xl border border-border bg-card text-card-foreground">
             {image?.url && (
               <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
-                <Image src={image.url} alt={image.alt} fill className="object-cover transition-transform duration-500 hover:scale-105" />
+                <Image src={image.url} alt={image.alt} fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-500 hover:scale-105" />
               </div>
             )}
             <div className="flex flex-col gap-4 p-6">
@@ -118,7 +118,7 @@ export function PageRenderer({ initialPage, projects = [] }: { initialPage: Page
                   {block.description && <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">{block.description}</p>}
                   {block.actions?.length ? <div className="flex flex-wrap gap-4">{block.actions.map((action) => <ActionLink key={action.id ?? action.url} action={action} />)}</div> : null}
                 </div>
-                {image?.url && <div className="relative aspect-square overflow-hidden rounded-3xl bg-secondary"><Image src={image.url} alt={image.alt} fill priority={index === 0} className="object-cover" /></div>}
+                {image?.url && <div className="relative aspect-square overflow-hidden rounded-3xl bg-secondary"><Image src={image.url} alt={image.alt} fill sizes="(min-width: 1024px) 50vw, 100vw" priority={index === 0} className="object-cover" /></div>}
               </div>
             </section>
           )
@@ -131,7 +131,7 @@ export function PageRenderer({ initialPage, projects = [] }: { initialPage: Page
 
         if (block.blockType === 'media') {
           const media = typeof block.media === 'object' ? block.media : null
-          return media?.url ? <section key={key} id={anchor} className={sectionClass(block.settings)}><figure className={cn('mx-auto px-6 lg:px-8', block.fullWidth ? 'max-w-none' : 'max-w-7xl')}><div className="relative aspect-video overflow-hidden rounded-3xl bg-secondary"><Image src={media.url} alt={media.alt} fill className="object-cover" /></div>{block.caption && <figcaption className="mt-4 text-sm text-muted-foreground">{block.caption}</figcaption>}</figure></section> : null
+          return media?.url ? <section key={key} id={anchor} className={sectionClass(block.settings)}><figure className={cn('mx-auto px-6 lg:px-8', block.fullWidth ? 'max-w-none' : 'max-w-7xl')}><div className="relative aspect-video overflow-hidden rounded-3xl bg-secondary"><Image src={media.url} alt={media.alt} fill sizes={block.fullWidth ? "100vw" : "(min-width: 1280px) 1280px, 100vw"} className="object-cover" /></div>{block.caption && <figcaption className="mt-4 text-sm text-muted-foreground">{block.caption}</figcaption>}</figure></section> : null
         }
 
         if (block.blockType === 'featureGrid') {
