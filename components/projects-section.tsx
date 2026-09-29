@@ -21,14 +21,6 @@ interface Project {
 
 const projects: Project[] = [
   {
-    titleKey: "projects.hazechill.title",
-    descriptionKey: "projects.hazechill.description",
-    url: "https://www.haze-chill.com/links",
-    tags: ["Design", "Social Media", "Instagram"],
-    category: "design",
-    type: "website",
-  },
-  {
     titleKey: "projects.reel.title",
     descriptionKey: "projects.reel.description",
     url: "https://www.instagram.com/reel/DYug1AZoD9L/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
