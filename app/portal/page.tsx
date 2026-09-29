@@ -18,8 +18,9 @@ function domainUrl(domain: string) {
 }
 
 export default async function PortalPage() {
+  const requestHeaders = await headers()
   const payload = await getPayload({ config })
-  const { user } = await payload.auth({ headers: await headers() })
+  const { user } = await payload.auth({ headers: requestHeaders })
 
   if (!user) return <PortalLoginForm />
   if (user.collection !== 'users') return <PortalLoginForm />

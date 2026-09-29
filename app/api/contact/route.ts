@@ -25,9 +25,18 @@ function normalize(value: unknown): string {
 }
 
 export async function POST(request: Request) {
+  let body: ContactRequest
   try {
-    const body = await request.json() as ContactRequest
+    const parsed: unknown = await request.json()
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return jsonResponse({ success: false, message: ERROR_MESSAGE }, 400)
+    }
+    body = parsed as ContactRequest
+  } catch {
+    return jsonResponse({ success: false, message: ERROR_MESSAGE }, 400)
+  }
 
+  try {
     // Spam-Check
     if (normalize(body.website)) {
       return jsonResponse({ success: true, message: SUCCESS_MESSAGE }, 200)
@@ -47,7 +56,7 @@ export async function POST(request: Request) {
       return jsonResponse({ success: false, message: ERROR_MESSAGE }, 400)
     }
 
-    if (!message || message.length > 5000) {
+    if (!message || message.length > 5000 || phone.length > 60) {
       return jsonResponse({ success: false, message: ERROR_MESSAGE }, 400)
     }
 
@@ -57,6 +66,9 @@ export async function POST(request: Request) {
     }
 
     const transporter = nodemailer.createTransport({
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+      socketTimeout: 20000,
       host: SMTP_HOST,
       port: SMTP_PORT,
       secure: true,
@@ -67,15 +79,17 @@ export async function POST(request: Request) {
     })
 
     // Send email
-    await transporter.sendMail({
-      from: `${SMTP_USER}`,
-      to: SMTP_USER,
-      replyTo: email,
-      subject: `Neue Kontaktanfrage von ${name}`,
-      text: `Name: ${name}\nE-Mail: ${email}\nTelefon: ${phone || "Nicht angegeben"}\n\nNachricht:\n${message}`,
-    })
-
-    transporter.close()
+    try {
+      await transporter.sendMail({
+        from: SMTP_USER,
+        to: SMTP_USER,
+        replyTo: email,
+        subject: `Neue Kontaktanfrage von ${name}`,
+        text: `Name: ${name}\nE-Mail: ${email}\nTelefon: ${phone || "Nicht angegeben"}\n\nNachricht:\n${message}`,
+      })
+    } finally {
+      transporter.close()
+    }
 
     return jsonResponse({ success: true, message: SUCCESS_MESSAGE }, 200)
   } catch {

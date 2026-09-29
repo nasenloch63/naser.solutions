@@ -12,6 +12,7 @@ import { HeroSection } from '@/components/hero-section'
 import { ProjectsSection } from '@/components/projects-section'
 import { ServicesSection } from '@/components/services-section'
 import { StatsSection } from '@/components/stats-section'
+import { VisionSection } from '@/components/vision-section'
 import { cn } from '@/lib/utils'
 
 const iconMap = { Code2, Globe: Globe2, Globe2, Palette, Rocket, ShieldCheck, Sparkles }
@@ -106,6 +107,7 @@ export function PageRenderer({ initialPage, projects = [] }: { initialPage: Page
           )
         }
         if (block.blockType === 'stats' && isHomepage) return <StatsSection key={key} />
+        if (block.blockType === 'cta' && isHomepage) return <VisionSection key={key} />
 
         if (block.blockType === 'hero') {
           const image = typeof block.image === 'object' ? block.image : null
@@ -155,7 +157,7 @@ export function PageRenderer({ initialPage, projects = [] }: { initialPage: Page
           return <section key={key} id={anchor} className={sectionClass(block.settings)}><div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center lg:px-8"><h2 className="font-display text-4xl font-bold text-balance md:text-6xl">{block.heading}</h2>{block.description && <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">{block.description}</p>}{block.actions?.length ? <div className="flex flex-wrap justify-center gap-4">{block.actions.map((action) => <ActionLink key={action.id ?? action.url} action={action} />)}</div> : null}</div></section>
         }
 
-        if (block.blockType === 'contact') return <div key={key} id={anchor}><ContactSection /></div>
+        if (block.blockType === 'contact') return <ContactSection key={key} showForm={!isHomepage} />
 
         return null
       })}

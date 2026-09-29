@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import type { Page } from '@/payload-types'
 
-export const SITE_URL = 'https://www.naser-solutions.de'
+export const SITE_URL = 'https://www.naser.solutions'
 export const SITE_NAME = 'Naser Solutions'
-export const DEFAULT_TITLE = 'Webdesign, Webentwicklung & SEO in Kassel | Naser Solutions'
+export const DEFAULT_TITLE = 'Naser Solutions | Webagentur für Webdesign in Kassel'
 export const DEFAULT_DESCRIPTION =
-  'Naser Solutions ist eine Digitalagentur aus Kassel für Webdesign, Webentwicklung, SEO, Social Media, Branding und digitale Lösungen.'
+  'Webdesign, Webentwicklung und digitale Markenauftritte aus Kassel. Naser Solutions begleitet dein Unternehmen von der Website-Idee bis zur Umsetzung.'
 export const SOCIAL_IMAGE = `${SITE_URL}/og-image.jpg`
 export const BUSINESS_EMAIL = 'info@naser-solutions.de'
 export const BUSINESS_PHONE = '+49 15560 729886'

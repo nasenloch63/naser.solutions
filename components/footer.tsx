@@ -13,7 +13,7 @@ export function Footer() {
   return (
     <footer className="py-12 border-t border-border bg-background">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col xl:flex-row items-center justify-between gap-6">
           <Link href="/" className="flex items-center gap-3">
             <div className="relative w-10 h-10">
               {/* Light mode logo */}
@@ -37,7 +37,7 @@ export function Footer() {
             </div>
           </Link>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-3 max-w-full">
             <a
               href="https://instagram.com/naser.solutions"
               target="_blank"

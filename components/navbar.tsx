@@ -18,8 +18,8 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl backdrop-saturate-150 border-b border-border/50 shadow-sm supports-[backdrop-filter]:bg-background/40">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="relative h-12 w-12 md:h-14 md:w-14 flex-shrink-0">
+          <Link href="/" className="flex items-center gap-2 min-w-0">
+            <div className="relative h-9 w-9 sm:h-14 sm:w-14 flex-shrink-0">
               {/* Light mode logo */}
               <Image
                 src="/images/logo-invertable.png"
@@ -38,7 +38,7 @@ export function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg md:text-xl font-bold tracking-tight text-foreground">Naser Solutions</span>
+              <span className="text-sm sm:text-xl font-bold text-foreground">Naser Solutions</span>
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium">
                 Webagency
               </span>
@@ -46,14 +46,14 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-6">
-            <Link href="#leistungen" className="text-muted-foreground hover:text-foreground transition-colors">
+          <div className="hidden xl:flex items-center gap-5">
+            <Link href="/#leistungen" className="text-muted-foreground hover:text-foreground transition-colors">
               {t("nav.services")}
             </Link>
-            <Link href="#projekte" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/#projekte" className="text-muted-foreground hover:text-foreground transition-colors">
               {t("nav.projects")}
             </Link>
-            <Link href="#ueber-uns" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/#ueber-uns" className="text-muted-foreground hover:text-foreground transition-colors">
               {t("nav.about")}
             </Link>
             <Link href="/links" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -73,7 +73,7 @@ export function Navbar() {
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-secondary transition-colors"
-              aria-label="Toggle dark mode"
+              aria-label={t("ui.theme")} title={t("ui.theme")}
             >
               {theme === "dark" ? (
                 <Sun className="h-5 w-5 text-foreground" />
@@ -81,18 +81,18 @@ export function Navbar() {
                 <Moon className="h-5 w-5 text-foreground" />
               )}
             </button>
-            <Link href="#kontakt">
+            <Link href="/#kontakt">
               <Button>{t("nav.contact")}</Button>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-2">
+          <div className="xl:hidden flex items-center gap-1 shrink-0">
             <a
               href="https://instagram.com/naser.solutions"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-secondary transition-colors"
+              className="hidden sm:block p-2 rounded-lg hover:bg-secondary transition-colors"
               aria-label="Instagram @naser.solutions"
             >
               <Instagram className="h-5 w-5 text-foreground" />
@@ -101,7 +101,7 @@ export function Navbar() {
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-secondary transition-colors"
-              aria-label="Toggle dark mode"
+              aria-label={t("ui.theme")} title={t("ui.theme")}
             >
               {theme === "dark" ? (
                 <Sun className="h-5 w-5 text-foreground" />
@@ -109,7 +109,7 @@ export function Navbar() {
                 <Moon className="h-5 w-5 text-foreground" />
               )}
             </button>
-            <button className="p-2" onClick={() => setIsOpen(!isOpen)}>
+            <button className="p-2" aria-label={t("ui.menu")} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
@@ -117,24 +117,24 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border/50 bg-background/80 backdrop-blur-xl">
+          <div id="mobile-navigation" className="xl:hidden py-4 border-t border-border/50 bg-background/80 backdrop-blur-xl">
             <div className="flex flex-col gap-4">
               <Link
-                href="#leistungen"
+                href="/#leistungen"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {t("nav.services")}
               </Link>
               <Link
-                href="#projekte"
+                href="/#projekte"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {t("nav.projects")}
               </Link>
               <Link
-                href="#ueber-uns"
+                href="/#ueber-uns"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setIsOpen(false)}
               >
@@ -157,7 +157,7 @@ export function Navbar() {
                 <Instagram className="h-5 w-5" />
                 <span>@naser.solutions</span>
               </a>
-              <Link href="#kontakt" onClick={() => setIsOpen(false)}>
+              <Link href="/#kontakt" onClick={() => setIsOpen(false)}>
                 <Button className="w-full">{t("nav.contact")}</Button>
               </Link>
             </div>

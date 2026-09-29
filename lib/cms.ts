@@ -2,10 +2,12 @@ import config from '@payload-config'
 import { cache } from 'react'
 import { getPayload } from 'payload'
 import type { Page, Project, SiteSetting } from '@/payload-types'
+import { isLocalPreview, previewHome } from '@/lib/local-preview'
 
 export const getCMS = cache(() => getPayload({ config }))
 
 export const getPageBySlug = cache(async (slug: string, draft = false): Promise<Page | null> => {
+  if (isLocalPreview) return slug === 'home' ? previewHome : null
   const payload = await getCMS()
   const result = await payload.find({
     collection: 'pages',
@@ -20,6 +22,7 @@ export const getPageBySlug = cache(async (slug: string, draft = false): Promise<
 })
 
 export const getPublishedPages = cache(async (): Promise<Page[]> => {
+  if (isLocalPreview) return [previewHome]
   const payload = await getCMS()
   const result = await payload.find({
     collection: 'pages',
@@ -33,6 +36,7 @@ export const getPublishedPages = cache(async (): Promise<Page[]> => {
 })
 
 export const getProjects = cache(async (): Promise<Project[]> => {
+  if (isLocalPreview) return []
   const payload = await getCMS()
   const result = await payload.find({
     collection: 'projects',

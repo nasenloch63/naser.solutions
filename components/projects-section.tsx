@@ -85,6 +85,7 @@ function getThumbnailSources(url: string): string[] {
 }
 
 function ProjectThumbnail({ url, title }: { url: string; title: string }) {
+  const { t } = useLanguage()
   const cached = thumbnailCache.get(url)
   const sources = getThumbnailSources(url)
 
@@ -148,7 +149,7 @@ function ProjectThumbnail({ url, title }: { url: string; title: string }) {
       {status === "error" && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-zinc-900">
           <Globe className="h-10 w-10 text-zinc-600" />
-          <p className="text-sm text-zinc-500">Vorschau nicht verfügbar</p>
+          <p className="text-sm text-zinc-500">{t("ui.preview")}</p>
         </div>
       )}
       {/* Hover overlay */}
@@ -203,7 +204,7 @@ export function ProjectsSection() {
   }, [selectedCategory])
 
   const categories: { value: CategoryFilter; label: string }[] = [
-    { value: "all", label: "Alle" },
+    { value: "all", label: t("ui.all") },
     { value: "web", label: "Web" },
     { value: "design", label: "Design" },
     { value: "showcase", label: "Showcase" },
@@ -260,7 +261,8 @@ export function ProjectsSection() {
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
               }`}
-              aria-label="Grid View"
+              aria-label={t("ui.grid")}
+              aria-pressed={viewMode === "grid"}
             >
               <Grid3x3 className="h-5 w-5" />
             </button>
@@ -271,7 +273,8 @@ export function ProjectsSection() {
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
               }`}
-              aria-label="List View"
+              aria-label={t("ui.list")}
+              aria-pressed={viewMode === "list"}
             >
               <List className="h-5 w-5" />
             </button>
@@ -283,7 +286,7 @@ export function ProjectsSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          {filteredProjects.length} {filteredProjects.length === 1 ? "Projekt" : "Projekte"}
+          {filteredProjects.length} {t(filteredProjects.length === 1 ? "ui.project" : "ui.projects")}
         </div>
 
         <div className={`grid gap-8 ${viewMode === "grid" ? "md:grid-cols-2" : "grid-cols-1"}`}>
@@ -297,10 +300,10 @@ export function ProjectsSection() {
                 viewMode === "grid" ? "hover:-translate-y-2" : ""
               } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               style={{ transitionDelay: `${400 + index * 100}ms` }}
-              aria-label={`${t(project.titleKey)} - Website besuchen`}
+              aria-label={`${t(project.titleKey)} - ${t(project.type === "social" ? "ui.instagram" : "ui.website")}`}
             >
               {/* Thumbnail */}
-              <div className={`${viewMode === "grid" ? "aspect-video" : "sm:aspect-[3/1]"} relative overflow-hidden`}>
+              <div className={`${viewMode === "grid" ? "aspect-video" : "aspect-video sm:aspect-[3/1]"} relative overflow-hidden`}>
                 {project.previewImage ? (
                   <StaticThumbnail src={project.previewImage} alt={project.previewAlt || t(project.titleKey)} />
                 ) : project.logo ? (
@@ -330,7 +333,7 @@ export function ProjectsSection() {
                 </div>
 
                 <div className="mt-4 sm:mt-0 flex items-center gap-2 text-primary font-medium">
-                  <span>{project.type === "social" ? "Auf Instagram ansehen" : "Website besuchen"}</span>
+                  <span>{t(project.type === "social" ? "ui.instagram" : "ui.website")}</span>
                   {project.type === "social" ? (
                     <Instagram className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   ) : (
@@ -345,8 +348,8 @@ export function ProjectsSection() {
         {filteredProjects.length === 0 && (
           <div className="text-center py-16">
             <Filter className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-            <h3 className="text-xl font-semibold text-foreground mb-2">Keine Projekte gefunden</h3>
-            <p className="text-muted-foreground">Versuchen Sie, einen anderen Filter auszuwählen</p>
+            <h3 className="text-xl font-semibold text-foreground mb-2">{t("ui.empty")}</h3>
+            <p className="text-muted-foreground">{t("ui.retry")}</p>
           </div>
         )}
 
