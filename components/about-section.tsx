@@ -18,22 +18,40 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div
           ref={ref}
-          className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-1000 ${
+          className={`grid lg:grid-cols-[1.25fr_1fr] gap-12 lg:gap-16 items-start transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
           }`}
         >
           <div>
             <p className="text-muted-foreground text-lg mb-4 tracking-wide uppercase">{t("about.label")}</p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8 text-balance">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 text-balance">
               {t("about.title")}
             </h2>
             <p
-              className="text-xl text-muted-foreground leading-relaxed mb-8"
+              className="text-base text-muted-foreground leading-relaxed mb-5"
               dangerouslySetInnerHTML={{
                 __html: t("about.description").replace("<strong>", '<strong class="text-foreground">'),
               }}
             />
-            <ul className="space-y-4 mb-8">
+            <div className="space-y-4 text-base text-muted-foreground leading-relaxed mb-8">
+              <p>{t("about.family")}</p>
+              <p>{t("about.training")}</p>
+              <p>{t("about.swiss")} <a href="https://www.instagram.com/webdigital.cloud/" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">@webdigital.cloud</a>.</p>
+              <p><a href="https://oxince.com/" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">oxince.com</a> {t("about.mentor")}</p>
+              <h3 className="text-xl font-semibold text-foreground pt-2">{t("about.networkTitle")}</h3>
+              <p>{t("about.network")}</p>
+              <p>{t("about.thailand")} <a href="https://ritzi.digital/" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">ritzi.digital</a>.</p>
+              <details className="border-y border-border py-4">
+                <summary className="cursor-pointer font-semibold text-foreground">{t("about.backgroundTitle")}</summary>
+                <div className="space-y-4 pt-4">
+                  <p>{t("about.school")}</p>
+                  <p>{t("about.bundeswehr")}</p>
+                  <p>{t("about.community")}</p>
+                  <p className="text-xs break-all"><span className="font-medium">Solana CA: </span><bdi>68eD7fdMVEqKDev9jChsBxtvg45XF2FKsnVRfDTpxCkK</bdi></p>
+                </div>
+              </details>
+            </div>
+            <ul className="space-y-3 mb-8 text-sm">
               {benefitKeys.map((key, index) => (
                 <li
                   key={index}
@@ -64,18 +82,19 @@ export function AboutSection() {
               </Link>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative lg:sticky lg:top-28">
             <div className="relative aspect-square">
-              <div className="aspect-square overflow-hidden">
+              <div className="relative aspect-square overflow-hidden">
                 <Image
                   src="/images/whatsapp-20bild-202025-12-12-20um-2022.jpg"
-                  alt="Yasin Adam Aissani - Direktor Naser Solutions"
+                  alt="Yasin Adam Aissani, Naser Solutions"
                   fill
+                  sizes="(min-width: 1024px) 45vw, 90vw"
                   className="object-cover dark:[clip-path:circle(47%_at_50%_50%)]"
                 />
               </div>
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-background dark:bg-card p-6 rounded-xl shadow-lg border border-border">
+            <div className="relative -mt-10 mx-4 bg-background dark:bg-card p-5 rounded-lg shadow-lg border border-border">
               <p className="font-semibold text-foreground text-lg">Yasin Adam Aissani</p>
               <p className="text-muted-foreground">{t("about.role")}</p>
             </div>

@@ -129,6 +129,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 /* Premium glass cursor for precise mouse/trackpad input only. */
 @media (hover: hover) and (pointer: fine) {
   body.premium-cursor-enabled,

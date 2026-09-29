@@ -7,6 +7,7 @@ import { LanguageProvider } from "@/components/language-provider"
 import { PremiumCursor } from "@/components/premium-cursor"
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL, SOCIAL_IMAGE } from "@/lib/seo"
 import "../globals.css"
+import { themeInitScript } from "@/lib/theme"
 
 const _inter = Inter({ subsets: ["latin"] })
 const _spaceGrotesk = Space_Grotesk({ subsets: ["latin"] })
@@ -53,6 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html className="bg-background" lang="de-DE" suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: themeInitScript }} /></head>
       <body className={`font-sans antialiased`}>
         <ThemeProvider>
           <LanguageProvider>{children}</LanguageProvider>

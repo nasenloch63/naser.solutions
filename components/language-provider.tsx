@@ -1,6 +1,8 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
+import { siteCopy } from "@/lib/site-copy"
+import { uiCopy } from "@/lib/ui-copy"
 
 export type Language = "de" | "en" | "fr" | "ar" | "tr" | "sq" | "ru" | "es" | "it" | "el" | "pt" | "zh"
 
@@ -2779,7 +2781,7 @@ const translations = {
 }
 
 const translateGerman = (key: string): string =>
-  (translations.de as Record<string, string>)[key] || key
+  (uiCopy.de as Record<string, string>)[key] || (siteCopy.de as Record<string, string>)[key] || (translations.de as Record<string, string>)[key] || key
 
 const defaultContextValue: LanguageContextType = {
   language: "de",
@@ -2800,7 +2802,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const isRTL = dir === "rtl"
 
   useEffect(() => {
-    const stored = localStorage.getItem("language") as Language | null
+    let stored: Language | null = null
+    try { stored = localStorage.getItem("language") as Language | null } catch {}
     if (stored && languages.some((l) => l.code === stored)) {
       setLanguageState(stored)
     }
@@ -2816,13 +2819,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
-    localStorage.setItem("language", lang)
+    try { localStorage.setItem("language", lang) } catch {}
   }
 
   const t = (key: string): string => {
     const currentTranslations = translations[language] as Record<string, string>
-    const defaultTranslations = translations.de as Record<string, string>
-    return currentTranslations[key] || defaultTranslations[key] || key
+    return (uiCopy[language] as Record<string, string>)[key] || (siteCopy[language] as Record<string, string>)[key] || currentTranslations[key] || translateGerman(key)
   }
 
   return (
