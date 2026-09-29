@@ -1,0 +1,163 @@
+import type { Language } from "@/components/language-provider"
+
+type CMSCopy = {
+  title: string
+  status: string
+  intro: string
+  openTitle: string
+  openBody: string
+  cmsTitle: string
+  cmsBody: string
+  editTitle: string
+  edits: string[]
+  scope: string
+  contact: string
+  back: string
+}
+
+export const cmsProjectCopy: Record<Language, CMSCopy> = {
+  de: {
+    title: "CMS & Kunden-Dashboard", status: "In Entwicklung",
+    intro: "Ich entwickle ein CMS-Backend mit einem eigenen Dashboard für meine Kunden. Damit kannst du kleinere Änderungen an der von mir bereitgestellten Website selbst vornehmen.",
+    openTitle: "Was ist Open-Source-Software?",
+    openBody: "Bei Open-Source-Software ist der Quellcode zugänglich. Eine entsprechende Lizenz erlaubt, die Software zu nutzen, zu verändern und weiterzugeben. Das schafft eine nachvollziehbare Grundlage, die sich an unterschiedliche Anforderungen anpassen lässt. Open Source bedeutet dabei nicht, dass Einrichtung, Hosting oder Betreuung kostenlos sind.",
+    cmsTitle: "Was macht ein CMS?",
+    cmsBody: "CMS steht für Content-Management-System. Es trennt die Inhalte deiner Website von ihrer technischen Umsetzung. Ich baue ein Backend-Dashboard, in dem sich meine Kunden mit ihrem eigenen Zugang anmelden und freigegebene Inhalte bearbeiten können, ohne selbst programmieren zu müssen.",
+    editTitle: "Kleine Änderungen selbst erledigen",
+    edits: ["Texte und Beschreibungen aktualisieren", "Bilder austauschen", "Öffnungszeiten und Kontaktdaten pflegen", "Angebote oder Neuigkeiten ergänzen"],
+    scope: "Das Dashboard befindet sich in Entwicklung. Welche Bereiche du später selbst bearbeiten kannst, stimmen wir für deine Website gemeinsam ab. Größere Änderungen an Gestaltung, Struktur oder Funktionen übernehme ich weiterhin. Ein öffentlicher Kunden-Login ist hier noch nicht verfügbar.",
+    contact: "CMS für meine Website besprechen", back: "Zurück zu den Projekten",
+  },
+  en: {
+    title: "CMS & customer dashboard", status: "In development",
+    intro: "I'm developing a CMS backend with a dedicated dashboard for my customers, so you can make small changes to the website I provide yourself.",
+    openTitle: "What is open-source software?",
+    openBody: "Open-source software makes its source code available under a license that allows use, modification and redistribution. It provides a transparent foundation that can be adapted to different needs. Setup, hosting and support may still cost money.",
+    cmsTitle: "What does a CMS do?",
+    cmsBody: "CMS stands for content management system. It separates website content from its technical implementation. I'm building a backend dashboard where customers can log in with their own account and edit approved content without programming.",
+    editTitle: "Handle small updates yourself",
+    edits: ["Update text and descriptions", "Replace images", "Maintain opening hours and contact details", "Add offers or news"],
+    scope: "The dashboard is in development. We'll agree which parts of your website you can edit. I'll continue handling larger changes to design, structure or functionality. A public customer login is not available here yet.",
+    contact: "Discuss a CMS for my website", back: "Back to projects",
+  },
+  fr: {
+    title: "CMS & espace client", status: "En développement",
+    intro: "Je développe un backend CMS avec un espace dédié à mes clients pour modifier eux-mêmes de petits éléments du site que je leur fournis.",
+    openTitle: "Qu'est-ce qu'un logiciel open source ?",
+    openBody: "Son code source est accessible et sa licence permet de l'utiliser, de le modifier et de le redistribuer. Cette base transparente peut être adaptée à différents besoins. L'installation, l'hébergement et l'accompagnement peuvent rester payants.",
+    cmsTitle: "À quoi sert un CMS ?",
+    cmsBody: "Un CMS est un système de gestion de contenu. Il sépare les contenus de la réalisation technique du site. Je construis un tableau de bord où mes clients pourront se connecter avec leur compte et modifier les contenus autorisés sans programmer.",
+    editTitle: "Effectuer les petites mises à jour",
+    edits: ["Actualiser les textes", "Remplacer les images", "Modifier les horaires et coordonnées", "Ajouter des offres ou actualités"],
+    scope: "Le tableau de bord est en développement. Nous définirons ensemble les contenus modifiables. Je continuerai à prendre en charge les changements importants de design, de structure et de fonctionnalités. Aucun accès client public n'est encore disponible ici.",
+    contact: "Parler d'un CMS pour mon site", back: "Retour aux projets",
+  },
+  es: {
+    title: "CMS & panel de clientes", status: "En desarrollo",
+    intro: "Estoy desarrollando un backend CMS con un panel para que mis clientes hagan pequeños cambios en la web que les proporciono.",
+    openTitle: "¿Qué es el software de código abierto?",
+    openBody: "Su código fuente está disponible y su licencia permite utilizarlo, modificarlo y redistribuirlo. Es una base transparente y adaptable. La instalación, el alojamiento y el soporte pueden tener un coste.",
+    cmsTitle: "¿Para qué sirve un CMS?",
+    cmsBody: "Un CMS es un sistema de gestión de contenidos que separa el contenido de la implementación técnica. Estoy creando un panel donde los clientes podrán acceder con su cuenta y editar los contenidos autorizados sin programar.",
+    editTitle: "Gestiona pequeños cambios",
+    edits: ["Actualizar textos", "Cambiar imágenes", "Modificar horarios y datos de contacto", "Añadir ofertas o noticias"],
+    scope: "El panel está en desarrollo. Acordaremos qué contenidos puedes editar. Seguiré encargándome de cambios importantes de diseño, estructura y funciones. Todavía no hay un acceso público para clientes en esta página.",
+    contact: "Hablar de un CMS para mi web", back: "Volver a los proyectos",
+  },
+  it: {
+    title: "CMS & dashboard clienti", status: "In sviluppo",
+    intro: "Sto sviluppando un backend CMS con una dashboard per consentire ai miei clienti di apportare piccole modifiche al sito che fornisco.",
+    openTitle: "Che cos'è il software open source?",
+    openBody: "Il codice sorgente è accessibile e la licenza consente di utilizzare, modificare e ridistribuire il software. È una base trasparente e adattabile. Configurazione, hosting e assistenza possono comunque avere un costo.",
+    cmsTitle: "A cosa serve un CMS?",
+    cmsBody: "Un CMS è un sistema di gestione dei contenuti che separa i contenuti dalla realizzazione tecnica. Sto creando una dashboard dove i clienti potranno accedere con il proprio account e modificare i contenuti autorizzati senza programmare.",
+    editTitle: "Gestire le piccole modifiche",
+    edits: ["Aggiornare i testi", "Sostituire le immagini", "Modificare orari e contatti", "Aggiungere offerte o notizie"],
+    scope: "La dashboard è in sviluppo. Concorderemo i contenuti modificabili. Continuerò a occuparmi delle modifiche importanti a design, struttura e funzioni. Non è ancora disponibile un accesso pubblico per i clienti.",
+    contact: "Parliamo di un CMS per il mio sito", back: "Torna ai progetti",
+  },
+  pt: {
+    title: "CMS & painel de clientes", status: "Em desenvolvimento",
+    intro: "Estou a desenvolver um backend CMS com um painel para os meus clientes fazerem pequenas alterações no site que lhes forneço.",
+    openTitle: "O que é software de código aberto?",
+    openBody: "O código-fonte está disponível e a licença permite utilizar, modificar e redistribuir o software. É uma base transparente e adaptável. A configuração, o alojamento e o apoio podem ter custos.",
+    cmsTitle: "Para que serve um CMS?",
+    cmsBody: "Um CMS é um sistema de gestão de conteúdos que separa o conteúdo da implementação técnica. Estou a criar um painel onde os clientes poderão entrar com a sua conta e editar conteúdos autorizados sem programar.",
+    editTitle: "Fazer pequenas alterações",
+    edits: ["Atualizar textos", "Substituir imagens", "Alterar horários e contactos", "Adicionar ofertas ou notícias"],
+    scope: "O painel está em desenvolvimento. Combinaremos os conteúdos que poderás editar. Continuarei a tratar de alterações maiores ao design, à estrutura e às funções. Ainda não existe acesso público para clientes nesta página.",
+    contact: "Conversar sobre um CMS para o meu site", back: "Voltar aos projetos",
+  },
+  tr: {
+    title: "CMS & müşteri paneli", status: "Geliştirme aşamasında",
+    intro: "Müşterilerimin sağladığım web sitesinde küçük değişiklikleri kendilerinin yapabilmesi için bir CMS altyapısı ve müşteri paneli geliştiriyorum.",
+    openTitle: "Açık kaynak yazılım nedir?",
+    openBody: "Kaynak kodu erişilebilirdir ve lisansı yazılımı kullanmaya, değiştirmeye ve yeniden dağıtmaya izin verir. Şeffaf ve uyarlanabilir bir temel sunar. Kurulum, barındırma ve destek ücretli olabilir.",
+    cmsTitle: "CMS ne işe yarar?",
+    cmsBody: "CMS, içerik yönetim sistemidir; içerikleri teknik uygulamadan ayırır. Müşterilerin kendi hesaplarıyla giriş yapıp izin verilen içerikleri kod yazmadan düzenleyebileceği bir panel oluşturuyorum.",
+    editTitle: "Küçük değişiklikleri kendin yap",
+    edits: ["Metinleri güncelle", "Görselleri değiştir", "Çalışma saatlerini ve iletişim bilgilerini düzenle", "Teklifler veya haberler ekle"],
+    scope: "Panel geliştirme aşamasında. Düzenleyebileceğin alanları birlikte belirleyeceğiz. Tasarım, yapı ve işlevlerdeki büyük değişiklikleri ben yapmaya devam edeceğim. Burada henüz herkese açık bir müşteri girişi yok.",
+    contact: "Web sitem için CMS hakkında konuşalım", back: "Projelere dön",
+  },
+  sq: {
+    title: "CMS & paneli i klientëve", status: "Në zhvillim",
+    intro: "Po zhvilloj një backend CMS me panel për klientët e mi, që të bëjnë vetë ndryshime të vogla në faqen që u ofroj.",
+    openTitle: "Çfarë është softueri me kod të hapur?",
+    openBody: "Kodi burimor është i disponueshëm dhe licenca lejon përdorimin, ndryshimin dhe rishpërndarjen. Kjo ofron një bazë transparente dhe të përshtatshme. Konfigurimi, hostimi dhe mbështetja mund të kenë kosto.",
+    cmsTitle: "Çfarë bën një CMS?",
+    cmsBody: "CMS është një sistem për menaxhimin e përmbajtjes që e ndan atë nga zbatimi teknik. Po ndërtoj një panel ku klientët mund të hyjnë me llogarinë e tyre dhe të ndryshojnë përmbajtjen e lejuar pa programuar.",
+    editTitle: "Bëj vetë ndryshime të vogla",
+    edits: ["Përditëso tekstet", "Zëvendëso imazhet", "Ndrysho oraret dhe kontaktet", "Shto oferta ose lajme"],
+    scope: "Paneli është në zhvillim. Do të përcaktojmë së bashku pjesët që mund të ndryshosh. Ndryshimet e mëdha në dizajn, strukturë dhe funksione do t'i bëj unë. Hyrja publike për klientët nuk është ende e disponueshme këtu.",
+    contact: "Të flasim për CMS për faqen time", back: "Kthehu te projektet",
+  },
+  ru: {
+    title: "CMS и кабинет клиента", status: "В разработке",
+    intro: "Я разрабатываю CMS с кабинетом для клиентов, чтобы вы могли самостоятельно вносить небольшие изменения на созданном мной сайте.",
+    openTitle: "Что такое открытое программное обеспечение?",
+    openBody: "Исходный код доступен, а лицензия разрешает использование, изменение и распространение программы. Это прозрачная и адаптируемая основа. Настройка, хостинг и поддержка могут быть платными.",
+    cmsTitle: "Для чего нужна CMS?",
+    cmsBody: "CMS — система управления контентом. Она отделяет содержимое сайта от технической реализации. Я создаю кабинет, в котором клиенты смогут входить в свой аккаунт и редактировать разрешённые материалы без программирования.",
+    editTitle: "Небольшие изменения самостоятельно",
+    edits: ["Обновлять тексты", "Заменять изображения", "Менять часы работы и контакты", "Добавлять предложения и новости"],
+    scope: "Кабинет находится в разработке. Мы согласуем доступные для редактирования разделы. Крупные изменения дизайна, структуры и функций по-прежнему буду выполнять я. Публичный вход для клиентов здесь пока недоступен.",
+    contact: "Обсудить CMS для моего сайта", back: "Назад к проектам",
+  },
+  ar: {
+    title: "CMS ولوحة العملاء", status: "قيد التطوير",
+    intro: "أطوّر نظام إدارة محتوى مع لوحة خاصة بعملائي ليتمكنوا من إجراء تعديلات صغيرة بأنفسهم على الموقع الذي أقدّمه لهم.",
+    openTitle: "ما هي البرمجيات مفتوحة المصدر؟",
+    openBody: "تكون الشيفرة المصدرية متاحة، ويسمح الترخيص باستخدام البرنامج وتعديله وإعادة توزيعه. يوفّر ذلك أساساً شفافاً قابلاً للتكييف. وقد تبقى الإعدادات والاستضافة والدعم خدمات مدفوعة.",
+    cmsTitle: "ما وظيفة نظام إدارة المحتوى؟",
+    cmsBody: "يفصل نظام إدارة المحتوى محتوى الموقع عن تنفيذه التقني. أبني لوحة تتيح للعملاء تسجيل الدخول بحساباتهم وتعديل المحتوى المسموح به دون كتابة برامج.",
+    editTitle: "تعديلات صغيرة بنفسك",
+    edits: ["تحديث النصوص", "استبدال الصور", "تعديل أوقات العمل وبيانات التواصل", "إضافة عروض أو أخبار"],
+    scope: "اللوحة قيد التطوير. سنتفق معاً على الأقسام القابلة للتعديل. سأواصل تنفيذ التغييرات الكبيرة في التصميم والبنية والوظائف. لا يتوفر هنا تسجيل دخول عام للعملاء بعد.",
+    contact: "لنتحدث عن نظام إدارة محتوى لموقعي", back: "العودة إلى المشاريع",
+  },
+  el: {
+    title: "CMS & πίνακας πελατών", status: "Υπό ανάπτυξη",
+    intro: "Αναπτύσσω ένα CMS με πίνακα για τους πελάτες μου, ώστε να κάνουν μόνοι τους μικρές αλλαγές στον ιστότοπο που τους παρέχω.",
+    openTitle: "Τι είναι το λογισμικό ανοικτού κώδικα;",
+    openBody: "Ο πηγαίος κώδικας είναι διαθέσιμος και η άδεια επιτρέπει χρήση, τροποποίηση και αναδιανομή. Προσφέρει διαφανή και προσαρμόσιμη βάση. Η εγκατάσταση, η φιλοξενία και η υποστήριξη μπορεί να έχουν κόστος.",
+    cmsTitle: "Τι κάνει ένα CMS;",
+    cmsBody: "Το CMS είναι σύστημα διαχείρισης περιεχομένου. Διαχωρίζει το περιεχόμενο από την τεχνική υλοποίηση. Δημιουργώ έναν πίνακα όπου οι πελάτες θα συνδέονται με τον λογαριασμό τους και θα επεξεργάζονται το επιτρεπόμενο περιεχόμενο χωρίς προγραμματισμό.",
+    editTitle: "Μικρές αλλαγές μόνος σου",
+    edits: ["Ενημέρωση κειμένων", "Αντικατάσταση εικόνων", "Αλλαγή ωραρίου και στοιχείων επικοινωνίας", "Προσθήκη προσφορών ή νέων"],
+    scope: "Ο πίνακας είναι υπό ανάπτυξη. Θα συμφωνήσουμε ποια μέρη θα μπορείς να επεξεργάζεσαι. Θα συνεχίσω να αναλαμβάνω μεγάλες αλλαγές σε σχεδιασμό, δομή και λειτουργίες. Δεν υπάρχει ακόμη δημόσια σύνδεση πελατών εδώ.",
+    contact: "Ας συζητήσουμε ένα CMS για τον ιστότοπό μου", back: "Επιστροφή στα έργα",
+  },
+  zh: {
+    title: "CMS 与客户管理面板", status: "开发中",
+    intro: "我正在开发 CMS 后台和专属客户面板，让客户可以自行对我提供的网站进行小幅修改。",
+    openTitle: "什么是开源软件？",
+    openBody: "开源软件提供可访问的源代码，并通过许可证允许使用、修改和再分发。这是一种透明且可调整的基础。配置、托管和维护服务仍可能收费。",
+    cmsTitle: "CMS 有什么作用？",
+    cmsBody: "CMS 是内容管理系统，将网站内容与技术实现分开。我正在构建一个面板，让客户使用自己的账户登录，无需编程即可编辑获授权的内容。",
+    editTitle: "自行完成小幅更新",
+    edits: ["更新文字和介绍", "替换图片", "维护营业时间和联系方式", "添加优惠或新闻"],
+    scope: "面板正在开发中。我们会共同确定可编辑的内容。设计、结构或功能上的重大修改仍由我负责。此页面暂未提供公开的客户登录入口。",
+    contact: "讨论我的网站所需的 CMS", back: "返回项目",
+  },
+}

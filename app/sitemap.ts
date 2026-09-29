@@ -15,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const cmsUrls = new Set(cmsEntries.map((entry) => entry.url))
   const staticEntries: MetadataRoute.Sitemap = [
+    ['/CMS', 0.7],
     ['/impressum', 0.3],
     ['/datenschutz', 0.3],
     ['/agb', 0.3],
