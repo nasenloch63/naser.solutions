@@ -4,7 +4,8 @@ import Image from "next/image"
 import { useState, useMemo, useCallback } from "react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
-import { ExternalLink, Clock, Grid3x3, List, Filter, Globe, Play, Instagram } from "lucide-react"
+import { ExternalLink, ArrowUpRight, Clock, Grid3x3, List, Filter, Globe, Play, Instagram } from "lucide-react"
+import { cmsProjectCopy } from "@/lib/cms-project-copy"
 
 interface Project {
   titleKey: string
@@ -20,6 +21,15 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    titleKey: "projects.cms.title",
+    descriptionKey: "projects.cms.description",
+    url: "/CMS",
+    tags: ["CMS", "Dashboard", "Open Source"],
+    category: "web",
+    type: "website",
+    logo: "/images/logo-invertable.png",
+  },
   {
     titleKey: "projects.reel.title",
     descriptionKey: "projects.reel.description",
@@ -194,7 +204,9 @@ type CategoryFilter = "all" | "web" | "design" | "showcase" | "ecommerce" | "non
 
 export function ProjectsSection() {
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const cmsCopy = cmsProjectCopy[language]
+  const projectTitle = (project: Project) => project.url === "/CMS" ? cmsCopy.title : t(project.titleKey)
   const [viewMode, setViewMode] = useState<ViewMode>("grid")
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all")
 
@@ -294,20 +306,20 @@ export function ProjectsSection() {
             <a
               key={project.url}
               href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={project.url.startsWith("/") ? undefined : "_blank"}
+              rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
               className={`group relative bg-background rounded-2xl border border-border overflow-hidden hover:border-primary/50 transition-all duration-500 hover:shadow-2xl cursor-pointer ${
                 viewMode === "grid" ? "hover:-translate-y-2" : ""
               } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               style={{ transitionDelay: `${400 + index * 100}ms` }}
-              aria-label={`${t(project.titleKey)} - ${t(project.type === "social" ? "ui.instagram" : "ui.website")}`}
+              aria-label={projectTitle(project)}
             >
               {/* Thumbnail */}
               <div className={`${viewMode === "grid" ? "aspect-video" : "aspect-video sm:aspect-[3/1]"} relative overflow-hidden`}>
                 {project.previewImage ? (
                   <StaticThumbnail src={project.previewImage} alt={project.previewAlt || t(project.titleKey)} />
                 ) : project.logo ? (
-                  <LogoThumbnail logo={project.logo} title={t(project.titleKey)} />
+                  <LogoThumbnail logo={project.logo} title={projectTitle(project)} />
                 ) : (
                   <ProjectThumbnail url={project.url} title={t(project.titleKey)} />
                 )}
@@ -327,14 +339,16 @@ export function ProjectsSection() {
                     ))}
                   </div>
                   <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {t(project.titleKey)}
+                    {projectTitle(project)}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">{t(project.descriptionKey)}</p>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{project.url === "/CMS" ? cmsCopy.intro : t(project.descriptionKey)}</p>
                 </div>
 
                 <div className="mt-4 sm:mt-0 flex items-center gap-2 text-primary font-medium">
-                  <span>{t(project.type === "social" ? "ui.instagram" : "ui.website")}</span>
-                  {project.type === "social" ? (
+                  <span>{project.url === "/CMS" ? cmsCopy.status : t(project.type === "social" ? "ui.instagram" : "ui.website")}</span>
+                  {project.url === "/CMS" ? (
+                    <ArrowUpRight className="h-4 w-4" />
+                  ) : project.type === "social" ? (
                     <Instagram className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   ) : (
                     <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
