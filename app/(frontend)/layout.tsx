@@ -4,6 +4,7 @@ import { Inter, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
+import { PremiumCursor } from "@/components/premium-cursor"
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL, SOCIAL_IMAGE } from "@/lib/seo"
 import "../globals.css"
 
@@ -56,6 +57,7 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
+        <PremiumCursor />
         <Analytics />
       </body>
     </html>

@@ -7,16 +7,16 @@ export type Language = "de" | "en" | "fr" | "ar" | "tr" | "sq" | "ru" | "es" | "
 export const languages = [
   { code: "de" as const, name: "Deutsch", flag: "🇩🇪", dir: "ltr" as const },
   { code: "en" as const, name: "English", flag: "🇬🇧", dir: "ltr" as const },
-  { code: "fr" as const, name: "Français", flag: "🇫🇷", dir: "ltr" as const },
-  { code: "ar" as const, name: "العربية", flag: "🇸🇦", dir: "rtl" as const },
-  { code: "tr" as const, name: "Türkçe", flag: "🇹🇷", dir: "ltr" as const },
-  { code: "sq" as const, name: "Shqip", flag: "🇦🇱", dir: "ltr" as const },
   { code: "ru" as const, name: "Русский", flag: "🇷🇺", dir: "ltr" as const },
+  { code: "tr" as const, name: "Türkçe", flag: "🇹🇷", dir: "ltr" as const },
+  { code: "ar" as const, name: "العربية", flag: "🇸🇦", dir: "rtl" as const },
+  { code: "zh" as const, name: "中文", flag: "🇨🇳", dir: "ltr" as const },
+  { code: "fr" as const, name: "Français", flag: "🇫🇷", dir: "ltr" as const },
   { code: "es" as const, name: "Español", flag: "🇪🇸", dir: "ltr" as const },
   { code: "it" as const, name: "Italiano", flag: "🇮🇹", dir: "ltr" as const },
-  { code: "el" as const, name: "Ελληνικά", flag: "🇬🇷", dir: "ltr" as const },
   { code: "pt" as const, name: "Português", flag: "🇵🇹", dir: "ltr" as const },
-  { code: "zh" as const, name: "中文", flag: "🇨🇳", dir: "ltr" as const },
+  { code: "el" as const, name: "Ελληνικά", flag: "🇬🇷", dir: "ltr" as const },
+  { code: "sq" as const, name: "Shqip", flag: "🇦🇱", dir: "ltr" as const },
 ]
 
 export interface LanguageContextType {
