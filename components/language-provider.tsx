@@ -1,5 +1,7 @@
 "use client"
 
+import { profileCopy } from "@/lib/profile-copy"
+
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import { siteCopy } from "@/lib/site-copy"
 import { uiCopy } from "@/lib/ui-copy"
@@ -70,9 +72,6 @@ const translations = {
     "services.web.title": "Webdesign & Webentwicklung",
     "services.web.description":
       "Webdesign und Webentwicklung aus Kassel: Wir konzipieren und realisieren schnelle, zugängliche Websites, die Unternehmen klar präsentieren und Anfragen erleichtern.",
-    "services.influencer.title": "Influencer-Websites",
-    "services.influencer.description":
-      "Einzigartige digitale Präsenzen für Content Creator und Influencer mit Portfolio-Showcases und nahtloser Social Media Integration.",
     "services.supermarket.title": "Supermarkt-Apps",
     "services.supermarket.description":
       "Maßgeschneiderte Apps mit Push-Notifications, digitalen Coupons und Treueprogrammen für den Einzelhandel – mehr Kundenbindung, mehr Umsatz.",
@@ -475,9 +474,6 @@ const translations = {
     "services.web.title": "Web Design & Development",
     "services.web.description":
       "Professional and modern websites that optimally present your company and convince customers. From concept to implementation.",
-    "services.influencer.title": "Influencer Websites",
-    "services.influencer.description":
-      "Unique digital presences for content creators and influencers with portfolio showcases and seamless social media integration.",
     "services.supermarket.title": "Supermarket Apps",
     "services.supermarket.description":
       "Custom apps with push notifications, digital coupons and loyalty programs for retail – more customer loyalty, more revenue.",
@@ -781,9 +777,6 @@ const translations = {
     "services.web.title": "Design & Développement Web",
     "services.web.description":
       "Sites web professionnels et modernes qui présentent votre entreprise de manière optimale et convainquent les clients.",
-    "services.influencer.title": "Sites pour Influenceurs",
-    "services.influencer.description":
-      "Présences digitales uniques pour créateurs de contenu et influenceurs avec portfolios et intégration réseaux sociaux.",
     "services.supermarket.title": "Applications Supermarché",
     "services.supermarket.description":
       "Applications sur mesure avec notifications push, coupons digitaux et programmes de fidélité pour le commerce.",
@@ -1002,8 +995,6 @@ const translations = {
     "services.description": "من الفكرة إلى الحل النهائي – نرافقك في جميع مراحل مشروعك الرقمي.",
     "services.web.title": "تصميم وتطوير المواقع",
     "services.web.description": "مواقع احترافية وحديثة تقدم شركتك بشكل مثالي وتقنع العملاء.",
-    "services.influencer.title": "مواقع المؤثرين",
-    "services.influencer.description": "حضور رقمي فريد لصناع المحتوى والمؤثرين مع معارض الأعمال وتكامل وسائل التواصل.",
     "services.supermarket.title": "تطبيقات السوبرماركت",
     "services.supermarket.description": "تطبيقات مخصصة مع إشعارات فورية وكوبونات رقمية وبرامج ولاء.",
     "services.social.title": "وسائل التواصل والإعلانات",
@@ -1210,9 +1201,6 @@ const translations = {
     "services.web.title": "Web Tasarım ve Geliştirme",
     "services.web.description":
       "Şirketinizi en iyi şekilde sunan ve müşterileri ikna eden profesyonel ve modern web siteleri.",
-    "services.influencer.title": "Influencer Web Siteleri",
-    "services.influencer.description":
-      "İçerik oluşturucular ve influencerlar için portföy vitrinleri ve sosyal medya entegrasyonu ile benzersiz dijital varlıklar.",
     "services.supermarket.title": "Süpermarket Uygulamaları",
     "services.supermarket.description":
       "Push bildirimleri, dijital kuponlar ve sadakat programları ile özel uygulamalar.",
@@ -1423,9 +1411,6 @@ const translations = {
     "services.web.title": "Dizajn dhe Zhvillim Web",
     "services.web.description":
       "Faqe web profesionale dhe moderne që prezantojnë kompaninë tuaj në mënyrën më të mirë.",
-    "services.influencer.title": "Faqe për Influencerë",
-    "services.influencer.description":
-      "Prezenca dixhitale unike për krijuesit e përmbajtjes me portofol dhe integrim të mediave sociale.",
     "services.supermarket.title": "Aplikacione Supermarketi",
     "services.supermarket.description":
       "Aplikacione të personalizuara me njoftime push, kuponë dixhitalë dhe programe besnikërie.",
@@ -1636,9 +1621,6 @@ const translations = {
     "services.web.title": "Веб-дизайн и разработка",
     "services.web.description":
       "Профессиональные и современные сайты, которые оптимально представляют вашу компанию и убеждают клиентов. От концепции до реализации.",
-    "services.influencer.title": "Сайты для инфлюенсеров",
-    "services.influencer.description":
-      "Уни��альное цифровое присутствие для создателей контента и инфлюенсеров с портфолио и интеграцией социальных сетей.",
     "services.supermarket.title": "Прил��жения для супермаркетов",
     "services.supermarket.description":
       "Индивидуальные приложения с push-уведомлениями, цифровыми купонами и программами лояльности для розничной торговли.",
@@ -1862,9 +1844,6 @@ const translations = {
     "services.web.title": "Diseño y Desarrollo Web",
     "services.web.description":
       "Sitios web profesionales y modernos que presentan tu empresa de manera óptima y convencen a los clientes. Desde el concepto hasta la implementación.",
-    "services.influencer.title": "Webs para Influencers",
-    "services.influencer.description":
-      "Presencias digitales únicas para creadores de contenido e influencers con portafolios y perfecta integración con redes sociales.",
     "services.supermarket.title": "Apps para Supermercados",
     "services.supermarket.description":
       "Apps personalizadas con notificaciones push, cupones digitales y programas de fidelización para el comercio minorista.",
@@ -2065,9 +2044,6 @@ const translations = {
     "services.web.title": "Web Design e Sviluppo",
     "services.web.description":
       "Siti web professionali e moderni che presentano la tua azienda in modo ottimale e convincono i clienti. Dal concept all'implementazione.",
-    "services.influencer.title": "Siti per Influencer",
-    "services.influencer.description":
-      "Presenze digitali uniche per content creator e influencer con portfolio e perfetta integrazione social media.",
     "services.supermarket.title": "App per Supermercati",
     "services.supermarket.description":
       "App personalizzate con notifiche push, coupon digitali e programmi fedeltà per il retail.",
@@ -2288,9 +2264,6 @@ const translations = {
     "services.web.title": "Σχεδίαση & Ανάπτυξη Ιστοσελίδων",
     "services.web.description":
       "Επαγγελματικές και μοντέρνες ιστοσελίδες που παρουσιάζουν βέλτιστα την εταιρεία σας και πείθουν τους πελάτες.",
-    "services.influencer.title": "Ιστοσελίδες για Influencers",
-    "services.influencer.description":
-      "Μοναδικές ψηφιακές παρουσίες για content creators και influencers με portfolio και άψογη ενσωμάτωση social media.",
     "services.supermarket.title": "Εφαρμογές Supermarket",
     "services.supermarket.description":
       "Προσαρμοσμένες εφαρμογές με push notifications, ψηφιακά κουπόνια και προγράμματα πιστότητας για το λιανεμπόριο.",
@@ -2495,9 +2468,6 @@ const translations = {
     "services.web.title": "网页设计与开发",
     "services.web.description":
       "专业且现代的网站，完美展示您的企业并说服客户。从构思到实施。",
-    "services.influencer.title": "网红网站",
-    "services.influencer.description":
-      "为内容创作者和网红打造独特的数字形象，包括作品展示和无缝的社交媒体整合。",
     "services.supermarket.title": "超市应用",
     "services.supermarket.description":
       "定制应用程序，配备推送通知、数字优惠券和零售忠诚度计划——更多客户忠诚度，更多销售额。",
@@ -2781,7 +2751,7 @@ const translations = {
 }
 
 const translateGerman = (key: string): string =>
-  (uiCopy.de as Record<string, string>)[key] || (siteCopy.de as Record<string, string>)[key] || (translations.de as Record<string, string>)[key] || key
+  profileCopy.de[key] || (uiCopy.de as Record<string, string>)[key] || (siteCopy.de as Record<string, string>)[key] || (translations.de as Record<string, string>)[key] || key
 
 const defaultContextValue: LanguageContextType = {
   language: "de",
@@ -2824,7 +2794,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const t = (key: string): string => {
     const currentTranslations = translations[language] as Record<string, string>
-    return (uiCopy[language] as Record<string, string>)[key] || (siteCopy[language] as Record<string, string>)[key] || currentTranslations[key] || translateGerman(key)
+    return profileCopy[language][key] || (uiCopy[language] as Record<string, string>)[key] || (siteCopy[language] as Record<string, string>)[key] || currentTranslations[key] || translateGerman(key)
   }
 
   return (

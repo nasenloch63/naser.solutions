@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36">
-  <defs>
-    <linearGradient id="glass" x1="3" y1="3" x2="21" y2="32" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ffffff" stop-opacity=".26"/>
-      <stop offset=".45" stop-color="#ffffff" stop-opacity=".06"/>
-      <stop offset="1" stop-color="#dce8ef" stop-opacity=".16"/>
-    </linearGradient>
-    <path id="arrow" d="M3 4.4Q3 2.7 4.3 3.9L23 21.2Q24.1 22.3 22.5 22.3H14.4L19.1 30.6Q19.7 31.7 18.5 32.3L15.5 33.8Q14.4 34.3 13.8 33.2L9.1 24.8L4.6 29.2Q3 30.7 3 28.6Z"/>
-  </defs>
-  <use href="#arrow" fill="url(#glass)" stroke="#18232b" stroke-opacity=".42" stroke-width="1.4" stroke-linejoin="round"/>
-  <use href="#arrow" fill="none" stroke="#ffffff" stroke-opacity=".78" stroke-width=".65"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36"><defs><linearGradient id="glass" x1="3" y1="4" x2="22" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#f5f5f5" stop-opacity=".85"/><stop offset=".38" stop-color="#a1a1aa" stop-opacity=".42"/><stop offset="1" stop-color="#52525b" stop-opacity=".58"/></linearGradient><path id="arrow" d="M3 4.4Q3 2.7 4.3 3.9L23 21.2Q24.1 22.3 22.5 22.3H14.4L19.1 30.6Q19.7 31.7 18.5 32.3L15.5 33.8Q14.4 34.3 13.8 33.2L9.1 24.8L4.6 29.2Q3 30.7 3 28.6Z"/></defs><use href="#arrow" fill="url(#glass)" stroke="#27272a" stroke-opacity=".85" stroke-width="1.2" stroke-linejoin="round"/><path d="M4.5 7V25L9.4 20.5" fill="none" stroke="#ffffff" stroke-opacity=".68" stroke-width=".7" stroke-linejoin="round"/></svg>

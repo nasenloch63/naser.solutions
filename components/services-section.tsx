@@ -1,6 +1,6 @@
 "use client"
 
-import { Globe, Smartphone, TrendingUp, Palette, Store, Megaphone, Sparkles } from "lucide-react"
+import { Globe, TrendingUp, Palette, Workflow, Megaphone, Wrench } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
 
@@ -9,41 +9,12 @@ export function ServicesSection() {
   const { t } = useLanguage()
 
   const services = [
-    {
-      icon: Globe,
-      titleKey: "services.web.title",
-      descriptionKey: "services.web.description",
-    },
-    {
-      icon: Smartphone,
-      titleKey: "services.influencer.title",
-      descriptionKey: "services.influencer.description",
-    },
-    {
-      icon: Store,
-      titleKey: "services.supermarket.title",
-      descriptionKey: "services.supermarket.description",
-    },
-    {
-      icon: Megaphone,
-      titleKey: "services.social.title",
-      descriptionKey: "services.social.description",
-    },
-    {
-      icon: Palette,
-      titleKey: "services.design.title",
-      descriptionKey: "services.design.description",
-    },
-    {
-      icon: TrendingUp,
-      titleKey: "services.seo.title",
-      descriptionKey: "services.seo.description",
-    },
-    {
-      icon: Sparkles,
-      titleKey: "services.ai.title",
-      descriptionKey: "services.ai.description",
-    },
+    { icon: Globe, titleKey: "services.web.title", descriptionKey: "services.web.description" },
+    { icon: Workflow, titleKey: "services.integrations.title", descriptionKey: "services.integrations.description" },
+    { icon: TrendingUp, titleKey: "services.seo.title", descriptionKey: "services.seo.description" },
+    { icon: Megaphone, titleKey: "services.social.title", descriptionKey: "services.social.description" },
+    { icon: Palette, titleKey: "services.design.title", descriptionKey: "services.design.description" },
+    { icon: Wrench, titleKey: "services.care.title", descriptionKey: "services.care.description" },
   ]
 
   return (

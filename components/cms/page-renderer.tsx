@@ -89,25 +89,21 @@ export function PageRenderer({ initialPage, projects = [] }: { initialPage: Page
   })
 
   const isHomepage = page.slug === 'home'
+  const layout = isHomepage
+    ? [...page.layout.filter(block => block.blockType === 'hero'), ...page.layout.filter(block => block.blockType === 'projects'), ...page.layout.filter(block => block.blockType !== 'hero' && block.blockType !== 'projects')]
+    : page.layout
 
   return (
     <>
-      {page.layout.map((block, index) => {
+      {layout.map((block, index) => {
         const key = block.id ?? `${block.blockType}-${index}`
         const anchor = block.settings?.anchor || undefined
 
         if (block.blockType === 'hero' && isHomepage) return <HeroSection key={key} />
         if (block.blockType === 'featureGrid' && isHomepage) return <ServicesSection key={key} />
-        if (block.blockType === 'projects' && isHomepage) {
-          return (
-            <div key={key}>
-              <ProjectsSection />
-              <AboutSection />
-            </div>
-          )
-        }
+        if (block.blockType === 'projects' && isHomepage) return <ProjectsSection key={key} />
         if (block.blockType === 'stats' && isHomepage) return <StatsSection key={key} />
-        if (block.blockType === 'cta' && isHomepage) return <VisionSection key={key} />
+        if (block.blockType === 'cta' && isHomepage) return <div key={key}><AboutSection /><VisionSection /></div>
 
         if (block.blockType === 'hero') {
           const image = typeof block.image === 'object' ? block.image : null
