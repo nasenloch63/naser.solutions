@@ -138,13 +138,13 @@ section[id] {
   html,
   body,
   body * {
-    cursor: url("/cursors/glass-arrow.svg") 3 4, auto !important;
+    cursor: url("/cursors/glass-arrow.svg?v=2") 4 3, auto !important;
   }
 
   html.dark,
   .dark body,
   .dark body * {
-    cursor: url("/cursors/glass-arrow-dark.svg") 3 4, auto !important;
+    cursor: url("/cursors/glass-arrow-dark.svg?v=2") 4 3, auto !important;
   }
 
   :is(html, html.dark) body input,
