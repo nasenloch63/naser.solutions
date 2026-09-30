@@ -16,7 +16,6 @@ export const siteCopy = {
     "about.mentor": "ist ein guter Freund und langjähriger Senior-Full-Stack-Developer. Er hat mich ursprünglich zum Coden gebracht und begleitet meinen Weg mit freundschaftlicher Unterstützung.",
     "about.networkTitle": "Persönlich verbunden, gemeinsam weiter.",
     "about.network": "Mein Netzwerk umfasst Webagenturen in der Schweiz und ganz Deutschland. In Kassel gebe ich mein Wissen an Freunde und Bekannte weiter, um geeignete Aufträge gemeinsam bearbeiten zu können.",
-    "about.thailand": "Auch bis nach Thailand reichen persönliche Kontakte, mit denen ich mich bei Fragen und Projekten austausche, etwa mein Freund von",
     "about.role": "Gründer & dein Ansprechpartner",
     "about.benefit1": "Direkter Austausch mit dem Menschen hinter dem Projekt",
     "about.benefit2": "Technik, die zu deinem Vorhaben passt",
@@ -25,7 +24,6 @@ export const siteCopy = {
     "services.title": "Ein guter Auftritt beginnt mit einem klaren Plan.",
     "services.description": "Wir klären, was dein Unternehmen braucht, und verbinden Gestaltung, Inhalte und Entwicklung zu einer passenden digitalen Lösung.",
     "services.web.description": "Von der Struktur bis zur Umsetzung: moderne, responsive Websites mit klaren Inhalten, kurzen Wegen und einer wartbaren technischen Grundlage.",
-    "services.influencer.description": "Eine eigene Website für deine Inhalte, Kooperationen und dein Portfolio. Passend zu deiner Persönlichkeit und mit deinen Social-Media-Kanälen verbunden.",
     "services.supermarket.title": "Web-Apps für den Handel",
     "services.supermarket.description": "Individuelle digitale Anwendungen für Angebote, Kundeninformationen und Abläufe im Handel. Funktionen und Machbarkeit stimmen wir vorab gemeinsam ab.",
     "services.social.description": "Inhalte und visuelle Konzepte für deine Social-Media-Kanäle. Kampagnen planen wir passend zu Zielgruppe, Budget und vereinbarten Zielen.",
@@ -61,7 +59,6 @@ export const siteCopy = {
     "about.backgroundTitle": "Mehr über meinen Weg",
     "about.school": "Meine Mittlere Reife habe ich als Klassenbester abgeschlossen. In der Schule habe ich mich außerdem als erster Schülersprecher engagiert.",
     "about.bundeswehr": "Ich war kurz bei der Bundeswehr und habe dort meine Grundausbildung abgeschlossen. Mein Dienstgrad ist Gefreiter; meine Verwendung war IT-Soldat, sekundär Medic.",
-    "about.community": "Daneben bin ich Moderator bei Goathub und leite das Marketing für den Solana-Coin $JACKTHEGOAT."
   },
   "en": {
     "nav.about": "About me",
@@ -78,7 +75,6 @@ export const siteCopy = {
     "about.mentor": "is a close friend and experienced senior full-stack developer. He first got me into coding and continues to support me as a friend.",
     "about.networkTitle": "Personal connections. Shared progress.",
     "about.network": "My network includes web agencies across Switzerland and Germany. In Kassel, I share my knowledge with friends and acquaintances so we can collaborate on suitable projects.",
-    "about.thailand": "My personal connections extend to Thailand, where I exchange ideas and discuss projects with people including my friend at",
     "about.role": "Founder & your contact",
     "about.benefit1": "Direct contact with the person behind your project",
     "about.benefit2": "Technology suited to your needs",
@@ -87,7 +83,6 @@ export const siteCopy = {
     "services.title": "A good website starts with a clear plan.",
     "services.description": "We establish what your business needs, then combine design, content and development into a fitting digital solution.",
     "services.web.description": "From structure to delivery: modern, responsive websites with clear content, straightforward navigation and a maintainable technical foundation.",
-    "services.influencer.description": "Your own space for content, collaborations and a portfolio. Built around your personality and connected to your social channels.",
     "services.supermarket.title": "Web apps for retail",
     "services.supermarket.description": "Custom digital tools for offers, customer information and retail workflows. We agree on features and feasibility before development.",
     "services.social.description": "Content and visual concepts for your social channels. Campaigns are planned around your audience, budget and agreed goals.",
@@ -123,7 +118,6 @@ export const siteCopy = {
     "about.backgroundTitle": "More about my journey",
     "about.school": "I completed my German intermediate secondary school certificate at the top of my class and also served as the lead student representative.",
     "about.bundeswehr": "I briefly served in the German Bundeswehr and completed basic training. My rank is Gefreiter; my assignment was IT soldier, with a secondary medic role.",
-    "about.community": "I also moderate Goathub and lead marketing for the Solana coin $JACKTHEGOAT."
   },
   "fr": {
     "nav.about": "À propos",
@@ -140,7 +134,6 @@ export const siteCopy = {
     "about.mentor": "est un ami proche et développeur full-stack senior expérimenté. Il m'a initié au code et continue de me soutenir en ami.",
     "about.networkTitle": "Des liens personnels, des progrès partagés.",
     "about.network": "Mon réseau comprend des agences web en Suisse et en Allemagne. À Kassel, je transmets mes connaissances à des amis et connaissances pour collaborer sur des projets adaptés.",
-    "about.thailand": "Mes contacts personnels vont jusqu'en Thaïlande, avec des échanges sur les questions et les projets, notamment avec mon ami de",
     "about.role": "Fondateur et votre interlocuteur",
     "about.benefit1": "Un échange direct avec votre interlocuteur",
     "about.benefit2": "Une technique adaptée au projet",
@@ -149,7 +142,6 @@ export const siteCopy = {
     "services.title": "Un bon site commence par un plan clair.",
     "services.description": "Nous définissons vos besoins, puis réunissons design, contenu et développement.",
     "services.web.description": "Des sites modernes et adaptatifs, des contenus clairs et une base technique facile à maintenir.",
-    "services.influencer.description": "Un espace pour vos contenus, collaborations et portfolio, relié à vos réseaux sociaux.",
     "services.supermarket.title": "Applications web pour le commerce",
     "services.supermarket.description": "Des outils pour vos offres, informations clients et processus. Fonctionnalités et faisabilité sont définies ensemble.",
     "services.social.description": "Contenus et concepts visuels pour vos réseaux. Campagnes adaptées au public, au budget et aux objectifs convenus.",
@@ -185,7 +177,6 @@ export const siteCopy = {
     "about.backgroundTitle": "En savoir plus sur mon parcours",
     "about.school": "J'ai obtenu mon diplôme allemand de fin d'études secondaires intermédiaires en tête de ma classe et j'ai été représentant principal des élèves.",
     "about.bundeswehr": "J'ai brièvement servi dans la Bundeswehr et terminé la formation militaire initiale. Mon grade est Gefreiter ; mon affectation était soldat informatique, avec un rôle secondaire de medic.",
-    "about.community": "Je suis aussi modérateur chez Goathub et responsable marketing du jeton Solana $JACKTHEGOAT."
   },
   "es": {
     "nav.about": "Sobre mí",
@@ -202,7 +193,6 @@ export const siteCopy = {
     "about.mentor": "es un buen amigo y desarrollador full-stack sénior con amplia experiencia. Me inició en la programación y sigue apoyándome como amigo.",
     "about.networkTitle": "Conexiones personales, progreso compartido.",
     "about.network": "Mi red incluye agencias web de Suiza y Alemania. En Kassel comparto conocimientos con amigos y conocidos para colaborar en proyectos adecuados.",
-    "about.thailand": "Mis contactos personales llegan hasta Tailandia, donde intercambio ideas sobre dudas y proyectos, por ejemplo con mi amigo de",
     "about.role": "Fundador y tu contacto",
     "about.benefit1": "Comunicación directa con quien lleva tu proyecto",
     "about.benefit2": "Tecnología adecuada a tus necesidades",
@@ -211,7 +201,6 @@ export const siteCopy = {
     "services.title": "Una buena web empieza con un plan claro.",
     "services.description": "Definimos tus necesidades y reunimos diseño, contenido y desarrollo.",
     "services.web.description": "Sitios modernos y adaptables con contenidos claros, navegación sencilla y una base técnica mantenible.",
-    "services.influencer.description": "Un espacio para tus contenidos, colaboraciones y portafolio, conectado a tus redes sociales.",
     "services.supermarket.title": "Aplicaciones web para comercios",
     "services.supermarket.description": "Herramientas para ofertas, información al cliente y procesos comerciales. Acordamos funciones y viabilidad antes de empezar.",
     "services.social.description": "Contenidos y conceptos visuales para tus redes. Campañas adaptadas a tu público, presupuesto y objetivos acordados.",
@@ -247,7 +236,6 @@ export const siteCopy = {
     "about.backgroundTitle": "Más sobre mi trayectoria",
     "about.school": "Terminé la titulación alemana de educación secundaria intermedia como el mejor de mi clase y fui representante principal del alumnado.",
     "about.bundeswehr": "Serví brevemente en la Bundeswehr y completé la instrucción básica. Mi rango es Gefreiter; mi destino era soldado de informática, con función secundaria de medic.",
-    "about.community": "También soy moderador en Goathub y dirijo el marketing de la moneda de Solana $JACKTHEGOAT."
   },
   "it": {
     "nav.about": "Chi sono",
@@ -264,7 +252,6 @@ export const siteCopy = {
     "about.mentor": "è un caro amico e un senior full-stack developer di lunga esperienza. Mi ha avvicinato alla programmazione e continua a sostenermi come amico.",
     "about.networkTitle": "Legami personali, crescita condivisa.",
     "about.network": "La mia rete comprende agenzie web in Svizzera e Germania. A Kassel condivido le mie conoscenze con amici e conoscenti per collaborare su progetti adatti.",
-    "about.thailand": "I miei contatti personali arrivano fino in Thailandia, con scambi su domande e progetti, ad esempio con il mio amico di",
     "about.role": "Fondatore e tuo referente",
     "about.benefit1": "Contatto diretto con chi segue il progetto",
     "about.benefit2": "Tecnologia adatta alle tue esigenze",
@@ -273,7 +260,6 @@ export const siteCopy = {
     "services.title": "Un buon sito parte da un piano chiaro.",
     "services.description": "Definiamo le tue esigenze e uniamo design, contenuti e sviluppo.",
     "services.web.description": "Siti moderni e responsive con contenuti chiari, navigazione semplice e una base tecnica gestibile.",
-    "services.influencer.description": "Uno spazio per contenuti, collaborazioni e portfolio, collegato ai tuoi canali social.",
     "services.supermarket.title": "App web per il commercio",
     "services.supermarket.description": "Strumenti per offerte, informazioni ai clienti e processi commerciali. Concordiamo funzioni e fattibilità prima dello sviluppo.",
     "services.social.description": "Contenuti e idee visive per i social. Campagne in linea con pubblico, budget e obiettivi concordati.",
@@ -309,7 +295,6 @@ export const siteCopy = {
     "about.backgroundTitle": "Il mio percorso",
     "about.school": "Ho concluso il percorso scolastico tedesco della Mittlere Reife come migliore della classe e sono stato il principale rappresentante degli studenti.",
     "about.bundeswehr": "Ho prestato brevemente servizio nella Bundeswehr e completato l'addestramento di base. Il mio grado è Gefreiter; il mio impiego era soldato informatico, con ruolo secondario di medic.",
-    "about.community": "Sono anche moderatore di Goathub e responsabile marketing della moneta Solana $JACKTHEGOAT."
   },
   "pt": {
     "nav.about": "Sobre mim",
@@ -326,7 +311,6 @@ export const siteCopy = {
     "about.mentor": "é um grande amigo e programador full-stack sénior com muitos anos de experiência. Foi quem me iniciou na programação e continua a apoiar-me como amigo.",
     "about.networkTitle": "Ligações pessoais, progresso partilhado.",
     "about.network": "A minha rede inclui agências web na Suíça e na Alemanha. Em Kassel, partilho conhecimentos com amigos e conhecidos para colaborarmos em projetos adequados.",
-    "about.thailand": "Os meus contactos pessoais chegam à Tailândia, com trocas de ideias sobre dúvidas e projetos, por exemplo com o meu amigo da",
     "about.role": "Fundador e o seu contacto",
     "about.benefit1": "Contacto direto com quem acompanha o projeto",
     "about.benefit2": "Tecnologia adequada às suas necessidades",
@@ -335,7 +319,6 @@ export const siteCopy = {
     "services.title": "Um bom site começa com um plano claro.",
     "services.description": "Definimos as necessidades e reunimos design, conteúdos e desenvolvimento.",
     "services.web.description": "Sites modernos e adaptáveis, com conteúdos claros, navegação simples e uma base técnica fácil de manter.",
-    "services.influencer.description": "Um espaço para conteúdos, colaborações e portefólio, ligado às suas redes sociais.",
     "services.supermarket.title": "Aplicações web para o comércio",
     "services.supermarket.description": "Ferramentas para ofertas, informação ao cliente e processos comerciais. Funções e viabilidade são acordadas antes do desenvolvimento.",
     "services.social.description": "Conteúdos e conceitos visuais para as redes. Campanhas adequadas ao público, orçamento e objetivos acordados.",
@@ -371,7 +354,6 @@ export const siteCopy = {
     "about.backgroundTitle": "Mais sobre o meu percurso",
     "about.school": "Concluí a qualificação escolar alemã Mittlere Reife como o melhor da turma e fui o representante principal dos alunos.",
     "about.bundeswehr": "Servi brevemente na Bundeswehr e concluí a formação militar básica. O meu posto é Gefreiter; a minha função era soldado de informática, com função secundária de medic.",
-    "about.community": "Também sou moderador na Goathub e lidero o marketing da moeda Solana $JACKTHEGOAT."
   },
   "tr": {
     "nav.about": "Hakkımda",
@@ -388,7 +370,6 @@ export const siteCopy = {
     "about.mentor": "yakın arkadaşım ve uzun yıllardır çalışan kıdemli full-stack geliştirici. Beni kodlamayla tanıştırdı ve arkadaşça desteğini sürdürüyor.",
     "about.networkTitle": "Kişisel bağlar, ortak ilerleme.",
     "about.network": "Çevremde İsviçre ve Almanya'dan web ajansları var. Kassel'de uygun projelerde birlikte çalışabilmek için arkadaşlarıma ve tanıdıklarıma bilgilerimi aktarıyorum.",
-    "about.thailand": "Soru ve projeler hakkında fikir alışverişi yaptığım kişisel bağlantılarım Tayland'a kadar uzanıyor. Örneğin şu sitenin sahibi olan arkadaşım:",
     "about.role": "Kurucu ve iletişim kişin",
     "about.benefit1": "Projenle ilgilenen kişiyle doğrudan iletişim",
     "about.benefit2": "İhtiyacına uygun teknoloji",
@@ -397,7 +378,6 @@ export const siteCopy = {
     "services.title": "İyi bir site açık bir planla başlar.",
     "services.description": "İhtiyaçlarını belirleyip tasarım, içerik ve geliştirmeyi birleştiriyoruz.",
     "services.web.description": "Açık içerikli, kolay gezilen ve sürdürülebilir teknik temele sahip modern, duyarlı siteler.",
-    "services.influencer.description": "İçerik, iş birlikleri ve portföy için sosyal hesaplarına bağlı kişisel bir alan.",
     "services.supermarket.title": "Perakende için web uygulamaları",
     "services.supermarket.description": "Teklifler, müşteri bilgileri ve iş süreçleri için araçlar. Özellikleri ve uygulanabilirliği önceden belirliyoruz.",
     "services.social.description": "Sosyal kanallar için içerik ve görsel konseptler. Hedef kitle, bütçe ve hedeflere uygun kampanyalar.",
@@ -433,7 +413,6 @@ export const siteCopy = {
     "about.backgroundTitle": "Yolculuğum hakkında",
     "about.school": "Almanya'daki Mittlere Reife diplomamı sınıf birincisi olarak aldım ve okulda birinci öğrenci temsilcisi olarak görev yaptım.",
     "about.bundeswehr": "Kısa süre Alman Bundeswehr'de görev yapıp temel eğitimi tamamladım. Rütbem Gefreiter; görevim IT askeri, ikincil görevim medic idi.",
-    "about.community": "Ayrıca Goathub'da moderatörüm ve Solana üzerindeki $JACKTHEGOAT coin'inin pazarlamasını yönetiyorum."
   },
   "sq": {
     "nav.about": "Rreth meje",
@@ -450,7 +429,6 @@ export const siteCopy = {
     "about.mentor": "është mik i afërt dhe zhvillues senior full-stack me përvojë shumëvjeçare. Ai më prezantoi me programimin dhe vazhdon të më mbështesë si mik.",
     "about.networkTitle": "Lidhje personale, përparim i përbashkët.",
     "about.network": "Rrjeti im përfshin agjenci web në Zvicër dhe Gjermani. Në Kassel ndaj njohuritë me miq e të njohur që të bashkëpunojmë në projekte të përshtatshme.",
-    "about.thailand": "Kontaktet e mia personale shtrihen deri në Tajlandë, ku shkëmbej mendime për pyetje e projekte, për shembull me mikun tim nga",
     "about.role": "Themelues dhe kontakti yt",
     "about.benefit1": "Kontakt i drejtpërdrejtë për projektin",
     "about.benefit2": "Teknologji që i përshtatet nevojës",
@@ -459,7 +437,6 @@ export const siteCopy = {
     "services.title": "Një faqe e mirë nis me plan të qartë.",
     "services.description": "Përcaktojmë nevojat dhe bashkojmë dizajnin, përmbajtjen dhe zhvillimin.",
     "services.web.description": "Faqe moderne e të përshtatshme për pajisje të ndryshme, me përmbajtje të qartë dhe bazë teknike të mirëmbajtshme.",
-    "services.influencer.description": "Hapësira jote për përmbajtje, bashkëpunime dhe portofol, e lidhur me rrjetet sociale.",
     "services.supermarket.title": "Aplikacione web për tregtinë",
     "services.supermarket.description": "Mjete për oferta, informacion për klientët dhe procese tregtare. Funksionet dhe realizueshmërinë i dakordësojmë paraprakisht.",
     "services.social.description": "Përmbajtje dhe koncepte vizuale për rrjetet sociale. Fushata sipas audiencës, buxhetit dhe objektivave.",
@@ -495,7 +472,6 @@ export const siteCopy = {
     "about.backgroundTitle": "Më shumë për rrugëtimin tim",
     "about.school": "Përfundova kualifikimin shkollor gjerman Mittlere Reife si më i miri i klasës dhe isha përfaqësuesi kryesor i nxënësve.",
     "about.bundeswehr": "Shërbeva shkurt në Bundeswehr dhe përfundova trajnimin bazë. Grada ime është Gefreiter; detyra ime ishte ushtar IT, me rol dytësor medic.",
-    "about.community": "Jam gjithashtu moderator në Goathub dhe drejtoj marketingun e monedhës Solana $JACKTHEGOAT."
   },
   "ru": {
     "nav.about": "Обо мне",
@@ -512,7 +488,6 @@ export const siteCopy = {
     "about.mentor": "— близкий друг и опытный senior full-stack разработчик. Он познакомил меня с программированием и продолжает поддерживать по-дружески.",
     "about.networkTitle": "Личные связи, совместное развитие.",
     "about.network": "В моём кругу есть веб-агентства Швейцарии и Германии. В Касселе я делюсь знаниями с друзьями и знакомыми, чтобы вместе работать над подходящими проектами.",
-    "about.thailand": "Личные контакты есть и в Таиланде: мы обсуждаем вопросы и проекты, например с моим другом из",
     "about.role": "Основатель и ваш контакт",
     "about.benefit1": "Прямое общение с исполнителем",
     "about.benefit2": "Технологии под ваши задачи",
@@ -521,7 +496,6 @@ export const siteCopy = {
     "services.title": "Хороший сайт начинается с ясного плана.",
     "services.description": "Определяем потребности и объединяем дизайн, контент и разработку.",
     "services.web.description": "Современные адаптивные сайты с понятным контентом, простой навигацией и удобной поддержкой.",
-    "services.influencer.description": "Собственное пространство для контента, сотрудничества и портфолио, связанное с соцсетями.",
     "services.supermarket.title": "Веб-приложения для торговли",
     "services.supermarket.description": "Инструменты для предложений, информации покупателям и рабочих процессов. Функции и реализуемость обсуждаем заранее.",
     "services.social.description": "Контент и визуальные концепции для соцсетей. Кампании с учётом аудитории, бюджета и согласованных целей.",
@@ -557,7 +531,6 @@ export const siteCopy = {
     "about.backgroundTitle": "Подробнее о моём пути",
     "about.school": "Я получил немецкий школьный аттестат Mittlere Reife лучшим в классе и был главным представителем учеников.",
     "about.bundeswehr": "Я недолго служил в Бундесвере и завершил базовую подготовку. Моё звание — Gefreiter; назначение — IT-солдат, с дополнительной ролью medic.",
-    "about.community": "Я также модерирую Goathub и руковожу маркетингом монеты $JACKTHEGOAT в сети Solana."
   },
   "el": {
     "nav.about": "Σχετικά με εμένα",
@@ -574,7 +547,6 @@ export const siteCopy = {
     "about.mentor": "είναι καλός φίλος και έμπειρος senior full-stack developer. Με έφερε στον προγραμματισμό και συνεχίζει να με στηρίζει φιλικά.",
     "about.networkTitle": "Προσωπικές σχέσεις, κοινή πρόοδος.",
     "about.network": "Το δίκτυό μου περιλαμβάνει web agencies στην Ελβετία και τη Γερμανία. Στο Kassel μοιράζομαι γνώσεις με φίλους και γνωστούς για συνεργασία σε κατάλληλα έργα.",
-    "about.thailand": "Οι προσωπικές επαφές φτάνουν έως την Ταϊλάνδη, με ανταλλαγή ιδεών για ερωτήσεις και έργα, όπως με τον φίλο μου από",
     "about.role": "Ιδρυτής και υπεύθυνος επικοινωνίας",
     "about.benefit1": "Άμεση επαφή με τον άνθρωπο του έργου",
     "about.benefit2": "Τεχνολογία για τις ανάγκες σου",
@@ -583,7 +555,6 @@ export const siteCopy = {
     "services.title": "Μια καλή ιστοσελίδα ξεκινά με σαφές πλάνο.",
     "services.description": "Ορίζουμε τις ανάγκες και συνδυάζουμε σχεδιασμό, περιεχόμενο και ανάπτυξη.",
     "services.web.description": "Σύγχρονες προσαρμοστικές ιστοσελίδες με σαφές περιεχόμενο, εύκολη πλοήγηση και συντηρήσιμη τεχνική βάση.",
-    "services.influencer.description": "Ο δικός σου χώρος για περιεχόμενο, συνεργασίες και portfolio, συνδεδεμένος με τα κοινωνικά δίκτυα.",
     "services.supermarket.title": "Web εφαρμογές για το εμπόριο",
     "services.supermarket.description": "Εργαλεία για προσφορές, πληροφορίες πελατών και διαδικασίες. Συμφωνούμε λειτουργίες και εφικτότητα εκ των προτέρων.",
     "services.social.description": "Περιεχόμενο και οπτικές ιδέες για τα δίκτυά σου. Καμπάνιες ανάλογα με κοινό, προϋπολογισμό και στόχους.",
@@ -619,7 +590,6 @@ export const siteCopy = {
     "about.backgroundTitle": "Περισσότερα για την πορεία μου",
     "about.school": "Ολοκλήρωσα τον γερμανικό σχολικό τίτλο Mittlere Reife ως πρώτος στην τάξη και ήμουν ο κύριος εκπρόσωπος των μαθητών.",
     "about.bundeswehr": "Υπηρέτησα για λίγο στη Bundeswehr και ολοκλήρωσα τη βασική εκπαίδευση. Ο βαθμός μου είναι Gefreiter· η ειδικότητά μου ήταν στρατιώτης πληροφορικής, με δευτερεύοντα ρόλο medic.",
-    "about.community": "Είμαι επίσης συντονιστής στο Goathub και επικεφαλής μάρκετινγκ του νομίσματος Solana $JACKTHEGOAT."
   },
   "ar": {
     "nav.about": "عني",
@@ -636,7 +606,6 @@ export const siteCopy = {
     "about.mentor": "صديق مقرّب ومطوّر أول شامل بخبرة طويلة. هو من عرّفني على البرمجة، وما زال يدعمني كصديق.",
     "about.networkTitle": "علاقات شخصية وتقدّم مشترك.",
     "about.network": "تضم شبكة معارفي وكالات ويب في سويسرا وألمانيا. وفي كاسل أشارك معرفتي مع الأصدقاء والمعارف لنتعاون في المشاريع المناسبة.",
-    "about.thailand": "تمتد علاقاتي الشخصية إلى تايلاند، حيث نتبادل الأفكار حول الأسئلة والمشاريع، مثل صديقي في",
     "about.role": "المؤسس وجهة تواصلك",
     "about.benefit1": "تواصل مباشر مع المسؤول عن مشروعك",
     "about.benefit2": "تقنية تناسب احتياجاتك",
@@ -645,7 +614,6 @@ export const siteCopy = {
     "services.title": "الموقع الجيد يبدأ بخطة واضحة.",
     "services.description": "نحدد احتياجاتك ونجمع التصميم والمحتوى والتطوير في حل مناسب.",
     "services.web.description": "مواقع حديثة ومتجاوبة بمحتوى واضح وتصفح بسيط وأساس تقني قابل للصيانة.",
-    "services.influencer.description": "مساحتك الخاصة للمحتوى والتعاون ومعرض الأعمال، مرتبطة بحساباتك الاجتماعية.",
     "services.supermarket.title": "تطبيقات ويب للتجارة",
     "services.supermarket.description": "أدوات للعروض ومعلومات العملاء وإجراءات العمل. نتفق مسبقًا على الوظائف وإمكانية تنفيذها.",
     "services.social.description": "محتوى وأفكار بصرية لقنواتك الاجتماعية، وحملات تناسب الجمهور والميزانية والأهداف المتفق عليها.",
@@ -681,7 +649,6 @@ export const siteCopy = {
     "about.backgroundTitle": "المزيد عن مسيرتي",
     "about.school": "أنهيت شهادة Mittlere Reife الألمانية كأفضل طالب في صفي، وشغلت أيضًا منصب الممثل الأول للطلاب.",
     "about.bundeswehr": "خدمت لفترة قصيرة في الجيش الألماني وأكملت التدريب الأساسي. رتبتي Gefreiter، وكان تخصصي جندي تقنية معلومات مع دور ثانوي بصفة medic.",
-    "about.community": "كما أعمل مشرفًا في Goathub وأقود التسويق لعملة $JACKTHEGOAT على شبكة Solana."
   },
   "zh": {
     "nav.about": "关于我",
@@ -698,7 +665,6 @@ export const siteCopy = {
     "about.mentor": "是我的好友，也是一位经验丰富的资深全栈开发者。他最初带我接触编程，至今仍以朋友的身份支持我。",
     "about.networkTitle": "真诚联系，共同进步。",
     "about.network": "我的人脉包括瑞士和德国的网站工作室。在卡塞尔，我与朋友和熟人分享知识，以便共同承接适合的项目。",
-    "about.thailand": "我的私人联系也延伸至泰国，我们交流问题和项目，例如我的朋友所在的",
     "about.role": "创始人及你的联系人",
     "about.benefit1": "直接与项目负责人沟通",
     "about.benefit2": "根据需求选择技术",
@@ -707,7 +673,6 @@ export const siteCopy = {
     "services.title": "好网站始于清晰的计划。",
     "services.description": "先明确需求，再结合设计、内容与开发提供合适的方案。",
     "services.web.description": "现代响应式网站，配备清晰内容、简洁导航和便于维护的技术基础。",
-    "services.influencer.description": "展示内容、合作与作品的个人空间，并连接你的社交平台。",
     "services.supermarket.title": "零售网络应用",
     "services.supermarket.description": "面向促销、客户信息及零售流程的定制工具。开发前共同明确功能和可行性。",
     "services.social.description": "为社交平台制作内容和视觉方案，按受众、预算与约定目标规划推广活动。",
@@ -743,6 +708,5 @@ export const siteCopy = {
     "about.backgroundTitle": "了解我的经历",
     "about.school": "我以班级第一的成绩取得德国 Mittlere Reife 中等教育毕业资格，并担任过首席学生代表。",
     "about.bundeswehr": "我曾短期服役于德国联邦国防军并完成基础训练，军衔为 Gefreiter，任职方向为 IT 士兵，兼任 medic 角色。",
-    "about.community": "此外，我担任 Goathub 社区管理员，并负责 Solana 代币 $JACKTHEGOAT 的市场营销。"
   }
 } satisfies Record<Language, Record<string, string>>

@@ -134,41 +134,47 @@ section[id] {
 }
 
 /* Native glass arrow; editable fields retain their standard text cursor. */
-@media (any-pointer: fine) and (forced-colors: none) {
+@media (hover: hover) and (pointer: fine) and (forced-colors: none) {
   html,
   body,
   body * {
     cursor: url("/cursors/glass-arrow.svg") 3 4, auto !important;
   }
 
-  input,
-  input *,
-  select,
-  select * {
+  html.dark,
+  .dark body,
+  .dark body * {
+    cursor: url("/cursors/glass-arrow-dark.svg") 3 4, auto !important;
+  }
+
+  :is(html, html.dark) body input,
+  :is(html, html.dark) body input *,
+  :is(html, html.dark) body select,
+  :is(html, html.dark) body select * {
     cursor: auto !important;
   }
 
-  input:not([type]),
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="url"],
-  input[type="search"],
-  input[type="password"],
-  input[type="number"],
-  textarea,
-  textarea *,
-  [contenteditable=""],
-  [contenteditable="true"],
-  [contenteditable="plaintext-only"],
-  [contenteditable="true"] * {
+  :is(html, html.dark) body input:not([type]),
+  :is(html, html.dark) body input[type="text"],
+  :is(html, html.dark) body input[type="email"],
+  :is(html, html.dark) body input[type="tel"],
+  :is(html, html.dark) body input[type="url"],
+  :is(html, html.dark) body input[type="search"],
+  :is(html, html.dark) body input[type="password"],
+  :is(html, html.dark) body input[type="number"],
+  :is(html, html.dark) body textarea,
+  :is(html, html.dark) body textarea *,
+  :is(html, html.dark) body [contenteditable=""],
+  :is(html, html.dark) body [contenteditable="true"],
+  :is(html, html.dark) body [contenteditable="plaintext-only"],
+  :is(html, html.dark) body [contenteditable="true"] * {
     cursor: text !important;
   }
 
-  :disabled,
-  :disabled *,
-  [aria-disabled="true"],
-  [aria-disabled="true"] * {
+  :is(html, html.dark) body :disabled,
+  :is(html, html.dark) body :disabled *,
+  :is(html, html.dark) body [aria-disabled="true"],
+  :is(html, html.dark) body [aria-disabled="true"] * {
     cursor: not-allowed !important;
   }
 }
@@ -363,3 +369,7 @@ section[id] {
 .animate-scroll-infinite:hover {
   animation-play-state: paused;
 }
+
+.document-button { display:inline-flex; min-height:48px; align-items:center; justify-content:center; gap:.6rem; border-radius:.8rem; padding:.8rem 1.2rem; font-size:.875rem; font-weight:600; box-shadow:0 4px 16px #00000008; transition:box-shadow .2s; }
+.document-button:hover { box-shadow:0 6px 22px #00000018; }
+.document-button:focus-visible { outline:2px solid var(--ring); outline-offset:4px; }

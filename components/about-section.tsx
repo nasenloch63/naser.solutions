@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Check, Instagram, ExternalLink } from "lucide-react"
+import { Check, Instagram, ExternalLink, FileText, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
@@ -11,6 +11,7 @@ export function AboutSection() {
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.2 })
   const { t } = useLanguage()
 
+  const [worldBefore, worldAfter] = t("about.world").split("{ritzi}")
   const benefitKeys = ["about.benefit1", "about.benefit2", "about.benefit3", "about.benefit4"]
 
   return (
@@ -40,14 +41,17 @@ export function AboutSection() {
               <p><a href="https://oxince.com/" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">oxince.com</a> {t("about.mentor")}</p>
               <h3 className="text-xl font-semibold text-foreground pt-2">{t("about.networkTitle")}</h3>
               <p>{t("about.network")}</p>
-              <p>{t("about.thailand")} <a href="https://ritzi.digital/" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">ritzi.digital</a>.</p>
-              <details className="border-y border-border py-4">
-                <summary className="cursor-pointer font-semibold text-foreground">{t("about.backgroundTitle")}</summary>
+              <p>{worldBefore} <a href="https://ritzi.digital/" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">ritzi.digital</a>{worldAfter}</p>
+              <details className="rounded-2xl border border-border bg-card/50 p-5 shadow-sm backdrop-blur-xl">
+                <summary className="cursor-pointer rounded font-semibold text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">{t("about.backgroundTitle")}</summary>
                 <div className="space-y-4 pt-4">
                   <p>{t("about.school")}</p>
                   <p>{t("about.bundeswehr")}</p>
                   <p>{t("about.community")}</p>
-                  <p className="text-xs break-all"><span className="font-medium">Solana CA: </span><bdi>68eD7fdMVEqKDev9jChsBxtvg45XF2FKsnVRfDTpxCkK</bdi></p>
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <a href="/documents/cw-yasin-2026.pdf" target="_blank" rel="noopener noreferrer" className="document-button bg-primary text-primary-foreground"><FileText className="size-4" aria-hidden="true" />{t("about.cv")}<ArrowUpRight className="size-4" aria-hidden="true" /><span className="sr-only">{t("about.newTab")}</span></a>
+                    <a href="/documents/zeugnisse.html" target="_blank" rel="noopener noreferrer" className="document-button border border-border bg-background/60"><FileText className="size-4" aria-hidden="true" />{t("about.certificates")}<ArrowUpRight className="size-4" aria-hidden="true" /><span className="sr-only">{t("about.newTab")}</span></a>
+                  </div>
                 </div>
               </details>
             </div>

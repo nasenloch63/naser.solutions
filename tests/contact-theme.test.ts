@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict'
 import { test, mock } from 'node:test'
 import { runInNewContext } from 'node:vm'
-import nodemailer from 'nodemailer'
+import nodemailer, { type SendMailOptions } from 'nodemailer'
 import { POST } from '../app/api/contact/route'
 import { scheduledTheme, themeInitScript } from '../lib/theme'
 import { siteCopy } from '../lib/site-copy'
+import { profileCopy } from '../lib/profile-copy'
 
 test('scheduled theme follows the local 10:00 and 18:00 boundaries', () => {
   for (let hour = 0; hour < 24; hour++) {
@@ -31,6 +32,12 @@ test('before-paint theme respects saved choice and tolerates blocked storage', (
 
 test('all twelve locales contain every updated copy key', () => {
   assert.equal(Object.keys(siteCopy).length, 12)
+  assert.equal(Object.keys(profileCopy).length, 12)
+  for (const [language, copy] of Object.entries(profileCopy)) {
+    assert.deepEqual(Object.keys(copy).sort(), Object.keys(profileCopy.de).sort(), language)
+    assert.ok(Object.values(copy).every(value => value.trim().length > 0), language)
+    assert.ok(copy['about.world'].includes('{ritzi}'), language)
+  }
   for (const [language, copy] of Object.entries(siteCopy)) {
     assert.deepEqual(Object.keys(copy).sort(), Object.keys(siteCopy.de).sort(), language)
     assert.ok(Object.values(copy).every(value => value.trim().length > 0))
@@ -39,11 +46,11 @@ test('all twelve locales contain every updated copy key', () => {
 
 test('contact validation and SMTP delivery with a mocked transport only', async () => {
   const savedPassword = process.env.STRATO_SMTP_PASSWORD
-  const sent: nodemailer.SendMailOptions[] = []
+  const sent: SendMailOptions[] = []
   let closed = 0
   let fail = false
   const transportMock = mock.method(nodemailer, 'createTransport', () => ({
-    async sendMail(data: nodemailer.SendMailOptions) {
+    async sendMail(data: SendMailOptions) {
       if (fail) throw new Error('Simulated SMTP failure')
       sent.push(data)
       return { accepted: ['info@naser-solutions.de'] }
