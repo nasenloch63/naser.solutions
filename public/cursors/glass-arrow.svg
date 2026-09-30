@@ -1,1 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36"><defs><linearGradient id="glass" x1="3" y1="4" x2="22" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#f5f5f5" stop-opacity=".85"/><stop offset=".38" stop-color="#a1a1aa" stop-opacity=".42"/><stop offset="1" stop-color="#52525b" stop-opacity=".58"/></linearGradient><path id="arrow" d="M3 4.4Q3 2.7 4.3 3.9L23 21.2Q24.1 22.3 22.5 22.3H14.4L19.1 30.6Q19.7 31.7 18.5 32.3L15.5 33.8Q14.4 34.3 13.8 33.2L9.1 24.8L4.6 29.2Q3 30.7 3 28.6Z"/></defs><use href="#arrow" fill="url(#glass)" stroke="#27272a" stroke-opacity=".85" stroke-width="1.2" stroke-linejoin="round"/><path d="M4.5 7V25L9.4 20.5" fill="none" stroke="#ffffff" stroke-opacity=".68" stroke-width=".7" stroke-linejoin="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 64 80">
+  <defs>
+    <linearGradient id="rim" x1="7" y1="8" x2="51" y2="72" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#55595c"/><stop offset=".2" stop-color="#303436"/><stop offset=".49" stop-color="#8b8e90"/><stop offset=".65" stop-color="#696d6f"/><stop offset=".82" stop-color="#34383a"/><stop offset="1" stop-color="#777b7d"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="16" y1="15" x2="44" y2="69" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#151719" stop-opacity=".94"/><stop offset=".46" stop-color="#080a0c" stop-opacity=".82"/><stop offset=".78" stop-color="#282d31" stop-opacity=".87"/><stop offset="1" stop-color="#101315" stop-opacity=".94"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="14" y1="15" x2="43" y2="71" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f5f5f5" stop-opacity=".88"/><stop offset=".24" stop-color="#d7dbdd" stop-opacity=".24"/><stop offset=".57" stop-color="#e9ecee" stop-opacity=".74"/><stop offset="1" stop-color="#eff1f2" stop-opacity=".16"/>
+    </linearGradient>
+    <linearGradient id="reflection" x1="14" y1="22" x2="24" y2="61" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity="0"/><stop offset=".52" stop-color="#dae0e3" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="center"><path d="M14 17L49 43L34 47L44 66L39 69L28 51L17 63Z"/></clipPath>
+    <filter id="soft"><feGaussianBlur stdDeviation="1.1"/></filter>
+  </defs>
+  <path d="M8 6L6 9L10 70Q11 74 14 72L28 61L38 77L52 69L50 67L39 74L28 58L13 69Z" fill="#363a3c" stroke="#151719" stroke-width=".8" stroke-linejoin="round"/>
+  <path d="M8 6L57 44Q60 46 57 48L41 52L51 68L38 75L28 58L14 70Q11 72 11 68Z" fill="url(#rim)" stroke="#272a2d" stroke-opacity=".65" stroke-width=".8" stroke-linejoin="round"/>
+  <path d="M14 17L49 43L34 47L44 66L39 69L28 51L17 63Z" fill="url(#glass)" stroke="#07090a" stroke-width="1.8" stroke-linejoin="round"/>
+  <g clip-path="url(#center)">
+    <path d="M13 22C28 31 12 38 24 47C30 53 24 57 27 66L17 68Z" fill="url(#reflection)" filter="url(#soft)"/>
+    <path d="M14 17L25 25L18 23L17 33Z" fill="#f4f6f7" fill-opacity=".52" filter="url(#soft)"/>
+    <path d="M35 48L45 65L40 69L38 58Z" fill="#e4e8eb" fill-opacity=".13" filter="url(#soft)"/>
+  </g>
+  <path d="M14 17L49 43L34 47L44 66L39 69L28 51L17 63Z" fill="none" stroke="url(#edge)" stroke-width="1.1" stroke-linejoin="round"/>
+  <path d="M9 9L12 68M56 46L38 50M49 68L38 73" fill="none" stroke="#edf0f1" stroke-opacity=".28" stroke-width=".7" stroke-linecap="round"/>
+</svg>
