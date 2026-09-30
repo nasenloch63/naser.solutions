@@ -10,12 +10,6 @@ export function HeroSection() {
   const { t } = useLanguage()
   return (
     <section id="start" className="relative overflow-hidden pt-32 pb-16 lg:pt-40 lg:pb-20">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-16 top-20 h-[480px] w-[480px] opacity-[0.055] sm:left-[8%] lg:top-8 lg:h-[720px] lg:w-[720px] dark:opacity-[0.075]">
-          <Image src="/images/logo-invertable.png" alt="" fill sizes="(min-width: 1024px) 720px, 480px" className="object-contain dark:hidden" />
-          <Image src="/images/inverted-20logo-20png.png" alt="" fill sizes="(min-width: 1024px) 720px, 480px" className="hidden object-contain dark:block" />
-        </div>
-      </div>
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-center">
         <div className="min-w-0">
           <p className="text-sm font-medium text-muted-foreground mb-5">{t("hero.eyebrow")}</p>
@@ -30,9 +24,17 @@ export function HeroSection() {
             <p>{t("hero.regions")}</p>
           </div>
         </div>
-        <div id="anfrage" className="min-w-0 scroll-mt-28 lg:border-s border-border lg:ps-8">
-          <h2 className="text-xl font-semibold mb-2">{t("contact.form.title")}</h2>
-          <p className="text-sm text-muted-foreground mb-5">{t("contact.form.intro")}</p>
+        <div id="anfrage" className="min-w-0 scroll-mt-28 rounded-3xl border border-border/70 bg-card/70 p-6 shadow-[0_12px_48px_-24px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:p-8 dark:bg-secondary/30">
+          <div className="mb-6 flex items-center gap-4 sm:gap-5">
+            <div aria-hidden="true" className="relative size-20 shrink-0 sm:size-24">
+              <Image src="/images/logo-invertable.png" alt="" fill sizes="(min-width: 640px) 96px, 80px" className="object-contain opacity-80 dark:hidden" />
+              <Image src="/images/inverted-20logo-20png.png" alt="" fill sizes="(min-width: 640px) 96px, 80px" className="hidden object-contain opacity-90 dark:block" />
+            </div>
+            <div className="min-w-0">
+              <h2 className="mb-2 text-xl font-semibold leading-snug">{t("contact.form.title")}</h2>
+              <p className="text-sm leading-relaxed text-muted-foreground">{t("contact.form.intro")}</p>
+            </div>
+          </div>
           <ContactForm />
         </div>
       </div>
