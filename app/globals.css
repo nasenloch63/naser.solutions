@@ -369,7 +369,3 @@ section[id] {
 .animate-scroll-infinite:hover {
   animation-play-state: paused;
 }
-
-.document-button { display:inline-flex; min-height:48px; align-items:center; justify-content:center; gap:.6rem; border-radius:.8rem; padding:.8rem 1.2rem; font-size:.875rem; font-weight:600; box-shadow:0 4px 16px #00000008; transition:box-shadow .2s; }
-.document-button:hover { box-shadow:0 6px 22px #00000018; }
-.document-button:focus-visible { outline:2px solid var(--ring); outline-offset:4px; }

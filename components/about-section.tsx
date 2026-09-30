@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Check, Instagram, ExternalLink, FileText, ArrowUpRight } from "lucide-react"
+import { Check, Instagram, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
@@ -48,10 +48,6 @@ export function AboutSection() {
                   <p>{t("about.school")}</p>
                   <p>{t("about.bundeswehr")}</p>
                   <p>{t("about.community")}</p>
-                  <div className="flex flex-wrap gap-3 pt-2">
-                    <a href="/documents/cw-yasin-2026.pdf" target="_blank" rel="noopener noreferrer" className="document-button bg-primary text-primary-foreground"><FileText className="size-4" aria-hidden="true" />{t("about.cv")}<ArrowUpRight className="size-4" aria-hidden="true" /><span className="sr-only">{t("about.newTab")}</span></a>
-                    <a href="/documents/zeugnisse.html" target="_blank" rel="noopener noreferrer" className="document-button border border-border bg-background/60"><FileText className="size-4" aria-hidden="true" />{t("about.certificates")}<ArrowUpRight className="size-4" aria-hidden="true" /><span className="sr-only">{t("about.newTab")}</span></a>
-                  </div>
                 </div>
               </details>
             </div>
