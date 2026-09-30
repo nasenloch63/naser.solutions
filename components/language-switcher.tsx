@@ -1,8 +1,23 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
 import { Globe, Check, ChevronDown } from "lucide-react"
 import { useLanguage, languages, type Language } from "@/components/language-provider"
+
+function LanguageFlag({ language }: { language: Language }) {
+  return (
+    <Image
+      src={`/flags/${language}.png`}
+      alt=""
+      width={20}
+      height={20}
+      unoptimized
+      className="h-5 w-5 shrink-0 object-contain"
+      aria-hidden="true"
+    />
+  )
+}
 
 export function LanguageSwitcher() {
   const { language, setLanguage, t, isRTL } = useLanguage()
@@ -48,7 +63,7 @@ export function LanguageSwitcher() {
         aria-haspopup="listbox"
       >
         <Globe className="h-4 w-4 text-foreground" />
-        <span className="text-sm font-medium text-foreground">{currentLang.flag}</span>
+        <LanguageFlag language={currentLang.code} />
         <span className="text-sm font-medium text-foreground uppercase hidden sm:inline">{language}</span>
         <ChevronDown className={`h-3 w-3 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`} />
       </button>
@@ -74,7 +89,7 @@ export function LanguageSwitcher() {
                 role="option"
                 aria-selected={language === lang.code}
               >
-                <span className="text-lg">{lang.flag}</span>
+                <LanguageFlag language={lang.code} />
                 <span className="flex-1 text-sm font-medium text-foreground">{lang.name}</span>
                 {language === lang.code && <Check className="h-4 w-4 text-primary" />}
               </button>
@@ -117,7 +132,7 @@ export function LanguageSwitcherCompact() {
         aria-label={t("language.select")}
         aria-expanded={isOpen}
       >
-        <span className="text-sm">{currentLang.flag}</span>
+        <LanguageFlag language={currentLang.code} />
         <ChevronDown className={`h-3 w-3 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`} />
       </button>
 
@@ -138,7 +153,7 @@ export function LanguageSwitcherCompact() {
                 role="option"
                 aria-selected={language === lang.code}
               >
-                <span>{lang.flag}</span>
+                <LanguageFlag language={lang.code} />
                 <span className="flex-1 text-sm text-foreground">{lang.name}</span>
                 {language === lang.code && <Check className="h-3 w-3 text-primary" />}
               </button>
