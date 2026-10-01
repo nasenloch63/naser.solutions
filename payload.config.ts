@@ -32,6 +32,15 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || '',
   admin: {
     user: Users.slug,
+    importMap: { baseDir: dirname },
+    components: {
+      graphics: {
+        Icon: '/cms/admin/brand#AdminIcon',
+        Logo: '/cms/admin/brand#AdminLogo',
+      },
+      beforeNavLinks: ['/cms/admin/brand#AdminNavBrand'],
+      beforeDashboard: ['/cms/admin/brand#DashboardWelcome'],
+    },
     meta: {
       titleSuffix: '– Naser Solutions CMS',
       description: 'Inhalte und Seiten von Naser Solutions verwalten',
