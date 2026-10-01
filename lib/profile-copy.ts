@@ -2,7 +2,7 @@ import type { Language } from "@/components/language-provider"
 
 export const profileCopy: Record<Language, Record<string, string>> = {
   "de": {
-    "about.world": "Meine persönlichen Kontakte reichen über die ganze Welt bis nach Südostasien. Mit Kontakten wie {ritzi} (Koh Tao) tausche ich mich fachlich zu Fragen und Projekten aus.",
+    "about.world": "Meine persönlichen Kontakte reichen über die ganze Welt bis nach Südostasien. Mit Kontakten wie {ritzi} tausche ich mich fachlich zu Fragen und Projekten aus.",
     "about.community": "Ich habe mehrere Moderator-Rollen auf großen Servern übernommen und dabei Erfahrung in der Betreuung von Communities gesammelt. Web3-Entwicklungen und Krypto-Projekte interessieren mich besonders; in diesem Bereich habe ich praktische Erfahrungen gesammelt.",
     "about.cv": "Lebenslauf",
     "about.certificates": "Zeugnisse",
@@ -21,7 +21,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Updates, Inhaltspflege und gezielte Verbesserungen halten deine Website aktuell. Persönliche Betreuung im gemeinsam vereinbarten Umfang."
   },
   "en": {
-    "about.world": "My personal connections span the world, reaching Southeast Asia. I exchange ideas on professional questions and projects with contacts such as {ritzi} (Koh Tao).",
+    "about.world": "My personal connections span the world, reaching Southeast Asia. I exchange ideas on professional questions and projects with contacts such as {ritzi}.",
     "about.community": "I have taken on several moderator roles on large servers, gaining experience supporting communities. I am particularly interested in Web3 developments and crypto projects, and have gained practical experience in this field.",
     "about.cv": "CV",
     "about.certificates": "Certificates",
@@ -40,7 +40,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Update content, improve features and plan the next step, with support scoped to your needs."
   },
   "ru": {
-    "about.world": "Мои личные контакты охватывают весь мир, вплоть до Юго-Восточной Азии. С такими контактами, как {ritzi} (Koh Tao), я обсуждаю профессиональные вопросы и проекты.",
+    "about.world": "Мои личные контакты охватывают весь мир, вплоть до Юго-Восточной Азии. С такими контактами, как {ritzi}, я обсуждаю профессиональные вопросы и проекты.",
     "about.community": "Я занимал несколько ролей модератора на крупных серверах и приобрёл опыт поддержки сообществ. Меня особенно интересуют разработки Web3 и криптопроекты, в этой области я получил практический опыт.",
     "about.cv": "Резюме",
     "about.certificates": "Свидетельства",
@@ -59,7 +59,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Обновление контента и функций в рамках согласованного сопровождения."
   },
   "tr": {
-    "about.world": "Kişisel bağlantılarım dünyanın her yerine, Güneydoğu Asya’ya kadar uzanıyor. {ritzi} (Koh Tao) gibi bağlantılarımla mesleki sorular ve projeler hakkında fikir alışverişi yapıyorum.",
+    "about.world": "Kişisel bağlantılarım dünyanın her yerine, Güneydoğu Asya’ya kadar uzanıyor. {ritzi} gibi bağlantılarımla mesleki sorular ve projeler hakkında fikir alışverişi yapıyorum.",
     "about.community": "Büyük sunucularda çeşitli moderatör rolleri üstlenerek topluluklara destek verme deneyimi kazandım. Web3 gelişmeleri ve kripto projeleriyle yakından ilgileniyor, bu alanda pratik deneyim ediniyorum.",
     "about.cv": "Özgeçmiş",
     "about.certificates": "Belgeler",
@@ -78,7 +78,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Anlaşılan kapsamda içerik güncellemeleri ve işlev iyileştirmeleri."
   },
   "ar": {
-    "about.world": "تمتد علاقاتي الشخصية حول العالم وصولاً إلى جنوب شرق آسيا. أتبادل الأفكار حول الأسئلة المهنية والمشاريع مع معارف مثل {ritzi} (Koh Tao).",
+    "about.world": "تمتد علاقاتي الشخصية حول العالم وصولاً إلى جنوب شرق آسيا. أتبادل الأفكار حول الأسئلة المهنية والمشاريع مع معارف مثل {ritzi}.",
     "about.community": "توليت عدة أدوار للإشراف في خوادم كبيرة واكتسبت خبرة في دعم المجتمعات. أهتم كثيراً بتطورات Web3 ومشاريع العملات الرقمية واكتسبت فيها خبرة عملية.",
     "about.cv": "السيرة الذاتية",
     "about.certificates": "الشهادات",
@@ -97,7 +97,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "تحديث المحتوى وتحسين الوظائف وفق نطاق دعم متفق عليه."
   },
   "zh": {
-    "about.world": "我的个人联系遍布世界，延伸至东南亚。我与 {ritzi} (Koh Tao) 等联系人交流专业问题和项目。",
+    "about.world": "我的个人联系遍布世界，延伸至东南亚。我与 {ritzi} 等联系人交流专业问题和项目。",
     "about.community": "我曾在大型服务器中担任多个管理员角色，积累了社区管理经验。我对 Web3 发展和加密货币项目很感兴趣，并在这一领域获得了实践经验。",
     "about.cv": "简历",
     "about.certificates": "证书",
@@ -116,7 +116,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "按约定范围更新内容、改进功能并规划下一步。"
   },
   "fr": {
-    "about.world": "Mes contacts personnels s’étendent dans le monde entier, jusqu’en Asie du Sud-Est. J’échange sur des questions professionnelles et des projets avec des contacts comme {ritzi} (Koh Tao).",
+    "about.world": "Mes contacts personnels s’étendent dans le monde entier, jusqu’en Asie du Sud-Est. J’échange sur des questions professionnelles et des projets avec des contacts comme {ritzi}.",
     "about.community": "J’ai occupé plusieurs rôles de modérateur sur de grands serveurs et acquis de l’expérience auprès des communautés. Je m’intéresse particulièrement au Web3 et aux projets crypto, domaines dans lesquels j’ai acquis une expérience pratique.",
     "about.cv": "CV",
     "about.certificates": "Diplômes",
@@ -135,7 +135,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Actualisation des contenus et amélioration des fonctions selon le périmètre convenu."
   },
   "es": {
-    "about.world": "Mis contactos personales abarcan todo el mundo, hasta el sudeste asiático. Intercambio ideas sobre cuestiones profesionales y proyectos con contactos como {ritzi} (Koh Tao).",
+    "about.world": "Mis contactos personales abarcan todo el mundo, hasta el sudeste asiático. Intercambio ideas sobre cuestiones profesionales y proyectos con contactos como {ritzi}.",
     "about.community": "He asumido varios roles de moderador en grandes servidores y adquirido experiencia apoyando comunidades. Me interesan especialmente los avances de Web3 y los proyectos de criptomonedas, donde he adquirido experiencia práctica.",
     "about.cv": "Currículum",
     "about.certificates": "Certificados",
@@ -154,7 +154,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Actualizar contenidos y mejorar funciones según el alcance acordado."
   },
   "it": {
-    "about.world": "I miei contatti personali si estendono in tutto il mondo, fino al Sud-est asiatico. Con contatti come {ritzi} (Koh Tao) mi confronto su questioni professionali e progetti.",
+    "about.world": "I miei contatti personali si estendono in tutto il mondo, fino al Sud-est asiatico. Con contatti come {ritzi} mi confronto su questioni professionali e progetti.",
     "about.community": "Ho ricoperto diversi ruoli di moderatore su grandi server, acquisendo esperienza nella gestione delle comunità. Mi interessano molto gli sviluppi Web3 e i progetti crypto, in cui ho maturato esperienza pratica.",
     "about.cv": "Curriculum",
     "about.certificates": "Certificati",
@@ -173,7 +173,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Aggiornamenti e miglioramenti delle funzioni secondo gli accordi."
   },
   "pt": {
-    "about.world": "Os meus contactos pessoais estendem-se por todo o mundo, até ao Sudeste Asiático. Troco ideias sobre questões profissionais e projetos com contactos como {ritzi} (Koh Tao).",
+    "about.world": "Os meus contactos pessoais estendem-se por todo o mundo, até ao Sudeste Asiático. Troco ideias sobre questões profissionais e projetos com contactos como {ritzi}.",
     "about.community": "Assumi vários cargos de moderador em grandes servidores, adquirindo experiência no apoio a comunidades. Interesso-me especialmente pelos desenvolvimentos Web3 e projetos de criptomoedas, nos quais adquiri experiência prática.",
     "about.cv": "Currículo",
     "about.certificates": "Certificados",
@@ -192,7 +192,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Atualizações de conteúdo e melhorias de funções conforme o âmbito acordado."
   },
   "el": {
-    "about.world": "Οι προσωπικές μου επαφές εκτείνονται σε όλο τον κόσμο, μέχρι τη Νοτιοανατολική Ασία. Με επαφές όπως το {ritzi} (Koh Tao) ανταλλάσσω απόψεις για επαγγελματικά ζητήματα και έργα.",
+    "about.world": "Οι προσωπικές μου επαφές εκτείνονται σε όλο τον κόσμο, μέχρι τη Νοτιοανατολική Ασία. Με επαφές όπως το {ritzi} ανταλλάσσω απόψεις για επαγγελματικά ζητήματα και έργα.",
     "about.community": "Ανέλαβα αρκετούς ρόλους συντονιστή σε μεγάλους διακομιστές και απέκτησα εμπειρία υποστήριξης κοινοτήτων. Ενδιαφέρομαι ιδιαίτερα για τις εξελίξεις Web3 και τα έργα κρυπτονομισμάτων, όπου έχω αποκτήσει πρακτική εμπειρία.",
     "about.cv": "Βιογραφικό",
     "about.certificates": "Πιστοποιητικά",
@@ -211,7 +211,7 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Ενημέρωση περιεχομένου και βελτίωση λειτουργιών σύμφωνα με τη συμφωνία."
   },
   "sq": {
-    "about.world": "Kontaktet e mia personale shtrihen në gjithë botën, deri në Azinë Juglindore. Me kontakte si {ritzi} (Koh Tao) shkëmbej mendime për pyetje profesionale dhe projekte.",
+    "about.world": "Kontaktet e mia personale shtrihen në gjithë botën, deri në Azinë Juglindore. Me kontakte si {ritzi} shkëmbej mendime për pyetje profesionale dhe projekte.",
     "about.community": "Kam marrë disa role moderatori në serverë të mëdhenj dhe kam fituar përvojë në mbështetjen e komuniteteve. Interesohem veçanërisht për zhvillimet Web3 dhe projektet kripto, ku kam fituar përvojë praktike.",
     "about.cv": "CV",
     "about.certificates": "Dëshmi",
