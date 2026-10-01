@@ -1,0 +1,194 @@
+/* The CMS has its own root layout; these styles never enter the public website. */
+.naser-admin {
+  --font-body: var(--naser-font-body, Inter), system-ui, sans-serif;
+  --font-serif: var(--naser-font-display, "Space Grotesk"), system-ui, sans-serif;
+  --theme-bg: #f5f5f7;
+  --theme-text: #202126;
+  --theme-input-bg: rgba(255, 255, 255, 0.86);
+  --theme-border-color: rgba(30, 32, 40, 0.13);
+  --style-radius-s: 8px;
+  --style-radius-m: 14px;
+  --style-radius-l: 20px;
+  --ns-glass: rgba(255, 255, 255, 0.72);
+  --ns-glass-solid: #fff;
+  --ns-muted: #60616b;
+  --ns-shadow: 0 12px 36px -24px rgba(20, 22, 30, 0.28);
+  --ns-focus: #535663;
+  --ns-button-bg: #202126;
+  --ns-button-text: #fff;
+  --ns-surface-hover: rgba(28, 30, 38, 0.045);
+  --ns-field-shadow: inset 0 1px 2px rgba(20, 22, 30, 0.025);
+}
+
+.naser-admin[data-theme="dark"] {
+  --theme-bg: #0d0e11;
+  --theme-text: #f0f0f3;
+  --theme-input-bg: rgba(25, 27, 33, 0.92);
+  --theme-border-color: rgba(255, 255, 255, 0.13);
+  --theme-elevation-0: #111216;
+  --theme-elevation-50: #191a20;
+  --theme-elevation-100: #23242c;
+  --theme-elevation-150: #30313a;
+  --ns-glass: rgba(24, 25, 31, 0.8);
+  --ns-glass-solid: #191a20;
+  --ns-muted: #a6a7b2;
+  --ns-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.75);
+  --ns-focus: #c6c9d7;
+  --ns-button-bg: #ececf0;
+  --ns-button-text: #16171d;
+  --ns-surface-hover: rgba(255, 255, 255, 0.045);
+  --ns-field-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.naser-admin body {
+  background: radial-gradient(ellipse at 85% 0%, rgba(132, 137, 155, 0.09), transparent 52%), var(--theme-bg);
+  font-family: var(--font-body);
+}
+
+.naser-admin :is(h1, h2, h3, .ns-admin-brand__name) {
+  font-family: var(--font-serif);
+  letter-spacing: -0.035em;
+}
+
+.naser-admin .app-header {
+  background: var(--ns-glass);
+  border-bottom: 1px solid var(--theme-border-color);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.naser-admin .nav {
+  background: var(--ns-glass);
+  border-inline-end: 1px solid var(--theme-border-color);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.naser-admin .nav__link {
+  border-radius: 9px;
+  transition: background-color 150ms ease;
+}
+
+.naser-admin .nav__link:hover { background: var(--ns-surface-hover); }
+.naser-admin .nav__link--active { font-weight: 650; background: var(--ns-surface-hover); }
+.naser-admin .nav-group__label { color: var(--ns-muted); }
+
+.naser-admin .dashboard { padding-top: 28px; padding-bottom: 48px; }
+.naser-admin .dashboard__group { margin-bottom: 28px; }
+.naser-admin .dashboard__group h2 { font-size: 21px; font-weight: 600; margin-bottom: 16px; }
+
+.naser-admin .card {
+  min-height: 96px;
+  padding: 22px;
+  border-radius: 18px;
+  background: var(--ns-glass);
+  border-color: var(--theme-border-color);
+  box-shadow: var(--ns-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.naser-admin .card:hover {
+  background: var(--ns-glass-solid);
+  border-color: var(--theme-elevation-300);
+  box-shadow: var(--ns-shadow);
+}
+
+.naser-admin .card__title { font-size: 15px; font-weight: 600; line-height: 1.45; }
+.naser-admin .card__actions .btn__icon { width: 28px; height: 28px; background: var(--ns-glass); }
+
+.naser-admin .btn { border-radius: 10px; }
+.naser-admin .btn--style-primary:not(:disabled) {
+  background: var(--ns-button-bg);
+  color: var(--ns-button-text);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 12px -7px rgba(0, 0, 0, 0.3);
+}
+.naser-admin .btn--style-primary:not(:disabled):hover { opacity: 0.9; }
+.naser-admin .btn--style-secondary { background: var(--ns-glass); border-color: var(--theme-border-color); }
+
+.naser-admin :is(.field-type.text input, .field-type.email input, .field-type.password input,
+  .field-type.number input, .field-type.textarea textarea, .search-filter input, .rs__control) {
+  border-radius: 10px;
+  box-shadow: var(--ns-field-shadow);
+}
+.naser-admin :is(.array-field__row, .blocks-field__row, .collapsible, .upload, .relationship-table) {
+  border-radius: 14px;
+}
+.naser-admin :is(.document-controls, .list-controls) {
+  background: var(--ns-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.naser-admin .table { border-radius: 14px; }
+.naser-admin .table tbody tr:hover { background: var(--ns-surface-hover); }
+.naser-admin :is(.popup__content, .rs__menu) {
+  border-radius: 12px;
+  background: var(--ns-glass-solid);
+  box-shadow: var(--ns-shadow);
+}
+
+.naser-admin :is(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--ns-focus);
+  outline-offset: 3px;
+}
+
+.ns-admin-mark { width: 28px; height: 28px; overflow: hidden; display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; }
+.ns-admin-mark img { width: 56px; height: 56px; max-width: none; flex-shrink: 0; transform: translateY(14%); }
+.naser-admin[data-theme="dark"] .ns-admin-mark img { filter: invert(1); }
+.ns-admin-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--theme-text); }
+.ns-admin-brand__name { display: block; font-size: 18px; font-weight: 650; line-height: 1.2; }
+.ns-admin-brand__label { display: block; margin-top: 5px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ns-muted); }
+.ns-admin-brand--nav { margin: 0 0 30px; }
+.ns-admin-brand--login { justify-content: center; margin: 0 auto 16px; }
+.ns-admin-brand--login .ns-admin-mark { width: 52px; height: 52px; }
+.ns-admin-brand--login .ns-admin-mark img { width: 104px; height: 104px; }
+.ns-admin-brand--login .ns-admin-brand__name { font-size: 29px; }
+
+.ns-admin-welcome {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-bottom: 36px;
+  padding: clamp(26px, 4vw, 46px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  color: #f6f6f8;
+  background: radial-gradient(ellipse at 100% 0%, rgba(157, 161, 180, 0.2), transparent 60%), linear-gradient(125deg, #16171c, #262831);
+  box-shadow: 0 18px 42px -24px rgba(15, 17, 25, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+.ns-admin-welcome__content { position: relative; z-index: 1; max-width: 70%; }
+.ns-admin-welcome__eyebrow { margin: 0 0 16px; color: #c2c4ce; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.ns-admin-welcome h1 { font-size: clamp(27px, 3.5vw, 43px); font-weight: 500; line-height: 1.1; margin: 0 0 16px; }
+.ns-admin-welcome__description { margin: 0; max-width: 46ch; color: #c6c8d3; line-height: 1.65; font-size: 14px; }
+.ns-admin-welcome__link { display: inline-flex; align-items: center; gap: 20px; min-height: 42px; margin-top: 25px; padding: 10px 18px; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: #fff; background: rgba(255,255,255,0.08); text-decoration: none; font-weight: 500; font-size: 12px; transition: background-color 150ms ease; }
+.ns-admin-welcome__link:hover { background: rgba(255,255,255,0.16); }
+.ns-admin-welcome__link:focus-visible { outline-color: #fff; }
+.ns-admin-welcome__logo { position: absolute; inset-inline-end: 4%; top: 50%; transform: translateY(-50%); width: 23%; aspect-ratio: 1; opacity: 0.18; pointer-events: none; }
+.ns-admin-welcome__logo .ns-admin-mark { width: 100%; height: 100%; }
+.ns-admin-welcome__logo .ns-admin-mark img { width: 200%; height: 200%; filter: invert(1); }
+.ns-admin-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+.naser-admin .login__form { padding: 28px; border: 1px solid var(--theme-border-color); border-radius: 20px; background: var(--ns-glass); box-shadow: var(--ns-shadow); }
+
+@media (max-width: 767px) {
+  .naser-admin .dashboard { padding-top: 20px; }
+  .naser-admin .dashboard__group h2 { font-size: 19px; }
+  .naser-admin .card { min-height: 80px; padding: 18px; }
+  .ns-admin-welcome { border-radius: 18px; margin-bottom: 28px; }
+  .ns-admin-welcome__content { max-width: 100%; }
+  .ns-admin-welcome__logo { display: none; }
+  .ns-admin-brand--login .ns-admin-brand__name { font-size: 24px; }
+  .naser-admin .login__form { padding: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .naser-admin *, .naser-admin *::before, .naser-admin *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
+}
+@media (forced-colors: active) {
+  .ns-admin-welcome { background: Canvas; color: CanvasText; border-color: CanvasText; }
+  .ns-admin-welcome :is(p, a) { color: CanvasText; }
+  .ns-admin-welcome__logo { display: none; }
+  .ns-admin-welcome__link { border-color: ButtonText; }
+}
