@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "next build",
+    "build": "payload run scripts/migrate-client-portal.ts && next build",
     "dev": "next dev",
     "lint": "eslint .",
     "test": "node --import tsx --test tests/*.test.ts",
