@@ -1,5 +1,5 @@
-import { getPayload } from 'payload'
-import * as clientPortal from '../migrations/20260818_113300_add_client_portal'
+import { Pool } from 'pg'
+import { clientPortalSchemaSQL } from '../cms/client-portal-schema'
 
 async function migrate() {
   if (process.env.VERCEL_ENV !== 'production') {
@@ -7,15 +7,35 @@ async function migrate() {
     return
   }
 
-  const { default: config } = await import('../payload.config')
-  const payload = await getPayload({ config })
-  await payload.db.migrate({
-    migrations: [{
-      name: '20260818_113300_add_client_portal',
-      up: (args) => clientPortal.up(args as Parameters<typeof clientPortal.up>[0]),
-      down: (args) => clientPortal.down(args as Parameters<typeof clientPortal.down>[0]),
-    }],
-  })
+  if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is required.')
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL, connectionTimeoutMillis: 15000, max: 1 })
+  const connection = await pool.connect()
+  try {
+    await connection.query('BEGIN')
+    await connection.query("SET LOCAL lock_timeout = '10s'; SET LOCAL statement_timeout = '20s'")
+    await connection.query("SELECT pg_advisory_xact_lock(hashtext('naser-client-portal-schema'))")
+    await connection.query(clientPortalSchemaSQL)
+    const columns = await connection.query<{ column_name: string }>(
+      "SELECT column_name FROM information_schema.columns WHERE table_schema = 'payload' AND table_name = 'client_projects'",
+    )
+    const required = ['id', 'name', 'domain', 'client_id', 'status', 'notes', 'client_feedback', 'updated_at', 'created_at']
+    if (required.some(name => !columns.rows.some(column => column.column_name === name))) {
+      throw new Error('The existing client_projects table has an incompatible schema.')
+    }
+    await connection.query(`
+      INSERT INTO "payload"."payload_migrations" ("name", "batch")
+      SELECT $1, COALESCE(MAX("batch") FILTER (WHERE "batch" > 0), 0) + 1
+      FROM "payload"."payload_migrations"
+      HAVING NOT EXISTS (SELECT 1 FROM "payload"."payload_migrations" WHERE "name" = $1)
+    `, ['20260818_113300_add_client_portal'])
+    await connection.query('COMMIT')
+  } catch (error) {
+    await connection.query('ROLLBACK')
+    throw error
+  } finally {
+    connection.release()
+    await pool.end()
+  }
   console.info('Client portal database migration completed.')
 }
 
