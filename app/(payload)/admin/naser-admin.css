@@ -173,6 +173,14 @@
 .naser-admin .login__form { padding: 28px; border: 1px solid var(--theme-border-color); border-radius: 20px; background: var(--ns-glass); box-shadow: var(--ns-shadow); }
 
 @media (max-width: 767px) {
+  .naser-admin .app-header__step-nav-wrapper { flex: 1 1 0%; min-width: 0; }
+  .naser-admin .app-header__step-nav { width: 100%; min-width: 0; }
+  .naser-admin .step-nav__last { min-width: 0; }
+  .naser-admin .app-header__localizer-spacing { flex-shrink: 0; }
+  .naser-admin .app-header .ns-admin-mark { width: 16px; height: 16px; }
+  .naser-admin .app-header .ns-admin-mark img { width: 32px; height: 32px; }
+  .naser-admin .doc-controls__meta { min-width: 0; flex-wrap: wrap; gap: 6px 16px; }
+  .naser-admin .doc-controls__list-item { max-width: 100%; }
   .naser-admin .dashboard { padding-top: 20px; }
   .naser-admin .dashboard__group h2 { font-size: 19px; }
   .naser-admin .card { min-height: 80px; padding: 18px; }
