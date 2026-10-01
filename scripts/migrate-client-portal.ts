@@ -24,9 +24,9 @@ async function migrate() {
     }
     await connection.query(`
       INSERT INTO "payload"."payload_migrations" ("name", "batch")
-      SELECT $1, COALESCE(MAX("batch") FILTER (WHERE "batch" > 0), 0) + 1
+      SELECT $1::varchar, COALESCE(MAX("batch") FILTER (WHERE "batch" > 0), 0) + 1
       FROM "payload"."payload_migrations"
-      HAVING NOT EXISTS (SELECT 1 FROM "payload"."payload_migrations" WHERE "name" = $1)
+      HAVING NOT EXISTS (SELECT 1 FROM "payload"."payload_migrations" WHERE "name" = $1::varchar)
     `, ['20260818_113300_add_client_portal'])
     await connection.query('COMMIT')
   } catch (error) {
