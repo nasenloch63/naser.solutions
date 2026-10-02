@@ -83,18 +83,18 @@ export function AboutSection() {
             </div>
           </div>
           <div className="relative lg:sticky lg:top-28">
-            <div className="relative aspect-square">
-              <div className="relative aspect-square overflow-hidden">
+            <div className="rounded-2xl border border-border bg-card p-3 shadow-lg">
+              <div className="relative aspect-[532/709] overflow-hidden rounded-xl">
                 <Image
-                  src="/images/whatsapp-20bild-202025-12-12-20um-2022.jpg"
+                  src="/images/yasin-adam-aissani-2026.jpg"
                   alt="Yasin Adam Aissani, Naser Solutions"
                   fill
                   sizes="(min-width: 1024px) 45vw, 90vw"
-                  className="object-cover dark:[clip-path:circle(47%_at_50%_50%)]"
+                  className="object-contain"
                 />
               </div>
             </div>
-            <div className="relative -mt-10 mx-4 bg-background dark:bg-card p-5 rounded-lg shadow-lg border border-border">
+            <div className="relative mt-4 bg-background dark:bg-card p-5 rounded-lg shadow-lg border border-border">
               <p className="font-semibold text-foreground text-lg">Yasin Adam Aissani</p>
               <p className="text-muted-foreground">{t("about.role")}</p>
             </div>
