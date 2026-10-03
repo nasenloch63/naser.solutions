@@ -8,6 +8,7 @@ import { PageRenderer } from '@/components/cms/page-renderer'
 import { SectionPage } from '@/components/section-page'
 import { isSectionSlug } from '@/lib/section-pages'
 import { getPageBySlug, getProjects } from '@/lib/cms'
+import { paymentServicesCopy } from '@/lib/payment-services-copy'
 import {
   BUSINESS_EMAIL,
   BUSINESS_PHONE,
@@ -55,6 +56,8 @@ export default async function CMSPage({ params }: Props) {
     ['SEO & Performance', 'Technische und inhaltliche Suchmaschinenoptimierung für bessere Auffindbarkeit und schnelle Ladezeiten.'],
     ['Social Media & Ads', 'Strategie, Inhalte und Kampagnen für Social-Media-Plattformen und digitale Anzeigen.'],
     ['Grafikdesign & Branding', 'Markenidentitäten und visuelle Systeme für konsistente digitale Auftritte.'],
+    [paymentServicesCopy.de['services.cryptoPayments.title'], paymentServicesCopy.de['services.cryptoPayments.description']],
+    [paymentServicesCopy.de['services.sumup.title'], paymentServicesCopy.de['services.sumup.description']],
   ]
   const graph: Record<string, unknown>[] = [
     {

@@ -5,6 +5,7 @@ import { profileCopy } from "@/lib/profile-copy"
 import { createContext, useContext, useRef, useState, useEffect, type ReactNode } from "react"
 import { siteCopy } from "@/lib/site-copy"
 import { uiCopy } from "@/lib/ui-copy"
+import { paymentServiceTranslation } from "@/lib/payment-services-copy"
 
 import { LANGUAGE_OVERRIDE_KEY, resolveLanguage, type Language } from "@/lib/language"
 export type { Language } from "@/lib/language"
@@ -320,10 +321,7 @@ const translations = {
     "privacy.changes.title": "10. Änderungen dieser Datenschutzerklärung",
     "privacy.changes.text":
       "Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen, um sie an geänderte Rechtslagen oder bei Änderungen unserer Dienste anzupassen. Es gilt die jeweils aktuelle auf unserer Website veröffentlichte Fassung.",
-    "privacy.backHome": "Zurück zur Startseite",
-
-    // Payment Page
-  },
+    "privacy.backHome": "Zurück zur Startseite",  },
   pt: {
     // Navbar
     "nav.services": "Serviços",
@@ -434,10 +432,7 @@ const translations = {
     "footer.rights": "Todos os direitos reservados.",
 
     // Modal
-    "modal.backToSite": "Voltar ao site",
-
-    // Payment Page
-  },
+    "modal.backToSite": "Voltar ao site",  },
   en: {
     // Navbar
     "nav.services": "Services",
@@ -717,10 +712,7 @@ const translations = {
     "privacy.changes.title": "10. Changes to this Privacy Policy",
     "privacy.changes.text":
       "We reserve the right to adapt this privacy policy as needed to adapt to changed legal situations or changes in our services. The current version published on our website always applies.",
-    "privacy.backHome": "Back to homepage",
-
-    // Payment Page
-  },
+    "privacy.backHome": "Back to homepage",  },
   fr: {
     // Navbar
     "nav.services": "Services",
@@ -941,10 +933,7 @@ const translations = {
     "privacy.security.text": "Nous utilisons le cryptage SSL/TLS pour la transmission sécurisée des données.",
     "privacy.changes.title": "10. Modifications de cette politique",
     "privacy.changes.text": "Nous nous réservons le droit d'adapter cette politique de confidentialité si nécessaire.",
-    "privacy.backHome": "Retour à l'accueil",
-
-    // Payment Page
-  },
+    "privacy.backHome": "Retour à l'accueil",  },
   ar: {
     // Navbar
     "nav.services": "الخدمات",
@@ -1146,10 +1135,7 @@ const translations = {
     "privacy.security.text": "نستخدم تشفير SSL/TLS لنقل البيانات بشكل آمن.",
     "privacy.changes.title": "10. التغييرات على هذه السياسة",
     "privacy.changes.text": "نحتفظ بالحق في تعديل سياسة الخصو��ية هذه حسب الحاجة.",
-    "privacy.backHome": "العودة للصفحة الرئيسية",
-
-    // Payment Page
-  },
+    "privacy.backHome": "العودة للصفحة الرئيسية",  },
   tr: {
     // Navbar
     "nav.services": "Hizmetler",
@@ -1356,10 +1342,7 @@ const translations = {
     "privacy.security.text": "Güvenli veri iletimi için SSL/TLS şifrelemesi kullanıyoruz.",
     "privacy.changes.title": "10. Bu Politikadaki Değişiklikler",
     "privacy.changes.text": "Bu gizlilik politikasını gerektiğinde uyarlama hakkımızı saklı tutarız.",
-    "privacy.backHome": "Ana sayfaya dön",
-
-    // Payment Page
-  },
+    "privacy.backHome": "Ana sayfaya dön",  },
   sq: {
     // Navbar
     "nav.services": "Shërbimet",
@@ -1565,10 +1548,7 @@ const translations = {
     "privacy.security.text": "Përdorim enkriptimin SSL/TLS për transmetimin e sigurt të të dhënave.",
     "privacy.changes.title": "10. Ndryshimet në Këtë Politikë",
     "privacy.changes.text": "Rezervojmë të drejtën të përshtatim këtë politikë privatësie sipas nevojës.",
-    "privacy.backHome": "Kthehu në faqen kryesore",
-
-    // Payment Page
-  },
+    "privacy.backHome": "Kthehu në faqen kryesore",  },
   ru: {
     // Navbar
     "nav.services": "Услуги",
@@ -1788,10 +1768,7 @@ const translations = {
     "privacy.security.text": "Мы используем SSL/TLS шифрование для безопасной ��ере��ачи данных.",
     "privacy.changes.title": "10. Изменения в политике конфиденциальности",
     "privacy.changes.text": "Мы оставляем за собой право изменять эту политику конфиденциальности при необходимости.",
-    "privacy.backHome": "Вернуться на главную",
-
-    // Payment Page
-  },
+    "privacy.backHome": "Вернуться на главную",  },
   es: {
     // Navbar
     "nav.services": "Servicios",
@@ -2008,10 +1985,7 @@ const translations = {
     "privacy.security.text": "Utilizamos cifrado SSL/TLS para la transmisión segura de datos.",
     "privacy.changes.title": "10. Cambios en esta política de privacidad",
     "privacy.changes.text": "Nos reservamos el derecho de adaptar esta política de privacidad según sea necesario.",
-    "privacy.backHome": "Volver al inicio",
-
-    // Payment
-  },
+    "privacy.backHome": "Volver al inicio",  },
   it: {
     // Navbar
     "nav.services": "Servizi",
@@ -2207,10 +2181,7 @@ const translations = {
     "privacy.security.text": "Utilizziamo la crittografia SSL/TLS per la trasmissione sicura dei dati.",
     "privacy.changes.title": "10. Modifiche a questa informativa",
     "privacy.changes.text": "Ci riserviamo il diritto di adattare questa informativa secondo necessità.",
-    "privacy.backHome": "Torna alla home",
-
-    // Payment
-  },
+    "privacy.backHome": "Torna alla home",  },
   el: {
   // Navbar
   "nav.services": "Υπηρεσίες",
@@ -2427,10 +2398,7 @@ const translations = {
     "privacy.security.text": "Χρησιμοποιούμε κρυπτογράφηση SSL/TLS για την ασφαλή μεταφορά δεδομένων.",
     "privacy.changes.title": "10. Αλλαγές σε αυτή την πολιτική",
     "privacy.changes.text": "Διατηρούμε το δικαίωμα να προσαρμόσουμε αυτή την πολιτική απορρήτου όπως απαιτείται.",
-    "privacy.backHome": "Επιστροφή στην αρχική",
-
-    // Payment
-  },
+    "privacy.backHome": "Επιστροφή στην αρχική",  },
 
   zh: {
     // Navbar
@@ -2608,7 +2576,7 @@ const translations = {
     "agb.section5.p1":
       "所有价格均为增值税。开具发票后14天内支付，不得扣除。对于较长期的项目，可以约定分期付款。",
     "agb.section5.p2":
-      "我们接受比特币（BTC）、Solana（SOL）、Monero（XMR）支付以及银行转账。逾期付款将按基准利率加9个百分点计算违约利息。",
+      "我们接受银行转账。逾期付款将按基准利率加9个百分点计算违约利息。",
     "agb.portfolio.title": "6. 使用权和作品集使用",
     "agb.portfolio.p1":
       "在完全支付报酬后，承包商向客户授予创建作品的合同约定使用权。除非另有约定，客户将获得简单的、在时间和空间上无限制的使用权。",
@@ -2745,14 +2713,11 @@ const translations = {
     "privacy.changes.title": "10. 本政策的变更",
     "privacy.changes.text":
       "我们保留根据需要调整本隐私政策的权利。",
-    "privacy.backHome": "返回首页",
-
-    // Payment
-  }
+    "privacy.backHome": "返回首页",  }
 }
 
 const translateGerman = (key: string): string =>
-  profileCopy.de[key] || (uiCopy.de as Record<string, string>)[key] || (siteCopy.de as Record<string, string>)[key] || (translations.de as Record<string, string>)[key] || key
+  paymentServiceTranslation('de', key) || profileCopy.de[key] || (uiCopy.de as Record<string, string>)[key] || (siteCopy.de as Record<string, string>)[key] || (translations.de as Record<string, string>)[key] || key
 
 const defaultContextValue: LanguageContextType = {
   language: "de",
@@ -2801,7 +2766,7 @@ export function LanguageProvider({ children, initialLanguage = "de" }: { childre
 
   const t = (key: string): string => {
     const currentTranslations = translations[language] as Record<string, string>
-    return profileCopy[language][key] || (uiCopy[language] as Record<string, string>)[key] || (siteCopy[language] as Record<string, string>)[key] || currentTranslations[key] || translateGerman(key)
+    return paymentServiceTranslation(language, key) || profileCopy[language][key] || (uiCopy[language] as Record<string, string>)[key] || (siteCopy[language] as Record<string, string>)[key] || currentTranslations[key] || translateGerman(key)
   }
 
   return (

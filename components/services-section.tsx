@@ -1,6 +1,6 @@
 "use client"
 
-import { Globe, TrendingUp, Palette, Workflow, Megaphone, Wrench } from "lucide-react"
+import { Globe, TrendingUp, Palette, Workflow, Megaphone, Wrench, Wallet, CreditCard } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
 
@@ -15,6 +15,8 @@ export function ServicesSection() {
     { icon: Megaphone, titleKey: "services.social.title", descriptionKey: "services.social.description" },
     { icon: Palette, titleKey: "services.design.title", descriptionKey: "services.design.description" },
     { icon: Wrench, titleKey: "services.care.title", descriptionKey: "services.care.description" },
+    { icon: Wallet, titleKey: "services.cryptoPayments.title", descriptionKey: "services.cryptoPayments.description" },
+    { icon: CreditCard, titleKey: "services.sumup.title", descriptionKey: "services.sumup.description" },
   ]
 
   return (
