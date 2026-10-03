@@ -1,12 +1,19 @@
 "use client"
 
-import { Globe, TrendingUp, Palette, Workflow, Megaphone, Wrench, Wallet, CreditCard } from "lucide-react"
+import { Globe, TrendingUp, Palette, Workflow, Megaphone, Wrench, Wallet, CreditCard, ReceiptText } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
+import { servicePricingCopy } from "@/lib/service-pricing-copy"
 
 export function ServicesSection() {
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
+  const pricing = servicePricingCopy[language]
+  const priceExamples = [
+    { title: pricing.entry, prefix: pricing.from, amount: "200–400 €" },
+    { title: pricing.integrations, prefix: pricing.upTo, amount: "2.000 €" },
+    { title: pricing.app, prefix: pricing.upTo, amount: "5.000 €" },
+  ]
 
   const services = [
     { icon: Globe, titleKey: "services.web.title", descriptionKey: "services.web.description" },
@@ -33,6 +40,27 @@ export function ServicesSection() {
             {t("services.title")}
           </h2>
           <p className="text-base sm:text-xl text-muted-foreground leading-relaxed">{t("services.description")}</p>
+        </div>
+
+        <div className="mb-10 sm:mb-16 rounded-2xl border border-primary/20 bg-background p-5 sm:p-8">
+          <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">{pricing.title}</h3>
+          <p className="mt-3 max-w-3xl text-base text-muted-foreground leading-relaxed">{pricing.description}</p>
+          <dl className="mt-6 grid gap-4 md:grid-cols-3">
+            {priceExamples.map((example) => (
+              <div key={example.title} className="min-w-0 rounded-xl bg-secondary/50 p-5">
+                <dt className="text-base font-medium text-foreground">{example.title}</dt>
+                <dd className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  <span className="text-sm text-muted-foreground">{example.prefix}</span>
+                  <span dir="ltr" className="text-3xl font-semibold tracking-tight text-foreground whitespace-nowrap">{example.amount}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 flex items-start gap-2 text-base font-medium text-foreground">
+            <ReceiptText className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+            {pricing.invoice}
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{pricing.note}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
