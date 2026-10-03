@@ -47,20 +47,20 @@ export function ContactForm() {
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="space-y-2 min-w-0">
             <Label htmlFor="contact-name">{t("contact.form.name")}</Label>
-            <Input id="contact-name" name="name" autoComplete="name" required maxLength={120} pattern=".*\S.*" placeholder={t("contact.form.namePlaceholder")} />
+            <Input id="contact-name" name="name" className="h-11 text-base md:text-base" autoComplete="name" enterKeyHint="next" required maxLength={120} pattern=".*\S.*" placeholder={t("contact.form.namePlaceholder")} />
           </div>
           <div className="space-y-2 min-w-0">
             <Label htmlFor="contact-email">{t("contact.form.email")}</Label>
-            <Input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} placeholder={t("contact.form.emailPlaceholder")} />
+            <Input id="contact-email" name="email" type="email" className="h-11 text-base md:text-base" autoComplete="email" autoCapitalize="none" spellCheck={false} enterKeyHint="next" required maxLength={254} placeholder={t("contact.form.emailPlaceholder")} />
           </div>
         </div>
         <div className="space-y-2">
           <Label htmlFor="contact-phone">{t("contact.form.phone")}</Label>
-          <Input id="contact-phone" name="phone" type="tel" autoComplete="tel" maxLength={60} placeholder={t("contact.form.phonePlaceholder")} />
+          <Input id="contact-phone" name="phone" type="tel" className="h-11 text-base md:text-base" autoComplete="tel" enterKeyHint="next" maxLength={60} placeholder={t("contact.form.phonePlaceholder")} />
         </div>
         <div className="space-y-2">
           <Label htmlFor="contact-message">{t("contact.form.message")}</Label>
-          <Textarea id="contact-message" name="message" required maxLength={5000} rows={3} className="min-h-24 resize-y" placeholder={t("contact.form.messagePlaceholder")} />
+          <Textarea id="contact-message" name="message" required maxLength={5000} rows={3} className="min-h-24 resize-y text-base md:text-base" placeholder={t("contact.form.messagePlaceholder")} />
         </div>
         <div hidden aria-hidden="true">
           <label htmlFor="contact-website">Website</label>

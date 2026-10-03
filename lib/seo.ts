@@ -1,14 +1,31 @@
 import type { Metadata } from 'next'
 import type { Page } from '@/payload-types'
 
-export const SITE_URL = 'https://www.naser.solutions'
+export const SITE_URL = 'https://www.naser-solutions.de'
 export const SITE_NAME = 'Naser Solutions'
 export const DEFAULT_TITLE = 'Naser Solutions | Webagentur für Webdesign in Kassel'
 export const DEFAULT_DESCRIPTION =
   'Webdesign, Webentwicklung und digitale Markenauftritte aus Kassel. Naser Solutions begleitet dein Unternehmen von der Website-Idee bis zur Umsetzung.'
-export const SOCIAL_IMAGE = `${SITE_URL}/og-image.jpg`
+export function socialImageUrl(path = '/') {
+  return `${SITE_URL}/og${path === '/' ? '' : path}?v=2`
+}
+export const SOCIAL_IMAGE = socialImageUrl()
 export const BUSINESS_EMAIL = 'info@naser-solutions.de'
 export const BUSINESS_PHONE = '+49 15560 729886'
+
+export const SHARE_PAGES: Record<string, { title: string; description: string; headline: string; label: string; noIndex?: boolean }> = {
+  '/': { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, headline: 'Webdesign. Entwicklung. Persönlich.', label: 'WEBAGENTUR · KASSEL' },
+  '/ueber-uns': { title: 'Über mich – Yasin Adam Aissani | Naser Solutions', description: 'Lerne Yasin Adam Aissani kennen: den Menschen hinter Naser Solutions, seinen Weg in die Webentwicklung und sein persönliches Netzwerk.', headline: 'Der Mensch hinter Naser Solutions.', label: 'YASIN ADAM AISSANI' },
+  '/leistungen': { title: 'Leistungen für deinen digitalen Auftritt | Naser Solutions', description: 'Webdesign, Webentwicklung, SEO, Branding und laufende Website-Betreuung aus Kassel – persönlich und auf dein Unternehmen abgestimmt.', headline: 'Dein digitaler Auftritt. Durchdacht umgesetzt.', label: 'UNSERE LEISTUNGEN' },
+  '/projekte': { title: 'Projekte & Referenzen | Naser Solutions', description: 'Entdecke Webdesign-Projekte, digitale Markenauftritte und Arbeiten von Naser Solutions.', headline: 'Ideen werden zu digitalen Erlebnissen.', label: 'PROJEKTE & REFERENZEN' },
+  '/kontakt': { title: 'Kontakt & Projektanfrage | Naser Solutions', description: 'Sprich mit Yasin Adam Aissani über deine Website-Idee. Persönlicher Kontakt zu Naser Solutions per E-Mail, Telefon oder WhatsApp.', headline: 'Lass uns über dein Projekt sprechen.', label: 'PERSÖNLICHER KONTAKT' },
+  '/CMS': { title: 'CMS & Kunden-Dashboard | Naser Solutions', description: 'Naser Solutions entwickelt ein CMS-Dashboard, mit dem Kunden kleine Website-Änderungen selbst vornehmen können. Einblicke in das Open-Source-Projekt.', headline: 'Deine Website. Selbst im Griff.', label: 'CMS & KUNDEN-DASHBOARD' },
+  '/links': { title: 'Links | Naser Solutions', description: 'Offizielle Links, Social-Media-Profile und Kontaktkanäle von Naser Solutions.', headline: 'Alle Links. Ein Kontakt.', label: 'NASER SOLUTIONS · LINKS', noIndex: true },
+  '/impressum': { title: 'Impressum | Naser Solutions', description: 'Anbieterkennzeichnung und Kontaktinformationen von Naser Solutions.', headline: 'Impressum & Kontaktinformationen.', label: 'RECHTLICHE INFORMATIONEN' },
+  '/datenschutz': { title: 'Datenschutz | Naser Solutions', description: 'Informationen zum Datenschutz bei Naser Solutions und zur Verarbeitung personenbezogener Daten.', headline: 'Deine Daten. Transparent erklärt.', label: 'DATENSCHUTZ' },
+  '/agb': { title: 'AGB | Naser Solutions', description: 'Allgemeine Geschäftsbedingungen für digitale Dienstleistungen von Naser Solutions.', headline: 'Klare Regeln für die Zusammenarbeit.', label: 'ALLGEMEINE GESCHÄFTSBEDINGUNGEN' },
+  '/portal': { title: 'Kundenportal | Naser Solutions', description: 'Geschützter Kundenbereich von Naser Solutions.', headline: 'Dein Projekt. Alles im Blick.', label: 'KUNDENPORTAL', noIndex: true },
+}
 
 export function absoluteUrl(path = '/') {
   if (/^https?:\/\//.test(path)) return path
@@ -24,16 +41,24 @@ export function buildMetadata({
   description,
   path = '/',
   noIndex = false,
-  image = SOCIAL_IMAGE,
+  image,
+  imageWidth = 1200,
+  imageHeight = 630,
+  imageAlt = title,
+  imageType = 'image/png',
 }: {
   title: string
   description: string
   path?: string
   noIndex?: boolean
   image?: string
+  imageWidth?: number
+  imageHeight?: number
+  imageAlt?: string
+  imageType?: string
 }): Metadata {
   const canonical = absoluteUrl(path)
-  const imageUrl = absoluteUrl(image)
+  const imageUrl = absoluteUrl(image || socialImageUrl(path))
 
   return {
     title: { absolute: title },
@@ -47,24 +72,33 @@ export function buildMetadata({
       url: canonical,
       title,
       description,
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: `${SITE_NAME} – Digitalagentur aus Kassel` }],
+      images: [{ url: imageUrl, secureUrl: imageUrl, width: imageWidth, height: imageHeight, alt: imageAlt, type: imageType }],
     },
-    twitter: { card: 'summary_large_image', title, description, images: [imageUrl] },
+    twitter: { card: 'summary_large_image', title, description, images: [{ url: imageUrl, alt: imageAlt }] },
   }
+}
+
+export function publicPageMetadata(path: string): Metadata {
+  const page = SHARE_PAGES[path]
+  return buildMetadata({ ...page, path })
 }
 
 export function metadataForPage(page: Page): Metadata {
   const isHome = page.slug === 'home'
   const title = isHome ? DEFAULT_TITLE : page.seo?.title || `${page.title} | ${SITE_NAME}`
   const description = isHome ? DEFAULT_DESCRIPTION : page.seo?.description || `${page.title}: Informationen und digitale Leistungen von Naser Solutions aus Kassel.`
-  const cmsImage = typeof page.seo?.image === 'object' ? page.seo.image?.url : null
+  const cmsImage = typeof page.seo?.image === 'object' ? page.seo.image : null
 
   return buildMetadata({
     title,
     description,
     path: pagePath(page.slug),
     noIndex: Boolean(page.seo?.noIndex),
-    image: cmsImage || SOCIAL_IMAGE,
+    image: cmsImage?.url || undefined,
+    imageWidth: cmsImage?.width || undefined,
+    imageHeight: cmsImage?.height || undefined,
+    imageAlt: cmsImage?.alt || title,
+    imageType: cmsImage?.mimeType || undefined,
   })
 }
 

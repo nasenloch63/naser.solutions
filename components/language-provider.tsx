@@ -2,11 +2,12 @@
 
 import { profileCopy } from "@/lib/profile-copy"
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
+import { createContext, useContext, useRef, useState, useEffect, type ReactNode } from "react"
 import { siteCopy } from "@/lib/site-copy"
 import { uiCopy } from "@/lib/ui-copy"
 
-export type Language = "de" | "en" | "fr" | "ar" | "tr" | "sq" | "ru" | "es" | "it" | "el" | "pt" | "zh"
+import { LANGUAGE_OVERRIDE_KEY, resolveLanguage, type Language } from "@/lib/language"
+export type { Language } from "@/lib/language"
 
 export const languages = [
   { code: "de" as const, name: "Deutsch", flag: "🇩🇪", dir: "ltr" as const },
@@ -2763,21 +2764,26 @@ const defaultContextValue: LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("de")
+export function LanguageProvider({ children, initialLanguage = "de" }: { children: ReactNode; initialLanguage?: Language }) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage)
   const [mounted, setMounted] = useState(false)
+  const preference = useRef<Language | null>(null)
 
   const currentLang = languages.find((l) => l.code === language) || languages[0]
   const dir = currentLang.dir
   const isRTL = dir === "rtl"
 
   useEffect(() => {
-    let stored: Language | null = null
-    try { stored = localStorage.getItem("language") as Language | null } catch {}
-    if (stored && languages.some((l) => l.code === stored)) {
-      setLanguageState(stored)
+    function syncLanguage() {
+      let stored: unknown = preference.current
+      try { stored = sessionStorage.getItem(LANGUAGE_OVERRIDE_KEY) } catch {}
+      setLanguageState(resolveLanguage([...navigator.languages, navigator.language], stored))
+      setMounted(true)
     }
-    setMounted(true)
+
+    syncLanguage()
+    window.addEventListener("languagechange", syncLanguage)
+    return () => window.removeEventListener("languagechange", syncLanguage)
   }, [])
 
   useEffect(() => {
@@ -2788,8 +2794,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [language, dir, mounted])
 
   const setLanguage = (lang: Language) => {
+    preference.current = lang
     setLanguageState(lang)
-    try { localStorage.setItem("language", lang) } catch {}
+    try { sessionStorage.setItem(LANGUAGE_OVERRIDE_KEY, lang) } catch {}
   }
 
   const t = (key: string): string => {

@@ -1,14 +1,13 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import '../globals.css'
+import { publicPageMetadata } from '@/lib/seo'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' })
 
 export const metadata: Metadata = {
-  title: 'Kundenportal | Naser Solutions',
-  description: 'Geschützter Kundenbereich von Naser Solutions.',
-  robots: { index: false, follow: false },
+  ...publicPageMetadata('/portal'),
   icons: { icon: '/favicon.png', apple: '/favicon.png' },
 }
 

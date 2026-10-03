@@ -3,7 +3,8 @@ import { test, mock } from 'node:test'
 import { runInNewContext } from 'node:vm'
 import nodemailer, { type SendMailOptions } from 'nodemailer'
 import { POST } from '../app/api/contact/route'
-import { scheduledTheme, themeInitScript } from '../lib/theme'
+import { nextThemeBoundary, parseThemeOverride, scheduledTheme, themeInitScript } from '../lib/theme'
+import { deviceLanguage, requestLanguage, resolveLanguage, supportedLanguages } from '../lib/language'
 import { siteCopy } from '../lib/site-copy'
 import { profileCopy } from '../lib/profile-copy'
 
@@ -13,21 +14,69 @@ test('scheduled theme follows the local 10:00 and 18:00 boundaries', () => {
   }
 })
 
-test('before-paint theme respects saved choice and tolerates blocked storage', () => {
-  for (const hour of [9, 10, 17, 18]) {
-    for (const saved of [null, 'invalid', 'dark', 'light', 'blocked']) {
+test('before-paint theme uses local time, ignores legacy storage, and expires manual overrides', () => {
+  for (const [hour, minute, second] of [[9, 59, 59], [10, 0, 0], [17, 59, 59], [18, 0, 0], [0, 0, 0]]) {
+    const now = new Date(2026, 9, 3, hour, minute, second)
+    for (const saved of [null, 'invalid', 'dark', 'light', 'blocked', 'expired', 'invalid-theme']) {
+      const raw = saved === 'dark' || saved === 'light'
+        ? JSON.stringify({ theme: saved, expiresAt: nextThemeBoundary(now).getTime() })
+        : saved === 'expired' ? JSON.stringify({ theme: 'light', expiresAt: now.getTime() })
+        : saved === 'invalid-theme' ? JSON.stringify({ theme: 'invalid', expiresAt: now.getTime() + 1000 }) : saved
       let dark = false
       const style = { colorScheme: '' }
+      let chromeColor = ''
       runInNewContext(themeInitScript, {
-        Date: class { getHours() { return hour } },
-        localStorage: { getItem() { if (saved === 'blocked') throw new Error(); return saved } },
-        document: { documentElement: { style, classList: { toggle(_: string, value: boolean) { dark = value } } } },
+        Date: class extends Date { constructor() { super(now) } },
+        localStorage: { getItem() { throw new Error('Legacy preferences must not be read') } },
+        sessionStorage: { getItem(key: string) { assert.equal(key, 'themeOverride'); if (saved === 'blocked') throw new Error(); return raw } },
+        document: {
+          documentElement: { style, classList: { toggle(_: string, value: boolean) { dark = value } } },
+          querySelector() { return { setAttribute(_: string, value: string) { chromeColor = value } } },
+        },
       })
       const expected = saved === 'dark' || saved === 'light' ? saved : scheduledTheme(hour)
       assert.equal(dark, expected === 'dark')
       assert.equal(style.colorScheme, expected)
+      assert.equal(chromeColor, expected === 'dark' ? '#0a0a0a' : '#fcfcfc')
     }
   }
+})
+
+test('manual theme choices expire at the next local 10:00 or 18:00 boundary', () => {
+  for (const hour of [0, 9, 10, 17, 18, 23]) {
+    const now = new Date(2026, 9, 3, hour, 30)
+    const next = nextThemeBoundary(now)
+    assert.ok(next.getTime() > now.getTime())
+    assert.equal(next.getHours(), hour >= 10 && hour < 18 ? 18 : 10)
+    assert.equal(next.getDate(), hour >= 18 ? 4 : 3)
+    const raw = JSON.stringify({ theme: 'dark', expiresAt: next.getTime() })
+    assert.equal(parseThemeOverride(raw, now)?.theme, 'dark')
+    assert.equal(parseThemeOverride(raw, next), null)
+  }
+  for (const raw of [null, '{', '[]', '"dark"', '{"theme":"dark","expiresAt":"tomorrow"}']) {
+    assert.equal(parseThemeOverride(raw, new Date()), null)
+  }
+})
+
+test('default language follows device preference order and regional language tags', () => {
+  for (const language of supportedLanguages) {
+    assert.equal(deviceLanguage([`${language.toUpperCase()}-XX`]), language)
+  }
+  assert.equal(deviceLanguage(['de-DE', 'ar-SA']), 'de')
+  assert.equal(deviceLanguage(['en-US', 'de-DE']), 'en')
+  assert.equal(deviceLanguage(['nl-NL', 'fr-CH', 'de-DE']), 'fr')
+  assert.equal(deviceLanguage(['pt_BR']), 'pt')
+  assert.equal(deviceLanguage(['zh-Hant-TW']), 'zh')
+  assert.equal(deviceLanguage(['ja-JP']), 'de')
+  assert.equal(deviceLanguage([]), 'de')
+  assert.equal(resolveLanguage(['de-DE'], 'ar'), 'ar')
+  assert.equal(resolveLanguage(['en-US'], 'invalid'), 'en')
+  assert.equal(resolveLanguage(['de-DE'], null), 'de')
+  assert.equal(requestLanguage('de-DE,de;q=0.9,ar;q=0.8'), 'de')
+  assert.equal(requestLanguage('de;q=0.2,en-US;q=0.9'), 'en')
+  assert.equal(requestLanguage('ar;q=0,fr-CH;q=0.8'), 'fr')
+  assert.equal(requestLanguage('ja-JP,en;q=0.5'), 'en')
+  assert.equal(requestLanguage(null), 'de')
 })
 
 test('all twelve locales contain every updated copy key', () => {
