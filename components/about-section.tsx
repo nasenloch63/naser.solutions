@@ -83,7 +83,7 @@ export function AboutSection() {
               </Button>
             </div>
           </div>
-          <div className="relative lg:sticky lg:top-28">
+          <div className="relative">
             <div className="rounded-2xl border border-border bg-card p-3 shadow-lg">
               <div className="relative aspect-[532/709] overflow-hidden rounded-xl">
                 <Image
