@@ -66,7 +66,7 @@ export function StatsSection() {
 
   return (
     <section className="py-16 lg:py-24 border-t border-border overflow-hidden bg-secondary/20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={ref}
           className={`text-center mb-12 transition-all duration-700 ${
@@ -95,7 +95,7 @@ export function StatsSection() {
           <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
           {/* Scrolling Container */}
-          <div className="flex overflow-hidden">
+          <div className="flex overflow-hidden motion-reduce:overflow-x-auto overscroll-x-contain">
             <div className="flex animate-scroll-infinite gap-8 py-8">
               {[...tools, ...tools].map((tool, index) => (
                 <div

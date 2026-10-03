@@ -8,18 +8,19 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
 
 export function AboutSection() {
-  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.2 })
+  // The stacked mobile content can be much taller than the viewport.
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0 })
   const { t } = useLanguage()
 
   const [worldBefore, worldAfter] = t("about.world").split("{ritzi}")
   const benefitKeys = ["about.benefit1", "about.benefit2", "about.benefit3", "about.benefit4"]
 
   return (
-    <section id="ueber-uns" className="py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="ueber-uns" className="py-16 sm:py-24 lg:py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={ref}
-          className={`grid lg:grid-cols-[1.25fr_1fr] gap-12 lg:gap-16 items-start transition-all duration-1000 ${
+          className={`grid lg:grid-cols-[1.25fr_1fr] gap-8 sm:gap-12 lg:gap-16 items-start transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
           }`}
         >
@@ -68,18 +69,18 @@ export function AboutSection() {
               ))}
             </ul>
             <div className="flex flex-wrap gap-3">
-              <Link href="https://instagram.com/nasenloch638" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="gap-2 bg-transparent">
+              <Button asChild variant="outline" className="min-h-11 h-auto gap-2 bg-transparent">
+                <Link href="https://instagram.com/nasenloch638" target="_blank" rel="noopener noreferrer">
                   <Instagram className="h-5 w-5" />
                   @nasenloch638
-                </Button>
-              </Link>
-              <Link href="https://beacons.ai/yasinadamaissani" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="gap-2 bg-transparent">
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="min-h-11 h-auto gap-2 bg-transparent">
+                <Link href="https://beacons.ai/yasinadamaissani" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-5 w-5" />
                   Linktree
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
           <div className="relative lg:sticky lg:top-28">

@@ -133,6 +133,24 @@ section[id] {
   scroll-margin-top: 6rem;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-scroll-infinite {
+    animation: none !important;
+  }
+}
+
 /* Native glass arrow; editable fields retain their standard text cursor. */
 @media (hover: hover) and (pointer: fine) and (forced-colors: none) {
   html,

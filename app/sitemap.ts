@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getPublishedPages } from '@/lib/cms'
-import { absoluteUrl, pagePath } from '@/lib/seo'
+import { absoluteUrl, pagePath, SHARE_PAGES } from '@/lib/seo'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages = await getPublishedPages()
@@ -14,17 +14,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
 
   const cmsUrls = new Set(cmsEntries.map((entry) => entry.url))
-  const staticEntries: MetadataRoute.Sitemap = [
-    ['/CMS', 0.7],
-    ['/impressum', 0.3],
-    ['/datenschutz', 0.3],
-    ['/agb', 0.3],
-  ]
-    .filter(([path]) => !cmsUrls.has(absoluteUrl(String(path))))
-    .map(([path, priority]) => ({
-      url: absoluteUrl(String(path)),
+  const staticEntries: MetadataRoute.Sitemap = Object.entries(SHARE_PAGES)
+    .filter(([path, page]) => path !== '/' && !page.noIndex && !cmsUrls.has(absoluteUrl(path)))
+    .map(([path]) => ({
+      url: absoluteUrl(path),
       changeFrequency: 'yearly' as const,
-      priority: Number(priority),
+      priority: ['/impressum', '/datenschutz', '/agb'].includes(path) ? 0.3 : 0.7,
     }))
 
   return [...cmsEntries, ...staticEntries]

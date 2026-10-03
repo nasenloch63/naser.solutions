@@ -103,20 +103,29 @@ export function LanguageSwitcher() {
 
 // Compact version for mobile
 export function LanguageSwitcherCompact() {
-  const { language, setLanguage, t, isRTL } = useLanguage()
+  const { language, setLanguage, t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const currentLang = languages.find((l) => l.code === language) || languages[0]
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
+    function handleClickOutside(event: PointerEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false)
       }
     }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener("pointerdown", handleClickOutside)
+    document.addEventListener("keydown", handleEscape)
+    return () => {
+      document.removeEventListener("pointerdown", handleClickOutside)
+      document.removeEventListener("keydown", handleEscape)
+    }
   }, [])
 
   const handleSelect = (langCode: Language) => {
@@ -128,9 +137,10 @@ export function LanguageSwitcherCompact() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-secondary transition-colors border border-border"
+        className="flex min-h-11 items-center gap-1 px-2 rounded-lg hover:bg-secondary transition-colors border border-border"
         aria-label={t("language.select")}
         aria-expanded={isOpen}
+        aria-haspopup="listbox"
       >
         <LanguageFlag language={currentLang.code} />
         <ChevronDown className={`h-3 w-3 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`} />
@@ -139,15 +149,16 @@ export function LanguageSwitcherCompact() {
       {isOpen && (
         <div
           className={`absolute top-full mt-2 min-w-[160px] bg-popover border border-border rounded-lg shadow-lg overflow-hidden z-50`}
-          style={{ insetInlineEnd: isRTL ? "auto" : "0", insetInlineStart: isRTL ? "0" : "auto" }}
+          style={{ insetInlineEnd: 0 }}
           role="listbox"
+          aria-label={t("language.select")}
         >
-          <div className="max-h-[280px] overflow-y-auto">
+          <div className="max-h-[min(280px,calc(100dvh-7rem))] overflow-y-auto overscroll-contain">
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => handleSelect(lang.code)}
-                className={`w-full flex items-center gap-2 px-3 py-2 text-start hover:bg-secondary transition-colors ${
+                className={`w-full min-h-11 flex items-center gap-2 px-3 py-2 text-start hover:bg-secondary transition-colors ${
                   language === lang.code ? "bg-secondary" : ""
                 }`}
                 role="option"

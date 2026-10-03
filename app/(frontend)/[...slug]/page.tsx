@@ -5,6 +5,8 @@ import { Footer } from '@/components/footer'
 import { LegalModalProvider } from '@/components/legal-modal-provider'
 import { Navbar } from '@/components/navbar'
 import { PageRenderer } from '@/components/cms/page-renderer'
+import { SectionPage } from '@/components/section-page'
+import { isSectionSlug } from '@/lib/section-pages'
 import { getPageBySlug, getProjects } from '@/lib/cms'
 import {
   BUSINESS_EMAIL,
@@ -17,6 +19,7 @@ import {
   jsonLd,
   metadataForPage,
   pagePath,
+  publicPageMetadata,
   richTextToPlainText,
 } from '@/lib/seo'
 
@@ -28,7 +31,9 @@ function toSlug(parts?: string[]) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const page = await getPageBySlug(toSlug(slug))
+  const pageSlug = toSlug(slug)
+  if (isSectionSlug(pageSlug)) return publicPageMetadata(`/${pageSlug}`)
+  const page = await getPageBySlug(pageSlug)
   if (!page) return {}
 
   return metadataForPage(page)
@@ -36,7 +41,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CMSPage({ params }: Props) {
   const [{ slug }, draft] = await Promise.all([params, draftMode()])
-  const page = await getPageBySlug(toSlug(slug), draft.isEnabled)
+  const pageSlug = toSlug(slug)
+  if (isSectionSlug(pageSlug)) return <SectionPage slug={pageSlug} />
+  const page = await getPageBySlug(pageSlug, draft.isEnabled)
   if (!page) notFound()
 
   const projects = page.layout.some((block) => block.blockType === 'projects') ? await getProjects() : []

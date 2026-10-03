@@ -225,8 +225,8 @@ export function ProjectsSection() {
   ]
 
   return (
-    <section id="projekte" className="py-24 lg:py-32 bg-secondary/30">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="projekte" className="py-16 sm:py-24 lg:py-32 bg-secondary/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={ref}
           className={`max-w-3xl mb-12 transition-all duration-1000 ${
@@ -237,10 +237,10 @@ export function ProjectsSection() {
             <Clock className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-primary">{t("projects.badge")}</span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance">
             {t("projects.title")}
           </h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">{t("projects.description")}</p>
+          <p className="text-base sm:text-xl text-muted-foreground leading-relaxed">{t("projects.description")}</p>
         </div>
 
         {/* Filter and View Controls */}
@@ -254,7 +254,8 @@ export function ProjectsSection() {
               <button
                 key={category.value}
                 onClick={() => setSelectedCategory(category.value)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                aria-pressed={selectedCategory === category.value}
+                className={`min-h-11 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   selectedCategory === category.value
                     ? "bg-primary text-primary-foreground shadow-lg scale-105"
                     : "bg-background text-muted-foreground hover:bg-secondary hover:text-foreground"
@@ -268,7 +269,7 @@ export function ProjectsSection() {
           <div className="flex gap-2 bg-background rounded-lg p-1 border border-border">
             <button
               onClick={() => setViewMode("grid")}
-              className={`p-2 rounded transition-colors ${
+              className={`inline-flex size-11 items-center justify-center rounded transition-colors ${
                 viewMode === "grid"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
@@ -280,7 +281,7 @@ export function ProjectsSection() {
             </button>
             <button
               onClick={() => setViewMode("list")}
-              className={`p-2 rounded transition-colors ${
+              className={`inline-flex size-11 items-center justify-center rounded transition-colors ${
                 viewMode === "list"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
@@ -301,7 +302,7 @@ export function ProjectsSection() {
           {filteredProjects.length} {t(filteredProjects.length === 1 ? "ui.project" : "ui.projects")}
         </div>
 
-        <div className={`grid gap-8 ${viewMode === "grid" ? "md:grid-cols-2" : "grid-cols-1"}`}>
+        <div className={`grid gap-5 sm:gap-8 ${viewMode === "grid" ? "md:grid-cols-2" : "grid-cols-1"}`}>
           {filteredProjects.map((project, index) => (
             <a
               key={project.url}
@@ -326,7 +327,7 @@ export function ProjectsSection() {
               </div>
 
               {/* Content */}
-              <div className={`p-6 ${viewMode === "list" ? "sm:flex sm:items-center sm:gap-6" : ""}`}>
+              <div className={`p-5 sm:p-6 ${viewMode === "list" ? "sm:flex sm:items-center sm:gap-6" : ""}`}>
                 <div className="flex-1">
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag) => (

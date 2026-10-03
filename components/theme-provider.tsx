@@ -2,7 +2,7 @@
 
 import type * as React from "react"
 import { createContext, useContext, useEffect, useRef, useState } from "react"
-import { scheduledTheme, type Theme } from "@/lib/theme"
+import { applyTheme, nextThemeBoundary, parseThemeOverride, scheduledTheme, THEME_OVERRIDE_KEY, type Theme, type ThemeOverride } from "@/lib/theme"
 
 interface ThemeContextType {
   theme: Theme
@@ -16,37 +16,40 @@ const ThemeContext = createContext<ThemeContextType>({
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light")
-  const preference = useRef<Theme | null>(null)
+  const preference = useRef<ThemeOverride | null>(null)
 
   useEffect(() => {
+    let timeout: number
     function syncTheme() {
+      const now = new Date()
       try {
-        const saved = localStorage.getItem("theme")
-        preference.current = saved === "light" || saved === "dark" ? saved : null
+        preference.current = parseThemeOverride(sessionStorage.getItem(THEME_OVERRIDE_KEY), now)
       } catch {}
-      const next = preference.current ?? scheduledTheme(new Date().getHours())
+      if (preference.current && preference.current.expiresAt <= now.getTime()) preference.current = null
+      const next = preference.current?.theme ?? scheduledTheme(now.getHours())
       setTheme(next)
-      document.documentElement.classList.toggle("dark", next === "dark")
-      document.documentElement.style.colorScheme = next
+      applyTheme(next)
+      window.clearTimeout(timeout)
+      const boundary = Math.min(nextThemeBoundary(now).getTime(), preference.current?.expiresAt ?? Infinity)
+      timeout = window.setTimeout(syncTheme, boundary - now.getTime())
     }
     syncTheme()
-    const interval = window.setInterval(syncTheme, 1000)
-    window.addEventListener("storage", syncTheme)
+    window.addEventListener("focus", syncTheme)
     document.addEventListener("visibilitychange", syncTheme)
     return () => {
-      window.clearInterval(interval)
-      window.removeEventListener("storage", syncTheme)
+      window.clearTimeout(timeout)
+      window.removeEventListener("focus", syncTheme)
       document.removeEventListener("visibilitychange", syncTheme)
     }
   }, [])
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light"
+    const override: ThemeOverride = { theme: newTheme, expiresAt: nextThemeBoundary(new Date()).getTime() }
     setTheme(newTheme)
-    preference.current = newTheme
-    try { localStorage.setItem("theme", newTheme) } catch {}
-    document.documentElement.classList.toggle("dark", newTheme === "dark")
-    document.documentElement.style.colorScheme = newTheme
+    preference.current = override
+    try { sessionStorage.setItem(THEME_OVERRIDE_KEY, JSON.stringify(override)) } catch {}
+    applyTheme(newTheme)
   }
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>

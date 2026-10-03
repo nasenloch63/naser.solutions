@@ -1,11 +1,7 @@
 import type { ReactNode } from 'react'
-import { buildMetadata } from '@/lib/seo'
+import { publicPageMetadata } from '@/lib/seo'
 
-export const metadata = buildMetadata({
-  title: 'AGB | Naser Solutions',
-  description: 'Allgemeine Geschäftsbedingungen für digitale Dienstleistungen von Naser Solutions.',
-  path: '/agb',
-})
+export const metadata = publicPageMetadata('/agb')
 
 export default function AgbLayout({ children }: { children: ReactNode }) {
   return children
