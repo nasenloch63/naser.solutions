@@ -7,7 +7,7 @@ const nextConfig = {
   },
   outputFileTracingIncludes: {
     '/og/**': [
-      './public/images/inverted-20logo-20png.png',
+      './public/images/logo-invertable.png',
       './public/images/yasin-adam-aissani-2026.jpg',
       './node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf',
     ],

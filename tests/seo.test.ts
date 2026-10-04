@@ -4,7 +4,7 @@ import type { Page } from '../payload-types'
 import { buildMetadata, metadataForPage, publicPageMetadata, SHARE_PAGES, SITE_URL, socialImageUrl } from '../lib/seo'
 import { isSectionSlug, sectionSlugs } from '../lib/section-pages'
 
-test('every shareable page has matching canonical, OG and Twitter metadata and its own image', () => {
+test('shareable pages use the original logo preview, with a separate portrait preview for about', () => {
   const images = new Set<string>()
   for (const [path, page] of Object.entries(SHARE_PAGES)) {
     const metadata = publicPageMetadata(path)
@@ -25,11 +25,14 @@ test('every shareable page has matching canonical, OG and Twitter metadata and i
     assert.equal(twitter.images[0].alt, page.title)
     images.add(og.images[0].url)
   }
-  assert.equal(images.size, Object.keys(SHARE_PAGES).length)
+  assert.equal(images.size, 2)
+  assert.notEqual(socialImageUrl('/ueber-uns'), socialImageUrl('/'))
+  assert.equal(socialImageUrl('/leistungen'), socialImageUrl('/'))
+  assert.ok(socialImageUrl('/').endsWith('?v=3'))
   assert.equal(SITE_URL, 'https://www.naser-solutions.de')
 })
 
-test('CMS pages receive their own preview and preserve uploaded images and no-index settings', () => {
+test('CMS pages use the brand preview even with an uploaded SEO image and preserve no-index settings', () => {
   const page: Page = { id: 1, title: 'Beispielprojekt', slug: 'projekte/beispiel', layout: [], createdAt: '2026-10-03', updatedAt: '2026-10-03' }
   const defaultMetadata = metadataForPage(page)
   assert.equal((defaultMetadata.openGraph as { images: { url: string }[] }).images[0].url, socialImageUrl('/projekte/beispiel'))
@@ -39,11 +42,11 @@ test('CMS pages receive their own preview and preserve uploaded images and no-in
   }
   const metadata = metadataForPage(page)
   const image = (metadata.openGraph as { images: { url: string; width: number; height: number; alt: string; type: string }[] }).images[0]
-  assert.equal(image.url, `${SITE_URL}/uploads/custom.jpg`)
-  assert.equal(image.width, 1600)
-  assert.equal(image.height, 900)
-  assert.equal(image.alt, 'Projektvorschau')
-  assert.equal(image.type, 'image/jpeg')
+  assert.equal(image.url, socialImageUrl('/'))
+  assert.equal(image.width, 1200)
+  assert.equal(image.height, 630)
+  assert.equal(image.alt, 'Individueller Titel')
+  assert.equal(image.type, 'image/png')
   assert.equal((metadata.robots as { index: boolean }).index, false)
 })
 

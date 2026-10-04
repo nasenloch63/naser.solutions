@@ -7,7 +7,7 @@ export const DEFAULT_TITLE = 'Naser Solutions | Webagentur für Webdesign in Kas
 export const DEFAULT_DESCRIPTION =
   'Webdesign, Webentwicklung und digitale Markenauftritte aus Kassel. Naser Solutions begleitet dein Unternehmen von der Website-Idee bis zur Umsetzung.'
 export function socialImageUrl(path = '/') {
-  return `${SITE_URL}/og${path === '/' ? '' : path}?v=2`
+  return `${SITE_URL}/og${path === '/ueber-uns' ? '/ueber-uns' : ''}?v=3`
 }
 export const SOCIAL_IMAGE = socialImageUrl()
 export const BUSINESS_EMAIL = 'info@naser-solutions.de'
@@ -87,18 +87,11 @@ export function metadataForPage(page: Page): Metadata {
   const isHome = page.slug === 'home'
   const title = isHome ? DEFAULT_TITLE : page.seo?.title || `${page.title} | ${SITE_NAME}`
   const description = isHome ? DEFAULT_DESCRIPTION : page.seo?.description || `${page.title}: Informationen und digitale Leistungen von Naser Solutions aus Kassel.`
-  const cmsImage = typeof page.seo?.image === 'object' ? page.seo.image : null
-
   return buildMetadata({
     title,
     description,
     path: pagePath(page.slug),
     noIndex: Boolean(page.seo?.noIndex),
-    image: cmsImage?.url || undefined,
-    imageWidth: cmsImage?.width || undefined,
-    imageHeight: cmsImage?.height || undefined,
-    imageAlt: cmsImage?.alt || title,
-    imageType: cmsImage?.mimeType || undefined,
   })
 }
 
