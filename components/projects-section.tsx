@@ -6,13 +6,16 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
 import { ExternalLink, ArrowUpRight, Clock, Grid3x3, List, Filter, Globe, Play, Instagram } from "lucide-react"
 import { cmsProjectCopy } from "@/lib/cms-project-copy"
+import { hazeChillProjectCopy } from "@/lib/haze-chill-project-copy"
+
+type ProjectCategory = "web" | "design" | "gastro" | "social" | "ecommerce" | "nonprofit"
 
 interface Project {
   titleKey: string
   descriptionKey: string
   url: string
   tags: string[]
-  category: string
+  category: ProjectCategory
   type?: "website" | "social"
   platform?: "instagram"
   logo?: string
@@ -29,6 +32,15 @@ const projects: Project[] = [
     category: "web",
     type: "website",
     logo: "/images/logo-invertable.png",
+  },
+  {
+    titleKey: "projects.hazechill.title",
+    descriptionKey: "projects.hazechill.description",
+    url: "https://www.haze-chill.com/",
+    tags: ["Webdesign", "Café", "Kassel"],
+    category: "gastro",
+    type: "website",
+    previewImage: "/projects/haze-chill-website.jpg",
   },
   {
     titleKey: "projects.reel.title",
@@ -200,13 +212,15 @@ function LogoThumbnail({ logo, title }: { logo: string; title: string }) {
 }
 
 type ViewMode = "grid" | "list"
-type CategoryFilter = "all" | "web" | "design" | "showcase" | "ecommerce" | "nonprofit"
+type CategoryFilter = "all" | ProjectCategory
 
 export function ProjectsSection() {
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
   const { t, language } = useLanguage()
   const cmsCopy = cmsProjectCopy[language]
-  const projectTitle = (project: Project) => project.url === "/CMS" ? cmsCopy.title : t(project.titleKey)
+  const hazeCopy = hazeChillProjectCopy[language]
+  const projectTitle = (project: Project) => project.url === "/CMS" ? cmsCopy.title : project.titleKey === "projects.hazechill.title" ? hazeCopy.title : t(project.titleKey)
+  const projectDescription = (project: Project) => project.url === "/CMS" ? cmsCopy.intro : project.descriptionKey === "projects.hazechill.description" ? hazeCopy.description : t(project.descriptionKey)
   const [viewMode, setViewMode] = useState<ViewMode>("grid")
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all")
 
@@ -215,14 +229,16 @@ export function ProjectsSection() {
     return projects.filter((p) => p.category === selectedCategory)
   }, [selectedCategory])
 
-  const categories: { value: CategoryFilter; label: string }[] = [
+  const categoryOptions: { value: CategoryFilter; label: string }[] = [
     { value: "all", label: t("ui.all") },
     { value: "web", label: "Web" },
     { value: "design", label: "Design" },
-    { value: "showcase", label: "Showcase" },
+    { value: "gastro", label: hazeCopy.gastro },
+    { value: "social", label: hazeCopy.social },
     { value: "ecommerce", label: "E-Commerce" },
     { value: "nonprofit", label: "Non-Profit" },
   ]
+  const categories = categoryOptions.filter((category) => category.value === "all" || projects.some((project) => project.category === category.value))
 
   return (
     <section id="projekte" className="py-16 sm:py-24 lg:py-32 bg-secondary/30">
@@ -318,11 +334,11 @@ export function ProjectsSection() {
               {/* Thumbnail */}
               <div className={`${viewMode === "grid" ? "aspect-video" : "aspect-video sm:aspect-[3/1]"} relative overflow-hidden`}>
                 {project.previewImage ? (
-                  <StaticThumbnail src={project.previewImage} alt={project.previewAlt || t(project.titleKey)} />
+                  <StaticThumbnail src={project.previewImage} alt={project.previewAlt || projectTitle(project)} />
                 ) : project.logo ? (
                   <LogoThumbnail logo={project.logo} title={projectTitle(project)} />
                 ) : (
-                  <ProjectThumbnail url={project.url} title={t(project.titleKey)} />
+                  <ProjectThumbnail url={project.url} title={projectTitle(project)} />
                 )}
               </div>
 
@@ -342,7 +358,7 @@ export function ProjectsSection() {
                   <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {projectTitle(project)}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">{project.url === "/CMS" ? cmsCopy.intro : t(project.descriptionKey)}</p>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{projectDescription(project)}</p>
                 </div>
 
                 <div className="mt-4 sm:mt-0 flex items-center gap-2 text-primary font-medium">
