@@ -79,9 +79,9 @@ test('default language follows device preference order and regional language tag
   assert.equal(requestLanguage(null), 'de')
 })
 
-test('all twelve locales contain every updated copy key', () => {
-  assert.equal(Object.keys(siteCopy).length, 12)
-  assert.equal(Object.keys(profileCopy).length, 12)
+test('all supported locales contain every updated copy key', () => {
+  assert.deepEqual(Object.keys(siteCopy).sort(), [...supportedLanguages].sort())
+  assert.deepEqual(Object.keys(profileCopy).sort(), [...supportedLanguages].sort())
   for (const [language, copy] of Object.entries(profileCopy)) {
     assert.deepEqual(Object.keys(copy).sort(), Object.keys(profileCopy.de).sort(), language)
     assert.ok(Object.values(copy).every(value => value.trim().length > 0), language)

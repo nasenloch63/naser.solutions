@@ -3,6 +3,24 @@ import type { Language } from './language'
 type PaymentServiceKey = 'services.cryptoPayments.title' | 'services.cryptoPayments.description' | 'services.sumup.title' | 'services.sumup.description'
 
 export const paymentServicesCopy: Record<Language, Record<PaymentServiceKey, string>> = {
+  hi: {
+    "services.cryptoPayments.title": "व्यवसायों के लिए क्रिप्टो भुगतान समाधान",
+    "services.cryptoPayments.description": "हम आपके व्यवसाय में क्रिप्टो भुगतान शुरू करने में मदद करते हैं: सही समाधान चुनने, सेटअप और वेबसाइट या दुकान से जोड़ने से लेकर अनुकूलन और लगातार तकनीकी सहायता तक।",
+    "services.sumup.title": "SumUp: स्थापना, रखरखाव और अनुकूलन",
+    "services.sumup.description": "हम SumUp कार्ड टर्मिनल और बिक्री प्रणालियाँ स्थापित और कॉन्फ़िगर करते हैं, उत्पाद, रसीदें और कार्यप्रवाह अनुकूलित करते हैं और समर्थित इंटरफ़ेस के माध्यम से अपडेट, तकनीकी रखरखाव और इंटीग्रेशन में सहायता देते हैं।"
+  },
+  th: {
+    "services.cryptoPayments.title": "โซลูชันชำระเงินคริปโตสำหรับธุรกิจ",
+    "services.cryptoPayments.description": "เราช่วยธุรกิจของคุณเริ่มรับชำระเงินคริปโต ตั้งแต่เลือกโซลูชันที่เหมาะสม ตั้งค่าและเชื่อมกับเว็บไซต์หรือร้านค้า ไปจนถึงปรับแต่งและดูแลด้านเทคนิคอย่างต่อเนื่อง",
+    "services.sumup.title": "SumUp: ติดตั้ง ดูแล และปรับแต่ง",
+    "services.sumup.description": "เราติดตั้งและตั้งค่าเครื่องรับบัตรและระบบขายหน้าร้าน SumUp ปรับแต่งสินค้า ใบเสร็จ และกระบวนการ พร้อมดูแลการอัปเดต การบำรุงรักษา และการเชื่อมต่อผ่านอินเทอร์เฟซที่รองรับ"
+  },
+  uk: {
+    "services.cryptoPayments.title": "Криптовалютні платіжні рішення для бізнесу",
+    "services.cryptoPayments.description": "Допомагаємо твоїй компанії впровадити криптовалютні платежі: від вибору відповідного рішення, налаштування та інтеграції із сайтом або магазином до адаптації та постійної технічної підтримки.",
+    "services.sumup.title": "SumUp: встановлення, обслуговування та налаштування",
+    "services.sumup.description": "Встановлюємо й налаштовуємо карткові термінали та касові системи SumUp, адаптуємо товари, чеки й процеси, супроводжуємо оновлення, технічне обслуговування та інтеграції через підтримувані інтерфейси."
+  },
   de: {
     'services.cryptoPayments.title': 'Krypto-Zahlungslösungen für Unternehmen',
     'services.cryptoPayments.description': 'Wir unterstützen dein Unternehmen bei der Einführung von Krypto-Zahlungen: von der Auswahl passender Lösungen über Einrichtung und Integration in Website oder Shop bis zu Anpassungen und laufender technischer Betreuung.',

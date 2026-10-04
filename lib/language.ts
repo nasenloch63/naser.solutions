@@ -1,4 +1,4 @@
-export const supportedLanguages = ["de", "en", "fr", "ar", "tr", "sq", "ru", "es", "it", "el", "pt", "zh"] as const
+export const supportedLanguages = ["de", "en", "fr", "ar", "th", "hi", "tr", "sq", "ru", "es", "it", "uk", "el", "pt", "zh"] as const
 export type Language = typeof supportedLanguages[number]
 
 export const LANGUAGE_OVERRIDE_KEY = "languageOverride"

@@ -1,6 +1,51 @@
 import type { Language } from "@/components/language-provider"
 
 export const uiCopy = {
+  hi: {
+    "ui.menu": "मेन्यू",
+    "ui.theme": "रंग थीम बदलें",
+    "ui.grid": "ग्रिड दृश्य",
+    "ui.list": "सूची दृश्य",
+    "ui.all": "सभी",
+    "ui.project": "प्रोजेक्ट",
+    "ui.projects": "प्रोजेक्ट",
+    "ui.website": "वेबसाइट खोलें",
+    "ui.instagram": "Instagram पर देखें",
+    "ui.empty": "कोई प्रोजेक्ट नहीं मिला",
+    "ui.retry": "दूसरी श्रेणी चुनें।",
+    "ui.preview": "प्रीव्यू उपलब्ध नहीं है",
+    "about.label": "मेरे बारे में और मेरा नेटवर्क"
+  },
+  th: {
+    "ui.menu": "เมนู",
+    "ui.theme": "เปลี่ยนธีมสี",
+    "ui.grid": "มุมมองตาราง",
+    "ui.list": "มุมมองรายการ",
+    "ui.all": "ทั้งหมด",
+    "ui.project": "โปรเจกต์",
+    "ui.projects": "โปรเจกต์",
+    "ui.website": "เข้าชมเว็บไซต์",
+    "ui.instagram": "ดูบน Instagram",
+    "ui.empty": "ไม่พบโปรเจกต์",
+    "ui.retry": "เลือกหมวดหมู่อื่น",
+    "ui.preview": "ไม่มีตัวอย่างให้ดู",
+    "about.label": "เกี่ยวกับฉันและเครือข่าย"
+  },
+  uk: {
+    "ui.menu": "Меню",
+    "ui.theme": "Змінити колірну тему",
+    "ui.grid": "Сітка",
+    "ui.list": "Список",
+    "ui.all": "Усі",
+    "ui.project": "проєкт",
+    "ui.projects": "проєкти",
+    "ui.website": "Відвідати сайт",
+    "ui.instagram": "Переглянути в Instagram",
+    "ui.empty": "Проєктів не знайдено",
+    "ui.retry": "Обери іншу категорію.",
+    "ui.preview": "Перегляд недоступний",
+    "about.label": "Про мене та мої контакти"
+  },
   "de": {
     "ui.menu": "Menü",
     "ui.theme": "Farbschema wechseln",

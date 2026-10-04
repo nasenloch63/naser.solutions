@@ -6,6 +6,9 @@ import { createContext, useContext, useRef, useState, useEffect, type ReactNode 
 import { siteCopy } from "@/lib/site-copy"
 import { uiCopy } from "@/lib/ui-copy"
 import { paymentServiceTranslation } from "@/lib/payment-services-copy"
+import { ukrainianCopy } from "@/lib/ukrainian-copy"
+import { thaiCopy } from "@/lib/thai-copy"
+import { hindiCopy } from "@/lib/hindi-copy"
 
 import { LANGUAGE_OVERRIDE_KEY, resolveLanguage, type Language } from "@/lib/language"
 export type { Language } from "@/lib/language"
@@ -14,6 +17,8 @@ export const languages = [
   { code: "de" as const, name: "Deutsch", flag: "🇩🇪", dir: "ltr" as const },
   { code: "en" as const, name: "English", flag: "🇬🇧", dir: "ltr" as const },
   { code: "ru" as const, name: "Русский", flag: "🇷🇺", dir: "ltr" as const },
+  { code: "th" as const, name: "ไทย", flag: "🇹🇭", dir: "ltr" as const },
+  { code: "hi" as const, name: "हिन्दी", flag: "🇮🇳", dir: "ltr" as const },
   { code: "tr" as const, name: "Türkçe", flag: "🇹🇷", dir: "ltr" as const },
   { code: "ar" as const, name: "العربية", flag: "🇸🇦", dir: "rtl" as const },
   { code: "zh" as const, name: "中文", flag: "🇨🇳", dir: "ltr" as const },
@@ -21,6 +26,7 @@ export const languages = [
   { code: "es" as const, name: "Español", flag: "🇪🇸", dir: "ltr" as const },
   { code: "it" as const, name: "Italiano", flag: "🇮🇹", dir: "ltr" as const },
   { code: "pt" as const, name: "Português", flag: "🇵🇹", dir: "ltr" as const },
+  { code: "uk" as const, name: "Українська", flag: "🇺🇦", dir: "ltr" as const },
   { code: "el" as const, name: "Ελληνικά", flag: "🇬🇷", dir: "ltr" as const },
   { code: "sq" as const, name: "Shqip", flag: "🇦🇱", dir: "ltr" as const },
 ]
@@ -35,6 +41,9 @@ export interface LanguageContextType {
 
 
 const translations = {
+  th: thaiCopy,
+  hi: hindiCopy,
+  uk: ukrainianCopy,
   de: {
     // Navbar
     "nav.services": "Leistungen",

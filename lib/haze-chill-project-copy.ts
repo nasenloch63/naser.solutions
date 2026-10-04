@@ -3,6 +3,21 @@ import type { Language } from './language'
 type ProjectCopy = { title: string; description: string; gastro: string; social: string }
 
 export const hazeChillProjectCopy: Record<Language, ProjectCopy> = {
+  uk: {
+    title: 'Haze & Chill Café — сайт',
+    description: 'Сайт Haze & Chill Café у Касселі: цифрове меню, знайомство з лаунжем і настінним мистецтвом, години роботи та маршрут. Доступний німецькою й англійською.',
+    gastro: 'Заклади харчування', social: 'Соцмережі',
+  },
+  th: {
+    title: 'Haze & Chill Café – เว็บไซต์',
+    description: 'เว็บไซต์ Haze & Chill Café ในคัสเซิล พร้อมเมนูดิจิทัล ภาพเลานจ์และศิลปะบนผนัง เวลาเปิด และเส้นทาง มีภาษาเยอรมันและอังกฤษ',
+    gastro: 'ร้านอาหารและคาเฟ่', social: 'โซเชียลมีเดีย',
+  },
+  hi: {
+    title: 'Haze & Chill Café — वेबसाइट',
+    description: 'कासेल के Haze & Chill Café की वेबसाइट: डिजिटल मेन्यू, लाउंज और दीवार की कला की झलक, खुलने का समय और रास्ता। जर्मन और अंग्रेज़ी में उपलब्ध।',
+    gastro: 'रेस्तराँ और कैफ़े', social: 'सोशल मीडिया',
+  },
   de: {
     title: 'Haze & Chill Café – Website',
     description: 'Webauftritt für das Haze & Chill Café in Kassel: mit digitaler Speisekarte, Einblicken in die Lounge und Wandkunst sowie Öffnungszeiten und Anfahrt. Die Website ist auf Deutsch und Englisch verfügbar.',
