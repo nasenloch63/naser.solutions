@@ -95,7 +95,7 @@ export function Navbar() {
             <Link href="/#projekte" onClick={handleSectionNavigation} className="text-muted-foreground hover:text-foreground transition-colors">
               {t("nav.projects")}
             </Link>
-            <Link href="/#ueber-uns" onClick={handleSectionNavigation} className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/ueber-uns" className="text-muted-foreground hover:text-foreground transition-colors">
               {t("nav.about")}
             </Link>
             <Link href="/links" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -174,9 +174,9 @@ export function Navbar() {
                 {t("nav.projects")}
               </Link>
               <Link
-                href="/#ueber-uns"
+                href="/ueber-uns"
                 className="flex min-h-11 items-center rounded-xl px-3 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-                onClick={handleSectionNavigation}
+                onClick={() => setIsOpen(false)}
               >
                 {t("nav.about")}
               </Link>
