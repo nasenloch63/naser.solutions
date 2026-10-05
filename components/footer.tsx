@@ -48,11 +48,11 @@ export function Footer() {
               <Instagram className="h-5 w-5" />
             </a>
             <a
-              href="https://beacons.ai/yasinadamaissani"
+              href="https://naser-solutions.de/links"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex size-11 items-center justify-center rounded-lg text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-              aria-label="Linktree"
+              aria-label={t("nav.links")}
             >
               <ExternalLink className="h-5 w-5" />
             </a>
