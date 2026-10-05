@@ -67,7 +67,7 @@ test('default language follows device preference order and regional language tag
   assert.equal(deviceLanguage(['nl-NL', 'fr-CH', 'de-DE']), 'fr')
   assert.equal(deviceLanguage(['pt_BR']), 'pt')
   assert.equal(deviceLanguage(['zh-Hant-TW']), 'zh')
-  assert.equal(deviceLanguage(['ja-JP']), 'de')
+  assert.equal(deviceLanguage(['ko-KR']), 'de')
   assert.equal(deviceLanguage([]), 'de')
   assert.equal(resolveLanguage(['de-DE'], 'ar'), 'ar')
   assert.equal(resolveLanguage(['en-US'], 'invalid'), 'en')
@@ -75,7 +75,7 @@ test('default language follows device preference order and regional language tag
   assert.equal(requestLanguage('de-DE,de;q=0.9,ar;q=0.8'), 'de')
   assert.equal(requestLanguage('de;q=0.2,en-US;q=0.9'), 'en')
   assert.equal(requestLanguage('ar;q=0,fr-CH;q=0.8'), 'fr')
-  assert.equal(requestLanguage('ja-JP,en;q=0.5'), 'en')
+  assert.equal(requestLanguage('ja-JP,en;q=0.5'), 'ja')
   assert.equal(requestLanguage(null), 'de')
 })
 

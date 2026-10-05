@@ -1,8 +1,10 @@
 import type { Language } from './language'
+import { japanesePaymentCopy } from './japanese-copy'
 
 type PaymentServiceKey = 'services.cryptoPayments.title' | 'services.cryptoPayments.description' | 'services.sumup.title' | 'services.sumup.description'
 
 export const paymentServicesCopy: Record<Language, Record<PaymentServiceKey, string>> = {
+  ja: japanesePaymentCopy,
   hi: {
     "services.cryptoPayments.title": "व्यवसायों के लिए क्रिप्टो भुगतान समाधान",
     "services.cryptoPayments.description": "हम आपके व्यवसाय में क्रिप्टो भुगतान शुरू करने में मदद करते हैं: सही समाधान चुनने, सेटअप और वेबसाइट या दुकान से जोड़ने से लेकर अनुकूलन और लगातार तकनीकी सहायता तक।",

@@ -18,7 +18,10 @@ const de = {
 export type PortalCopy = Record<keyof typeof de, string>
 export type FeedbackMessage = 'invalidFeedback' | 'feedbackTooLong' | 'sessionExpired' | 'saved' | 'saveError' | AttachmentError
 
+import { japanesePortalCopy } from './japanese-copy'
+
 export const portalCopy: Record<Language, PortalCopy> = {
+  ja: japanesePortalCopy,
   de,
   en: {
     selectLanguage: 'Select language',

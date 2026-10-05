@@ -1,4 +1,5 @@
 import type { Language } from './language'
+import { japanesePricingCopy } from './japanese-copy'
 
 type PricingCopy = {
   title: string
@@ -13,6 +14,7 @@ type PricingCopy = {
 }
 
 export const servicePricingCopy: Record<Language, PricingCopy> = {
+  ja: japanesePricingCopy,
   uk: {
     title: 'Скільки коштуватиме твій проєкт?',
     description: 'Вартість наших послуг починається від 200–400 €. Ціна залежить від обсягу та складності твого проєкту.',

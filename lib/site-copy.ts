@@ -1,6 +1,9 @@
 import type { Language } from "@/components/language-provider"
 
+import { japaneseSiteCopy } from './japanese-copy'
+
 export const siteCopy = {
+  ja: japaneseSiteCopy,
   hi: {
     "nav.about": "मेरे बारे में",
     "hero.eyebrow": "कासेल की वेब एजेंसी",

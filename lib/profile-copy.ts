@@ -1,6 +1,9 @@
 import type { Language } from "@/components/language-provider"
 
+import { japaneseProfileCopy } from './japanese-copy'
+
 export const profileCopy: Record<Language, Record<string, string>> = {
+  ja: japaneseProfileCopy,
   hi: {
     "about.world": "मेरे व्यक्तिगत संपर्क दुनिया भर में, दक्षिण-पूर्व एशिया तक हैं। {ritzi} जैसे परिचितों के साथ मैं पेशेवर सवालों और प्रोजेक्ट पर विचार साझा करता हूँ।",
     "about.community": "मैंने बड़े सर्वरों पर कई मॉडरेटर भूमिकाएँ निभाईं और समुदायों की देखभाल का अनुभव प्राप्त किया। Web3 और क्रिप्टो प्रोजेक्ट में मेरी विशेष रुचि है और इस क्षेत्र में व्यावहारिक अनुभव भी है।",

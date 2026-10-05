@@ -1,8 +1,10 @@
 import type { Language } from './language'
+import { japaneseHazeCopy } from './japanese-copy'
 
 type ProjectCopy = { title: string; description: string; gastro: string; social: string }
 
 export const hazeChillProjectCopy: Record<Language, ProjectCopy> = {
+  ja: japaneseHazeCopy,
   uk: {
     title: 'Haze & Chill Café — сайт',
     description: 'Сайт Haze & Chill Café у Касселі: цифрове меню, знайомство з лаунжем і настінним мистецтвом, години роботи та маршрут. Доступний німецькою й англійською.',

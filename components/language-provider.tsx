@@ -9,6 +9,7 @@ import { paymentServiceTranslation } from "@/lib/payment-services-copy"
 import { ukrainianCopy } from "@/lib/ukrainian-copy"
 import { thaiCopy } from "@/lib/thai-copy"
 import { hindiCopy } from "@/lib/hindi-copy"
+import { japaneseCopy } from "@/lib/japanese-copy"
 
 import { LANGUAGE_OVERRIDE_KEY, resolveLanguage, type Language } from "@/lib/language"
 export type { Language } from "@/lib/language"
@@ -17,11 +18,12 @@ export const languages = [
   { code: "de" as const, name: "Deutsch", flag: "🇩🇪", dir: "ltr" as const },
   { code: "en" as const, name: "English", flag: "🇬🇧", dir: "ltr" as const },
   { code: "ru" as const, name: "Русский", flag: "🇷🇺", dir: "ltr" as const },
-  { code: "th" as const, name: "ไทย", flag: "🇹🇭", dir: "ltr" as const },
-  { code: "hi" as const, name: "हिन्दी", flag: "🇮🇳", dir: "ltr" as const },
   { code: "tr" as const, name: "Türkçe", flag: "🇹🇷", dir: "ltr" as const },
   { code: "ar" as const, name: "العربية", flag: "🇸🇦", dir: "rtl" as const },
   { code: "zh" as const, name: "中文", flag: "🇨🇳", dir: "ltr" as const },
+  { code: "ja" as const, name: "日本語", flag: "🇯🇵", dir: "ltr" as const },
+  { code: "th" as const, name: "ไทย", flag: "🇹🇭", dir: "ltr" as const },
+  { code: "hi" as const, name: "हिन्दी", flag: "🇮🇳", dir: "ltr" as const },
   { code: "fr" as const, name: "Français", flag: "🇫🇷", dir: "ltr" as const },
   { code: "es" as const, name: "Español", flag: "🇪🇸", dir: "ltr" as const },
   { code: "it" as const, name: "Italiano", flag: "🇮🇹", dir: "ltr" as const },
@@ -41,6 +43,7 @@ export interface LanguageContextType {
 
 
 const translations = {
+  ja: japaneseCopy,
   th: thaiCopy,
   hi: hindiCopy,
   uk: ukrainianCopy,

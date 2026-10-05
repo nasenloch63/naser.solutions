@@ -1,4 +1,5 @@
 import type { Language } from './language'
+import { japaneseAttachmentCopy } from './japanese-copy'
 
 const en = {
   attachments: 'Attachments', chooseFiles: 'Choose files', attachmentHelp: 'Images, PDFs and videos. Up to 5 files per request, 20 MB per file.',
@@ -8,6 +9,7 @@ const en = {
 }
 type AttachmentCopy = Record<keyof typeof en, string>
 export const attachmentCopy: Record<Language, AttachmentCopy> = {
+  ja: japaneseAttachmentCopy,
   en,
   de: { attachments: 'Anhänge', chooseFiles: 'Dateien auswählen', attachmentHelp: 'Bilder, PDFs und Videos. Bis zu 5 Dateien pro Anfrage, jeweils maximal 20 MB.', removeFile: 'Datei entfernen', submittedFiles: 'Eingereichte Dateien', uploadingFiles: 'Dateien werden hochgeladen …', attachmentTooLarge: 'Jede Datei muss zwischen 1 Byte und 20 MB groß sein.', attachmentInvalidType: 'Bitte JPG, PNG, WebP, GIF, PDF, MP4 oder WebM auswählen.', attachmentTooMany: 'Bis zu 5 Dateien pro Anfrage auswählen. Ein Projekt kann bis zu 20 Anhänge enthalten.', attachmentUploadError: 'Die Dateien konnten nicht hochgeladen werden. Ihr Entwurf ist noch vorhanden; bitte versuchen Sie es erneut.' },
   fr: { attachments: 'Pièces jointes', chooseFiles: 'Choisir des fichiers', attachmentHelp: 'Images, PDF et vidéos. Jusqu’à 5 fichiers par demande, 20 Mo par fichier.', removeFile: 'Retirer le fichier', submittedFiles: 'Fichiers envoyés', uploadingFiles: 'Envoi des fichiers …', attachmentTooLarge: 'Chaque fichier doit avoir une taille comprise entre 1 octet et 20 Mo.', attachmentInvalidType: 'Choisissez des fichiers JPG, PNG, WebP, GIF, PDF, MP4 ou WebM.', attachmentTooMany: 'Jusqu’à 5 fichiers par demande et 20 pièces jointes par projet.', attachmentUploadError: 'L’envoi a échoué. Votre brouillon est conservé ; veuillez réessayer.' },

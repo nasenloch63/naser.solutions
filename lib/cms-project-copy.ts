@@ -15,7 +15,10 @@ type CMSCopy = {
   back: string
 }
 
+import { japaneseCMSCopy } from './japanese-copy'
+
 export const cmsProjectCopy: Record<Language, CMSCopy> = {
+  ja: japaneseCMSCopy,
   uk: {
     title: "CMS і клієнтська панель", status: "У розробці",
     intro: "Я розробляю CMS із власною панеллю для клієнтів, щоб ти міг самостійно вносити невеликі зміни до створеного мною сайту.",

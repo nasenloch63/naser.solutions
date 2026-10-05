@@ -1,6 +1,9 @@
 import type { Language } from "@/components/language-provider"
 
+import { japaneseUICopy } from './japanese-copy'
+
 export const uiCopy = {
+  ja: japaneseUICopy,
   hi: {
     "ui.menu": "मेन्यू",
     "ui.theme": "रंग थीम बदलें",
