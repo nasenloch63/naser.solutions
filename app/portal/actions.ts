@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache'
 import type { FeedbackMessage } from '@/lib/portal-copy'
 import { randomUUID } from 'node:crypto'
 import { head } from '@vercel/blob'
+import { getPortalUser } from '@/lib/portal-session'
 import { MAX_PROJECT_ATTACHMENTS, ownsAttachmentPath, parseSubmittedAttachments, validateAttachment } from '@/lib/feedback-attachments'
 
 export type FeedbackState = { message: FeedbackMessage | ''; success: boolean }
@@ -28,7 +29,7 @@ export async function saveClientFeedback(
   }
 
   const payload = await getPayload({ config })
-  const { user } = await payload.auth({ headers: await headers() })
+  const user = await getPortalUser(payload, await headers())
 
   if (!user || user.collection !== 'users' || user.role !== 'client') {
     return { success: false, message: 'sessionExpired' }

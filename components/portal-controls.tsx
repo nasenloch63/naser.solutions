@@ -114,7 +114,7 @@ export function LogoutButton() {
 
   async function logout() {
     setIsPending(true)
-    await fetch('/api/users/logout', { method: 'POST', credentials: 'same-origin' })
+    await fetch('/api/portal/logout', { method: 'POST', credentials: 'same-origin' })
     router.refresh()
   }
 

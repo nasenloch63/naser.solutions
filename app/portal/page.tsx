@@ -1,19 +1,16 @@
 import config from '@payload-config'
 import { getPayload } from 'payload'
 import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { getPortalUser } from '@/lib/portal-session'
 import { PortalLoginForm } from '@/components/portal-login-form'
 import { PortalDashboard } from '@/components/portal-dashboard'
 
 export default async function PortalPage() {
   const requestHeaders = await headers()
   const payload = await getPayload({ config })
-  const { user } = await payload.auth({ headers: requestHeaders })
+  const user = await getPortalUser(payload, requestHeaders)
 
   if (!user) return <PortalLoginForm />
-  if (user.collection !== 'users') return <PortalLoginForm />
-  if (user.role === 'admin' || user.role === 'editor') redirect('/admin')
-  if (user.role !== 'client') return <PortalLoginForm />
 
   const projects = await payload.find({
     collection: 'client-projects',

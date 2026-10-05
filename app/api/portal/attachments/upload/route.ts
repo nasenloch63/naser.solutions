@@ -1,6 +1,7 @@
 import config from '@payload-config'
 import { getPayload } from 'payload'
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client'
+import { getPortalUser } from '@/lib/portal-session'
 import { MAX_ATTACHMENT_BYTES, MAX_PROJECT_ATTACHMENTS, ownsAttachmentPath, validateAttachment, attachmentContentType } from '@/lib/feedback-attachments'
 
 export const runtime = 'nodejs'
@@ -16,7 +17,7 @@ export async function POST(request: Request) {
         const origin = request.headers.get('origin')
         if (!origin || origin !== new URL(request.url).origin) throw new Error('Invalid origin')
         const payload = await getPayload({ config })
-        const { user } = await payload.auth({ headers: request.headers })
+        const user = await getPortalUser(payload, request.headers)
         if (!user || user.collection !== 'users' || user.role !== 'client') throw new Error('Not authorized')
         const metadata = JSON.parse(clientPayload ?? '{}') as { projectId: string; name: string; size: number; type: string }
         if (!ownsAttachmentPath(pathname, metadata.projectId) || typeof metadata.name !== 'string' || metadata.name.length > 200 || validateAttachment(metadata) || attachmentContentType(pathname) !== attachmentContentType(metadata.name)) throw new Error('Invalid attachment')

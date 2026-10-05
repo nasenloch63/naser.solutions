@@ -18,7 +18,7 @@ export function PortalLoginForm() {
 
     const form = new FormData(event.currentTarget)
     try {
-      const response = await fetch('/api/users/login', {
+      const response = await fetch('/api/portal/login', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
