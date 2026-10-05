@@ -52,7 +52,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex size-11 items-center justify-center rounded-lg text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-              aria-label={t("nav.links")}
+              aria-label="Links"
             >
               <ExternalLink className="h-5 w-5" />
             </a>

@@ -78,7 +78,7 @@ export function AboutSection() {
               <Button asChild variant="outline" className="min-h-11 h-auto gap-2 bg-transparent">
                 <Link href="https://naser-solutions.de/links" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-5 w-5" />
-                  {t("nav.links")}
+                  Links
                 </Link>
               </Button>
             </div>
