@@ -4,8 +4,9 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 import { headers } from 'next/headers'
 import { revalidatePath } from 'next/cache'
+import type { FeedbackMessage } from '@/lib/portal-copy'
 
-export type FeedbackState = { message: string; success: boolean }
+export type FeedbackState = { message: FeedbackMessage | ''; success: boolean }
 
 export async function saveClientFeedback(
   _state: FeedbackState,
@@ -15,19 +16,19 @@ export async function saveClientFeedback(
   const feedback = formData.get('feedback')
 
   if ((typeof projectId !== 'string' && typeof projectId !== 'number') || typeof feedback !== 'string') {
-    return { success: false, message: 'Die Eingabe konnte nicht verarbeitet werden.' }
+    return { success: false, message: 'invalidFeedback' }
   }
 
   const cleanFeedback = feedback.trim()
   if (cleanFeedback.length > 5000) {
-    return { success: false, message: 'Das Feedback darf maximal 5.000 Zeichen enthalten.' }
+    return { success: false, message: 'feedbackTooLong' }
   }
 
   const payload = await getPayload({ config })
   const { user } = await payload.auth({ headers: await headers() })
 
   if (!user || user.collection !== 'users' || user.role !== 'client') {
-    return { success: false, message: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.' }
+    return { success: false, message: 'sessionExpired' }
   }
 
   try {
@@ -39,8 +40,8 @@ export async function saveClientFeedback(
       user,
     })
     revalidatePath('/portal')
-    return { success: true, message: 'Ihre Änderungswünsche wurden sicher gespeichert.' }
+    return { success: true, message: 'saved' }
   } catch {
-    return { success: false, message: 'Das Feedback konnte nicht gespeichert werden.' }
+    return { success: false, message: 'saveError' }
   }
 }
