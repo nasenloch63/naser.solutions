@@ -27,5 +27,6 @@ export default async function PortalPage() {
   return <PortalDashboard name={user.name} projects={projects.docs.map((project) => ({
     id: String(project.id), name: project.name, domain: project.domain,
     status: project.status, clientFeedback: project.clientFeedback ?? '',
+    attachments: (project.feedbackAttachments ?? []).map(file => ({ id: file.id!, name: file.name, size: file.size, mimeType: file.mimeType, downloadUrl: file.downloadUrl })),
   }))} />
 }

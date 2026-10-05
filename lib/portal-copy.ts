@@ -1,4 +1,5 @@
 import type { Language } from './language'
+import type { AttachmentError } from './feedback-attachments'
 
 const de = {
   selectLanguage: 'Sprache auswählen',
@@ -15,7 +16,7 @@ const de = {
 }
 
 export type PortalCopy = Record<keyof typeof de, string>
-export type FeedbackMessage = 'invalidFeedback' | 'feedbackTooLong' | 'sessionExpired' | 'saved' | 'saveError'
+export type FeedbackMessage = 'invalidFeedback' | 'feedbackTooLong' | 'sessionExpired' | 'saved' | 'saveError' | AttachmentError
 
 export const portalCopy: Record<Language, PortalCopy> = {
   de,

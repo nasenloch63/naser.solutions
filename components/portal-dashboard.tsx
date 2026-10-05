@@ -4,6 +4,7 @@ import { ArrowUpRight, CircleCheck, Globe2 } from 'lucide-react'
 import { FeedbackForm, LogoutButton } from '@/components/portal-controls'
 import { PortalLanguageSwitcher, usePortalCopy } from '@/components/portal-language-switcher'
 import { portalStatusKeys } from '@/lib/portal-copy'
+import type { PortalAttachment } from '@/lib/feedback-attachments'
 
 export type PortalProject = {
   id: string
@@ -11,6 +12,7 @@ export type PortalProject = {
   domain: string
   status: keyof typeof portalStatusKeys
   clientFeedback: string
+  attachments: PortalAttachment[]
 }
 
 function domainUrl(domain: string) {
@@ -71,7 +73,7 @@ export function PortalDashboard({ name, projects }: { name: string; projects: Po
                   </div>
                 </div>
                 <div className="border-t border-border bg-muted/40 p-6 sm:p-8">
-                  <FeedbackForm initialFeedback={project.clientFeedback} projectId={project.id} />
+                  <FeedbackForm initialFeedback={project.clientFeedback} projectId={project.id} attachments={project.attachments} />
                 </div>
               </article>
             ))}

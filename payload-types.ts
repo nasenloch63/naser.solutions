@@ -497,6 +497,21 @@ export interface ClientProject {
   status: 'preparation' | 'active' | 'live' | 'paused';
   notes?: string | null;
   clientFeedback?: string | null;
+  /**
+   * Vom Kunden eingereichte Dateien. Nur für den zugeordneten Kunden und das CMS-Team zugänglich.
+   */
+  feedbackAttachments?:
+    | {
+        name: string;
+        mimeType: string;
+        size: number;
+        requestNote?: string | null;
+        submittedAt: string;
+        blobPath: string;
+        downloadUrl: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1002,6 +1017,18 @@ export interface ClientProjectsSelect<T extends boolean = true> {
   status?: T;
   notes?: T;
   clientFeedback?: T;
+  feedbackAttachments?:
+    | T
+    | {
+        name?: T;
+        mimeType?: T;
+        size?: T;
+        requestNote?: T;
+        submittedAt?: T;
+        blobPath?: T;
+        downloadUrl?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

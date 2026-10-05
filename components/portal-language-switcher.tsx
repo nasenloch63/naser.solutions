@@ -4,10 +4,11 @@ import { ChevronDown, Globe } from 'lucide-react'
 import { languages, useLanguage } from '@/components/language-provider'
 import { isLanguage } from '@/lib/language'
 import { portalCopy } from '@/lib/portal-copy'
+import { attachmentCopy } from '@/lib/attachment-copy'
 
 export function usePortalCopy() {
   const { language } = useLanguage()
-  return portalCopy[language]
+  return { ...portalCopy[language], ...attachmentCopy[language] }
 }
 
 export function PortalLanguageSwitcher() {

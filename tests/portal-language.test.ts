@@ -13,7 +13,7 @@ test('every website language has complete portal, login and feedback translation
 })
 
 test('project states and server feedback outcomes have a message in every language', () => {
-  const feedbackMessages: FeedbackMessage[] = ['invalidFeedback', 'feedbackTooLong', 'sessionExpired', 'saved', 'saveError']
+  const feedbackMessages = ['invalidFeedback', 'feedbackTooLong', 'sessionExpired', 'saved', 'saveError'] as const satisfies readonly FeedbackMessage[]
   for (const language of supportedLanguages) {
     for (const key of [...Object.values(portalStatusKeys), ...feedbackMessages]) assert.ok(portalCopy[language][key])
   }

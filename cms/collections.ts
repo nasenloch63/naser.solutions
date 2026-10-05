@@ -234,6 +234,23 @@ export const ClientProjects: CollectionConfig = {
       type: 'textarea',
       maxLength: 5000,
     },
+    {
+      name: 'feedbackAttachments',
+      label: 'Anhänge zur Änderungsanfrage',
+      type: 'array',
+      maxRows: 20,
+      access: { create: staffOnly, update: staffOnly },
+      admin: { readOnly: true, description: 'Vom Kunden eingereichte Dateien. Nur für den zugeordneten Kunden und das CMS-Team zugänglich.' },
+      fields: [
+        { name: 'name', label: 'Dateiname', type: 'text', required: true },
+        { name: 'mimeType', label: 'Dateityp', type: 'text', required: true },
+        { name: 'size', label: 'Größe (Bytes)', type: 'number', required: true },
+        { name: 'requestNote', label: 'Zugehöriger Änderungswunsch', type: 'textarea' },
+        { name: 'submittedAt', label: 'Eingereicht am', type: 'date', required: true },
+        { name: 'blobPath', type: 'text', required: true, admin: { hidden: true } },
+        { name: 'downloadUrl', type: 'text', required: true, admin: { components: { Field: '/cms/admin/attachment-download#AttachmentDownloadField' } } },
+      ],
+    },
   ],
 }
 
