@@ -184,7 +184,7 @@ export const siteCopy = {
   "de": {
     "nav.about": "Über mich",
     "hero.eyebrow": "Webagentur aus Kassel",
-    "hero.title1": "Webdesign & Entwicklung für deinen nächsten Schritt.",
+    "hero.title1": "Webdesign & Webentwicklung in Kassel.",
     "hero.description": "Ich entwickle moderne Websites und digitale Markenauftritte für Unternehmen, Selbstständige und Creator. Klar im Design, durchdacht in der Technik und darauf ausgerichtet, dein Angebot verständlich zu machen und Anfragen zu erleichtern.",
     "hero.trust": "Persönlicher Kontakt. Klare Absprachen. Durchdachte Websites.",
     "hero.regions": "In Kassel zu Hause, mit Kontakten in Deutschland und der Schweiz.",

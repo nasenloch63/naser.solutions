@@ -14,21 +14,21 @@ export function Footer() {
     <footer className="py-12 border-t border-border bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col xl:flex-row items-center justify-between gap-6">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" aria-label="Naser Solutions" className="flex items-center gap-3">
             <div className="relative w-10 h-10">
               {/* Light mode logo */}
               <Image
                 src="/images/logo-invertable.png"
-                alt="Naser Solutions Logo"
+                alt="Logo von Naser Solutions"
                 fill
-                className="object-contain transition-opacity duration-500 dark:opacity-0 opacity-100"
+                className="object-contain dark:hidden"
               />
               {/* Dark mode logo - using direct URL */}
               <Image
                 src="/images/inverted-20logo-20png.png"
-                alt="Naser Solutions Logo"
+                alt="Logo von Naser Solutions"
                 fill
-                className="object-contain transition-opacity duration-500 opacity-0 dark:opacity-100"
+                className="hidden object-contain dark:block"
               />
             </div>
             <div className="flex flex-col">

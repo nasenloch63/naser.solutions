@@ -186,14 +186,14 @@ export default function LinksPage() {
               <div className="relative h-24 w-24 mx-auto rounded-full overflow-hidden ring-2 ring-primary/20">
                 <Image
                   src="/images/logo-invertable.png"
-                  alt="Yasin Adam Aissani"
+                  alt="Logo von Naser Solutions"
                   fill
                   className="object-cover dark:hidden"
                   priority
                 />
                 <Image
                   src="/images/inverted-20logo-20png.png"
-                  alt="Yasin Adam Aissani"
+                  alt="Logo von Naser Solutions"
                   fill
                   className="object-cover hidden dark:block"
                   priority

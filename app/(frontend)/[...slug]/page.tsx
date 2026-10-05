@@ -9,6 +9,7 @@ import { SectionPage } from '@/components/section-page'
 import { isSectionSlug } from '@/lib/section-pages'
 import { getPageBySlug, getProjects } from '@/lib/cms'
 import { paymentServicesCopy } from '@/lib/payment-services-copy'
+import { profileCopy } from '@/lib/profile-copy'
 import {
   BUSINESS_EMAIL,
   BUSINESS_PHONE,
@@ -52,10 +53,10 @@ export default async function CMSPage({ params }: Props) {
   const isHome = page.slug === 'home'
   const faqBlocks = page.layout.filter((block) => block.blockType === 'faq')
   const services = [
-    ['Webdesign & Webentwicklung', 'Konzeption und Entwicklung schneller, zugänglicher Websites für Unternehmen, Selbstständige und Creator.'],
-    ['SEO & Performance', 'Technische und inhaltliche Suchmaschinenoptimierung für bessere Auffindbarkeit und schnelle Ladezeiten.'],
-    ['Social Media & Ads', 'Strategie, Inhalte und Kampagnen für Social-Media-Plattformen und digitale Anzeigen.'],
-    ['Grafikdesign & Branding', 'Markenidentitäten und visuelle Systeme für konsistente digitale Auftritte.'],
+    ...(['web', 'integrations', 'seo', 'social', 'design', 'care'] as const).map(service => [
+      profileCopy.de[`services.${service}.title`],
+      profileCopy.de[`services.${service}.description`],
+    ]),
     [paymentServicesCopy.de['services.cryptoPayments.title'], paymentServicesCopy.de['services.cryptoPayments.description']],
     [paymentServicesCopy.de['services.sumup.title'], paymentServicesCopy.de['services.sumup.description']],
   ]

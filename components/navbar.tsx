@@ -60,22 +60,22 @@ export function Navbar() {
     <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl backdrop-saturate-150 border-b border-border/50 shadow-sm supports-[backdrop-filter]:bg-background/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center gap-2 min-w-0">
+          <Link href="/" aria-label="Naser Solutions" className="flex items-center gap-2 min-w-0">
             <div className="relative h-9 w-9 sm:h-14 sm:w-14 flex-shrink-0">
               {/* Light mode logo */}
               <Image
                 src="/images/logo-invertable.png"
-                alt="Naser Solutions - Web Agency"
+                alt="Logo von Naser Solutions"
                 fill
-                className="object-contain transition-opacity duration-500 dark:opacity-0 opacity-100"
+                className="object-contain dark:hidden"
                 priority
               />
               {/* Dark mode logo - using direct URL */}
               <Image
                 src="/images/inverted-20logo-20png.png"
-                alt="Naser Solutions - Web Agency"
+                alt="Logo von Naser Solutions"
                 fill
-                className="object-contain transition-opacity duration-500 opacity-0 dark:opacity-100"
+                className="hidden object-contain dark:block"
                 priority
               />
             </div>

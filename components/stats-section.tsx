@@ -96,18 +96,20 @@ export function StatsSection() {
 
           {/* Scrolling Container */}
           <div className="flex overflow-hidden motion-reduce:overflow-x-auto overscroll-x-contain">
-            <div className="flex animate-scroll-infinite gap-8 py-8">
+            <div role="list" className="flex animate-scroll-infinite gap-8 py-8">
               {[...tools, ...tools].map((tool, index) => (
                 <div
                   key={index}
+                  role="listitem"
+                  aria-hidden={index >= tools.length ? true : undefined}
                   className="flex-shrink-0 group"
                 >
                   <div className="w-48 h-40 bg-background rounded-2xl border border-border p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1">
-                    <div className="text-foreground/70 group-hover:text-primary transition-colors duration-300">
+                    <div aria-hidden="true" className="text-foreground/70 group-hover:text-primary transition-colors duration-300">
                       {tool.logo}
                     </div>
                     <div className="text-center">
-                      <h3 className="font-semibold text-foreground">{tool.name}</h3>
+                      <p className="font-semibold text-foreground">{tool.name}</p>
                       <p className="text-sm text-muted-foreground">{tool.description}</p>
                     </div>
                   </div>

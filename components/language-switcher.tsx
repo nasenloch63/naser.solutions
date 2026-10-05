@@ -1,19 +1,14 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import Image from "next/image"
 import { Globe, Check, ChevronDown } from "lucide-react"
 import { useLanguage, languages, type Language } from "@/components/language-provider"
 
 function LanguageFlag({ language }: { language: Language }) {
   return (
-    <Image
-      src={`/flags/${language}.png`}
-      alt=""
-      width={20}
-      height={20}
-      unoptimized
-      className="h-5 w-5 shrink-0 object-contain"
+    <span
+      style={{ backgroundImage: `url('/flags/${language}.png')` }}
+      className="h-5 w-5 shrink-0 bg-contain bg-center bg-no-repeat"
       aria-hidden="true"
     />
   )

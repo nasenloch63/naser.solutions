@@ -7,6 +7,7 @@ import { useLanguage } from "@/components/language-provider"
 import { ExternalLink, ArrowUpRight, Clock, Grid3x3, List, Filter, Globe, Play, Instagram } from "lucide-react"
 import { cmsProjectCopy } from "@/lib/cms-project-copy"
 import { hazeChillProjectCopy } from "@/lib/haze-chill-project-copy"
+import { projectImageCopy } from "@/lib/project-image-copy"
 
 type ProjectCategory = "web" | "design" | "gastro" | "social" | "ecommerce" | "nonprofit"
 
@@ -20,7 +21,6 @@ interface Project {
   platform?: "instagram"
   logo?: string
   previewImage?: string
-  previewAlt?: string
 }
 
 const projects: Project[] = [
@@ -51,7 +51,6 @@ const projects: Project[] = [
     type: "social",
     platform: "instagram",
     previewImage: "/projects/haze-chill-instagram.png",
-    previewAlt: "Haze & Chill Café Instagram Social Media Content",
   },
   {
     titleKey: "projects.studio.title",
@@ -107,7 +106,7 @@ function getThumbnailSources(url: string): string[] {
 }
 
 function ProjectThumbnail({ url, title }: { url: string; title: string }) {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const cached = thumbnailCache.get(url)
   const sources = getThumbnailSources(url)
 
@@ -154,7 +153,7 @@ function ProjectThumbnail({ url, title }: { url: string; title: string }) {
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={src}
-          alt={title}
+          alt={`${projectImageCopy[language].website}: ${title}`}
           loading="lazy"
           className={`w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105 ${
             status === "loaded" ? "opacity-100" : "opacity-0"
@@ -196,12 +195,13 @@ function StaticThumbnail({ src, alt }: { src: string; alt: string }) {
 }
 
 function LogoThumbnail({ logo, title }: { logo: string; title: string }) {
+  const { language } = useLanguage()
   return (
     <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 dark:bg-zinc-100">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={logo || "/placeholder.svg"}
-        alt={title}
+        alt={`${projectImageCopy[language].logo}: ${title}`}
         loading="lazy"
         className="max-h-[70%] max-w-[60%] object-contain transition-transform duration-700 group-hover:scale-105"
       />
@@ -219,6 +219,7 @@ export function ProjectsSection() {
   const { t, language } = useLanguage()
   const cmsCopy = cmsProjectCopy[language]
   const hazeCopy = hazeChillProjectCopy[language]
+  const imageCopy = projectImageCopy[language]
   const projectTitle = (project: Project) => project.url === "/CMS" ? cmsCopy.title : project.titleKey === "projects.hazechill.title" ? hazeCopy.title : t(project.titleKey)
   const projectDescription = (project: Project) => project.url === "/CMS" ? cmsCopy.intro : project.descriptionKey === "projects.hazechill.description" ? hazeCopy.description : t(project.descriptionKey)
   const [viewMode, setViewMode] = useState<ViewMode>("grid")
@@ -334,9 +335,9 @@ export function ProjectsSection() {
               {/* Thumbnail */}
               <div className={`${viewMode === "grid" ? "aspect-video" : "aspect-video sm:aspect-[3/1]"} relative overflow-hidden`}>
                 {project.previewImage ? (
-                  <StaticThumbnail src={project.previewImage} alt={project.previewAlt || projectTitle(project)} />
+                  <StaticThumbnail src={project.previewImage} alt={`${project.type === "social" ? imageCopy.social : imageCopy.website}: ${projectTitle(project)}`} />
                 ) : project.logo ? (
-                  <LogoThumbnail logo={project.logo} title={projectTitle(project)} />
+                  <LogoThumbnail logo={project.logo} title="Naser Solutions" />
                 ) : (
                   <ProjectThumbnail url={project.url} title={projectTitle(project)} />
                 )}
