@@ -26,6 +26,7 @@ import { AdminIcon as AdminIcon_d123741fd6da47b78c20b0d1b7ca61a9 } from '../../.
 import { AdminLogo as AdminLogo_d123741fd6da47b78c20b0d1b7ca61a9 } from '../../../cms/admin/brand'
 import { DashboardWelcome as DashboardWelcome_d123741fd6da47b78c20b0d1b7ca61a9 } from '../../../cms/admin/brand'
 import { AdminNavBrand as AdminNavBrand_d123741fd6da47b78c20b0d1b7ca61a9 } from '../../../cms/admin/brand'
+import { AdminSessionSync as AdminSessionSync_59c389247bd934dc1db57eae649b9895 } from '../../../cms/admin/session-sync'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { VercelBlobClientUploadHandler as VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e } from '@payloadcms/storage-vercel-blob/client'
 
@@ -59,6 +60,7 @@ export const importMap = {
   "/cms/admin/brand#AdminLogo": AdminLogo_d123741fd6da47b78c20b0d1b7ca61a9,
   "/cms/admin/brand#DashboardWelcome": DashboardWelcome_d123741fd6da47b78c20b0d1b7ca61a9,
   "/cms/admin/brand#AdminNavBrand": AdminNavBrand_d123741fd6da47b78c20b0d1b7ca61a9,
+  "/cms/admin/session-sync#AdminSessionSync": AdminSessionSync_59c389247bd934dc1db57eae649b9895,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1,
   "@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler": VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e
 }

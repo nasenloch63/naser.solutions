@@ -34,6 +34,7 @@ export default buildConfig({
     user: Users.slug,
     importMap: { baseDir: dirname },
     components: {
+      providers: ['/cms/admin/session-sync#AdminSessionSync'],
       graphics: {
         Icon: '/cms/admin/brand#AdminIcon',
         Logo: '/cms/admin/brand#AdminLogo',
