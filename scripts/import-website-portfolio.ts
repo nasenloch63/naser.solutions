@@ -52,7 +52,12 @@ async function run() {
       for (const locale of supportedLanguages.filter(language => language !== 'de')) {
         const title = typeof all.title === 'object' ? all.title?.[locale] : undefined
         const description = typeof all.description === 'object' ? all.description?.[locale] : undefined
-        if (!title || !description) await payload.update({ collection: 'projects', id: project.id, locale, data: { ...(!title ? { title: localizedText(copy.title, locale) } : {}), ...(!description ? { description: localizedText(copy.description, locale) } : {}), _status: 'published' } })
+        if (!title || !description) await payload.update({ collection: 'projects', id: project.id, locale, data: {
+          ...(!title ? { title: localizedText(copy.title, locale) } : {}),
+          ...(!description ? { description: localizedText(copy.description, locale) } : {}),
+          tags: all.tags?.map((tag, index) => ({ id: tag.id, label: localizedText(tag.label, locale) || defaults.tags[index] })),
+          _status: 'published',
+        } })
       }
     }
 
