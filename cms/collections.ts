@@ -96,7 +96,7 @@ export const Projects: CollectionConfig = {
     preview: () => '/preview?collection=projects',
   },
   access: { read: publicRead, create: staffOnly, update: staffOnly, delete: staffOnly },
-  versions: { drafts: { autosave: { interval: 500 } }, maxPerDoc: 30 },
+  versions: { drafts: { autosave: false }, maxPerDoc: 30 },
   fields: [
     { name: 'title', type: 'text', required: true, localized: true },
     { name: 'slug', type: 'text', required: true, unique: true, index: true },
@@ -148,7 +148,7 @@ export const Pages: CollectionConfig = {
     },
   },
   access: { read: publicRead, create: staffOnly, update: staffOnly, delete: staffOnly },
-  versions: { drafts: { autosave: { interval: 500 }, schedulePublish: true }, maxPerDoc: 50 },
+  versions: { drafts: { autosave: false, schedulePublish: true }, maxPerDoc: 50 },
   fields: [
     { name: 'title', type: 'text', required: true, localized: true },
     { name: 'slug', type: 'text', required: true, unique: true, index: true, admin: { position: 'sidebar' } },

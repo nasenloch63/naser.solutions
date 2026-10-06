@@ -75,7 +75,7 @@ async function run() {
       const localizedHome = await payload.findByID({ collection: 'pages', id: home.id, locale, depth: 0 })
       const translatedLayout = layout.map(block => {
         const translatedBlock = localizedHome.layout.find(item => item.id === block.id) || block
-        return translatedBlock.blockType === 'projects' ? { ...translatedBlock, eyebrow: websiteText(locale, 'projects.badge'), heading: websiteText(locale, 'projects.title'), description: websiteText(locale, 'projects.description'), selection: [] } : translatedBlock
+        return translatedBlock.blockType === 'projects' ? { ...translatedBlock, eyebrow: websiteText(locale, 'projects.badge'), heading: websiteText(locale, 'projects.title'), description: websiteText(locale, 'projects.description'), selection: [], showFilters: true } : translatedBlock
       })
       await payload.update({ collection: 'pages', id: home.id, locale, data: { title: localizedHome.title || home.title, layout: translatedLayout, _status: 'published' } })
     }
