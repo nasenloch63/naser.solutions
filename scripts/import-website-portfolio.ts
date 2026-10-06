@@ -77,7 +77,7 @@ async function run() {
         const translatedBlock = localizedHome.layout.find(item => item.id === block.id) || block
         return translatedBlock.blockType === 'projects' ? { ...translatedBlock, eyebrow: websiteText(locale, 'projects.badge'), heading: websiteText(locale, 'projects.title'), description: websiteText(locale, 'projects.description'), selection: [] } : translatedBlock
       })
-      await payload.update({ collection: 'pages', id: home.id, locale, data: { layout: translatedLayout, _status: 'published' } })
+      await payload.update({ collection: 'pages', id: home.id, locale, data: { title: localizedHome.title || home.title, layout: translatedLayout, _status: 'published' } })
     }
     await connection.query('INSERT INTO payload.payload_kv (key, data) VALUES ($1, $2::jsonb) ON CONFLICT (key) DO NOTHING', [checkpoint, JSON.stringify({ completedAt: new Date().toISOString() })])
     console.info('Website media and eight portfolio projects imported successfully.')

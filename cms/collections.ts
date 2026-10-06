@@ -62,7 +62,7 @@ export const Users: CollectionConfig = {
 export const Media: CollectionConfig = {
   slug: 'media',
   labels: { singular: 'Medium', plural: 'Medien' },
-  admin: { group: 'Inhalte', useAsTitle: 'alt', description: 'Öffentliche Website-Medien. Bilder und PDF bis 4 MB pro Datei.' },
+  admin: { group: 'Inhalte', useAsTitle: 'alt', defaultColumns: ['filename', 'alt', 'updatedAt'], description: 'Öffentliche Website-Medien. Bilder und PDF bis 4 MB pro Datei.' },
   access: { read: () => true, create: staffOnly, update: staffOnly, delete: staffOnly },
   hooks: { beforeOperation: [({ req, operation }) => {
     if ((operation === 'create' || operation === 'update') && req.file && req.file.size > 4 * 1024 * 1024) throw new APIError('Bitte eine Datei mit höchstens 4 MB hochladen.', 400)
