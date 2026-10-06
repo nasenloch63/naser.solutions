@@ -9,6 +9,7 @@ import { randomUUID } from 'node:crypto'
 import { head } from '@vercel/blob'
 import { getPortalUser } from '@/lib/portal-session'
 import { MAX_PROJECT_ATTACHMENTS, ownsAttachmentPath, parseSubmittedAttachments, validateAttachment } from '@/lib/feedback-attachments'
+import { sendFeedbackNotification } from '@/lib/feedback-email'
 
 export type FeedbackState = { message: FeedbackMessage | ''; success: boolean }
 
@@ -60,6 +61,19 @@ export async function saveClientFeedback(
       user,
     })
     revalidatePath('/portal')
+    // Notify only after the request is saved, and only for genuinely changed submissions.
+    if (cleanFeedback !== (project.clientFeedback ?? '').trim() || attachments.length > 0) {
+      try {
+        await sendFeedbackNotification({
+          projectId: project.id, projectName: project.name,
+          customerName: user.name, customerEmail: user.email,
+          feedback: cleanFeedback, attachments,
+        })
+      } catch {
+        // A mail outage must never discard the customer's saved request or invite resubmission.
+        payload.logger.error({ msg: 'Customer feedback saved, but SMTP notification failed', projectId: project.id })
+      }
+    }
     return { success: true, message: 'saved' }
   } catch {
     return { success: false, message: 'saveError' }
