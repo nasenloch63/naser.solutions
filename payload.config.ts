@@ -5,6 +5,7 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
+import { cmsOrigins } from './lib/cms-origins'
 import {
   ClientProjects,
   Footer,
@@ -80,8 +81,8 @@ export default buildConfig({
     defaultLocale: 'de',
     fallback: true,
   },
-  cors: [serverURL].filter(Boolean),
-  csrf: [serverURL].filter(Boolean),
+  cors: cmsOrigins(serverURL),
+  csrf: cmsOrigins(serverURL),
   plugins: [
     vercelBlobStorage({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
