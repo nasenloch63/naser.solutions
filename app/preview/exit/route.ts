@@ -6,5 +6,6 @@ export async function GET(request: Request) {
   drafts.disable()
 
   const url = new URL(request.url)
-  redirect(url.searchParams.get('redirect') || '/')
+  const path = url.searchParams.get('redirect') || '/'
+  redirect(path.startsWith('/') && !path.startsWith('//') && !path.includes('\\') ? path : '/')
 }

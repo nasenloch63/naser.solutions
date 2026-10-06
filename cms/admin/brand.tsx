@@ -38,7 +38,12 @@ export function DashboardWelcome() {
       <div className="ns-admin-welcome__content">
         <p className="ns-admin-welcome__eyebrow">Naser Solutions · CMS</p>
         <h1 id="ns-admin-welcome-title">Deine Website im Überblick.</h1>
-        <p className="ns-admin-welcome__description">Inhalte pflegen, Projekte präsentieren und Kundenzugänge verwalten.</p>
+        <p className="ns-admin-welcome__description">Projekte bearbeiten, Bilder auswählen und die Reihenfolge festlegen. Erst als Entwurf speichern und in der Vorschau prüfen; „Veröffentlichen“ übernimmt die Änderungen auf die Website.</p>
+        <nav aria-label="Website bearbeiten" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+          <a className="ns-admin-welcome__link" href="/admin/collections/projects">Projekte bearbeiten →</a>
+          <a className="ns-admin-welcome__link" href="/admin/collections/media">Medienbibliothek →</a>
+          <a className="ns-admin-welcome__link" href="/admin/collections/pages">Sektionen anordnen →</a>
+        </nav>
         <a className="ns-admin-welcome__link" href="/" target="_blank" rel="noopener noreferrer">
           Website öffnen <span aria-hidden="true">↗</span>
           <span className="ns-admin-sr-only"> (in einem neuen Tab)</span>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { draftMode } from 'next/headers'
+import { staffPreviewEnabled } from '@/lib/cms-preview'
+import { PreviewBanner } from '@/components/cms/preview-banner'
 import { notFound } from 'next/navigation'
 import { Footer } from '@/components/footer'
 import { LegalModalProvider } from '@/components/legal-modal-provider'
@@ -7,7 +8,7 @@ import { Navbar } from '@/components/navbar'
 import { PageRenderer } from '@/components/cms/page-renderer'
 import { SectionPage } from '@/components/section-page'
 import { isSectionSlug } from '@/lib/section-pages'
-import { getPageBySlug, getProjects } from '@/lib/cms'
+import { getPageBySlug, getProjects, getPortfolio, getPortfolioSection } from '@/lib/cms'
 import { paymentServicesCopy } from '@/lib/payment-services-copy'
 import { profileCopy } from '@/lib/profile-copy'
 import {
@@ -34,21 +35,25 @@ function toSlug(parts?: string[]) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const pageSlug = toSlug(slug)
-  if (isSectionSlug(pageSlug)) return publicPageMetadata(`/${pageSlug}`)
+  const preview = await staffPreviewEnabled()
+  if (isSectionSlug(pageSlug)) return { ...publicPageMetadata(`/${pageSlug}`), ...(preview ? { robots: { index: false, follow: false } } : {}) }
   const page = await getPageBySlug(pageSlug)
   if (!page) return {}
 
-  return metadataForPage(page)
+  return { ...metadataForPage(page), ...(preview ? { robots: { index: false, follow: false } } : {}) }
 }
 
 export default async function CMSPage({ params }: Props) {
-  const [{ slug }, draft] = await Promise.all([params, draftMode()])
+  const [{ slug }, preview] = await Promise.all([params, staffPreviewEnabled()])
   const pageSlug = toSlug(slug)
-  if (isSectionSlug(pageSlug)) return <SectionPage slug={pageSlug} />
-  const page = await getPageBySlug(pageSlug, draft.isEnabled)
+  if (isSectionSlug(pageSlug)) {
+    const [portfolio, section] = pageSlug === 'projekte' ? await Promise.all([getPortfolio(preview), getPortfolioSection(preview)]) : [[], undefined]
+    return <>{preview && <PreviewBanner />}<SectionPage slug={pageSlug} portfolio={portfolio} portfolioSection={section} /></>
+  }
+  const page = await getPageBySlug(pageSlug, preview)
   if (!page) notFound()
 
-  const projects = page.layout.some((block) => block.blockType === 'projects') ? await getProjects() : []
+  const [projects, portfolio, portfolioSection] = page.layout.some((block) => block.blockType === 'projects') ? await Promise.all([getProjects(preview), getPortfolio(preview), getPortfolioSection(preview)]) : [[], [], undefined]
   const canonical = absoluteUrl(pagePath(page.slug))
   const isHome = page.slug === 'home'
   const faqBlocks = page.layout.filter((block) => block.blockType === 'faq')
@@ -133,10 +138,11 @@ export default async function CMSPage({ params }: Props) {
 
   return (
     <LegalModalProvider>
+      {preview && <PreviewBanner />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd({ '@context': 'https://schema.org', '@graph': graph }) }} />
       <main className="min-h-screen bg-background text-foreground">
         <Navbar />
-        <PageRenderer initialPage={page} projects={projects} />
+        <PageRenderer initialPage={page} projects={projects} portfolio={portfolio} portfolioSection={portfolioSection} />
         <Footer />
       </main>
     </LegalModalProvider>

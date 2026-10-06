@@ -2,7 +2,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { websiteMediaStorage } from './cms/media-storage'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { cmsOrigins } from './lib/cms-origins'
@@ -77,22 +77,18 @@ export default buildConfig({
       { label: 'Ελληνικά', code: 'el' },
       { label: 'العربية', code: 'ar' },
       { label: '中文', code: 'zh' },
+      { label: '日本語', code: 'ja' },
+      { label: 'ไทย', code: 'th' },
+      { label: 'हिन्दी', code: 'hi' },
+      { label: 'Українська', code: 'uk' },
+      { label: 'Italiano', code: 'it' },
     ],
     defaultLocale: 'de',
     fallback: true,
   },
   cors: cmsOrigins(serverURL),
   csrf: cmsOrigins(serverURL),
-  plugins: [
-    vercelBlobStorage({
-      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
-      collections: { media: { prefix: 'cms/media' } },
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-      access: 'public',
-      addRandomSuffix: true,
-      clientUploads: true,
-    }),
-  ],
+  plugins: [websiteMediaStorage],
   sharp: sharp as unknown as Parameters<typeof buildConfig>[0]['sharp'],
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

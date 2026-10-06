@@ -5,15 +5,16 @@ import config from '@payload-config'
 
 export async function GET(request: Request) {
   const url = new URL(request.url)
-  const secret = url.searchParams.get('secret')
   const slug = url.searchParams.get('slug') || 'home'
   const collection = url.searchParams.get('collection') || 'pages'
 
-  if (secret !== process.env.PAYLOAD_PREVIEW_SECRET || collection !== 'pages') {
-    return new Response('Ungültige Vorschau-Anfrage', { status: 401 })
-  }
-
   const payload = await getPayload({ config })
+  const { user } = await payload.auth({ headers: request.headers })
+  if (!user || !['admin', 'editor'].includes(user.role) || !['pages', 'projects'].includes(collection)) return new Response('Bitte zuerst im CMS als Administrator oder Redakteur anmelden.', { status: 401 })
+  if (collection === 'projects') {
+    (await draftMode()).enable()
+    redirect('/projekte')
+  }
   const result = await payload.find({
     collection: 'pages',
     draft: true,
@@ -26,5 +27,7 @@ export async function GET(request: Request) {
 
   const drafts = await draftMode()
   drafts.enable()
-  redirect(slug === 'home' ? '/' : `/${slug}`)
+  const path = slug === 'home' ? '/' : `/${slug}`
+  if (path.startsWith('//') || path.includes('\\')) return new Response('Ungültiger Pfad', { status: 400 })
+  redirect(path)
 }

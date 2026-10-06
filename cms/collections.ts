@@ -1,4 +1,5 @@
 import type { CollectionConfig, GlobalConfig } from 'payload'
+import { APIError } from 'payload'
 import { pageBlocks } from './blocks'
 
 type CMSUser = { id: number | string; role?: 'admin' | 'editor' | 'client' } | null
@@ -61,8 +62,11 @@ export const Users: CollectionConfig = {
 export const Media: CollectionConfig = {
   slug: 'media',
   labels: { singular: 'Medium', plural: 'Medien' },
-  admin: { group: 'Inhalte', useAsTitle: 'alt' },
-  access: { read: publicUnlessClient, create: staffOnly, update: staffOnly, delete: staffOnly },
+  admin: { group: 'Inhalte', useAsTitle: 'alt', description: 'Öffentliche Website-Medien. Bilder und PDF bis 4 MB pro Datei.' },
+  access: { read: () => true, create: staffOnly, update: staffOnly, delete: staffOnly },
+  hooks: { beforeOperation: [({ req, operation }) => {
+    if ((operation === 'create' || operation === 'update') && req.file && req.file.size > 4 * 1024 * 1024) throw new APIError('Bitte eine Datei mit höchstens 4 MB hochladen.', 400)
+  }] },
   upload: {
     mimeTypes: ['image/*', 'video/*', 'application/pdf'],
     imageSizes: [
@@ -76,16 +80,20 @@ export const Media: CollectionConfig = {
     { name: 'alt', type: 'text', required: true, localized: true },
     { name: 'caption', type: 'textarea', localized: true },
     { name: 'credit', type: 'text' },
+    { name: 'sourcePath', type: 'text', unique: true, admin: { readOnly: true, description: 'Herkunft eines übernommenen Website-Mediums.' } },
   ],
 }
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
+  defaultSort: 'order',
   labels: { singular: 'Projekt', plural: 'Projekte' },
   admin: {
     group: 'Inhalte',
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'status', 'updatedAt'],
+    defaultColumns: ['title', 'order', 'category', '_status', 'updatedAt'],
+    description: 'Die Website zeigt veröffentlichte Projekte in aufsteigender Reihenfolge. Entwurf speichern → Vorschau → Veröffentlichen.',
+    preview: () => '/preview?collection=projects',
   },
   access: { read: publicRead, create: staffOnly, update: staffOnly, delete: staffOnly },
   versions: { drafts: { autosave: { interval: 500 } }, maxPerDoc: 30 },
@@ -93,8 +101,14 @@ export const Projects: CollectionConfig = {
     { name: 'title', type: 'text', required: true, localized: true },
     { name: 'slug', type: 'text', required: true, unique: true, index: true },
     { name: 'description', type: 'textarea', required: true, localized: true },
-    { name: 'url', type: 'text', required: true },
-    { name: 'thumbnail', type: 'upload', relationTo: 'media' },
+    { name: 'url', type: 'text', required: true, validate: (value: unknown) => {
+      if (typeof value !== 'string') return 'Bitte eine URL eintragen.'
+      if (/^\/(?!\/)/.test(value) || /^#[\w-]+$/.test(value)) return true
+      try { const url = new URL(value); return ['https:', 'http:'].includes(url.protocol) || 'Bitte eine HTTPS-Adresse oder einen internen Pfad verwenden.' } catch { return 'Bitte eine gültige URL eintragen.' }
+    } },
+    { name: 'thumbnail', label: 'Projektbild', type: 'upload', relationTo: 'media', filterOptions: { mimeType: { contains: 'image/' } } },
+    { name: 'containImage', label: 'Bild vollständig zeigen (z. B. Logo)', type: 'checkbox', defaultValue: false },
+    { name: 'showInPortfolio', label: 'Im Portfolio anzeigen', type: 'checkbox', defaultValue: true },
     {
       name: 'category',
       type: 'select',
@@ -114,7 +128,7 @@ export const Projects: CollectionConfig = {
       ],
     },
     { name: 'featured', type: 'checkbox', defaultValue: false },
-    { name: 'order', type: 'number', defaultValue: 0, index: true },
+    { name: 'order', label: 'Reihenfolge', type: 'number', defaultValue: 0, index: true, admin: { description: 'Kleinere Zahlen erscheinen zuerst. Die neue Position wird erst nach Veröffentlichung sichtbar.' } },
   ],
 }
 
@@ -125,10 +139,11 @@ export const Pages: CollectionConfig = {
     group: 'Inhalte',
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', '_status', 'updatedAt'],
+    description: 'Sektionen in „Layout“ verschieben. Änderungen zunächst als Entwurf speichern, dann veröffentlichen.',
+    preview: (data) => `/preview?collection=pages&slug=${encodeURIComponent(String(data.slug || 'home'))}`,
     livePreview: {
       url: ({ data, locale }) => {
-        const slug = data?.slug === 'home' ? '' : `/${data?.slug ?? ''}`
-        return `${process.env.NEXT_PUBLIC_SERVER_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000'}${slug}?preview=true&locale=${locale.code}`
+        return `/preview?collection=pages&slug=${encodeURIComponent(data?.slug || 'home')}&locale=${locale.code}`
       },
     },
   },

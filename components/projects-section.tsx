@@ -7,92 +7,13 @@ import { useLanguage } from "@/components/language-provider"
 import { ExternalLink, ArrowUpRight, Clock, Grid3x3, List, Filter, Globe, Play, Instagram } from "lucide-react"
 import { cmsProjectCopy } from "@/lib/cms-project-copy"
 import { hazeChillProjectCopy } from "@/lib/haze-chill-project-copy"
+import { localizedText, selectPortfolio, type PortfolioProject, type PortfolioSection } from "@/lib/portfolio"
 import { projectImageCopy } from "@/lib/project-image-copy"
 
-type ProjectCategory = "web" | "design" | "gastro" | "social" | "ecommerce" | "nonprofit"
+type ProjectCategory = "showcase" | "web" | "design" | "gastro" | "social" | "ecommerce" | "nonprofit"
 
-interface Project {
-  titleKey: string
-  descriptionKey: string
-  url: string
-  tags: string[]
-  category: ProjectCategory
-  type?: "website" | "social"
-  platform?: "instagram"
-  logo?: string
-  previewImage?: string
-}
 
-const projects: Project[] = [
-  {
-    titleKey: "projects.cms.title",
-    descriptionKey: "projects.cms.description",
-    url: "/CMS",
-    tags: ["CMS", "Dashboard", "Open Source"],
-    category: "web",
-    type: "website",
-    logo: "/images/logo-invertable.png",
-  },
-  {
-    titleKey: "projects.hazechill.title",
-    descriptionKey: "projects.hazechill.description",
-    url: "https://www.haze-chill.com/",
-    tags: ["Webdesign", "Café", "Kassel"],
-    category: "gastro",
-    type: "website",
-    previewImage: "/projects/haze-chill-website.jpg",
-  },
-  {
-    titleKey: "projects.reel.title",
-    descriptionKey: "projects.reel.description",
-    url: "https://www.instagram.com/reel/DYug1AZoD9L/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    tags: ["Instagram", "Reel", "Content Editing", "Social Media"],
-    category: "social",
-    type: "social",
-    platform: "instagram",
-    previewImage: "/projects/haze-chill-instagram.png",
-  },
-  {
-    titleKey: "projects.studio.title",
-    descriptionKey: "projects.studio.description",
-    url: "https://www.glace14.com/",
-    tags: ["Design", "Studio", "Portfolio"],
-    category: "design",
-    type: "website",
-  },
-  {
-    titleKey: "projects.joesgarage.title",
-    descriptionKey: "projects.joesgarage.description",
-    url: "https://www.joes-garage.net",
-    tags: ["Rock Bar", "Webdesign", "Events"],
-    category: "gastro",
-    type: "website",
-  },
-  {
-    titleKey: "projects.crypto.title",
-    descriptionKey: "projects.crypto.description",
-    url: "https://v0-crypto-news-website-peach.vercel.app/",
-    tags: ["Next.js", "Crypto", "News"],
-    category: "web",
-    type: "website",
-  },
-  {
-    titleKey: "projects.luxury.title",
-    descriptionKey: "projects.luxury.description",
-    url: "https://v0-luxury-street-chic-website.vercel.app/",
-    tags: ["Fashion", "E-Commerce", "AWD"],
-    category: "ecommerce",
-    type: "website",
-  },
-  {
-    titleKey: "projects.donation.title",
-    descriptionKey: "projects.donation.description",
-    url: "https://v0-donation-website-for-al-salam.vercel.app/",
-    tags: ["Charity", "Donation", "Website"],
-    category: "nonprofit",
-    type: "website",
-  },
-]
+
 
 // Module-level cache: persists across re-renders and filter changes
 const thumbnailCache = new Map<string, { src: string; status: "loaded" | "error" }>()
@@ -214,32 +135,34 @@ function LogoThumbnail({ logo, title }: { logo: string; title: string }) {
 type ViewMode = "grid" | "list"
 type CategoryFilter = "all" | ProjectCategory
 
-export function ProjectsSection() {
+export function ProjectsSection({ projects, section }: { projects: PortfolioProject[]; section?: PortfolioSection }) {
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
   const { t, language } = useLanguage()
   const cmsCopy = cmsProjectCopy[language]
   const hazeCopy = hazeChillProjectCopy[language]
   const imageCopy = projectImageCopy[language]
-  const projectTitle = (project: Project) => project.url === "/CMS" ? cmsCopy.title : project.titleKey === "projects.hazechill.title" ? hazeCopy.title : t(project.titleKey)
-  const projectDescription = (project: Project) => project.url === "/CMS" ? cmsCopy.intro : project.descriptionKey === "projects.hazechill.description" ? hazeCopy.description : t(project.descriptionKey)
+  const projectTitle = (project: PortfolioProject) => localizedText(project.title, language)
+  const projectDescription = (project: PortfolioProject) => localizedText(project.description, language)
+  const selectedProjects = useMemo(() => selectPortfolio(projects, section?.selection), [projects, section?.selection])
   const [viewMode, setViewMode] = useState<ViewMode>("grid")
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all")
 
   const filteredProjects = useMemo(() => {
-    if (selectedCategory === "all") return projects
-    return projects.filter((p) => p.category === selectedCategory)
-  }, [selectedCategory])
+    if (selectedCategory === "all") return selectedProjects
+    return selectedProjects.filter((p) => p.category === selectedCategory)
+  }, [selectedCategory, selectedProjects])
 
   const categoryOptions: { value: CategoryFilter; label: string }[] = [
     { value: "all", label: t("ui.all") },
     { value: "web", label: "Web" },
     { value: "design", label: "Design" },
+    { value: "showcase", label: "Showcase" },
     { value: "gastro", label: hazeCopy.gastro },
     { value: "social", label: hazeCopy.social },
     { value: "ecommerce", label: "E-Commerce" },
     { value: "nonprofit", label: "Non-Profit" },
   ]
-  const categories = categoryOptions.filter((category) => category.value === "all" || projects.some((project) => project.category === category.value))
+  const categories = categoryOptions.filter((category) => category.value === "all" || selectedProjects.some((project) => project.category === category.value))
 
   return (
     <section id="projekte" className="py-16 sm:py-24 lg:py-32 bg-secondary/30">
@@ -252,12 +175,12 @@ export function ProjectsSection() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
             <Clock className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">{t("projects.badge")}</span>
+            <span className="text-sm font-medium text-primary">{section ? localizedText(section.eyebrow, language) : t("projects.badge")}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance">
-            {t("projects.title")}
+            {section ? localizedText(section.heading, language) : t("projects.title")}
           </h2>
-          <p className="text-base sm:text-xl text-muted-foreground leading-relaxed">{t("projects.description")}</p>
+          <p className="text-base sm:text-xl text-muted-foreground leading-relaxed">{section ? localizedText(section.description, language) : t("projects.description")}</p>
         </div>
 
         {/* Filter and View Controls */}
@@ -267,7 +190,7 @@ export function ProjectsSection() {
           }`}
         >
           <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
+            {(section?.showFilters === false ? [] : categories).map((category) => (
               <button
                 key={category.value}
                 onClick={() => setSelectedCategory(category.value)}
@@ -322,7 +245,7 @@ export function ProjectsSection() {
         <div className={`grid gap-5 sm:gap-8 ${viewMode === "grid" ? "md:grid-cols-2" : "grid-cols-1"}`}>
           {filteredProjects.map((project, index) => (
             <a
-              key={project.url}
+              key={project.id}
               href={project.url}
               target={project.url.startsWith("/") ? undefined : "_blank"}
               rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
@@ -334,10 +257,10 @@ export function ProjectsSection() {
             >
               {/* Thumbnail */}
               <div className={`${viewMode === "grid" ? "aspect-video" : "aspect-video sm:aspect-[3/1]"} relative overflow-hidden`}>
-                {project.previewImage ? (
-                  <StaticThumbnail src={project.previewImage} alt={`${project.type === "social" ? imageCopy.social : imageCopy.website}: ${projectTitle(project)}`} />
-                ) : project.logo ? (
-                  <LogoThumbnail logo={project.logo} title="Naser Solutions" />
+                {project.image && !project.containImage ? (
+                  <StaticThumbnail src={project.image!} alt={localizedText(project.alt, language) || `${project.category === "social" ? imageCopy.social : imageCopy.website}: ${projectTitle(project)}`} />
+                ) : project.image ? (
+                  <LogoThumbnail logo={project.image!} title={projectTitle(project)} />
                 ) : (
                   <ProjectThumbnail url={project.url} title={projectTitle(project)} />
                 )}
@@ -349,10 +272,10 @@ export function ProjectsSection() {
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag) => (
                       <span
-                        key={tag}
+                        key={localizedText(tag, language)}
                         className="text-xs px-3 py-1 rounded-full bg-secondary text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-300"
                       >
-                        {tag}
+                        {localizedText(tag, language)}
                       </span>
                     ))}
                   </div>
@@ -363,10 +286,10 @@ export function ProjectsSection() {
                 </div>
 
                 <div className="mt-4 sm:mt-0 flex items-center gap-2 text-primary font-medium">
-                  <span>{project.url === "/CMS" ? cmsCopy.status : t(project.type === "social" ? "ui.instagram" : "ui.website")}</span>
+                  <span>{project.url === "/CMS" ? cmsCopy.status : t(project.category === "social" ? "ui.instagram" : "ui.website")}</span>
                   {project.url === "/CMS" ? (
                     <ArrowUpRight className="h-4 w-4" />
-                  ) : project.type === "social" ? (
+                  ) : project.category === "social" ? (
                     <Instagram className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   ) : (
                     <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />

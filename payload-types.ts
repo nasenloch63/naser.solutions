@@ -98,8 +98,8 @@ export interface Config {
     | ('false' | 'none' | 'null')
     | false
     | null
-    | ('de' | 'en' | 'fr' | 'pt' | 'es' | 'tr' | 'sq' | 'ru' | 'el' | 'ar' | 'zh')
-    | ('de' | 'en' | 'fr' | 'pt' | 'es' | 'tr' | 'sq' | 'ru' | 'el' | 'ar' | 'zh')[];
+    | ('de' | 'en' | 'fr' | 'pt' | 'es' | 'tr' | 'sq' | 'ru' | 'el' | 'ar' | 'zh' | 'ja' | 'th' | 'hi' | 'uk' | 'it')
+    | ('de' | 'en' | 'fr' | 'pt' | 'es' | 'tr' | 'sq' | 'ru' | 'el' | 'ar' | 'zh' | 'ja' | 'th' | 'hi' | 'uk' | 'it')[];
   globals: {
     navigation: Navigation;
     footer: Footer;
@@ -110,7 +110,7 @@ export interface Config {
     footer: FooterSelect<false> | FooterSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
-  locale: 'de' | 'en' | 'fr' | 'pt' | 'es' | 'tr' | 'sq' | 'ru' | 'el' | 'ar' | 'zh';
+  locale: 'de' | 'en' | 'fr' | 'pt' | 'es' | 'tr' | 'sq' | 'ru' | 'el' | 'ar' | 'zh' | 'ja' | 'th' | 'hi' | 'uk' | 'it';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -172,6 +172,8 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Öffentliche Website-Medien. Bilder und PDF bis 4 MB pro Datei.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
@@ -180,6 +182,10 @@ export interface Media {
   alt: string;
   caption?: string | null;
   credit?: string | null;
+  /**
+   * Herkunft eines übernommenen Website-Mediums.
+   */
+  sourcePath?: string | null;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -220,6 +226,8 @@ export interface Media {
   };
 }
 /**
+ * Sektionen in „Layout“ verschieben. Änderungen zunächst als Entwurf speichern, dann veröffentlichen.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
@@ -461,6 +469,8 @@ export interface Page {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Die Website zeigt veröffentlichte Projekte in aufsteigender Reihenfolge. Entwurf speichern → Vorschau → Veröffentlichen.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects".
  */
@@ -471,6 +481,8 @@ export interface Project {
   description: string;
   url: string;
   thumbnail?: (number | null) | Media;
+  containImage?: boolean | null;
+  showInPortfolio?: boolean | null;
   category: 'web' | 'design' | 'showcase' | 'social' | 'ecommerce' | 'nonprofit' | 'gastro';
   tags?:
     | {
@@ -480,6 +492,9 @@ export interface Project {
     | null;
   projectStatus?: ('showcase' | 'development' | 'live') | null;
   featured?: boolean | null;
+  /**
+   * Kleinere Zahlen erscheinen zuerst. Die neue Position wird erst nach Veröffentlichung sichtbar.
+   */
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -725,6 +740,7 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   credit?: T;
+  sourcePath?: T;
   prefix?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -992,6 +1008,8 @@ export interface ProjectsSelect<T extends boolean = true> {
   description?: T;
   url?: T;
   thumbnail?: T;
+  containImage?: T;
+  showInPortfolio?: T;
   category?: T;
   tags?:
     | T

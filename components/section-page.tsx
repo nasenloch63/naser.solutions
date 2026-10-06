@@ -9,6 +9,7 @@ import { ProjectsSection } from '@/components/projects-section'
 import { ServicesSection } from '@/components/services-section'
 import { useLanguage } from '@/components/language-provider'
 import type { SectionSlug } from '@/lib/section-pages'
+import type { PortfolioProject, PortfolioSection } from '@/lib/portfolio'
 
 const sections = {
   'ueber-uns': { Component: AboutSection, title: 'nav.about' },
@@ -17,7 +18,7 @@ const sections = {
   kontakt: { Component: ContactSection, title: 'nav.contact' },
 }
 
-export function SectionPage({ slug }: { slug: SectionSlug }) {
+export function SectionPage({ slug, portfolio = [], portfolioSection }: { slug: SectionSlug; portfolio?: PortfolioProject[]; portfolioSection?: PortfolioSection }) {
   const { t } = useLanguage()
   const { Component, title } = sections[slug]
 
@@ -26,7 +27,7 @@ export function SectionPage({ slug }: { slug: SectionSlug }) {
       <Navbar />
       <main className="min-h-screen bg-background pt-20 text-foreground">
         <h1 className="sr-only">{t(title)}</h1>
-        <Component />
+        <Component projects={portfolio} section={portfolioSection} />
       </main>
       <Footer />
     </LegalModalProvider>

@@ -12,8 +12,8 @@ export const previewHome: Page = {
   updatedAt: '2026-09-29T00:00:00.000Z',
   layout: [
     { blockType: 'hero', heading: 'Naser Solutions' },
-    { blockType: 'featureGrid', heading: 'Leistungen', items: [] },
     { blockType: 'projects', heading: 'Projekte' },
+    { blockType: 'featureGrid', heading: 'Leistungen', items: [] },
     { blockType: 'stats', items: [] },
     { blockType: 'cta', heading: 'Vision' },
     { blockType: 'contact', heading: 'Kontakt', recipientEmail: 'info@naser-solutions.de' },

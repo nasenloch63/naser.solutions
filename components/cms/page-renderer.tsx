@@ -14,6 +14,7 @@ import { ServicesSection } from '@/components/services-section'
 import { StatsSection } from '@/components/stats-section'
 import { VisionSection } from '@/components/vision-section'
 import { cn } from '@/lib/utils'
+import type { PortfolioProject, PortfolioSection } from '@/lib/portfolio'
 
 const iconMap = { Code2, Globe: Globe2, Globe2, Palette, Rocket, ShieldCheck, Sparkles }
 
@@ -81,7 +82,7 @@ function ProjectCards({ projects }: { projects: Project[] }) {
   )
 }
 
-export function PageRenderer({ initialPage, projects = [] }: { initialPage: Page; projects?: Project[] }) {
+export function PageRenderer({ initialPage, projects = [], portfolio = [], portfolioSection }: { initialPage: Page; projects?: Project[]; portfolio?: PortfolioProject[]; portfolioSection?: PortfolioSection }) {
   const { data: page } = useLivePreview<Page>({
     initialData: initialPage,
     serverURL: typeof window === 'undefined' ? '' : window.location.origin,
@@ -89,9 +90,7 @@ export function PageRenderer({ initialPage, projects = [] }: { initialPage: Page
   })
 
   const isHomepage = page.slug === 'home'
-  const layout = isHomepage
-    ? [...page.layout.filter(block => block.blockType === 'hero'), ...page.layout.filter(block => block.blockType === 'projects'), ...page.layout.filter(block => block.blockType !== 'hero' && block.blockType !== 'projects')]
-    : page.layout
+  const layout = page.layout
 
   return (
     <>
@@ -101,7 +100,7 @@ export function PageRenderer({ initialPage, projects = [] }: { initialPage: Page
 
         if (block.blockType === 'hero' && isHomepage) return <HeroSection key={key} />
         if (block.blockType === 'featureGrid' && isHomepage) return <ServicesSection key={key} />
-        if (block.blockType === 'projects' && isHomepage) return <ProjectsSection key={key} />
+        if (block.blockType === 'projects' && isHomepage) return <ProjectsSection key={key} projects={portfolio} section={portfolioSection && portfolioSection.id === block.id ? { ...portfolioSection, selection: block.selection, showFilters: block.showFilters } : block} />
         if (block.blockType === 'stats' && isHomepage) return <StatsSection key={key} />
         if (block.blockType === 'cta' && isHomepage) return <div key={key}><AboutSection /><VisionSection /></div>
 
