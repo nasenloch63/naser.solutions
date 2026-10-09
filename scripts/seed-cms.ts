@@ -4,22 +4,27 @@ import { getPayload } from 'payload'
 const localized = <T>(value: T) => value
 
 async function seed() {
-  const payload = await getPayload({ config })
+  const email = process.env.PAYLOAD_SEED_EMAIL?.trim()
   const password = process.env.PAYLOAD_SEED_PASSWORD
 
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    throw new Error('PAYLOAD_SEED_EMAIL fehlt oder ist ungültig.')
+  }
   if (!password) throw new Error('PAYLOAD_SEED_PASSWORD ist nicht gesetzt.')
+
+  const payload = await getPayload({ config })
 
   const existingAdmin = await payload.find({
     collection: 'users',
     limit: 1,
-    where: { email: { equals: 'cms-seed@example.invalid' } },
+    where: { email: { equals: email } },
   })
 
   if (!existingAdmin.docs.length) {
     await payload.create({
       collection: 'users',
       data: {
-        email: 'cms-seed@example.invalid',
+        email,
         password,
         name: 'Yasin Adam Aissani',
         role: 'admin',

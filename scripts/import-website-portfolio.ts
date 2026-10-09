@@ -16,9 +16,6 @@ const assets = [
   ['/images/yasin-adam-aissani-2026.jpg', 'Yasin Adam Aissani – Porträt'],
   ['/projects/haze-chill-website.jpg', 'Haze & Chill – Website'],
   ['/projects/haze-chill-instagram.png', 'Haze & Chill – Instagram Reel'],
-  ['/documents/cw-yasin-2026.pdf', 'Lebenslauf Yasin Adam Aissani 2026'],
-  ['/documents/frankenlandschule-zeugnis.jpeg', 'Zeugnis der Frankenlandschule'],
-  ['/documents/mittlere-reife-woerth.jpeg', 'Zeugnis Mittlere Reife Wörth'],
   ...slugs.slice(3).map(slug => [`/projects/${slug}.${slug === 'joes-garage' ? 'svg' : 'jpg'}`, `${slug === 'studio-glace' ? 'Studio Glacé' : slug === 'joes-garage' ? 'Joe’s Garage' : slug === 'crypto-news' ? 'Crypto News' : slug === 'awd-shop' ? 'AWD Shop' : 'Al Salam'} – Website`]),
 ]
 

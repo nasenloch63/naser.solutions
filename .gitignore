@@ -19,6 +19,19 @@ yarn-error.log*
 # env files
 .env*
 
+# Private documents, backups and credentials must stay outside the public repo.
+/public/documents/
+/private/
+/backups/
+*.pem
+*.key
+*.p12
+*.pfx
+*.dump
+*.backup
+/credentials*.json
+/service-account*.json
+
 # vercel
 .vercel
 

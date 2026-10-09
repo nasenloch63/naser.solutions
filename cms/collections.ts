@@ -1,6 +1,7 @@
 import type { CollectionConfig, GlobalConfig } from 'payload'
 import { APIError } from 'payload'
 import { pageBlocks } from './blocks'
+import { websiteMediaRead } from './media-access'
 
 type CMSUser = { id: number | string; role?: 'admin' | 'editor' | 'client' } | null
 
@@ -27,14 +28,14 @@ export const Users: CollectionConfig = {
     group: 'System',
   },
   access: {
-    create: staffOnly,
+    create: adminOnly,
     read: ({ req: { user } }) => {
       if (isStaff(user as CMSUser)) return true
       if (isClient(user as CMSUser)) return { id: { equals: user?.id } }
       return false
     },
     update: ({ req: { user } }) => {
-      if (isStaff(user as CMSUser)) return true
+      if (isAdmin(user as CMSUser)) return true
       if (isClient(user as CMSUser)) return { id: { equals: user?.id } }
       return false
     },
@@ -49,7 +50,7 @@ export const Users: CollectionConfig = {
       required: true,
       defaultValue: 'editor',
       saveToJWT: true,
-      access: { create: staffOnly, update: adminOnly },
+      access: { create: adminOnly, update: adminOnly },
       options: [
         { label: 'Administrator', value: 'admin' },
         { label: 'Redakteur', value: 'editor' },
@@ -63,7 +64,7 @@ export const Media: CollectionConfig = {
   slug: 'media',
   labels: { singular: 'Medium', plural: 'Medien' },
   admin: { group: 'Inhalte', useAsTitle: 'alt', defaultColumns: ['filename', 'alt', 'updatedAt'], description: 'Öffentliche Website-Medien. Bilder und PDF bis 4 MB pro Datei.' },
-  access: { read: () => true, create: staffOnly, update: staffOnly, delete: staffOnly },
+  access: { read: ({ req: { user } }) => websiteMediaRead(user), create: staffOnly, update: staffOnly, delete: staffOnly },
   hooks: { beforeOperation: [({ req, operation }) => {
     if ((operation === 'create' || operation === 'update') && req.file && req.file.size > 4 * 1024 * 1024) throw new APIError('Bitte eine Datei mit höchstens 4 MB hochladen.', 400)
   }] },

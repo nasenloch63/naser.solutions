@@ -24,13 +24,13 @@ const adapter: Adapter = () => ({
   async staticHandler(req, { params }) {
     let path: string
     try { path = mediaBlobPath(params.filename) } catch { return new Response('Invalid filename', { status: 400 }) }
-    const document = await req.payload.find({ collection: 'media', depth: 0, limit: 1, overrideAccess: true, where: { or: ['filename', 'sizes.thumbnail.filename', 'sizes.card.filename', 'sizes.hero.filename'].map(field => ({ [field]: { equals: params.filename } })) } })
+    const document = await req.payload.find({ collection: 'media', depth: 0, limit: 1, req, overrideAccess: false, where: { or: ['filename', 'sizes.thumbnail.filename', 'sizes.card.filename', 'sizes.hero.filename'].map(field => ({ [field]: { equals: params.filename } })) } })
     if (!document.docs.length) return new Response('Not found', { status: 404 })
     const result = await get(path, { access: 'private', token: process.env.BLOB_READ_WRITE_TOKEN })
     if (!result || result.statusCode !== 200) return new Response('Not found', { status: 404 })
     return new Response(result.stream, { headers: {
       'Content-Type': result.blob.contentType,
-      'Cache-Control': 'public, max-age=0, must-revalidate',
+      'Cache-Control': document.docs[0].sourcePath?.startsWith('/documents/') ? 'private, no-store' : 'public, max-age=0, must-revalidate',
       'X-Content-Type-Options': 'nosniff',
       'Content-Security-Policy': "default-src 'none'; sandbox",
     } })

@@ -17,7 +17,6 @@
     "@payloadcms/live-preview-react": "^3.86.0",
     "@payloadcms/next": "^3.86.0",
     "@payloadcms/richtext-lexical": "^3.86.0",
-    "@payloadcms/storage-vercel-blob": "^3.86.0",
     "@payloadcms/ui": "^3.86.0",
     "@radix-ui/react-label": "2.1.1",
     "@radix-ui/react-slot": "1.1.1",
