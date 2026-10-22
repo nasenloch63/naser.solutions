@@ -141,6 +141,7 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
   const cmsCopy = cmsProjectCopy[language]
   const hazeCopy = hazeChillProjectCopy[language]
   const imageCopy = projectImageCopy[language]
+  const isInstagramProject = (project: PortfolioProject) => /^https?:\/\/(?:www\.)?instagram\.com(?:\/|$)/i.test(project.url)
   const projectTitle = (project: PortfolioProject) => localizedText(project.title, language)
   const projectDescription = (project: PortfolioProject) => localizedText(project.description, language)
   const selectedProjects = useMemo(() => selectPortfolio(projects, section?.selection), [projects, section?.selection])
@@ -286,10 +287,10 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
                 </div>
 
                 <div className="mt-4 sm:mt-0 flex items-center gap-2 text-primary font-medium">
-                  <span>{project.url === "/CMS" ? cmsCopy.status : t(project.category === "social" ? "ui.instagram" : "ui.website")}</span>
+                  <span>{project.url === "/CMS" ? cmsCopy.status : t(isInstagramProject(project) ? "ui.instagram" : "ui.website")}</span>
                   {project.url === "/CMS" ? (
                     <ArrowUpRight className="h-4 w-4" />
-                  ) : project.category === "social" ? (
+                  ) : isInstagramProject(project) ? (
                     <Instagram className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   ) : (
                     <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
