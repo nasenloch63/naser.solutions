@@ -1,8 +1,10 @@
 import type { Language } from "@/components/language-provider"
 
 import { japaneseProfileCopy } from './japanese-copy'
+import { digitalMarketingCopy } from './digital-marketing-copy'
+import { supportedLanguages } from './language'
 
-export const profileCopy: Record<Language, Record<string, string>> = {
+const baseProfileCopy: Record<Language, Record<string, string>> = {
   ja: japaneseProfileCopy,
   hi: {
     "about.world": "मेरे व्यक्तिगत संपर्क दुनिया भर में, दक्षिण-पूर्व एशिया तक हैं। {ritzi} जैसे परिचितों के साथ मैं पेशेवर सवालों और प्रोजेक्ट पर विचार साझा करता हूँ।",
@@ -290,3 +292,11 @@ export const profileCopy: Record<Language, Record<string, string>> = {
     "services.care.description": "Përditësime dhe përmirësime sipas mbështetjes së dakordësuar."
   }
 }
+
+export const profileCopy: Record<Language, Record<string, string>> = Object.fromEntries<Record<string, string>>(
+  supportedLanguages.map(language => [language, {
+    ...baseProfileCopy[language],
+    'services.marketing.title': digitalMarketingCopy[language].title,
+    'services.marketing.description': digitalMarketingCopy[language].description,
+  }]),
+) as Record<Language, Record<string, string>>

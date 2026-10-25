@@ -3,6 +3,10 @@ import { test } from 'node:test'
 import type { Page } from '../payload-types'
 import { buildMetadata, metadataForPage, publicPageMetadata, SHARE_PAGES, SITE_URL, socialImageUrl } from '../lib/seo'
 import { isSectionSlug, sectionSlugs } from '../lib/section-pages'
+import { getLocalService, localServices } from '../lib/local-services'
+import { serviceSchema } from '../lib/service-schema'
+import { supportedLanguages } from '../lib/language'
+import { digitalMarketingCopy } from '../lib/digital-marketing-copy'
 
 test('shareable pages use the original logo preview, with a separate portrait preview for about', () => {
   const images = new Set<string>()
@@ -59,4 +63,36 @@ test('section links have real shareable pages while unknown sections remain CMS 
   assert.equal(isSectionSlug('projekte/beispiel'), false)
   const metadata = buildMetadata({ title: 'Test', description: 'Test', path: '/new-page' })
   assert.equal((metadata.openGraph as { images: { url: string }[] }).images[0].url, socialImageUrl('/new-page'))
+})
+
+test('local service pages have distinct canonicals, indexable metadata and matching visible FAQ data', () => {
+  const canonicals = new Set<string>()
+  for (const service of localServices) {
+    const metadata = publicPageMetadata(`/${service.slug}`)
+    const canonical = new URL(`/${service.slug}`, SITE_URL).href
+    canonicals.add(canonical)
+    assert.equal(metadata.alternates?.canonical, canonical)
+    assert.equal((metadata.robots as { index: boolean }).index, true)
+    assert.equal((metadata.openGraph as { title: string }).title, service.title)
+    const graph = serviceSchema(service)['@graph']
+    const page = graph.find(node => node['@type'] === 'WebPage')!
+    const offering = graph.find(node => node['@type'] === 'Service')!
+    const faq = graph.find(node => node['@type'] === 'FAQPage')!
+    assert.equal(page.url, canonical)
+    assert.equal(offering.url, canonical)
+    assert.equal(offering.areaServed?.name, 'Kassel')
+    assert.equal(offering.provider?.['@id'], `${SITE_URL}/#organization`)
+    assert.deepEqual(faq.mainEntity, service.faqs.map(item => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })))
+  }
+  assert.equal(canonicals.size, 3)
+  assert.equal(getLocalService('unknown'), undefined)
+  assert.equal(getLocalService('toString'), undefined)
+  assert.equal(getLocalService('webagentur-kassel/unknown'), undefined)
+})
+
+test('digital marketing is available in every supported language', () => {
+  for (const language of supportedLanguages) {
+    assert.ok(digitalMarketingCopy[language].title.trim())
+    assert.ok(digitalMarketingCopy[language].description.trim())
+  }
 })

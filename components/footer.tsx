@@ -13,6 +13,11 @@ export function Footer() {
   return (
     <footer className="py-12 border-t border-border bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav lang="de-DE" dir="ltr" aria-label="Leistungen in Kassel" className="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          <Link href="/webagentur-kassel" className="inline-flex min-h-11 items-center underline underline-offset-4 hover:text-foreground">Webagentur Kassel</Link>
+          <Link href="/digital-marketing-kassel" className="inline-flex min-h-11 items-center underline underline-offset-4 hover:text-foreground">Digital Marketing Kassel</Link>
+          <Link href="/anwendungsentwicklung-kassel" className="inline-flex min-h-11 items-center underline underline-offset-4 hover:text-foreground">Anwendungsentwicklung Kassel</Link>
+        </nav>
         <div className="flex flex-col xl:flex-row items-center justify-between gap-6">
           <Link href="/" aria-label="Naser Solutions" className="flex items-center gap-3">
             <div className="relative w-10 h-10">

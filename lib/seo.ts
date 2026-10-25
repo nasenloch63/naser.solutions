@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import type { Page } from '@/payload-types'
+import { localServices } from './local-services'
 
 export const SITE_URL = 'https://www.naser-solutions.de'
 export const SITE_NAME = 'Naser Solutions'
-export const DEFAULT_TITLE = 'Webdesign & Webentwicklung in Kassel | Naser Solutions'
+export const DEFAULT_TITLE = 'Webagentur Kassel & Digital Marketing | Naser Solutions'
 export const DEFAULT_DESCRIPTION =
-  'Webdesign & Webentwicklung in Kassel: individuelle Websites, SEO & GEO und passende Integrationen. Naser Solutions begleitet dein Projekt persönlich.'
+  'Naser Solutions: deine Webagentur in Kassel für Webdesign, Webentwicklung und Digital Marketing. SEO, Social Media und individuelle Anwendungen aus einer Hand.'
 export function socialImageUrl(path = '/') {
   return `${SITE_URL}/og${path === '/ueber-uns' ? '/ueber-uns' : ''}?v=3`
 }
@@ -14,9 +15,10 @@ export const BUSINESS_EMAIL = 'info@naser-solutions.de'
 export const BUSINESS_PHONE = '+49 15560 729886'
 
 export const SHARE_PAGES: Record<string, { title: string; description: string; headline: string; label: string; noIndex?: boolean }> = {
-  '/': { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, headline: 'Webdesign. Entwicklung. Persönlich.', label: 'WEBAGENTUR · KASSEL' },
+  ...Object.fromEntries(localServices.map(service => [`/${service.slug}`, { title: service.title, description: service.description, headline: service.heading, label: service.label }])),
+  '/': { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, headline: 'Webdesign. Entwicklung. Digital Marketing.', label: 'WEBAGENTUR · KASSEL' },
   '/ueber-uns': { title: 'Über mich – Yasin Adam Aissani | Naser Solutions', description: 'Lerne Yasin Adam Aissani kennen: den Menschen hinter Naser Solutions, seinen Weg in die Webentwicklung und sein persönliches Netzwerk.', headline: 'Der Mensch hinter Naser Solutions.', label: 'YASIN ADAM AISSANI' },
-  '/leistungen': { title: 'Leistungen für deinen digitalen Auftritt | Naser Solutions', description: 'Webdesign & Webentwicklung, SEO & GEO, Social Media, Cinematic Reels und Automatisierung: Entdecke die Leistungen von Naser Solutions aus Kassel.', headline: 'Dein digitaler Auftritt. Durchdacht umgesetzt.', label: 'UNSERE LEISTUNGEN' },
+  '/leistungen': { title: 'Webdesign, Digital Marketing & IT in Kassel | Naser Solutions', description: 'Webdesign, Digital Marketing, SEO, Social Media und Anwendungsentwicklung in Kassel: Entdecke die Leistungen von Naser Solutions für dein Unternehmen.', headline: 'Webdesign. Marketing. Entwicklung.', label: 'UNSERE LEISTUNGEN' },
   '/projekte': { title: 'Projekte & Referenzen | Naser Solutions', description: 'Entdecke Webdesign-Projekte, digitale Markenauftritte und Arbeiten von Naser Solutions.', headline: 'Ideen werden zu digitalen Erlebnissen.', label: 'PROJEKTE & REFERENZEN' },
   '/kontakt': { title: 'Kontakt & Projektanfrage | Naser Solutions', description: 'Sprich mit Yasin Adam Aissani über deine Website-Idee. Persönlicher Kontakt zu Naser Solutions per E-Mail, Telefon oder WhatsApp.', headline: 'Lass uns über dein Projekt sprechen.', label: 'PERSÖNLICHER KONTAKT' },
   '/CMS': { title: 'CMS & Kunden-Dashboard | Naser Solutions', description: 'Naser Solutions entwickelt ein CMS-Dashboard, mit dem Kunden kleine Website-Änderungen selbst vornehmen können. Einblicke in das Open-Source-Projekt.', headline: 'Deine Website. Selbst im Griff.', label: 'CMS & KUNDEN-DASHBOARD' },

@@ -1,6 +1,7 @@
 "use client"
 
-import { Globe, TrendingUp, Palette, Workflow, Megaphone, Wrench, Wallet, CreditCard, ReceiptText } from "lucide-react"
+import Link from "next/link"
+import { Globe, TrendingUp, Palette, Workflow, Megaphone, Wrench, Wallet, CreditCard, ReceiptText, Target } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
 import { servicePricingCopy } from "@/lib/service-pricing-copy"
@@ -17,6 +18,7 @@ export function ServicesSection() {
 
   const services = [
     { icon: Globe, titleKey: "services.web.title", descriptionKey: "services.web.description" },
+    { icon: Target, titleKey: "services.marketing.title", descriptionKey: "services.marketing.description" },
     { icon: Workflow, titleKey: "services.integrations.title", descriptionKey: "services.integrations.description" },
     { icon: TrendingUp, titleKey: "services.seo.title", descriptionKey: "services.seo.description" },
     { icon: Megaphone, titleKey: "services.social.title", descriptionKey: "services.social.description" },
@@ -40,6 +42,11 @@ export function ServicesSection() {
             {t("services.title")}
           </h2>
           <p className="text-base sm:text-xl text-muted-foreground leading-relaxed">{t("services.description")}</p>
+          <nav lang="de-DE" dir="ltr" aria-label="Leistungen in Kassel" className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            <Link href="/webagentur-kassel" className="inline-flex min-h-11 items-center underline underline-offset-4">Webagentur Kassel</Link>
+            <Link href="/digital-marketing-kassel" className="inline-flex min-h-11 items-center underline underline-offset-4">Digital Marketing Kassel</Link>
+            <Link href="/anwendungsentwicklung-kassel" className="inline-flex min-h-11 items-center underline underline-offset-4">Anwendungsentwicklung Kassel</Link>
+          </nav>
         </div>
 
         <div className="mb-10 sm:mb-16 rounded-2xl border border-primary/20 bg-background p-5 sm:p-8">

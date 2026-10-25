@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { getLocalService } from '@/lib/local-services'
+import { LocalServicePage } from '@/components/local-service-page'
 import { staffPreviewEnabled } from '@/lib/cms-preview'
 import { PreviewBanner } from '@/components/cms/preview-banner'
 import { notFound } from 'next/navigation'
@@ -36,6 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const pageSlug = toSlug(slug)
   const preview = await staffPreviewEnabled()
+  if (getLocalService(pageSlug)) return { ...publicPageMetadata(`/${pageSlug}`), ...(preview ? { robots: { index: false, follow: false } } : {}) }
   if (isSectionSlug(pageSlug)) return { ...publicPageMetadata(`/${pageSlug}`), ...(preview ? { robots: { index: false, follow: false } } : {}) }
   const page = await getPageBySlug(pageSlug)
   if (!page) return {}
@@ -46,6 +49,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CMSPage({ params }: Props) {
   const [{ slug }, preview] = await Promise.all([params, staffPreviewEnabled()])
   const pageSlug = toSlug(slug)
+  const localService = getLocalService(pageSlug)
+  if (localService) return <>{preview && <PreviewBanner />}<LocalServicePage service={localService} /></>
   if (isSectionSlug(pageSlug)) {
     const [portfolio, section] = pageSlug === 'projekte' ? await Promise.all([getPortfolio(preview), getPortfolioSection(preview)]) : [[], undefined]
     return <>{preview && <PreviewBanner />}<SectionPage slug={pageSlug} portfolio={portfolio} portfolioSection={section} /></>
@@ -58,7 +63,7 @@ export default async function CMSPage({ params }: Props) {
   const isHome = page.slug === 'home'
   const faqBlocks = page.layout.filter((block) => block.blockType === 'faq')
   const services = [
-    ...(['web', 'integrations', 'seo', 'social', 'design', 'care'] as const).map(service => [
+    ...(['web', 'marketing', 'integrations', 'seo', 'social', 'design', 'care'] as const).map(service => [
       profileCopy.de[`services.${service}.title`],
       profileCopy.de[`services.${service}.description`],
     ]),
@@ -92,6 +97,7 @@ export default async function CMSPage({ params }: Props) {
         telephone: BUSINESS_PHONE,
         founder: { '@type': 'Person', name: 'Yasin Adam Aissani' },
         areaServed: { '@type': 'City', name: 'Kassel' },
+        knowsAbout: ['Webdesign', 'Webentwicklung', 'Digital Marketing', 'SEO', 'Social Media Marketing', 'Anwendungsentwicklung'],
         sameAs: ['https://instagram.com/naser.solutions', 'https://www.facebook.com/profile.php?id=61588221712388'],
       },
       {

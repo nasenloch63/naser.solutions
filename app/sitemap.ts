@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getPublishedPages } from '@/lib/cms'
 import { absoluteUrl, pagePath, SHARE_PAGES } from '@/lib/seo'
+import { getLocalService } from '@/lib/local-services'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages = await getPublishedPages()
@@ -18,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter(([path, page]) => path !== '/' && !page.noIndex && !cmsUrls.has(absoluteUrl(path)))
     .map(([path]) => ({
       url: absoluteUrl(path),
-      changeFrequency: 'yearly' as const,
+      changeFrequency: getLocalService(path.slice(1)) ? 'monthly' as const : 'yearly' as const,
       priority: ['/impressum', '/datenschutz', '/agb'].includes(path) ? 0.3 : 0.7,
     }))
 
