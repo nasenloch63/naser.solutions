@@ -96,7 +96,7 @@ export function ServicesSection() {
               <dt className="text-sm font-medium">{nfc.bundle}</dt>
               <dd className="mt-3">
                 <span className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  <span dir="ltr" className="font-display text-2xl font-semibold whitespace-nowrap">10 €</span>
+                  <span dir="ltr" className="font-display text-2xl font-semibold whitespace-nowrap">13 €</span>
                   <span className="text-xs text-muted-foreground">{nfc.perCard}</span>
                 </span>
                 <span className="mt-1 block text-xs text-muted-foreground">{nfc.bundleTotal}</span>
