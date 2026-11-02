@@ -44,18 +44,18 @@ export function ServicesSection() {
             const Icon = icons[index]
             const featured = index === 1
             return (
-              <article key={index} className={`relative min-w-0 overflow-hidden rounded-2xl border p-6 sm:p-8 ${featured ? "border-foreground bg-foreground text-background" : "border-border bg-background"}`}>
+              <article key={index} className={`relative min-w-0 overflow-hidden rounded-2xl border border-border bg-background p-6 sm:p-8 ${featured ? "md:border-foreground md:bg-foreground md:text-background" : ""}`}>
                 <div className="mb-8 flex items-center justify-between">
-                  <span className={`flex size-11 items-center justify-center rounded-full border ${featured ? "border-background/25" : "border-border"}`}>
+                  <span className={`flex size-11 items-center justify-center rounded-full border border-border ${featured ? "md:border-background/25" : ""}`}>
                     <Icon className="size-5" strokeWidth={1.5} aria-hidden="true" />
                   </span>
-                  <span aria-hidden="true" className={`font-mono text-xs ${featured ? "text-background/60" : "text-muted-foreground"}`}>0{index + 1}</span>
+                  <span aria-hidden="true" className={`font-mono text-xs text-muted-foreground ${featured ? "md:text-background/60" : ""}`}>0{index + 1}</span>
                 </div>
                 <h3 className="mb-5 font-display text-2xl font-semibold leading-tight tracking-tight wrap-anywhere">{group.title}</h3>
-                <ul className={`divide-y ${featured ? "divide-background/15" : "divide-border"}`}>
+                <ul className={`divide-y divide-border ${featured ? "md:divide-background/15" : ""}`}>
                   {group.items.map(item => (
-                    <li key={item} className={`flex gap-3 py-3 text-sm leading-relaxed ${featured ? "text-background/85" : "text-muted-foreground"}`}>
-                      <span aria-hidden="true" className={`mt-2 size-1 shrink-0 rounded-full ${featured ? "bg-background/60" : "bg-foreground/40"}`} />
+                    <li key={item} className={`flex gap-3 py-3 text-sm leading-relaxed text-muted-foreground ${featured ? "md:text-background/85" : ""}`}>
+                      <span aria-hidden="true" className={`mt-2 size-1 shrink-0 rounded-full bg-foreground/40 ${featured ? "md:bg-background/60" : ""}`} />
                       <span className="min-w-0 wrap-anywhere">{item}</span>
                     </li>
                   ))}
