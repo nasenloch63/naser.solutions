@@ -14,8 +14,11 @@ test('portfolio selection uses only supplied records, respects order, and keeps 
   assert.deepEqual(selectPortfolio([], [999]), [])
 })
 
-test('all eight migrated projects retain their original translated copy and images', () => {
-  assert.equal(previewPortfolio.length, 8)
+test('portfolio previews retain translated copy and images, including the Kassel United reference', () => {
+  assert.equal(previewPortfolio.length, 9)
+  const kasselUnited = previewPortfolio.find(project => project.id === 'kassel-united')
+  assert.equal(kasselUnited?.url, 'https://www.kassel-united.de/')
+  assert.equal(kasselUnited?.category, 'web')
   for (const project of previewPortfolio) {
     assert.ok(project.image)
     for (const language of supportedLanguages) {

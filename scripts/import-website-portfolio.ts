@@ -7,6 +7,7 @@ import { previewPortfolio } from '../lib/portfolio-preview-data'
 import { supportedLanguages } from '../lib/language'
 import { localizedText } from '../lib/portfolio'
 import { websiteText } from '../lib/website-text'
+import { importKasselUnited } from './import-kassel-united'
 
 const checkpoint = '20261006_import_website_portfolio'
 const slugs = ['naser-cms', 'haze-chill-website', 'haze-chill-content', 'studio-glace', 'joes-garage', 'crypto-news', 'awd-shop', 'al-salam']
@@ -84,4 +85,4 @@ async function run() {
     await pool.end()
   }
 }
-try { await run(); process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }
+try { await run(); await importKasselUnited(); process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }
