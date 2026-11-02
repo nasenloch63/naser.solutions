@@ -4,6 +4,7 @@ import { Pool } from 'pg'
 import config from '../payload.config'
 import { kasselUnitedCopy, kasselUnitedProject } from '../lib/kassel-united-project'
 import { supportedLanguages } from '../lib/language'
+import { localizedText } from '../lib/portfolio'
 
 // A separate checkpoint keeps the original portfolio import and later CMS edits intact.
 const checkpoint = '20261102_add_kassel_united_reference'
@@ -43,6 +44,7 @@ export async function importKasselUnited() {
       if (!title || !description) await payload.update({ collection: 'projects', id: project.id, locale, data: {
         ...(!title ? { title: kasselUnitedCopy[locale].title } : {}),
         ...(!description ? { description: kasselUnitedCopy[locale].description } : {}),
+        tags: all.tags?.map((tag, index) => ({ id: tag.id, label: localizedText(tag.label, locale) || String(kasselUnitedProject.tags[index]) })),
         _status: project._status,
       } })
     }
