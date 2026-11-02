@@ -1,16 +1,18 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowUpRight, Globe, Target, AppWindow, Workflow, Server, HeartHandshake, Plus, ReceiptText } from "lucide-react"
+import { ArrowUpRight, Globe, Target, AppWindow, Workflow, Server, HeartHandshake, Plus, ReceiptText, CreditCard } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { serviceCatalog } from "@/lib/service-catalog"
 import { servicePricingCopy } from "@/lib/service-pricing-copy"
+import { nfcCardsCopy } from "@/lib/nfc-cards-copy"
 
 const icons = [Globe, Target, AppWindow, Workflow, Server, HeartHandshake]
 
 export function ServicesSection() {
   const { language, t } = useLanguage()
   const pricing = servicePricingCopy[language]
+  const nfc = nfcCardsCopy[language]
   const priceExamples = [
     { title: pricing.entry, amount: "100–500 €" },
     { title: pricing.integrations, amount: "500–2.000 €" },
@@ -73,6 +75,34 @@ export function ServicesSection() {
               <p className="pb-6 text-sm leading-relaxed text-muted-foreground">{t(`services.${service}.description`)}</p>
             </details>
           ))}
+        </div>
+
+        <div id="nfc-cards" className="mt-4 grid scroll-mt-24 gap-6 rounded-2xl border border-border bg-background p-6 sm:p-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+          <div>
+            <h3 className="flex items-center gap-3 font-display text-xl font-semibold">
+              <CreditCard className="size-5 shrink-0" strokeWidth={1.5} aria-hidden="true" />{nfc.title}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{nfc.description}</p>
+          </div>
+          <dl className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="min-w-0 rounded-xl bg-secondary/50 p-4 sm:p-5">
+              <dt className="text-sm font-medium">{nfc.single}</dt>
+              <dd className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <span className="text-xs text-muted-foreground">{pricing.from}</span>
+                <span dir="ltr" className="font-display text-2xl font-semibold whitespace-nowrap">20 €</span>
+              </dd>
+            </div>
+            <div className="min-w-0 rounded-xl border border-border bg-secondary/50 p-4 sm:p-5">
+              <dt className="text-sm font-medium">{nfc.bundle}</dt>
+              <dd className="mt-3">
+                <span className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  <span dir="ltr" className="font-display text-2xl font-semibold whitespace-nowrap">10 €</span>
+                  <span className="text-xs text-muted-foreground">{nfc.perCard}</span>
+                </span>
+                <span className="mt-1 block text-xs text-muted-foreground">{nfc.bundleTotal}</span>
+              </dd>
+            </div>
+          </dl>
         </div>
 
         <nav lang="de-DE" dir="ltr" aria-label="Leistungen in Kassel" className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-xs text-muted-foreground sm:text-sm">

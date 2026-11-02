@@ -13,6 +13,7 @@ import { isSectionSlug } from '@/lib/section-pages'
 import { getPageBySlug, getProjects, getPortfolio, getPortfolioSection } from '@/lib/cms'
 import { paymentServicesCopy } from '@/lib/payment-services-copy'
 import { serviceCatalog } from '@/lib/service-catalog'
+import { nfcCardsCopy } from '@/lib/nfc-cards-copy'
 import {
   BUSINESS_EMAIL,
   BUSINESS_PHONE,
@@ -66,6 +67,7 @@ export default async function CMSPage({ params }: Props) {
     ...serviceCatalog.de.flatMap(group => group.items.map(item => [item, group.title])),
     [paymentServicesCopy.de['services.cryptoPayments.title'], paymentServicesCopy.de['services.cryptoPayments.description']],
     [paymentServicesCopy.de['services.sumup.title'], paymentServicesCopy.de['services.sumup.description']],
+    [nfcCardsCopy.de.title, nfcCardsCopy.de.description],
   ]
   const graph: Record<string, unknown>[] = [
     {
