@@ -3,6 +3,49 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* A floating menu with reversible height and spring-like movement. */
+.mobile-menu-shell {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.98);
+  transform-origin: top center;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s 320ms;
+}
+
+.mobile-menu-shell[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition-delay: 0s;
+}
+
+.mobile-nav-item {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 160ms ease, transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 160ms ease, color 160ms ease;
+}
+
+.mobile-menu-shell[data-open="true"] .mobile-nav-item {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: calc(50ms + var(--menu-order, 0) * 35ms),
+    calc(50ms + var(--menu-order, 0) * 35ms), 0s, 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-shell,
+  .mobile-nav-item {
+    transition: none;
+    transform: none;
+  }
+}
+
 :root {
   --background: oklch(0.99 0 0);
   --foreground: oklch(0.12 0 0);

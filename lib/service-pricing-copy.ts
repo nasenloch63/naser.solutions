@@ -17,7 +17,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   ja: japanesePricingCopy,
   uk: {
     title: 'Скільки коштуватиме твій проєкт?',
-    description: 'Вартість наших послуг починається від 200–400 €. Ціна залежить від обсягу та складності твого проєкту.',
+    description: 'Вартість наших послуг починається від 100–500 €. Ціна залежить від обсягу та складності твого проєкту.',
     entry: 'Невеликі проєкти', from: 'від',
     integrations: 'Системи бронювання та інтеграції', upTo: 'до',
     app: 'Застосунки з публікацією в App Store',
@@ -26,7 +26,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   th: {
     title: 'โปรเจกต์ของคุณราคาเท่าไร?',
-    description: 'บริการของเราเริ่มที่ 200–400 € ราคาขึ้นอยู่กับขอบเขตและความซับซ้อนของโปรเจกต์',
+    description: 'บริการของเราเริ่มที่ 100–500 € ราคาขึ้นอยู่กับขอบเขตและความซับซ้อนของโปรเจกต์',
     entry: 'โปรเจกต์ขนาดเล็ก', from: 'เริ่มที่',
     integrations: 'ระบบจองและการเชื่อมต่อ', upTo: 'สูงสุด',
     app: 'แอปพร้อมเผยแพร่ใน App Store',
@@ -35,7 +35,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   hi: {
     title: 'आपके प्रोजेक्ट की लागत क्या होगी?',
-    description: 'हमारी सेवाएँ 200–400 € से शुरू होती हैं। कीमत आपके प्रोजेक्ट के दायरे और जटिलता पर निर्भर करती है।',
+    description: 'हमारी सेवाएँ 100–500 € से शुरू होती हैं। कीमत आपके प्रोजेक्ट के दायरे और जटिलता पर निर्भर करती है।',
     entry: 'छोटे प्रोजेक्ट', from: 'से शुरू',
     integrations: 'बुकिंग सिस्टम और इंटीग्रेशन', upTo: 'अधिकतम',
     app: 'App Store पर प्रकाशन सहित ऐप',
@@ -44,7 +44,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   de: {
     title: 'Was kostet dein Projekt?',
-    description: 'Unsere Leistungen beginnen bei 200–400 €. Der Preis richtet sich nach Umfang und Komplexität deines Projekts.',
+    description: 'Drei Preisrahmen als Orientierung. Der genaue Preis richtet sich nach Umfang und Komplexität deines Projekts.',
     entry: 'Kleinere Projekte', from: 'ab',
     integrations: 'Buchungssysteme & Integrationen', upTo: 'bis zu',
     app: 'Apps inkl. App-Store-Veröffentlichung',
@@ -53,7 +53,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   en: {
     title: 'What will your project cost?',
-    description: 'Our services start at €200–400. The price depends on the scope and complexity of your project.',
+    description: 'Three price ranges to guide your planning. The exact price depends on the scope and complexity of your project.',
     entry: 'Smaller projects', from: 'from',
     integrations: 'Booking systems & integrations', upTo: 'up to',
     app: 'Apps including App Store publication',
@@ -62,7 +62,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   fr: {
     title: 'Combien coûte votre projet ?',
-    description: 'Nos prestations commencent à 200–400 €. Le prix dépend de l’étendue et de la complexité de votre projet.',
+    description: 'Nos prestations commencent à 100–500 €. Le prix dépend de l’étendue et de la complexité de votre projet.',
     entry: 'Petits projets', from: 'à partir de',
     integrations: 'Systèmes de réservation et intégrations', upTo: 'jusqu’à',
     app: 'Applications avec publication sur l’App Store',
@@ -71,7 +71,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   ar: {
     title: 'كم تبلغ تكلفة مشروعك؟',
-    description: 'تبدأ خدماتنا من 200–400 €. يعتمد السعر على نطاق مشروعك ومدى تعقيده.',
+    description: 'تبدأ خدماتنا من 100–500 €. يعتمد السعر على نطاق مشروعك ومدى تعقيده.',
     entry: 'المشاريع الصغيرة', from: 'ابتداءً من',
     integrations: 'أنظمة الحجز والتكاملات', upTo: 'حتى',
     app: 'تطبيقات تشمل النشر في App Store',
@@ -80,7 +80,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   tr: {
     title: 'Projenin maliyeti ne kadar?',
-    description: 'Hizmetlerimiz 200–400 €’dan başlar. Fiyat, projenin kapsamına ve karmaşıklığına bağlıdır.',
+    description: 'Hizmetlerimiz 100–500 €’dan başlar. Fiyat, projenin kapsamına ve karmaşıklığına bağlıdır.',
     entry: 'Küçük projeler', from: 'başlangıç',
     integrations: 'Rezervasyon sistemleri ve entegrasyonlar', upTo: 'en fazla',
     app: 'App Store yayını dahil uygulamalar',
@@ -89,7 +89,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   sq: {
     title: 'Sa kushton projekti yt?',
-    description: 'Shërbimet tona fillojnë nga 200–400 €. Çmimi varet nga përmasat dhe kompleksiteti i projektit.',
+    description: 'Shërbimet tona fillojnë nga 100–500 €. Çmimi varet nga përmasat dhe kompleksiteti i projektit.',
     entry: 'Projekte të vogla', from: 'nga',
     integrations: 'Sisteme rezervimi dhe integrime', upTo: 'deri në',
     app: 'Aplikacione me publikim në App Store',
@@ -98,7 +98,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   ru: {
     title: 'Сколько стоит твой проект?',
-    description: 'Наши услуги начинаются от 200–400 €. Цена зависит от объёма и сложности проекта.',
+    description: 'Наши услуги начинаются от 100–500 €. Цена зависит от объёма и сложности проекта.',
     entry: 'Небольшие проекты', from: 'от',
     integrations: 'Системы бронирования и интеграции', upTo: 'до',
     app: 'Приложения с публикацией в App Store',
@@ -107,7 +107,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   es: {
     title: '¿Cuánto cuesta tu proyecto?',
-    description: 'Nuestros servicios empiezan en 200–400 €. El precio depende del alcance y la complejidad de tu proyecto.',
+    description: 'Nuestros servicios empiezan en 100–500 €. El precio depende del alcance y la complejidad de tu proyecto.',
     entry: 'Proyectos pequeños', from: 'desde',
     integrations: 'Sistemas de reservas e integraciones', upTo: 'hasta',
     app: 'Apps con publicación en el App Store',
@@ -116,7 +116,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   it: {
     title: 'Quanto costa il tuo progetto?',
-    description: 'I nostri servizi partono da 200–400 €. Il prezzo dipende dalla portata e dalla complessità del progetto.',
+    description: 'I nostri servizi partono da 100–500 €. Il prezzo dipende dalla portata e dalla complessità del progetto.',
     entry: 'Piccoli progetti', from: 'da',
     integrations: 'Sistemi di prenotazione e integrazioni', upTo: 'fino a',
     app: 'App con pubblicazione sull’App Store',
@@ -125,7 +125,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   el: {
     title: 'Πόσο κοστίζει το έργο σου;',
-    description: 'Οι υπηρεσίες μας ξεκινούν από 200–400 €. Η τιμή εξαρτάται από το εύρος και την πολυπλοκότητα του έργου.',
+    description: 'Οι υπηρεσίες μας ξεκινούν από 100–500 €. Η τιμή εξαρτάται από το εύρος και την πολυπλοκότητα του έργου.',
     entry: 'Μικρότερα έργα', from: 'από',
     integrations: 'Συστήματα κρατήσεων και διασυνδέσεις', upTo: 'έως',
     app: 'Εφαρμογές με δημοσίευση στο App Store',
@@ -134,7 +134,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   pt: {
     title: 'Quanto custa o teu projeto?',
-    description: 'Os nossos serviços começam nos 200–400 €. O preço depende do âmbito e da complexidade do teu projeto.',
+    description: 'Os nossos serviços começam nos 100–500 €. O preço depende do âmbito e da complexidade do teu projeto.',
     entry: 'Projetos mais pequenos', from: 'a partir de',
     integrations: 'Sistemas de reservas e integrações', upTo: 'até',
     app: 'Apps com publicação na App Store',
@@ -143,7 +143,7 @@ export const servicePricingCopy: Record<Language, PricingCopy> = {
   },
   zh: {
     title: '你的项目需要多少费用？',
-    description: '我们的服务起价为 200–400 €。价格取决于项目的范围和复杂程度。',
+    description: '我们的服务起价为 100–500 €。价格取决于项目的范围和复杂程度。',
     entry: '小型项目', from: '起价',
     integrations: '预订系统与集成', upTo: '最高',
     app: '含 App Store 发布的应用',

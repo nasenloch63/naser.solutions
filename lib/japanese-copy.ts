@@ -106,7 +106,7 @@ export const japaneseProfileCopy = {
 }
 
 export const japanesePricingCopy = {
-  title: 'プロジェクトの費用は？', description: 'サービス料金は200〜400ユーロから。費用はプロジェクトの範囲と複雑さによって決まります。', entry: '小規模なプロジェクト', from: '最低', integrations: '予約システム・連携', upTo: '最大', app: 'App Storeへの公開を含むアプリ', invoice: 'すべてのサービスについて請求書を発行します。', note: '金額は目安です。具体的なサービス範囲と費用は、開始前にお客様と合意します。',
+  title: 'プロジェクトの費用は？', description: 'サービス料金は100〜500ユーロから。費用はプロジェクトの範囲と複雑さによって決まります。', entry: '小規模なプロジェクト', from: '最低', integrations: '予約システム・連携', upTo: '最大', app: 'App Storeへの公開を含むアプリ', invoice: 'すべてのサービスについて請求書を発行します。', note: '金額は目安です。具体的なサービス範囲と費用は、開始前にお客様と合意します。',
 }
 
 export const japaneseCMSCopy = {

@@ -1,91 +1,118 @@
 "use client"
 
 import Link from "next/link"
-import { Globe, TrendingUp, Palette, Workflow, Megaphone, Wrench, Wallet, CreditCard, ReceiptText, Target } from "lucide-react"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { ArrowUpRight, Globe, Target, AppWindow, Workflow, Server, HeartHandshake, Plus, ReceiptText } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
+import { serviceCatalog } from "@/lib/service-catalog"
 import { servicePricingCopy } from "@/lib/service-pricing-copy"
 
+const icons = [Globe, Target, AppWindow, Workflow, Server, HeartHandshake]
+
 export function ServicesSection() {
-  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
   const { language, t } = useLanguage()
   const pricing = servicePricingCopy[language]
   const priceExamples = [
-    { title: pricing.entry, prefix: pricing.from, amount: "200–400 €" },
-    { title: pricing.integrations, prefix: pricing.upTo, amount: "2.000 €" },
-    { title: pricing.app, prefix: pricing.upTo, amount: "5.000 €" },
-  ]
-
-  const services = [
-    { icon: Globe, titleKey: "services.web.title", descriptionKey: "services.web.description" },
-    { icon: Target, titleKey: "services.marketing.title", descriptionKey: "services.marketing.description" },
-    { icon: Workflow, titleKey: "services.integrations.title", descriptionKey: "services.integrations.description" },
-    { icon: TrendingUp, titleKey: "services.seo.title", descriptionKey: "services.seo.description" },
-    { icon: Megaphone, titleKey: "services.social.title", descriptionKey: "services.social.description" },
-    { icon: Palette, titleKey: "services.design.title", descriptionKey: "services.design.description" },
-    { icon: Wrench, titleKey: "services.care.title", descriptionKey: "services.care.description" },
-    { icon: Wallet, titleKey: "services.cryptoPayments.title", descriptionKey: "services.cryptoPayments.description" },
-    { icon: CreditCard, titleKey: "services.sumup.title", descriptionKey: "services.sumup.description" },
+    { title: pricing.entry, amount: "100–500 €" },
+    { title: pricing.integrations, amount: "500–2.000 €" },
+    { title: pricing.app, amount: "1.000–10.000 €" },
   ]
 
   return (
-    <section id="leistungen" className="pt-12 pb-16 sm:pb-24 lg:pt-16 lg:pb-32 bg-secondary/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          ref={ref}
-          className={`max-w-3xl mb-10 sm:mb-16 transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-          }`}
-        >
-          <p className="text-muted-foreground text-lg mb-4 tracking-wide uppercase">{t("services.label")}</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance">
-            {t("services.title")}
-          </h2>
-          <p className="text-base sm:text-xl text-muted-foreground leading-relaxed">{t("services.description")}</p>
-          <nav lang="de-DE" dir="ltr" aria-label="Leistungen in Kassel" className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            <Link href="/webagentur-kassel" className="inline-flex min-h-11 items-center underline underline-offset-4">Webagentur Kassel</Link>
-            <Link href="/digital-marketing-kassel" className="inline-flex min-h-11 items-center underline underline-offset-4">Digital Marketing Kassel</Link>
-            <Link href="/anwendungsentwicklung-kassel" className="inline-flex min-h-11 items-center underline underline-offset-4">Anwendungsentwicklung Kassel</Link>
-          </nav>
+    <section id="leistungen" aria-labelledby="services-title" className="scroll-mt-20 bg-secondary/40 py-16 sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 grid gap-6 sm:mb-12 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-16">
+          <div>
+            <p className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <span aria-hidden="true" className="h-px w-8 bg-current" />{t("services.label")}
+            </p>
+            <h2 id="services-title" className="font-display text-3xl font-semibold leading-[1.1] tracking-tight text-balance sm:text-5xl lg:text-6xl">
+              {t("services.title")}
+            </h2>
+          </div>
+          <div>
+            <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">{t("services.description")}</p>
+            <Link href="/kontakt" className="mt-5 inline-flex min-h-11 items-center gap-3 border-b border-foreground text-sm font-semibold transition-colors hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-4">
+              {t("hero.cta")}<ArrowUpRight className="size-4 rtl-flip" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
 
-        <div className="mb-10 sm:mb-16 rounded-2xl border border-primary/20 bg-background p-5 sm:p-8">
-          <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">{pricing.title}</h3>
-          <p className="mt-3 max-w-3xl text-base text-muted-foreground leading-relaxed">{pricing.description}</p>
-          <dl className="mt-6 grid gap-4 md:grid-cols-3">
-            {priceExamples.map((example) => (
-              <div key={example.title} className="min-w-0 rounded-xl bg-secondary/50 p-5">
-                <dt className="text-base font-medium text-foreground">{example.title}</dt>
-                <dd className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  <span className="text-sm text-muted-foreground">{example.prefix}</span>
-                  <span dir="ltr" className="text-3xl font-semibold tracking-tight text-foreground whitespace-nowrap">{example.amount}</span>
-                </dd>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {serviceCatalog[language].map((group, index) => {
+            const Icon = icons[index]
+            const featured = index === 1
+            return (
+              <article key={index} className={`relative min-w-0 overflow-hidden rounded-2xl border p-6 sm:p-8 ${featured ? "border-foreground bg-foreground text-background" : "border-border bg-background"}`}>
+                <div className="mb-8 flex items-center justify-between">
+                  <span className={`flex size-11 items-center justify-center rounded-full border ${featured ? "border-background/25" : "border-border"}`}>
+                    <Icon className="size-5" strokeWidth={1.5} aria-hidden="true" />
+                  </span>
+                  <span aria-hidden="true" className={`font-mono text-xs ${featured ? "text-background/60" : "text-muted-foreground"}`}>0{index + 1}</span>
+                </div>
+                <h3 className="mb-5 font-display text-2xl font-semibold leading-tight tracking-tight wrap-anywhere">{group.title}</h3>
+                <ul className={`divide-y ${featured ? "divide-background/15" : "divide-border"}`}>
+                  {group.items.map(item => (
+                    <li key={item} className={`flex gap-3 py-3 text-sm leading-relaxed ${featured ? "text-background/85" : "text-muted-foreground"}`}>
+                      <span aria-hidden="true" className={`mt-2 size-1 shrink-0 rounded-full ${featured ? "bg-background/60" : "bg-foreground/40"}`} />
+                      <span className="min-w-0 wrap-anywhere">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            )
+          })}
+        </div>
+
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          {(["cryptoPayments", "sumup"] as const).map(service => (
+            <details key={service} className="group rounded-2xl border border-border bg-background px-6 sm:px-8">
+              <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-4 py-5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4 [&::-webkit-details-marker]:hidden">
+                {t(`services.${service}.title`)}
+                <Plus className="size-4 shrink-0 transition-transform group-open:rotate-45 motion-reduce:transition-none" aria-hidden="true" />
+              </summary>
+              <p className="pb-6 text-sm leading-relaxed text-muted-foreground">{t(`services.${service}.description`)}</p>
+            </details>
+          ))}
+        </div>
+
+        <nav lang="de-DE" dir="ltr" aria-label="Leistungen in Kassel" className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-xs text-muted-foreground sm:text-sm">
+          {[
+            ["/webagentur-kassel", "Webagentur Kassel"],
+            ["/digital-marketing-kassel", "Digital Marketing Kassel"],
+            ["/anwendungsentwicklung-kassel", "Anwendungsentwicklung Kassel"],
+          ].map(([href, label]) => (
+            <Link key={href} href={href} className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4 transition-colors hover:text-foreground">
+              {label}<ArrowUpRight className="size-3.5 shrink-0" aria-hidden="true" />
+            </Link>
+          ))}
+        </nav>
+
+        <div className="mt-12 border-t border-border pt-10 sm:mt-16 sm:pt-12">
+          <div className="mb-7 grid gap-4 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-16">
+            <h3 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">{pricing.title}</h3>
+            <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">{pricing.description}</p>
+          </div>
+          <dl className="grid gap-4 md:grid-cols-3">
+            {priceExamples.map((example, index) => (
+              <div key={example.title} className="flex min-w-0 flex-col rounded-2xl border border-border bg-background p-6 sm:p-8 md:p-5 lg:p-7">
+                <dt className="flex flex-1 items-start gap-3 text-sm font-medium leading-relaxed">
+                  <span aria-hidden="true" className="mt-0.5 font-mono text-xs text-muted-foreground">0{index + 1}</span>{example.title}
+                </dt>
+                <dd dir="ltr" className="mt-8 font-display text-3xl md:text-xl lg:text-2xl xl:text-3xl font-semibold tracking-tight whitespace-nowrap">{example.amount}</dd>
               </div>
             ))}
           </dl>
-          <p className="mt-6 flex items-start gap-2 text-base font-medium text-foreground">
-            <ReceiptText className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-            {pricing.invoice}
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{pricing.note}</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className={`min-w-0 bg-background p-5 sm:p-8 rounded-2xl border border-border hover:border-primary/50 transition-all duration-700 group hover:shadow-lg hover:-translate-y-1 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${200 + index * 100}ms` }}
-            >
-              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                <service.icon className="h-7 w-7 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-4">{t(service.titleKey)}</h3>
-              <p className="text-muted-foreground leading-relaxed">{t(service.descriptionKey)}</p>
+          <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="max-w-2xl">
+              <p className="flex items-start gap-2 text-sm font-medium">
+                <ReceiptText className="mt-0.5 size-4 shrink-0" aria-hidden="true" />{pricing.invoice}
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{pricing.note}</p>
             </div>
-          ))}
+            <Link href="/kontakt" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-4 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4">
+              {t("hero.cta")}<ArrowUpRight className="size-4 rtl-flip" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

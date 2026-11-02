@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useRef, useState, type MouseEvent } from "react"
+import { useEffect, useRef, useState, type MouseEvent, type CSSProperties } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X, Moon, Sun, Instagram } from "lucide-react"
+import { Menu, X, Moon, Sun, Instagram, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "@/components/theme-provider"
 import { useLanguage } from "@/components/language-provider"
@@ -36,6 +36,13 @@ export function Navbar() {
       document.removeEventListener("keydown", handleKeyDown)
     }
   }, [isOpen])
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1280px)")
+    const closeOnDesktop = () => { if (desktop.matches) setIsOpen(false) }
+    desktop.addEventListener("change", closeOnDesktop)
+    return () => desktop.removeEventListener("change", closeOnDesktop)
+  }, [])
 
   function handleSectionNavigation(event: MouseEvent<HTMLAnchorElement>) {
     setIsOpen(false)
@@ -149,60 +156,42 @@ export function Navbar() {
                 <Moon className="h-5 w-5 text-foreground" />
               )}
             </button>
-            <button ref={menuButtonRef} className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-secondary transition-colors" aria-label={t("ui.menu")} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <button ref={menuButtonRef} className="relative inline-flex size-11 items-center justify-center rounded-full border border-border/60 bg-background/50 transition-[background-color,transform] duration-200 hover:bg-secondary active:scale-90 motion-reduce:transition-none" aria-label={t("ui.menu")} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen(open => !open)}>
+              <Menu aria-hidden="true" className={`absolute size-5 transition-[opacity,transform] duration-300 motion-reduce:transition-none ${isOpen ? "rotate-90 scale-50 opacity-0" : "rotate-0 scale-100 opacity-100"}`} />
+              <X aria-hidden="true" className={`absolute size-5 transition-[opacity,transform] duration-300 motion-reduce:transition-none ${isOpen ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0"}`} />
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div id="mobile-navigation" className="xl:hidden max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain py-4 border-t border-border/50 bg-background/95 backdrop-blur-xl">
-            <div className="flex flex-col gap-1">
-              <Link
-                href="/#leistungen"
-                className="flex min-h-11 items-center rounded-xl px-3 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-                onClick={handleSectionNavigation}
-              >
-                {t("nav.services")}
-              </Link>
-              <Link
-                href="/#projekte"
-                className="flex min-h-11 items-center rounded-xl px-3 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-                onClick={handleSectionNavigation}
-              >
-                {t("nav.projects")}
-              </Link>
-              <Link
-                href="/ueber-uns"
-                className="flex min-h-11 items-center rounded-xl px-3 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {t("nav.about")}
-              </Link>
-              <Link
-                href="/links"
-                className="flex min-h-11 items-center rounded-xl px-3 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Links
-              </Link>
-              <a
-                href="https://instagram.com/naser.solutions"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-11 items-center gap-2 rounded-xl px-3 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                <Instagram className="h-5 w-5" />
-                <span>@naser.solutions</span>
-              </a>
-              <Button asChild className="w-full min-h-11 h-auto whitespace-normal">
-                <Link href="/#kontakt" onClick={handleSectionNavigation}>{t("nav.contact")}</Link>
-              </Button>
+        {/* Keep mounted so closing animates too; inert removes hidden links from keyboard navigation. */}
+        <div className="absolute inset-x-4 top-[calc(100%+0.75rem)] sm:inset-x-6 lg:inset-x-8 xl:hidden">
+          <div id="mobile-navigation" data-open={isOpen} aria-hidden={!isOpen} inert={!isOpen} className="mobile-menu-shell ms-auto max-w-lg">
+            <div className="min-h-0 overflow-hidden rounded-3xl border border-border/80 bg-background shadow-2xl shadow-black/15 backdrop-blur-2xl">
+              <div className="max-h-[calc(100dvh-7.5rem)] overflow-y-auto overscroll-contain p-3 sm:p-4">
+                <div className="flex flex-col gap-1">
+                  {[
+                    { href: "/#leistungen", label: t("nav.services"), section: true },
+                    { href: "/#projekte", label: t("nav.projects"), section: true },
+                    { href: "/ueber-uns", label: t("nav.about"), section: false },
+                    { href: "/links", label: "Links", section: false },
+                  ].map((item, index) => (
+                    <Link key={item.href} href={item.href} style={{ "--menu-order": index } as CSSProperties} className="mobile-nav-item group flex min-h-14 items-center justify-between gap-4 rounded-2xl px-4 py-3 text-lg font-medium text-foreground hover:bg-secondary active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-[-2px]" onClick={item.section ? handleSectionNavigation : () => setIsOpen(false)}>
+                      {item.label}<ArrowUpRight className="size-4 text-muted-foreground transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl-flip motion-reduce:transition-none" aria-hidden="true" />
+                    </Link>
+                  ))}
+                  <a href="https://instagram.com/naser.solutions" target="_blank" rel="noopener noreferrer" style={{ "--menu-order": 4 } as CSSProperties} className="mobile-nav-item mt-2 flex min-h-12 items-center gap-3 rounded-2xl px-4 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground" onClick={() => setIsOpen(false)}>
+                    <Instagram className="size-4" aria-hidden="true" /><span>@naser.solutions</span>
+                  </a>
+                  <div className="mobile-nav-item mt-3 border-t border-border/60 pt-4" style={{ "--menu-order": 5 } as CSSProperties}>
+                    <Button asChild className="h-auto min-h-12 w-full rounded-2xl px-5 py-3 whitespace-normal active:scale-[0.98] transition-transform motion-reduce:transition-none">
+                      <Link href="/#kontakt" onClick={handleSectionNavigation}>{t("nav.contact")}<ArrowUpRight className="ms-2 size-4 rtl-flip" aria-hidden="true" /></Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   )

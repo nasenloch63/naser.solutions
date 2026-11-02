@@ -17,7 +17,7 @@ export const localServices = [
     faqs: [
       { question: 'Was bietet Naser Solutions als Webagentur in Kassel an?', answer: 'Ich unterstütze dich bei Webdesign, Webentwicklung, SEO, Digital Marketing und der Pflege deiner Website. Passende Integrationen und Automatisierungen stimmen wir nach Bedarf ab.' },
       { question: 'Kann ich meine bestehende Website überarbeiten lassen?', answer: 'Ja. Wir schauen uns Struktur, Inhalte, Gestaltung und technische Anforderungen an und vereinbaren, welche Änderungen für deinen Relaunch sinnvoll sind.' },
-      { question: 'Was kostet eine Website?', answer: 'Kleinere Projekte starten je nach Umfang bei 200–400 Euro. Das ist eine Orientierung; den konkreten Leistungsumfang und Preis vereinbaren wir vor Projektbeginn. Weitere Beispiele findest du unter Leistungen.' },
+      { question: 'Was kostet eine Website?', answer: 'Der Preisrahmen für kleinere Projekte liegt je nach Umfang bei 100–500 Euro. Das ist eine Orientierung; den konkreten Leistungsumfang und Preis vereinbaren wir vor Projektbeginn. Weitere Beispiele findest du unter Leistungen.' },
     ],
   },
   {

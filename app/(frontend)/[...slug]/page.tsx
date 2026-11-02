@@ -12,7 +12,7 @@ import { SectionPage } from '@/components/section-page'
 import { isSectionSlug } from '@/lib/section-pages'
 import { getPageBySlug, getProjects, getPortfolio, getPortfolioSection } from '@/lib/cms'
 import { paymentServicesCopy } from '@/lib/payment-services-copy'
-import { profileCopy } from '@/lib/profile-copy'
+import { serviceCatalog } from '@/lib/service-catalog'
 import {
   BUSINESS_EMAIL,
   BUSINESS_PHONE,
@@ -63,10 +63,7 @@ export default async function CMSPage({ params }: Props) {
   const isHome = page.slug === 'home'
   const faqBlocks = page.layout.filter((block) => block.blockType === 'faq')
   const services = [
-    ...(['web', 'marketing', 'integrations', 'seo', 'social', 'design', 'care'] as const).map(service => [
-      profileCopy.de[`services.${service}.title`],
-      profileCopy.de[`services.${service}.description`],
-    ]),
+    ...serviceCatalog.de.flatMap(group => group.items.map(item => [item, group.title])),
     [paymentServicesCopy.de['services.cryptoPayments.title'], paymentServicesCopy.de['services.cryptoPayments.description']],
     [paymentServicesCopy.de['services.sumup.title'], paymentServicesCopy.de['services.sumup.description']],
   ]
