@@ -40,6 +40,8 @@ Zeugnisse, Lebensläufe, Datenbank-Dumps und Sicherungen bleiben außerhalb des 
 
 Die früher importierten Zeugnisse und der Lebenslauf sind im CMS nur für Administratoren und Redakteure lesbar. Diese Zugriffskontrolle gilt auch für Originaldateien und generierte Bildgrößen. Die Medienverwaltung ist für öffentliche Website-Inhalte gedacht; Kundenanhänge verwenden weiterhin ihren separaten geschützten Download.
 
+Benachrichtigungen über Kundenfeedback an `info@naser-solutions.de` enthalten neue Kundenanhänge als echte E-Mail-Anhänge mit ursprünglichem Dateinamen und Dateityp. Pro Nachricht werden insgesamt bis zu 15 MiB Dateidaten beigefügt, damit Platz für die Base64-Kodierung bleibt. Größere oder nicht ladbare Dateien werden mit geschütztem Downloadlink und Hinweis aufgeführt; die Benachrichtigung wird trotzdem versendet. Die Dateien werden serverseitig aus dem privaten Blob-Speicher geladen und bleiben im CMS verfügbar. Bereits versendete E-Mails werden nicht nachträglich verändert.
+
 Konten und Rollen werden ausschließlich von Administratoren angelegt und verwaltet. Redakteure behalten die Bearbeitung der Website-Inhalte; Kunden können weiterhin ihr eigenes Konto aktualisieren.
 
 ## Prüfen und bauen
