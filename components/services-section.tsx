@@ -80,7 +80,7 @@ export function ServicesSection() {
                     aria-expanded={expanded}
                     aria-controls={panelId}
                     onClick={() => setExpandedServices(current => current.includes(service) ? current.filter(item => item !== service) : [...current, service])}
-                    className="flex min-h-20 w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-start text-sm font-medium transition-colors duration-200 hover:bg-secondary/50 focus-visible:outline-2 focus-visible:-outline-offset-4 active:bg-secondary motion-reduce:transition-none sm:px-8"
+                    className="flex min-h-20 w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-start text-sm font-medium transition-colors duration-200 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:-outline-offset-4 active:bg-secondary/60 motion-reduce:transition-none sm:px-8"
                   >
                     {t(`services.${service}.title`)}
                     <Plus className={`size-4 shrink-0 transition-transform duration-300 motion-reduce:transition-none ${expanded ? "rotate-45" : "rotate-0"}`} aria-hidden="true" />
@@ -95,7 +95,7 @@ export function ServicesSection() {
                   className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
                 >
                   <div className="min-h-0 overflow-hidden">
-                    <p className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground sm:px-8">{t(`services.${service}.description`)}</p>
+                    <p className="border-t border-border/60 px-6 py-5 text-sm leading-relaxed text-muted-foreground sm:px-8 sm:py-6">{t(`services.${service}.description`)}</p>
                   </div>
                 </div>
               </div>

@@ -1,7 +1,9 @@
 "use client"
 
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import Link from "next/link"
+import { ArrowUpRight, Box, Code2, Cpu, Github, GitBranch, Sparkles, Workflow } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
+import { localAiCopy } from "@/lib/local-ai-copy"
 
 const tools = [
   {
@@ -32,13 +34,9 @@ const tools = [
     description: "Graphics",
   },
   {
-    name: "Adobe",
-    logo: (
-      <svg viewBox="0 0 24 24" className="w-10 h-10" fill="currentColor">
-        <path d="M13.966 22.624l-1.69-4.281H8.122l3.892-9.144 5.662 13.425h-3.71zm.893-22.624h9.141v22.624L14.859 0zM0 0h9.141v22.624L0 0z" />
-      </svg>
-    ),
-    description: "Creative Suite",
+    name: "Visual Studio Code",
+    logo: <Code2 className="size-10" strokeWidth={1.5} />,
+    description: "Code Editor",
   },
   {
     name: "Vercel",
@@ -58,25 +56,26 @@ const tools = [
     ),
     description: "AI Development",
   },
+  { name: "Blender", logo: <Box className="size-10" strokeWidth={1.5} />, description: "3D & Animation" },
+  { name: "n8n", logo: <Workflow className="size-10" strokeWidth={1.5} />, description: "Workflow Automation" },
+  { name: "Bitbucket", logo: <GitBranch className="size-10" strokeWidth={1.5} />, description: "Git Repositories" },
+  { name: "GitHub", logo: <Github className="size-10" strokeWidth={1.5} />, description: "Code & Collaboration" },
+  { name: "Anthropic", logo: <Sparkles className="size-10" strokeWidth={1.5} />, description: "Claude Code & Claude Design" },
+  { name: "NVIDIA", logo: <Cpu className="size-10" strokeWidth={1.5} />, description: "JetPack · CUDA · TensorRT" },
 ]
 
 export function StatsSection() {
-  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.2 })
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const ai = localAiCopy[language]
 
   return (
-    <section className="py-16 lg:py-24 border-t border-border overflow-hidden bg-secondary/20">
+    <section id="tools" aria-labelledby="tools-title" className="py-16 lg:py-24 border-t border-border bg-secondary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          ref={ref}
-          className={`text-center mb-12 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
+        <div className="text-center mb-12">
           <span className="inline-block px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary mb-4">
             {t("tools.badge")}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 id="tools-title" className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-4">
             {t("tools.title")}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -84,36 +83,40 @@ export function StatsSection() {
           </p>
         </div>
 
-        {/* Infinite Scrolling Slideshow */}
-        <div
-          className={`relative transition-all duration-1000 delay-300 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 sm:gap-4">
+          {tools.map(tool => (
+            <li key={tool.name} className="group flex min-h-44 min-w-0 flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-background p-4 text-center transition-colors duration-200 hover:border-foreground/40 sm:p-6">
+              <div aria-hidden="true" className="text-foreground/70 transition-colors duration-200 group-hover:text-foreground">
+                {tool.logo}
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold text-foreground sm:text-base">{tool.name}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{tool.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
 
-          {/* Scrolling Container */}
-          <div className="flex overflow-hidden motion-reduce:overflow-x-auto overscroll-x-contain">
-            <div role="list" className="flex animate-scroll-infinite gap-8 py-8">
-              {[...tools, ...tools].map((tool, index) => (
-                <div
-                  key={index}
-                  role="listitem"
-                  aria-hidden={index >= tools.length ? true : undefined}
-                  className="flex-shrink-0 group"
-                >
-                  <div className="w-48 h-40 bg-background rounded-2xl border border-border p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1">
-                    <div aria-hidden="true" className="text-foreground/70 group-hover:text-primary transition-colors duration-300">
-                      {tool.logo}
-                    </div>
-                    <div className="text-center">
-                      <p className="font-semibold text-foreground">{tool.name}</p>
-                      <p className="text-sm text-muted-foreground">{tool.description}</p>
-                    </div>
-                  </div>
-                </div>
+        <div id="local-ai" className="mt-8 grid scroll-mt-24 gap-8 rounded-3xl border border-border bg-background p-6 sm:p-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12 lg:p-10">
+          <div className="min-w-0">
+            <p className="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              <Cpu className="size-4 shrink-0" aria-hidden="true" /> NVIDIA Jetson AGX Xavier
+            </p>
+            <h3 className="font-display text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl">{ai.title}</h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">{ai.description}</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{ai.customers}</p>
+            <Link href="/kontakt" className="studio-link mt-6 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-foreground focus-visible:outline-2 focus-visible:outline-offset-4">
+              {ai.cta}<ArrowUpRight className="size-4 shrink-0 rtl-flip" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="flex min-w-0 flex-col justify-center rounded-2xl border border-border bg-secondary/30 p-6 sm:p-8">
+            <p className="font-display text-5xl font-medium tracking-tight text-foreground" dir="ltr">32 GB</p>
+            <p className="mt-2 text-sm text-muted-foreground">{ai.memory}</p>
+            <div className="my-6 h-px bg-border" />
+            <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">NVIDIA Software</p>
+            <div className="mt-3 flex flex-wrap gap-2" aria-label="NVIDIA Software">
+              {["JetPack", "CUDA", "TensorRT", "cuDNN"].map(name => (
+                <span key={name} className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground">{name}</span>
               ))}
             </div>
           </div>
