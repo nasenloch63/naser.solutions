@@ -2,9 +2,8 @@
 
 import Image from "next/image"
 import { useState, useMemo, useCallback } from "react"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useLanguage } from "@/components/language-provider"
-import { ExternalLink, ArrowUpRight, Clock, Grid3x3, List, Filter, Globe, Play, Instagram } from "lucide-react"
+import { ExternalLink, ArrowUpRight, Grid3x3, List, Filter, Globe, Instagram } from "lucide-react"
 import { cmsProjectCopy } from "@/lib/cms-project-copy"
 import { hazeChillProjectCopy } from "@/lib/haze-chill-project-copy"
 import { localizedText, selectPortfolio, type PortfolioProject, type PortfolioSection } from "@/lib/portfolio"
@@ -136,7 +135,6 @@ type ViewMode = "grid" | "list"
 type CategoryFilter = "all" | ProjectCategory
 
 export function ProjectsSection({ projects, section }: { projects: PortfolioProject[]; section?: PortfolioSection }) {
-  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
   const { t, language } = useLanguage()
   const cmsCopy = cmsProjectCopy[language]
   const hazeCopy = hazeChillProjectCopy[language]
@@ -166,39 +164,36 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
   const categories = categoryOptions.filter((category) => category.value === "all" || selectedProjects.some((project) => project.category === category.value))
 
   return (
-    <section id="projekte" className="py-16 sm:py-24 lg:py-32 bg-secondary/30">
+    <section id="projekte" aria-labelledby="projects-title" className="relative bg-secondary/30 pt-10 pb-16 sm:pt-14 sm:pb-24 lg:pt-16 lg:pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          ref={ref}
-          className={`max-w-3xl mb-12 transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-          }`}
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
-            <Clock className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">{section ? localizedText(section.eyebrow, language) : t("projects.badge")}</span>
+        <div className="mb-10 flex items-end justify-between gap-8 sm:mb-14">
+          <div className="max-w-3xl">
+            <div className="mb-6 flex items-center gap-3">
+              <span aria-hidden="true" className="h-px w-8 bg-foreground" />
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">{section ? localizedText(section.eyebrow, language) : t("projects.badge")}</span>
+            </div>
+            <h2 id="projects-title" className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-foreground mb-6 text-balance sm:text-5xl lg:text-7xl">
+              {section ? localizedText(section.heading, language) : t("projects.title")}
+            </h2>
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{section ? localizedText(section.description, language) : t("projects.description")}</p>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance">
-            {section ? localizedText(section.heading, language) : t("projects.title")}
-          </h2>
-          <p className="text-base sm:text-xl text-muted-foreground leading-relaxed">{section ? localizedText(section.description, language) : t("projects.description")}</p>
+          <div aria-hidden="true" className="hidden shrink-0 pb-1 text-end lg:block">
+            <span className="work-count block font-display text-[7.5rem] font-medium leading-none tracking-tighter">{String(selectedProjects.length).padStart(2, "0")}</span>
+            <span className="mt-3 block text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("ui.projects")}</span>
+          </div>
         </div>
 
         {/* Filter and View Controls */}
-        <div
-          className={`mb-8 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center transition-all duration-1000 delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <div className="flex flex-wrap gap-2">
+        <div className="mb-6 flex flex-col justify-between gap-4 border-y border-border py-4 sm:flex-row sm:items-center">
+          <div className="work-filters flex w-full min-w-0 gap-2 overflow-x-auto pb-1 sm:flex-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
             {(section?.showFilters === false ? [] : categories).map((category) => (
               <button
                 key={category.value}
                 onClick={() => setSelectedCategory(category.value)}
                 aria-pressed={selectedCategory === category.value}
-                className={`min-h-11 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`min-h-11 shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:-outline-offset-2 ${
                   selectedCategory === category.value
-                    ? "bg-primary text-primary-foreground shadow-lg scale-105"
+                    ? "bg-primary text-primary-foreground"
                     : "bg-background text-muted-foreground hover:bg-secondary hover:text-foreground"
                 }`}
               >
@@ -207,10 +202,10 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
             ))}
           </div>
 
-          <div className="flex gap-2 bg-background rounded-lg p-1 border border-border">
+          <div className="flex shrink-0 self-end gap-2 bg-background rounded-lg p-1 border border-border sm:self-auto">
             <button
               onClick={() => setViewMode("grid")}
-              className={`inline-flex size-11 items-center justify-center rounded transition-colors ${
+              className={`inline-flex size-11 items-center justify-center rounded transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
                 viewMode === "grid"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
@@ -222,7 +217,7 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
             </button>
             <button
               onClick={() => setViewMode("list")}
-              className={`inline-flex size-11 items-center justify-center rounded transition-colors ${
+              className={`inline-flex size-11 items-center justify-center rounded transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
                 viewMode === "list"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
@@ -235,25 +230,18 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
           </div>
         </div>
 
-        <div
-          className={`mb-6 text-sm text-muted-foreground transition-all duration-1000 delay-300 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
+        <div aria-live="polite" aria-atomic="true" className="mb-6 text-sm text-muted-foreground">
           {filteredProjects.length} {t(filteredProjects.length === 1 ? "ui.project" : "ui.projects")}
         </div>
 
         <div className={`grid gap-5 sm:gap-8 ${viewMode === "grid" ? "md:grid-cols-2" : "grid-cols-1"}`}>
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map((project) => (
             <a
               key={project.id}
               href={project.url}
               target={project.url.startsWith("/") ? undefined : "_blank"}
               rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
-              className={`group relative bg-background rounded-2xl border border-border overflow-hidden hover:border-primary/50 transition-all duration-500 hover:shadow-2xl cursor-pointer ${
-                viewMode === "grid" ? "hover:-translate-y-2" : ""
-              } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-              style={{ transitionDelay: `${400 + index * 100}ms` }}
+              className="project-card group relative rounded-3xl border border-border bg-background overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4"
               aria-label={projectTitle(project)}
             >
               {/* Thumbnail */}
@@ -265,6 +253,10 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
                 ) : (
                   <ProjectThumbnail url={project.url} title={projectTitle(project)} />
                 )}
+                <span aria-hidden="true" className="absolute start-4 top-4 rounded-full border border-border/50 bg-background/90 px-3 py-1.5 font-mono text-xs text-foreground backdrop-blur-md">{String(selectedProjects.findIndex(item => item.id === project.id) + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className="project-card-arrow absolute end-4 top-4 flex size-11 items-center justify-center rounded-full border border-border/50 bg-background/90 text-foreground backdrop-blur-md">
+                  <ArrowUpRight className="size-5 rtl-flip" />
+                </span>
               </div>
 
               {/* Content */}
@@ -280,13 +272,13 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
                       </span>
                     ))}
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="font-display text-xl font-semibold tracking-tight text-foreground mb-2 sm:text-2xl">
                     {projectTitle(project)}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed text-sm">{projectDescription(project)}</p>
                 </div>
 
-                <div className="mt-4 sm:mt-0 flex items-center gap-2 text-primary font-medium">
+                <div className="mt-5 flex shrink-0 items-center gap-2 text-sm text-primary font-medium">
                   <span>{project.url === "/CMS" ? cmsCopy.status : t(isInstagramProject(project) ? "ui.instagram" : "ui.website")}</span>
                   {project.url === "/CMS" ? (
                     <ArrowUpRight className="h-4 w-4" />
@@ -309,11 +301,7 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
           </div>
         )}
 
-        <div
-          className={`mt-12 text-center transition-all duration-1000 delay-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
+        <div className="mt-12 border-t border-border pt-6 text-center">
           <p className="text-muted-foreground mb-4">{t("projects.moreComingSoon")}</p>
         </div>
       </div>

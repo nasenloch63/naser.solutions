@@ -194,6 +194,104 @@ section[id] {
   }
 }
 
+/* Content stays visible; motion only adds a small positional accent. */
+.work-count {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--muted-foreground);
+}
+
+.work-filters { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.work-filters::-webkit-scrollbar { height: 3px; }
+.work-filters::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.work-filters::-webkit-scrollbar-track { background: transparent; }
+
+.project-card {
+  transition: border-color 220ms ease, box-shadow 300ms ease, transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-card-arrow {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), background-color 220ms ease, color 220ms ease;
+}
+
+.project-card:focus-visible .project-card-arrow {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.studio-link {
+  position: relative;
+}
+
+.studio-link::after {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 5px;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  scale: 0.2 1;
+  transform-origin: left;
+  transition: scale 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[dir="rtl"] .studio-link::after { transform-origin: right; }
+.studio-link:is(:hover, :focus-visible)::after { scale: 1 1; }
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--muted-foreground);
+    box-shadow: 0 18px 40px -24px color-mix(in oklab, var(--foreground) 30%, transparent);
+  }
+
+  .project-card:hover .project-card-arrow {
+    transform: rotate(45deg);
+    background: var(--foreground);
+    color: var(--background);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-orbit { animation: studio-orbit 80s linear infinite; }
+
+  @supports (animation-timeline: view()) {
+    .project-card {
+      animation: project-settle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 25%;
+    }
+  }
+}
+
+@keyframes studio-orbit { to { rotate: 360deg; } }
+@keyframes project-settle {
+  from { translate: 0 16px; }
+  to { translate: 0 0; }
+}
+
+@supports (animation-timeline: scroll()) {
+  body::before {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 60;
+    height: 2px;
+    background: var(--foreground);
+    content: "";
+    transform-origin: left;
+    animation: page-progress linear both;
+    animation-timeline: scroll();
+    pointer-events: none;
+  }
+}
+
+@keyframes page-progress { from { scale: 0 1; } to { scale: 1 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card:hover,
+  .project-card:hover .project-card-arrow { transform: none; }
+  body::before { display: none; }
+}
+
 /* Native glass arrow; editable fields retain their standard text cursor. */
 @media (hover: hover) and (pointer: fine) and (forced-colors: none) {
   html,
@@ -238,26 +336,6 @@ section[id] {
   :is(html, html.dark) body [aria-disabled="true"] * {
     cursor: not-allowed !important;
   }
-}
-
-/* Add white text glow effect in dark mode */
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h4,
-.dark h5,
-.dark h6,
-.dark p,
-.dark span,
-.dark li {
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.15), 0 0 40px rgba(255, 255, 255, 0.05);
-}
-
-/* Stronger glow for headings */
-.dark h1,
-.dark h2,
-.dark h3 {
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1);
 }
 
 /* Enhanced RTL support with logical CSS properties */
