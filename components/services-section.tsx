@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
 import { ArrowUpRight, Globe, Target, AppWindow, Workflow, Server, HeartHandshake, Plus, ReceiptText, CreditCard } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { serviceCatalog } from "@/lib/service-catalog"
@@ -13,6 +14,7 @@ export function ServicesSection() {
   const { language, t } = useLanguage()
   const pricing = servicePricingCopy[language]
   const nfc = nfcCardsCopy[language]
+  const [expandedServices, setExpandedServices] = useState<string[]>([])
   const priceExamples = [
     { title: pricing.entry, amount: "100–500 €" },
     { title: pricing.integrations, amount: "500–2.000 €" },
@@ -42,20 +44,19 @@ export function ServicesSection() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {serviceCatalog[language].map((group, index) => {
             const Icon = icons[index]
-            const featured = index === 1
             return (
-              <article key={index} className={`relative min-w-0 overflow-hidden rounded-2xl border border-border bg-background p-6 sm:p-8 ${featured ? "md:border-foreground md:bg-foreground md:text-background" : ""}`}>
+              <article key={index} className="relative min-w-0 overflow-hidden rounded-2xl border border-border bg-background p-6 text-foreground sm:p-8">
                 <div className="mb-8 flex items-center justify-between">
-                  <span className={`flex size-11 items-center justify-center rounded-full border border-border ${featured ? "md:border-background/25" : ""}`}>
+                  <span className="flex size-11 items-center justify-center rounded-full border border-border">
                     <Icon className="size-5" strokeWidth={1.5} aria-hidden="true" />
                   </span>
-                  <span aria-hidden="true" className={`font-mono text-xs text-muted-foreground ${featured ? "md:text-background/60" : ""}`}>0{index + 1}</span>
+                  <span aria-hidden="true" className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
                 </div>
                 <h3 className="mb-5 font-display text-2xl font-semibold leading-tight tracking-tight wrap-anywhere">{group.title}</h3>
-                <ul className={`divide-y divide-border ${featured ? "md:divide-background/15" : ""}`}>
+                <ul className="divide-y divide-border">
                   {group.items.map(item => (
-                    <li key={item} className={`flex gap-3 py-3 text-sm leading-relaxed text-muted-foreground ${featured ? "md:text-background/85" : ""}`}>
-                      <span aria-hidden="true" className={`mt-2 size-1 shrink-0 rounded-full bg-foreground/40 ${featured ? "md:bg-background/60" : ""}`} />
+                    <li key={item} className="flex gap-3 py-3 text-sm leading-relaxed text-muted-foreground">
+                      <span aria-hidden="true" className="mt-2 size-1 shrink-0 rounded-full bg-foreground/40" />
                       <span className="min-w-0 wrap-anywhere">{item}</span>
                     </li>
                   ))}
@@ -65,16 +66,41 @@ export function ServicesSection() {
           })}
         </div>
 
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
-          {(["cryptoPayments", "sumup"] as const).map(service => (
-            <details key={service} className="group rounded-2xl border border-border bg-background px-6 sm:px-8">
-              <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-4 py-5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4 [&::-webkit-details-marker]:hidden">
-                {t(`services.${service}.title`)}
-                <Plus className="size-4 shrink-0 transition-transform group-open:rotate-45 motion-reduce:transition-none" aria-hidden="true" />
-              </summary>
-              <p className="pb-6 text-sm leading-relaxed text-muted-foreground">{t(`services.${service}.description`)}</p>
-            </details>
-          ))}
+        <div className="mt-4 grid items-start gap-4 md:grid-cols-2">
+          {(["cryptoPayments", "sumup"] as const).map(service => {
+            const expanded = expandedServices.includes(service)
+            const triggerId = `service-${service}-trigger`
+            const panelId = `service-${service}-panel`
+            return (
+              <div key={service} className="overflow-hidden rounded-2xl border border-border bg-background text-foreground">
+                <h3>
+                  <button
+                    type="button"
+                    id={triggerId}
+                    aria-expanded={expanded}
+                    aria-controls={panelId}
+                    onClick={() => setExpandedServices(current => current.includes(service) ? current.filter(item => item !== service) : [...current, service])}
+                    className="flex min-h-20 w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-start text-sm font-medium transition-colors duration-200 hover:bg-secondary/50 focus-visible:outline-2 focus-visible:-outline-offset-4 active:bg-secondary motion-reduce:transition-none sm:px-8"
+                  >
+                    {t(`services.${service}.title`)}
+                    <Plus className={`size-4 shrink-0 transition-transform duration-300 motion-reduce:transition-none ${expanded ? "rotate-45" : "rotate-0"}`} aria-hidden="true" />
+                  </button>
+                </h3>
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={triggerId}
+                  aria-hidden={!expanded}
+                  inert={!expanded}
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <p className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground sm:px-8">{t(`services.${service}.description`)}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
         </div>
 
         <div id="nfc-cards" className="mt-4 grid scroll-mt-24 gap-6 rounded-2xl border border-border bg-background p-6 sm:p-8 lg:grid-cols-2 lg:items-center lg:gap-12">
