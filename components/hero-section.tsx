@@ -8,7 +8,7 @@ import { ContactForm } from "@/components/contact-form"
 export function HeroSection() {
   const { t } = useLanguage()
   return (
-    <section id="start" className="studio-hero relative isolate overflow-hidden pt-28 sm:pt-32 pb-16 lg:pt-40 lg:pb-20">
+    <section id="start" className="studio-hero relative isolate overflow-hidden pt-28 sm:pt-32 pb-10 lg:pt-36 lg:pb-12">
       <div aria-hidden="true" className="hero-orbit pointer-events-none absolute -start-48 top-12 -z-10 size-[38rem] rounded-full border border-foreground/[0.06]">
         <span className="absolute inset-12 rounded-full border border-foreground/[0.06]" />
         <span className="absolute inset-24 rounded-full border border-foreground/[0.06]" />
@@ -16,7 +16,6 @@ export function HeroSection() {
       </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.1fr_1fr] gap-8 sm:gap-12 lg:gap-20 items-center">
         <div className="min-w-0">
-          <p className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground mb-5"><span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-foreground" />{t("hero.eyebrow")}</p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] font-display mb-6">Naser Solutions{" "}<span className="block mt-3 text-2xl md:text-3xl font-medium text-muted-foreground leading-tight">{t("hero.title1")}</span></h1>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl mb-8">{t("hero.description")}</p>
           <div className="flex flex-wrap gap-x-7 gap-y-4 mb-10">

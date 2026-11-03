@@ -69,12 +69,9 @@ export function StatsSection() {
   const ai = localAiCopy[language]
 
   return (
-    <section id="tools" aria-labelledby="tools-title" className="py-16 lg:py-24 border-t border-border bg-secondary/20">
+    <section id="tools" aria-labelledby="tools-title" className="py-10 sm:py-12 lg:py-16 border-t border-border bg-secondary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="inline-block px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary mb-4">
-            {t("tools.badge")}
-          </span>
           <h2 id="tools-title" className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-4">
             {t("tools.title")}
           </h2>

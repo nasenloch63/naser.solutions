@@ -16,7 +16,7 @@ export function AboutSection() {
   const benefitKeys = ["about.benefit1", "about.benefit2", "about.benefit3", "about.benefit4"]
 
   return (
-    <section id="ueber-uns" className="py-16 sm:py-24 lg:py-32">
+    <section id="ueber-uns" className="pt-10 pb-6 sm:pt-12 sm:pb-8 lg:pt-16 lg:pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={ref}
@@ -25,7 +25,6 @@ export function AboutSection() {
           }`}
         >
           <div>
-            <p className="text-muted-foreground text-lg mb-4 tracking-wide uppercase">{t("about.label")}</p>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 text-balance">
               {t("about.title")}
             </h2>

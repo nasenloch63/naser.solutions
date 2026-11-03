@@ -22,13 +22,10 @@ export function ServicesSection() {
   ]
 
   return (
-    <section id="leistungen" aria-labelledby="services-title" className="scroll-mt-20 bg-secondary/40 py-16 sm:py-24 lg:py-28">
+    <section id="leistungen" aria-labelledby="services-title" className="scroll-mt-20 bg-secondary/40 py-10 sm:py-12 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 grid gap-6 sm:mb-12 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-16">
           <div>
-            <p className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              <span aria-hidden="true" className="h-px w-8 bg-current" />{t("services.label")}
-            </p>
             <h2 id="services-title" className="font-display text-3xl font-semibold leading-[1.1] tracking-tight text-balance sm:text-5xl lg:text-6xl">
               {t("services.title")}
             </h2>

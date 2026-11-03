@@ -8,10 +8,9 @@ import { ContactForm } from "@/components/contact-form"
 export function ContactSection({ showForm = true }: { showForm?: boolean }) {
   const { t } = useLanguage()
   return (
-    <section id="kontakt" className="py-16 sm:py-20 lg:py-28 scroll-mt-20">
+    <section id="kontakt" className="pt-6 pb-10 sm:pt-8 sm:pb-12 lg:pt-8 lg:pb-16 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 sm:gap-12">
         <div>
-          <p className="text-sm text-muted-foreground mb-4">{t("contact.label")}</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-5">{t("contact.title")}</h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">{t("contact.description")}</p>
           {!showForm && <Link href="/#anfrage" className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4 font-medium">{t("hero.cta")}<ArrowUpRight className="size-4 rtl-flip" aria-hidden="true" /></Link>}

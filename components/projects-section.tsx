@@ -164,14 +164,10 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
   const categories = categoryOptions.filter((category) => category.value === "all" || selectedProjects.some((project) => project.category === category.value))
 
   return (
-    <section id="projekte" aria-labelledby="projects-title" className="relative bg-secondary/30 pt-10 pb-16 sm:pt-14 sm:pb-24 lg:pt-16 lg:pb-32">
+    <section id="projekte" aria-labelledby="projects-title" className="relative bg-secondary/30 py-10 sm:py-12 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 sm:mb-14">
           <div className="max-w-3xl">
-            <div className="mb-6 flex items-center gap-3">
-              <span aria-hidden="true" className="h-px w-8 bg-foreground" />
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">{section ? localizedText(section.eyebrow, language) : t("projects.badge")}</span>
-            </div>
             <h2 id="projects-title" className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-foreground mb-6 text-balance sm:text-5xl lg:text-7xl">
               {section ? localizedText(section.heading, language) : t("projects.title")}
             </h2>
