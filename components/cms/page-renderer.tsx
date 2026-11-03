@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import Link from '@/components/site-link'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import { ArrowRight, Code2, Globe2, Palette, Rocket, ShieldCheck, Sparkles } from 'lucide-react'
@@ -12,7 +12,6 @@ import { HeroSection } from '@/components/hero-section'
 import { ProjectsSection } from '@/components/projects-section'
 import { ServicesSection } from '@/components/services-section'
 import { StatsSection } from '@/components/stats-section'
-import { VisionSection } from '@/components/vision-section'
 import { cn } from '@/lib/utils'
 import type { PortfolioProject, PortfolioSection } from '@/lib/portfolio'
 
@@ -102,7 +101,7 @@ export function PageRenderer({ initialPage, projects = [], portfolio = [], portf
         if (block.blockType === 'featureGrid' && isHomepage) return <ServicesSection key={key} />
         if (block.blockType === 'projects' && isHomepage) return <ProjectsSection key={key} projects={portfolio} section={portfolioSection && portfolioSection.id === block.id ? { ...portfolioSection, selection: block.selection, showFilters: block.showFilters } : block} />
         if (block.blockType === 'stats' && isHomepage) return <StatsSection key={key} />
-        if (block.blockType === 'cta' && isHomepage) return <div key={key}><AboutSection /><VisionSection /></div>
+        if (block.blockType === 'cta' && isHomepage) return <AboutSection key={key} />
 
         if (block.blockType === 'hero') {
           const image = typeof block.image === 'object' ? block.image : null

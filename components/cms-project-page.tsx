@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import Link from "@/components/site-link"
 import { ArrowLeft, ArrowUpRight, Check, Code2, LayoutDashboard } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -56,7 +56,7 @@ export function CMSProjectPage() {
           </section>
           <section className="py-10 sm:py-14">
             <p className="max-w-3xl leading-relaxed text-muted-foreground">{copy.scope}</p>
-            <Link href="/#kontakt" className="mt-6 inline-flex items-center gap-3 font-medium underline underline-offset-4">
+            <Link href="/#anfrage" className="mt-6 inline-flex items-center gap-3 font-medium underline underline-offset-4">
               {copy.contact}<ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
             </Link>
           </section>

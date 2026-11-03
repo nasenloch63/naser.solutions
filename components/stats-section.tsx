@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import Link from "@/components/site-link"
 import { ArrowUpRight, Box, Code2, Cpu, Github, GitBranch, Sparkles, Workflow } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { localAiCopy } from "@/lib/local-ai-copy"

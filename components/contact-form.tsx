@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState, type FormEvent } from "react"
-import Link from "next/link"
+import Link from "@/components/site-link"
 import { ArrowRight, LoaderCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"

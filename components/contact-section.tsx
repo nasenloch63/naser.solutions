@@ -1,6 +1,7 @@
 "use client"
 
 import { ArrowUpRight, Mail, MapPin, Phone, MessageCircle } from "lucide-react"
+import Link from "@/components/site-link"
 import { useLanguage } from "@/components/language-provider"
 import { ContactForm } from "@/components/contact-form"
 
@@ -13,7 +14,7 @@ export function ContactSection({ showForm = true }: { showForm?: boolean }) {
           <p className="text-sm text-muted-foreground mb-4">{t("contact.label")}</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-5">{t("contact.title")}</h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">{t("contact.description")}</p>
-          {!showForm && <a href="#anfrage" className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4 font-medium">{t("hero.cta")}<ArrowUpRight className="size-4 rtl-flip" aria-hidden="true" /></a>}
+          {!showForm && <Link href="/#anfrage" className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4 font-medium">{t("hero.cta")}<ArrowUpRight className="size-4 rtl-flip" aria-hidden="true" /></Link>}
         </div>
         <div className="space-y-6 min-w-0">
           <div className="grid gap-5 text-base">

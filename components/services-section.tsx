@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import Link from "@/components/site-link"
 import { useState } from "react"
 import { ArrowUpRight, Globe, Target, AppWindow, Workflow, Server, HeartHandshake, Plus, ReceiptText, CreditCard } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
@@ -35,7 +35,7 @@ export function ServicesSection() {
           </div>
           <div>
             <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">{t("services.description")}</p>
-            <Link href="/kontakt" className="mt-5 inline-flex min-h-11 items-center gap-3 border-b border-foreground text-sm font-semibold transition-colors hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-4">
+            <Link href="/#anfrage" className="mt-5 inline-flex min-h-11 items-center gap-3 border-b border-foreground text-sm font-semibold transition-colors hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-4">
               {t("hero.cta")}<ArrowUpRight className="size-4 rtl-flip" aria-hidden="true" />
             </Link>
           </div>
@@ -46,11 +46,10 @@ export function ServicesSection() {
             const Icon = icons[index]
             return (
               <article key={index} className="relative min-w-0 overflow-hidden rounded-2xl border border-border bg-background p-6 text-foreground sm:p-8">
-                <div className="mb-8 flex items-center justify-between">
+                <div className="mb-8">
                   <span className="flex size-11 items-center justify-center rounded-full border border-border">
                     <Icon className="size-5" strokeWidth={1.5} aria-hidden="true" />
                   </span>
-                  <span aria-hidden="true" className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
                 </div>
                 <h3 className="mb-5 font-display text-2xl font-semibold leading-tight tracking-tight wrap-anywhere">{group.title}</h3>
                 <ul className="divide-y divide-border">
@@ -149,11 +148,9 @@ export function ServicesSection() {
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">{pricing.description}</p>
           </div>
           <dl className="grid gap-4 md:grid-cols-3">
-            {priceExamples.map((example, index) => (
+            {priceExamples.map((example) => (
               <div key={example.title} className="flex min-w-0 flex-col rounded-2xl border border-border bg-background p-6 sm:p-8 md:p-5 lg:p-7">
-                <dt className="flex flex-1 items-start gap-3 text-sm font-medium leading-relaxed">
-                  <span aria-hidden="true" className="mt-0.5 font-mono text-xs text-muted-foreground">0{index + 1}</span>{example.title}
-                </dt>
+                <dt className="flex-1 text-sm font-medium leading-relaxed">{example.title}</dt>
                 <dd dir="ltr" className="mt-8 font-display text-3xl md:text-xl lg:text-2xl xl:text-3xl font-semibold tracking-tight whitespace-nowrap">{example.amount}</dd>
               </div>
             ))}
@@ -165,7 +162,7 @@ export function ServicesSection() {
               </p>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{pricing.note}</p>
             </div>
-            <Link href="/kontakt" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-4 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4">
+            <Link href="/#anfrage" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-4 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4">
               {t("hero.cta")}<ArrowUpRight className="size-4 rtl-flip" aria-hidden="true" />
             </Link>
           </div>

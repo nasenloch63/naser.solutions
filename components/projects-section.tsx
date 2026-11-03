@@ -166,7 +166,7 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
   return (
     <section id="projekte" aria-labelledby="projects-title" className="relative bg-secondary/30 pt-10 pb-16 sm:pt-14 sm:pb-24 lg:pt-16 lg:pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 flex items-end justify-between gap-8 sm:mb-14">
+        <div className="mb-10 sm:mb-14">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-3">
               <span aria-hidden="true" className="h-px w-8 bg-foreground" />
@@ -176,10 +176,6 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
               {section ? localizedText(section.heading, language) : t("projects.title")}
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{section ? localizedText(section.description, language) : t("projects.description")}</p>
-          </div>
-          <div aria-hidden="true" className="hidden shrink-0 pb-1 text-end lg:block">
-            <span className="work-count block font-display text-[7.5rem] font-medium leading-none tracking-tighter">{String(selectedProjects.length).padStart(2, "0")}</span>
-            <span className="mt-3 block text-xs uppercase tracking-[0.2em] text-muted-foreground">{t("ui.projects")}</span>
           </div>
         </div>
 
@@ -253,7 +249,6 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
                 ) : (
                   <ProjectThumbnail url={project.url} title={projectTitle(project)} />
                 )}
-                <span aria-hidden="true" className="absolute start-4 top-4 rounded-full border border-border/50 bg-background/90 px-3 py-1.5 font-mono text-xs text-foreground backdrop-blur-md">{String(selectedProjects.findIndex(item => item.id === project.id) + 1).padStart(2, "0")}</span>
                 <span aria-hidden="true" className="project-card-arrow absolute end-4 top-4 flex size-11 items-center justify-center rounded-full border border-border/50 bg-background/90 text-foreground backdrop-blur-md">
                   <ArrowUpRight className="size-5 rtl-flip" />
                 </span>

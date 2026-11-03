@@ -1,6 +1,7 @@
 "use client"
 
 import { ArrowDownRight, ArrowRight } from "lucide-react"
+import Link from "@/components/site-link"
 import { useLanguage } from "@/components/language-provider"
 import { ContactForm } from "@/components/contact-form"
 
@@ -19,8 +20,8 @@ export function HeroSection() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] font-display mb-6">Naser Solutions{" "}<span className="block mt-3 text-2xl md:text-3xl font-medium text-muted-foreground leading-tight">{t("hero.title1")}</span></h1>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl mb-8">{t("hero.description")}</p>
           <div className="flex flex-wrap gap-x-7 gap-y-4 mb-10">
-            <a href="#anfrage" className="studio-link inline-flex min-h-11 items-center gap-2 font-semibold focus-visible:outline-2 focus-visible:outline-offset-4">{t("hero.cta")}<ArrowDownRight className="size-4 rtl-flip" aria-hidden="true" /></a>
-            <a href="#projekte" className="studio-link inline-flex min-h-11 items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4">{t("hero.refBtn")}<ArrowRight className="size-4 rtl-flip" aria-hidden="true" /></a>
+            <Link href="/#anfrage" className="studio-link inline-flex min-h-11 items-center gap-2 font-semibold focus-visible:outline-2 focus-visible:outline-offset-4">{t("hero.cta")}<ArrowDownRight className="size-4 rtl-flip" aria-hidden="true" /></Link>
+            <Link href="/#projekte" className="studio-link inline-flex min-h-11 items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4">{t("hero.refBtn")}<ArrowRight className="size-4 rtl-flip" aria-hidden="true" /></Link>
           </div>
           <div className="border-t border-border pt-5 space-y-2 text-sm text-muted-foreground">
             <p className="text-foreground font-medium">{t("hero.trust")}</p>

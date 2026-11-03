@@ -168,6 +168,19 @@
 }
 
 /* Smooth scroll for anchor links */
+.site-page-enter {
+  animation: site-page-arrive 280ms ease-out;
+}
+
+@keyframes site-page-arrive {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-page-enter { animation: none; }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -195,11 +208,6 @@ section[id] {
 }
 
 /* Content stays visible; motion only adds a small positional accent. */
-.work-count {
-  color: transparent;
-  -webkit-text-stroke: 1px var(--muted-foreground);
-}
-
 .work-filters { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 .work-filters::-webkit-scrollbar { height: 3px; }
 .work-filters::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }

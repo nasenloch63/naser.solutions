@@ -5,6 +5,7 @@ import { Inter, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
+import { SiteNavigation } from "@/components/site-navigation"
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL, publicPageMetadata } from "@/lib/seo"
 import "../globals.css"
 import { themeInitScript } from "@/lib/theme"
@@ -45,7 +46,7 @@ export default async function RootLayout({
       <head><script dangerouslySetInnerHTML={{ __html: themeInitScript }} /></head>
       <body className={`font-sans antialiased`}>
         <ThemeProvider>
-          <LanguageProvider initialLanguage={initialLanguage}>{children}</LanguageProvider>
+          <LanguageProvider initialLanguage={initialLanguage}><SiteNavigation>{children}</SiteNavigation></LanguageProvider>
         </ThemeProvider>
         <Analytics />
       </body>

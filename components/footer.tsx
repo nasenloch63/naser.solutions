@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import Link from "@/components/site-link"
 import Image from "next/image"
 import { Instagram, ExternalLink } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"

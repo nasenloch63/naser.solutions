@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState, type MouseEvent, type CSSProperties } from "react"
-import Link from "next/link"
+import { useEffect, useRef, useState, type CSSProperties } from "react"
+import Link from "@/components/site-link"
 import Image from "next/image"
 import { Menu, X, Moon, Sun, Instagram, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -44,30 +44,15 @@ export function Navbar() {
     return () => desktop.removeEventListener("change", closeOnDesktop)
   }, [])
 
-  function handleSectionNavigation(event: MouseEvent<HTMLAnchorElement>) {
+  function handleSectionNavigation() {
     setIsOpen(false)
-
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-    if (window.location.pathname !== "/") return
-
-    const hash = event.currentTarget.hash
-    const section = document.getElementById(hash.slice(1))
-    if (!section) return
-
-    event.preventDefault()
-    if (window.location.hash !== hash) {
-      window.history.pushState(null, "", `/${hash}`)
-    }
-
-    // Scroll after the mobile menu closes, including repeat clicks on the current hash.
-    requestAnimationFrame(() => section.scrollIntoView({ block: "start" }))
   }
 
   return (
     <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl backdrop-saturate-150 border-b border-border/50 shadow-sm supports-[backdrop-filter]:bg-background/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link href="/" aria-label="Naser Solutions" className="flex items-center gap-2 min-w-0">
+          <Link href="/" onClick={handleSectionNavigation} aria-label="Naser Solutions" className="flex items-center gap-2 min-w-0">
             <div className="relative h-9 w-9 sm:h-14 sm:w-14 flex-shrink-0">
               {/* Light mode logo */}
               <Image
@@ -130,7 +115,7 @@ export function Navbar() {
                 <Moon className="h-5 w-5 text-foreground" />
               )}
             </button>
-            <Button asChild><Link href="/#kontakt" onClick={handleSectionNavigation}>{t("nav.contact")}</Link></Button>
+            <Button asChild><Link href="/#anfrage" onClick={handleSectionNavigation}>{t("nav.contact")}</Link></Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -184,7 +169,7 @@ export function Navbar() {
                   </a>
                   <div className="mobile-nav-item mt-3 border-t border-border/60 pt-4" style={{ "--menu-order": 5 } as CSSProperties}>
                     <Button asChild className="h-auto min-h-12 w-full rounded-2xl px-5 py-3 whitespace-normal active:scale-[0.98] transition-transform motion-reduce:transition-none">
-                      <Link href="/#kontakt" onClick={handleSectionNavigation}>{t("nav.contact")}<ArrowUpRight className="ms-2 size-4 rtl-flip" aria-hidden="true" /></Link>
+                      <Link href="/#anfrage" onClick={handleSectionNavigation}>{t("nav.contact")}<ArrowUpRight className="ms-2 size-4 rtl-flip" aria-hidden="true" /></Link>
                     </Button>
                   </div>
                 </div>

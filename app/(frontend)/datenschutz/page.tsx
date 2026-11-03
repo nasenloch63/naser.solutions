@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import Link from "@/components/site-link"
 import { ArrowLeft } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { Navbar } from "@/components/navbar"
