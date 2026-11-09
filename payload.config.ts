@@ -20,6 +20,12 @@ import {
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const database = postgresAdapter({
+  pool: { connectionString: process.env.DATABASE_URL },
+  schemaName: 'payload',
+  push: false,
+})
+
 const serverURL =
   process.env.NEXT_PUBLIC_SERVER_URL ||
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
@@ -58,11 +64,16 @@ export default buildConfig({
   },
   collections: [Users, Media, Pages, Projects, ClientProjects],
   globals: [Navigation, Footer, SiteSettings],
-  db: postgresAdapter({
-    pool: { connectionString: process.env.DATABASE_URL },
-    schemaName: 'payload',
-    push: false,
-  }),
+  db: {
+    ...database,
+    init(options) {
+      const adapter = database.init(options)
+      // Payload also rejects this internal promise when connect() throws.
+      // Observe it without changing the promise awaited by database callers.
+      void adapter.initializing.catch(() => {})
+      return adapter
+    },
+  },
   editor: lexicalEditor(),
   localization: {
     locales: [

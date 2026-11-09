@@ -2,6 +2,7 @@ import { Pool } from 'pg'
 import { clientPortalSchemaSQL } from '../cms/client-portal-schema'
 import { feedbackAttachmentSchemaSQL } from '../cms/feedback-attachment-schema'
 import { portfolioSchemaSQL, portfolioLocaleTypes, portfolioNewLocales } from '../cms/portfolio-schema'
+import { isCmsQuotaExceeded } from '../lib/cms-quota'
 
 async function migrate() {
   if (process.env.VERCEL_ENV !== 'production') {
@@ -11,7 +12,13 @@ async function migrate() {
 
   if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is required.')
   const pool = new Pool({ connectionString: process.env.DATABASE_URL, connectionTimeoutMillis: 15000, max: 1 })
-  const connection = await pool.connect()
+  const connection = await pool.connect().catch(async (error: unknown) => {
+    await pool.end()
+    if (!isCmsQuotaExceeded(error)) throw error
+    console.warn('Postgres quota exceeded; postponing the client portal migration before any writes.')
+    return null
+  })
+  if (!connection) return
   try {
     // PostgreSQL enum additions must commit before the newly added locales are used.
     for (const type of portfolioLocaleTypes) for (const locale of portfolioNewLocales) await connection.query(`ALTER TYPE "payload"."${type}" ADD VALUE IF NOT EXISTS '${locale}'`)

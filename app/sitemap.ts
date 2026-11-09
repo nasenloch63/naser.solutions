@@ -3,6 +3,8 @@ import { getPublishedPages } from '@/lib/cms'
 import { absoluteUrl, pagePath, SHARE_PAGES } from '@/lib/seo'
 import { getLocalService } from '@/lib/local-services'
 
+export const revalidate = 300
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages = await getPublishedPages()
   const cmsEntries: MetadataRoute.Sitemap = pages

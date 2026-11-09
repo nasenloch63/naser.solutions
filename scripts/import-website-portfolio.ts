@@ -8,6 +8,7 @@ import { supportedLanguages } from '../lib/language'
 import { localizedText } from '../lib/portfolio'
 import { websiteText } from '../lib/website-text'
 import { importKasselUnited } from './import-kassel-united'
+import { isCmsQuotaExceeded } from '../lib/cms-quota'
 
 const checkpoint = '20261006_import_website_portfolio'
 const slugs = ['naser-cms', 'haze-chill-website', 'haze-chill-content', 'studio-glace', 'joes-garage', 'crypto-news', 'awd-shop', 'al-salam']
@@ -23,8 +24,14 @@ const assets = [
 async function run() {
   if (process.env.VERCEL_ENV !== 'production') { console.info('Portfolio import: skipped outside production.'); return }
   if (!process.env.DATABASE_URL || !process.env.BLOB_READ_WRITE_TOKEN) throw new Error('CMS database and media storage are required for portfolio import.')
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 1 })
-  const connection = await pool.connect()
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL, connectionTimeoutMillis: 15000, max: 1 })
+  const connection = await pool.connect().catch(async (error: unknown) => {
+    await pool.end()
+    if (!isCmsQuotaExceeded(error)) throw error
+    console.warn('Postgres quota exceeded; postponing portfolio imports before any writes.')
+    return null
+  })
+  if (!connection) return false
   try {
     await connection.query("SELECT pg_advisory_lock(hashtext('naser-website-portfolio-import'))")
     if ((await connection.query('SELECT id FROM payload.payload_kv WHERE key = $1', [checkpoint])).rows.length) { console.info('Portfolio already imported; preserving CMS edits.'); return }
@@ -85,4 +92,4 @@ async function run() {
     await pool.end()
   }
 }
-try { await run(); await importKasselUnited(); process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }
+try { if (await run() !== false) await importKasselUnited(); process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }
