@@ -15,7 +15,8 @@ test('portfolio selection uses only supplied records, respects order, and keeps 
 })
 
 test('portfolio previews retain translated copy and images, including the Kassel United reference', () => {
-  assert.equal(previewPortfolio.length, 9)
+  assert.equal(previewPortfolio.length, 8)
+  assert.equal(previewPortfolio.some(project => project.url.includes('crypto-news')), false)
   const kasselUnited = previewPortfolio.find(project => project.id === 'kassel-united')
   assert.equal(kasselUnited?.url, 'https://www.kassel-united.de/')
   assert.equal(kasselUnited?.category, 'web')

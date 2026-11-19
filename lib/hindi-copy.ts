@@ -20,8 +20,6 @@ export const hindiCopy: Record<string, string> = {
   "projects.preview": "लाइव प्रीव्यू उपलब्ध है",
   "projects.viewProject": "प्रोजेक्ट देखें",
   "projects.moreComingSoon": "जल्द ही और प्रोजेक्ट आएँगे...",
-  "projects.crypto.title": "क्रिप्टो समाचार पोर्टल",
-  "projects.crypto.description": "रीयल-टाइम अपडेट, बाज़ार विश्लेषण और उद्योग की खबरों वाला आधुनिक क्रिप्टो समाचार पोर्टल।",
   "projects.studio.title": "Studio Glacé",
   "projects.studio.description": "रचनात्मक डिज़ाइन स्टूडियो के लिए सरल सौंदर्य और सहज एनिमेशन वाली आकर्षक पोर्टफ़ोलियो वेबसाइट।",
   "projects.joesgarage.title": "Joe's Garage Kassel",

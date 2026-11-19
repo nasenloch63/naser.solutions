@@ -50,15 +50,6 @@ export const portfolioDefaults: PortfolioDefault[] = [
     type: "website",
   },
   {
-    titleKey: "projects.crypto.title",
-    previewImage: "/projects/crypto-news.jpg",
-    descriptionKey: "projects.crypto.description",
-    url: "https://v0-crypto-news-website-peach.vercel.app/",
-    tags: ["Next.js", "Crypto", "News"],
-    category: "web",
-    type: "website",
-  },
-  {
     titleKey: "projects.luxury.title",
     previewImage: "/projects/awd-shop.jpg",
     descriptionKey: "projects.luxury.description",

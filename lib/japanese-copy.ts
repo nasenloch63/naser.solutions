@@ -16,7 +16,6 @@ export const japaneseCopy: Record<string, string> = {
   'services.ai.title': 'AIを活用した動画・画像編集', 'services.ai.description': 'AI技術を活用し、質の高い動画や画像を効率よく編集します。',
   'projects.badge': '開発中', 'projects.title': '進行中のプロジェクト', 'projects.description': '現在取り組んでいるウェブサイトとデジタルプロジェクトをご紹介します。',
   'projects.preview': 'ライブプレビューあり', 'projects.viewProject': 'プロジェクトを見る', 'projects.moreComingSoon': '新しい制作実績も順次ご紹介します。',
-  'projects.crypto.title': '暗号資産ニュースポータル', 'projects.crypto.description': '最新情報、市場分析、業界ニュースを届ける、暗号資産のニュースポータル。',
   'projects.studio.title': 'Studio Glacé', 'projects.studio.description': 'ミニマルなデザインと滑らかなアニメーションを備えた、クリエイティブスタジオのポートフォリオサイト。',
   'projects.joesgarage.title': "Joe's Garage Kassel", 'projects.joesgarage.description': "カッセルのロックバー兼パブ、Joe's Garageのウェブサイト。バーの雰囲気とともに、ドリンク、イベント、ライブ音楽、スポーツ観戦、写真、営業時間、アクセスを紹介します。",
   'projects.luxury.title': 'AWD Shop', 'projects.luxury.description': 'モダンなデザインと使いやすさを備えた、高級ファッションのオンラインショップ。',

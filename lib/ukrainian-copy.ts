@@ -20,8 +20,6 @@ export const ukrainianCopy: Record<string, string> = {
   "projects.preview": "Доступний перегляд наживо",
   "projects.viewProject": "Переглянути проєкт",
   "projects.moreComingSoon": "Незабаром з’являться нові проєкти...",
-  "projects.crypto.title": "Портал криптовалютних новин",
-  "projects.crypto.description": "Сучасний портал криптовалютних новин з оновленнями в реальному часі, аналізом ринку та новинами галузі.",
   "projects.studio.title": "Studio Glacé",
   "projects.studio.description": "Елегантний сайт-портфоліо творчої дизайн-студії з мінімалістичною естетикою та плавними анімаціями.",
   "projects.joesgarage.title": "Joe's Garage Kassel",

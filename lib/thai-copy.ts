@@ -20,8 +20,6 @@ export const thaiCopy: Record<string, string> = {
   "projects.preview": "มีตัวอย่างให้ดูออนไลน์",
   "projects.viewProject": "ดูโปรเจกต์",
   "projects.moreComingSoon": "โปรเจกต์ใหม่กำลังจะตามมา...",
-  "projects.crypto.title": "พอร์ทัลข่าวคริปโต",
-  "projects.crypto.description": "พอร์ทัลข่าวคริปโตสมัยใหม่ พร้อมอัปเดตแบบเรียลไทม์ วิเคราะห์ตลาด และข่าวในวงการ",
   "projects.studio.title": "Studio Glacé",
   "projects.studio.description": "เว็บไซต์พอร์ตโฟลิโอที่เรียบหรูสำหรับสตูดิโอออกแบบสร้างสรรค์ ด้วยสไตล์มินิมอลและแอนิเมชันที่ลื่นไหล",
   "projects.joesgarage.title": "Joe's Garage Kassel",

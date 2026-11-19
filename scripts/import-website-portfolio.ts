@@ -8,17 +8,18 @@ import { supportedLanguages } from '../lib/language'
 import { localizedText } from '../lib/portfolio'
 import { websiteText } from '../lib/website-text'
 import { importKasselUnited } from './import-kassel-united'
+import { removeCryptoNews } from './remove-crypto-news'
 import { isCmsQuotaExceeded } from '../lib/cms-quota'
 
 const checkpoint = '20261006_import_website_portfolio'
-const slugs = ['naser-cms', 'haze-chill-website', 'haze-chill-content', 'studio-glace', 'joes-garage', 'crypto-news', 'awd-shop', 'al-salam']
+const slugs = ['naser-cms', 'haze-chill-website', 'haze-chill-content', 'studio-glace', 'joes-garage', 'awd-shop', 'al-salam']
 const assets = [
   ['/images/logo-invertable.png', 'Naser Solutions Logo'],
   ['/images/inverted-20logo-20png.png', 'Naser Solutions Logo – helle Variante'],
   ['/images/yasin-adam-aissani-2026.jpg', 'Yasin Adam Aissani – Porträt'],
   ['/projects/haze-chill-website.jpg', 'Haze & Chill – Website'],
   ['/projects/haze-chill-instagram.png', 'Haze & Chill – Instagram Reel'],
-  ...slugs.slice(3).map(slug => [`/projects/${slug}.${slug === 'joes-garage' ? 'svg' : 'jpg'}`, `${slug === 'studio-glace' ? 'Studio Glacé' : slug === 'joes-garage' ? 'Joe’s Garage' : slug === 'crypto-news' ? 'Crypto News' : slug === 'awd-shop' ? 'AWD Shop' : 'Al Salam'} – Website`]),
+  ...slugs.slice(3).map(slug => [`/projects/${slug}.${slug === 'joes-garage' ? 'svg' : 'jpg'}`, `${slug === 'studio-glace' ? 'Studio Glacé' : slug === 'joes-garage' ? 'Joe’s Garage' : slug === 'awd-shop' ? 'AWD Shop' : 'Al Salam'} – Website`]),
 ]
 
 async function run() {
@@ -85,11 +86,11 @@ async function run() {
       await payload.update({ collection: 'pages', id: home.id, locale, data: { title: localizedHome.title || home.title, layout: translatedLayout, _status: 'published' } })
     }
     await connection.query('INSERT INTO payload.payload_kv (key, data) VALUES ($1, $2::jsonb) ON CONFLICT (key) DO NOTHING', [checkpoint, JSON.stringify({ completedAt: new Date().toISOString() })])
-    console.info('Website media and eight portfolio projects imported successfully.')
+    console.info('Website media and seven portfolio projects imported successfully.')
   } finally {
     await connection.query("SELECT pg_advisory_unlock(hashtext('naser-website-portfolio-import'))")
     connection.release()
     await pool.end()
   }
 }
-try { if (await run() !== false) await importKasselUnited(); process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }
+try { if (await run() !== false) { await importKasselUnited(); await removeCryptoNews() } process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }
