@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer"
-import type { ContactFormResponse } from "@/lib/contact-form"
+import { resolveContactServiceLabels, type ContactFormResponse } from "@/lib/contact-form"
 
 const SUCCESS_MESSAGE = "Kontaktanfrage erfolgreich! Wir melden uns schnellstmöglich bei dir."
 const ERROR_MESSAGE = "Ein Fehler ist aufgetreten. Bitte versuche es erneut oder kontaktiere uns direkt."
@@ -17,6 +17,7 @@ interface ContactRequest {
   email?: unknown
   phone?: unknown
   message?: unknown
+  services?: unknown
   website?: unknown
 }
 
@@ -46,6 +47,7 @@ export async function POST(request: Request) {
     const email = normalize(body.email).toLowerCase()
     const phone = normalize(body.phone)
     const message = normalize(body.message)
+    const services = resolveContactServiceLabels(body.services)
 
     // Validation
     if (!name || name.length > 120) {
@@ -56,7 +58,7 @@ export async function POST(request: Request) {
       return jsonResponse({ success: false, message: ERROR_MESSAGE }, 400)
     }
 
-    if (!message || message.length > 5000 || phone.length > 60) {
+    if (!message || message.length > 5000 || phone.length > 60 || services === null) {
       return jsonResponse({ success: false, message: ERROR_MESSAGE }, 400)
     }
 
@@ -85,7 +87,7 @@ export async function POST(request: Request) {
         to: SMTP_USER,
         replyTo: email,
         subject: `Neue Kontaktanfrage von ${name}`,
-        text: `Name: ${name}\nE-Mail: ${email}\nTelefon: ${phone || "Nicht angegeben"}\n\nNachricht:\n${message}`,
+        text: `Name: ${name}\nE-Mail: ${email}\nTelefon: ${phone || "Nicht angegeben"}\nLeistungen: ${services.length ? services.join(", ") : "Keine Angabe"}\n\nNachricht:\n${message}`,
       })
     } finally {
       transporter.close()

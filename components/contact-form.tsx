@@ -2,18 +2,31 @@
 
 import { useRef, useState, type FormEvent } from "react"
 import Link from "@/components/site-link"
-import { ArrowRight, LoaderCircle } from "lucide-react"
+import { ArrowRight, Check, LoaderCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { useLanguage } from "@/components/language-provider"
-import type { ContactFormResponse } from "@/lib/contact-form"
+import {
+  contactServiceLabel,
+  contactServiceOptions,
+  contactServicesHeading,
+  type ContactFormResponse,
+  type ContactServiceId,
+} from "@/lib/contact-form"
 
 export function ContactForm() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   const submitting = useRef(false)
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [selectedServices, setSelectedServices] = useState<ContactServiceId[]>([])
+
+  function toggleService(id: ContactServiceId) {
+    setSelectedServices(current =>
+      current.includes(id) ? current.filter(item => item !== id) : [...current, id],
+    )
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -22,7 +35,10 @@ export function ContactForm() {
     if (!form.reportValidity()) return
     submitting.current = true
     setStatus("loading")
-    const data = Object.fromEntries(new FormData(form))
+    const data = {
+      ...Object.fromEntries(new FormData(form)),
+      services: selectedServices,
+    }
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -33,6 +49,7 @@ export function ContactForm() {
       const result = (await response.json()) as ContactFormResponse
       if (!response.ok || result.success !== true) throw new Error("Contact request failed")
       form.reset()
+      setSelectedServices([])
       setStatus("success")
     } catch {
       setStatus("error")
@@ -57,6 +74,46 @@ export function ContactForm() {
         <div className="space-y-2">
           <Label htmlFor="contact-phone">{t("contact.form.phone")}</Label>
           <Input id="contact-phone" name="phone" type="tel" className="h-11 text-base md:text-base" autoComplete="tel" enterKeyHint="next" maxLength={60} placeholder={t("contact.form.phonePlaceholder")} />
+        </div>
+        <div className="space-y-2">
+          <Label asChild>
+            <span>{contactServicesHeading(language)}</span>
+          </Label>
+          <div role="group" aria-label={contactServicesHeading(language)} className="flex flex-wrap gap-2">
+            {contactServiceOptions.map(option => {
+              const checked = selectedServices.includes(option.id)
+              return (
+                <label
+                  key={option.id}
+                  className={`inline-flex min-h-9 cursor-pointer select-none items-center gap-2 rounded-lg border px-2.5 py-1.5 text-xs sm:text-sm transition-colors focus-within:outline-2 focus-within:outline-offset-2 ${
+                    checked
+                      ? "border-foreground bg-foreground/10 text-foreground font-medium"
+                      : "border-border/80 bg-background/50 text-muted-foreground hover:border-foreground/40 hover:text-foreground"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    name="services"
+                    value={option.id}
+                    checked={checked}
+                    onChange={() => toggleService(option.id)}
+                    className="sr-only"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className={`flex size-4 shrink-0 items-center justify-center rounded border transition-colors ${
+                      checked
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-muted-foreground/50 bg-transparent"
+                    }`}
+                  >
+                    {checked && <Check className="size-3 stroke-[2.5]" />}
+                  </span>
+                  <span>{contactServiceLabel(language, option.id)}</span>
+                </label>
+              )
+            })}
+          </div>
         </div>
         <div className="space-y-2">
           <Label htmlFor="contact-message">{t("contact.form.message")}</Label>
