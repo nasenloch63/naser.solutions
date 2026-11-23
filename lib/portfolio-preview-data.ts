@@ -3,6 +3,7 @@ import { supportedLanguages } from './language'
 import { cmsProjectCopy } from './cms-project-copy'
 import { hazeChillProjectCopy } from './haze-chill-project-copy'
 import { websiteText } from './website-text'
+import { hazeChillKarteProject } from './haze-chill-karte-project'
 import { kasselUnitedProject } from './kassel-united-project'
 import { westfalenHelpProject } from './westfalen-help-project'
 import type { LocalizedText, PortfolioProject, PortfolioSection } from './portfolio'
@@ -13,5 +14,5 @@ export const previewPortfolio: PortfolioProject[] = [...portfolioDefaults.map((p
   title: Object.fromEntries(supportedLanguages.map(language => [language, project.url === '/CMS' ? cmsProjectCopy[language].title : project.titleKey === 'projects.hazechill.title' ? hazeChillProjectCopy[language].title : websiteText(language, project.titleKey)])),
   description: Object.fromEntries(supportedLanguages.map(language => [language, project.url === '/CMS' ? cmsProjectCopy[language].intro : project.titleKey === 'projects.hazechill.title' ? hazeChillProjectCopy[language].description : websiteText(language, project.descriptionKey)])),
   tags: project.tags, image: project.logo || project.previewImage, containImage: Boolean(project.logo),
-})), kasselUnitedProject, westfalenHelpProject]
+})), kasselUnitedProject, westfalenHelpProject, hazeChillKarteProject]
 export const previewPortfolioSection: PortfolioSection = { eyebrow: translated('projects.badge'), heading: translated('projects.title'), description: translated('projects.description'), showFilters: true }

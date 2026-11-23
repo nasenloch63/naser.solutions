@@ -3,7 +3,8 @@ import assert from 'node:assert/strict'
 import { existsSync } from 'node:fs'
 import { selectPortfolio, localizedText, type PortfolioProject } from '../lib/portfolio'
 import { previewPortfolio } from '../lib/portfolio-preview-data'
-import { demoPartnerProjects, demoPartnerSectionCopy } from '../lib/demo-partner-projects'
+import { demoPartnerProjects, demoPartnerSectionCopy, isMovedDemoProject } from '../lib/demo-partner-projects'
+import { isHazeChillKarteUrl } from '../lib/haze-chill-karte-project'
 import { isWestfalenHelpUrl } from '../lib/westfalen-help-project'
 import { supportedLanguages } from '../lib/language'
 import { mediaBlobPath } from '../cms/media-storage'
@@ -17,9 +18,10 @@ test('portfolio selection uses only supplied records, respects order, and keeps 
   assert.deepEqual(selectPortfolio([], [999]), [])
 })
 
-test('portfolio previews retain translated copy and images, including Kassel United and Westfalen Help references', () => {
-  assert.equal(previewPortfolio.length, 9)
+test('portfolio previews retain translated copy and images, including CustomOS QRcode_expo, Westfalen Help and Kassel United', () => {
+  assert.equal(previewPortfolio.length, 8)
   assert.equal(previewPortfolio.some(project => project.url.includes('crypto-news')), false)
+  assert.equal(previewPortfolio.some(project => isMovedDemoProject(String(project.id), project.url)), false)
   const kasselUnited = previewPortfolio.find(project => project.id === 'kassel-united')
   assert.equal(kasselUnited?.url, 'https://www.kassel-united.de/')
   assert.equal(kasselUnited?.category, 'web')
@@ -30,6 +32,14 @@ test('portfolio previews retain translated copy and images, including Kassel Uni
   assert.equal(isWestfalenHelpUrl('https://www.westfalenhelp.de/'), true)
   assert.equal(isWestfalenHelpUrl('https://westfalenhelp.de'), true)
   assert.equal(isWestfalenHelpUrl('https://www.dovare.de/'), false)
+  const hazeKarte = previewPortfolio.find(project => project.id === 'haze-chill-karte')
+  assert.equal(hazeKarte?.url, 'https://haze-chill-karte.vercel.app/')
+  assert.equal(hazeKarte?.category, 'gastro')
+  assert.equal(hazeKarte?.featured, true)
+  assert.equal(hazeKarte?.secondaryLink?.url, 'https://github.com/nasenloch63/qr_card_expo')
+  assert.equal(isHazeChillKarteUrl('https://haze-chill-karte.vercel.app/'), true)
+  assert.equal(isHazeChillKarteUrl('https://karte.haze-chill.com/'), true)
+  assert.equal(isHazeChillKarteUrl('https://www.haze-chill.com/'), false)
   for (const project of previewPortfolio) {
     assert.ok(project.image)
     assert.ok(existsSync(new URL(`../public${project.image}`, import.meta.url)))
@@ -49,10 +59,16 @@ test('demo sites and partner grid retains all entries, assets, and translations'
     [
       'https://kvp-helsa.dovare.de/',
       'https://verdi-beta.vercel.app/',
+      'https://v0-tylers-designerz-website.vercel.app/',
+      'https://v0-luxury-street-chic-website.vercel.app/',
+      'https://v0-donation-website-for-al-salam.vercel.app/',
       'https://www.dovare.de/',
       'https://www.nextstepagency.de/',
     ],
   )
+  assert.equal(isMovedDemoProject('awd-shop', ''), true)
+  assert.equal(isMovedDemoProject('', 'https://v0-donation-website-for-al-salam.vercel.app/'), true)
+  assert.equal(isMovedDemoProject('kassel-united', 'https://www.kassel-united.de/'), false)
   assert.equal(demoPartnerProjects.find(project => project.id === 'kvp-helsa')?.partner?.url, 'https://www.dovare.de/')
   for (const language of supportedLanguages) {
     assert.ok(demoPartnerSectionCopy[language].heading.trim())

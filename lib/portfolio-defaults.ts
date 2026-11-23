@@ -49,22 +49,4 @@ export const portfolioDefaults: PortfolioDefault[] = [
     category: "gastro",
     type: "website",
   },
-  {
-    titleKey: "projects.luxury.title",
-    previewImage: "/projects/awd-shop.jpg",
-    descriptionKey: "projects.luxury.description",
-    url: "https://v0-luxury-street-chic-website.vercel.app/",
-    tags: ["Fashion", "E-Commerce", "AWD"],
-    category: "ecommerce",
-    type: "website",
-  },
-  {
-    titleKey: "projects.donation.title",
-    previewImage: "/projects/al-salam.jpg",
-    descriptionKey: "projects.donation.description",
-    url: "https://v0-donation-website-for-al-salam.vercel.app/",
-    tags: ["Charity", "Donation", "Website"],
-    category: "nonprofit",
-    type: "website",
-  },
 ]

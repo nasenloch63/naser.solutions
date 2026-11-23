@@ -1,6 +1,14 @@
 import { supportedLanguages, type Language } from './language'
 import type { LocalizedText, PortfolioPartner } from './portfolio'
+import { websiteText } from './website-text'
 import { westfalenHelpPartner } from './westfalen-help-project'
+
+const movedDemoSlugs = new Set(['awd-shop', 'al-salam'])
+const movedDemoUrlPattern = /^https?:\/\/(?:v0-luxury-street-chic-website|v0-donation-website-for-al-salam)\.vercel\.app(?:\/|$)/i
+
+export function isMovedDemoProject(slug: string | null | undefined, url: string | null | undefined): boolean {
+  return Boolean((slug && movedDemoSlugs.has(slug)) || (url && movedDemoUrlPattern.test(url.trim())))
+}
 
 export interface DemoPartnerSectionCopy {
   heading: string
@@ -437,8 +445,132 @@ const kvpHelsaCopy: DemoEntryCopy = {
   },
 }
 
+const tylersDesignerzCopy: DemoEntryCopy = {
+  de: {
+    badge: 'Demo-Site · Creator & Shop',
+    title: 'Tylers Designerz / bapeboy069 – Creator Page & Webshop',
+    description: 'Demo-Website für die Creator-Page und den Streetwear-Webshop von Tylers Designerz / bapeboy069: kuratierte Designer-Pieces, SS26-Kollektion, Lookbook, Warenkorb sowie integriertes Produkt-Admin-Panel.',
+  },
+  en: {
+    badge: 'Demo Site · Creator & Shop',
+    title: 'Tylers Designerz / bapeboy069 – Creator page & webshop',
+    description: 'Demo website for the Tylers Designerz / bapeboy069 creator page and luxury streetwear webshop featuring curated designer pieces, SS26 collection, lookbook, shopping cart and built-in product admin panel.',
+  },
+  fr: {
+    badge: 'Site démo · Créateur & Boutique',
+    title: 'Tylers Designerz / bapeboy069 – Page créateur & boutique',
+    description: 'Site démo pour la page créateur et la boutique streetwear de Tylers Designerz / bapeboy069 : pièces de créateurs sélectionnées, collection SS26, lookbook, panier et panneau d’administration produit intégré.',
+  },
+  ar: {
+    badge: 'موقع تجريبي · صانع محتوى ومتجر',
+    title: 'Tylers Designerz / bapeboy069 – صفحة صانع محتوى ومتجر',
+    description: 'موقع تجريبي لصفحة صانع المحتوى ومتجر الأزياء الخاص بـ Tylers Designerz / bapeboy069، يضم قطعاً مختارة ومجموعة SS26 وكتالوج صور وسلة تسوق ولوحة إدارة منتجات مدمجة.',
+  },
+  th: {
+    badge: 'เว็บไซต์เดโม · ครีเอเตอร์และร้านค้า',
+    title: 'Tylers Designerz / bapeboy069 – หน้าครีเอเตอร์และเว็บช็อป',
+    description: 'เว็บไซต์เดโมสำหรับหน้าครีเอเตอร์และร้านสตรีตแวร์ Tylers Designerz / bapeboy069 พร้อมคอลเลกชัน SS26 ลุคบุ๊ก ตะกร้าสินค้า และแผงจัดการสินค้าในตัว',
+  },
+  hi: {
+    badge: 'डेमो साइट · क्रिएटर और शॉप',
+    title: 'Tylers Designerz / bapeboy069 – क्रिएटर पेज और वेबशॉप',
+    description: 'Tylers Designerz / bapeboy069 के क्रिएटर पेज और स्ट्रीटवियर वेबशॉप की डेमो वेबसाइट: क्यूरेटेड डिज़ाइनर पीस, SS26 कलेक्शन, लुकबुक, कार्ट और बिल्ट-इन प्रोडक्ट एडमिन पैनल के साथ।',
+  },
+  tr: {
+    badge: 'Demo Site · Creator & Mağaza',
+    title: 'Tylers Designerz / bapeboy069 – Creator sayfası & web mağazası',
+    description: 'Tylers Designerz / bapeboy069 creator sayfası ve lüks streetwear web mağazası için demo site: seçkin tasarımcı parçaları, SS26 koleksiyonu, lookbook, sepet ve dahili ürün yönetim paneli.',
+  },
+  sq: {
+    badge: 'Faqe demo · Krijues & Dyqan',
+    title: 'Tylers Designerz / bapeboy069 – Faqe krijuesi & dyqan online',
+    description: 'Faqe demo për faqen e krijuesit dhe dyqanin streetwear të Tylers Designerz / bapeboy069: veshje të kuruara dizajneri, koleksioni SS26, lookbook, shporta dhe paneli i integruar i administrimit të produkteve.',
+  },
+  ru: {
+    badge: 'Демо-сайт · Креатор и магазин',
+    title: 'Tylers Designerz / bapeboy069 – Страница креатора и магазин',
+    description: 'Демо-сайт для страницы креатора и streetwear-магазина Tylers Designerz / bapeboy069: подборка дизайнерских вещей, коллекция SS26, лукбук, корзина и встроенная админ-панель товаров.',
+  },
+  es: {
+    badge: 'Sitio demo · Creador y Tienda',
+    title: 'Tylers Designerz / bapeboy069 – Página de creador y tienda',
+    description: 'Sitio web demo para la página de creador y tienda streetwear de Tylers Designerz / bapeboy069: piezas seleccionadas de diseñador, colección SS26, lookbook, carrito y panel de administración de productos.',
+  },
+  it: {
+    badge: 'Sito demo · Creator e Shop',
+    title: 'Tylers Designerz / bapeboy069 – Pagina creator e webshop',
+    description: 'Sito demo per la pagina creator e il webshop streetwear di Tylers Designerz / bapeboy069: capi di design selezionati, collezione SS26, lookbook, carrello e pannello admin prodotti integrato.',
+  },
+  uk: {
+    badge: 'Демо-сайт · Креатор і магазин',
+    title: 'Tylers Designerz / bapeboy069 – Сторінка креатора та магазин',
+    description: 'Демо-сайт для сторінки креатора та streetwear-магазину Tylers Designerz / bapeboy069: добірка дизайнерських речей, колекція SS26, лукбук, кошик і вбудована адмін-панель товарів.',
+  },
+  el: {
+    badge: 'Demo Site · Creator & Shop',
+    title: 'Tylers Designerz / bapeboy069 – Σελίδα creator & webshop',
+    description: 'Demo ιστοσελίδα για τη σελίδα creator και το streetwear webshop Tylers Designerz / bapeboy069: επιλεγμένα designer κομμάτια, συλλογή SS26, lookbook, καλάθι και ενσωματωμένο admin panel προϊόντων.',
+  },
+  pt: {
+    badge: 'Site demo · Criador e Loja',
+    title: 'Tylers Designerz / bapeboy069 – Página de criador e loja',
+    description: 'Website demo para a página de criador e loja streetwear de Tylers Designerz / bapeboy069: peças de designer selecionadas, coleção SS26, lookbook, carrinho e painel de gestão de produtos integrado.',
+  },
+  zh: {
+    badge: '演示站点 · 创作者与商城',
+    title: 'Tylers Designerz / bapeboy069 – 创作者主页与网店',
+    description: 'Tylers Designerz / bapeboy069 创作者主页与潮牌网店演示网站：涵盖精选设计师单品、SS26 系列、画册、购物车及内置商品管理后台。',
+  },
+  ja: {
+    badge: 'デモサイト・クリエイター＆ショップ',
+    title: 'Tylers Designerz / bapeboy069 – クリエイターページ＆ショップ',
+    description: 'Tylers Designerz / bapeboy069 のクリエイターページ兼ストリートウェアショップのデモサイト。厳選デザイナーズアイテム、SS26コレクション、ルックブック、カート、商品管理パネルを搭載。',
+  },
+}
+
+const awdDemoBadge: Record<Language, string> = {
+  de: 'Demo-Site · E-Commerce',
+  en: 'Demo Site · E-Commerce',
+  fr: 'Site démo · E-Commerce',
+  ar: 'موقع تجريبي · متجر إلكتروني',
+  th: 'เว็บไซต์เดโม · อีคอมเมิร์ซ',
+  hi: 'डेमो साइट · ई-कॉमर्स',
+  tr: 'Demo Site · E-Ticaret',
+  sq: 'Faqe demo · E-Commerce',
+  ru: 'Демо-сайт · E-Commerce',
+  es: 'Sitio demo · E-Commerce',
+  it: 'Sito demo · E-Commerce',
+  uk: 'Демо-сайт · E-Commerce',
+  el: 'Demo Site · E-Commerce',
+  pt: 'Site demo · E-Commerce',
+  zh: '演示站点 · 电商',
+  ja: 'デモサイト・EC',
+}
+
+const alSalamDemoBadge: Record<Language, string> = {
+  de: 'Demo-Site · Non-Profit',
+  en: 'Demo Site · Non-Profit',
+  fr: 'Site démo · Non-Profit',
+  ar: 'موقع تجريبي · غير ربحي',
+  th: 'เว็บไซต์เดโม · ไม่แสวงหากำไร',
+  hi: 'डेमो साइट · गैर-लाभकारी',
+  tr: 'Demo Site · Kâr Amacı Gütmeyen',
+  sq: 'Faqe demo · Jofitimprurëse',
+  ru: 'Демо-сайт · НКО',
+  es: 'Sitio demo · Sin fines de lucro',
+  it: 'Sito demo · Non-Profit',
+  uk: 'Демо-сайт · Неприбуткова',
+  el: 'Demo Site · Non-Profit',
+  pt: 'Site demo · Sem fins lucrativos',
+  zh: '演示站点 · 公益捐赠',
+  ja: 'デモサイト・非営利',
+}
+
 const mapLocalized = (copy: DemoEntryCopy, field: 'title' | 'description' | 'badge'): LocalizedText =>
   Object.fromEntries(supportedLanguages.map(language => [language, copy[language][field]]))
+
+const fromWebsiteText = (key: string): LocalizedText =>
+  Object.fromEntries(supportedLanguages.map(language => [language, websiteText(language, key)]))
 
 export const demoPartnerProjects: DemoPartnerProject[] = [
   {
@@ -461,6 +593,36 @@ export const demoPartnerProjects: DemoPartnerProject[] = [
     tags: ['Demo-Site', 'Beta', 'Gastronomie', 'Webdesign'],
     image: '/projects/verdi-beta.jpg',
     alt: 'Ristorante Verdi Pizzeria in Hessisch Lichtenau – Aktuelle Demo-Website',
+  },
+  {
+    id: 'tylers-designerz',
+    title: mapLocalized(tylersDesignerzCopy, 'title'),
+    description: mapLocalized(tylersDesignerzCopy, 'description'),
+    badge: mapLocalized(tylersDesignerzCopy, 'badge'),
+    url: 'https://v0-tylers-designerz-website.vercel.app/',
+    tags: ['Demo-Site', 'Creator Page', 'Webshop', 'bapeboy069'],
+    image: '/projects/tylers-designerz.jpg',
+    alt: 'Tylers Designerz / bapeboy069 – Creator Page & Streetwear Webshop Demo',
+  },
+  {
+    id: 'awd-shop',
+    title: fromWebsiteText('projects.luxury.title'),
+    description: fromWebsiteText('projects.luxury.description'),
+    badge: awdDemoBadge,
+    url: 'https://v0-luxury-street-chic-website.vercel.app/',
+    tags: ['Demo-Site', 'Fashion', 'E-Commerce', 'AWD'],
+    image: '/projects/awd-shop.jpg',
+    alt: 'AWD Shop – Fashion E-Commerce Demo-Website',
+  },
+  {
+    id: 'al-salam',
+    title: fromWebsiteText('projects.donation.title'),
+    description: fromWebsiteText('projects.donation.description'),
+    badge: alSalamDemoBadge,
+    url: 'https://v0-donation-website-for-al-salam.vercel.app/',
+    tags: ['Demo-Site', 'Charity', 'Donation', 'Non-Profit'],
+    image: '/projects/al-salam.jpg',
+    alt: 'Spendenseite Al Salam – Non-Profit Demo-Website',
   },
   {
     id: 'dovare',

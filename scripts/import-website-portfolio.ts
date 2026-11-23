@@ -10,17 +10,18 @@ import { websiteText } from '../lib/website-text'
 import { importKasselUnited } from './import-kassel-united'
 import { importWestfalenHelp } from './import-westfalen-help'
 import { removeCryptoNews } from './remove-crypto-news'
+import { syncDemoAndCustomOS } from './sync-demo-and-customos'
 import { isCmsQuotaExceeded } from '../lib/cms-quota'
 
 const checkpoint = '20261006_import_website_portfolio'
-const slugs = ['naser-cms', 'haze-chill-website', 'haze-chill-content', 'studio-glace', 'joes-garage', 'awd-shop', 'al-salam']
+const slugs = ['naser-cms', 'haze-chill-website', 'haze-chill-content', 'studio-glace', 'joes-garage']
 const assets = [
   ['/images/logo-invertable.png', 'Naser Solutions Logo'],
   ['/images/inverted-20logo-20png.png', 'Naser Solutions Logo – helle Variante'],
   ['/images/yasin-adam-aissani-2026.jpg', 'Yasin Adam Aissani – Porträt'],
   ['/projects/haze-chill-website.jpg', 'Haze & Chill – Website'],
   ['/projects/haze-chill-instagram.png', 'Haze & Chill – Instagram Reel'],
-  ...slugs.slice(3).map(slug => [`/projects/${slug}.${slug === 'joes-garage' ? 'svg' : 'jpg'}`, `${slug === 'studio-glace' ? 'Studio Glacé' : slug === 'joes-garage' ? 'Joe’s Garage' : slug === 'awd-shop' ? 'AWD Shop' : 'Al Salam'} – Website`]),
+  ...slugs.slice(3).map(slug => [`/projects/${slug}.${slug === 'joes-garage' ? 'svg' : 'jpg'}`, `${slug === 'studio-glace' ? 'Studio Glacé' : 'Joe’s Garage'} – Website`]),
 ]
 
 async function run() {
@@ -94,4 +95,4 @@ async function run() {
     await pool.end()
   }
 }
-try { if (await run() !== false) { await importKasselUnited(); await removeCryptoNews(); await importWestfalenHelp() } process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }
+try { if (await run() !== false) { await importKasselUnited(); await removeCryptoNews(); await importWestfalenHelp(); await syncDemoAndCustomOS() } process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }

@@ -5,6 +5,10 @@ export interface PortfolioPartner {
   name: string
   url: string
 }
+export interface PortfolioSecondaryLink {
+  label: LocalizedText
+  url: string
+}
 export interface PortfolioProject {
   id: number | string
   title: LocalizedText
@@ -16,7 +20,10 @@ export interface PortfolioProject {
   alt?: LocalizedText
   containImage?: boolean | null
   order?: number | null
+  featured?: boolean | null
+  badge?: LocalizedText
   partner?: PortfolioPartner | null
+  secondaryLink?: PortfolioSecondaryLink | null
 }
 export interface PortfolioSection {
   id?: string | null

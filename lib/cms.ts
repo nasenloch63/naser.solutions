@@ -6,6 +6,8 @@ import { isLocalPreview, previewHome } from '@/lib/local-preview'
 import { previewPortfolio, previewPortfolioSection } from './portfolio-preview-data'
 import type { PortfolioProject, PortfolioSection } from './portfolio'
 import { isCmsQuotaExceeded } from './cms-quota'
+import { isMovedDemoProject } from './demo-partner-projects'
+import { hazeChillKarteBadge, hazeChillKarteSecondaryLink, isHazeChillKarteUrl } from './haze-chill-karte-project'
 import { isWestfalenHelpUrl, westfalenHelpPartner } from './westfalen-help-project'
 
 export const getCMS = cache(() => getPayload({ config }))
@@ -83,11 +85,29 @@ export const getProjects = cache(async (draft = false): Promise<Project[]> => {
 
 async function readPortfolio(draft: boolean): Promise<PortfolioProject[]> {
   const result = await (await getCMS()).find({ collection: 'projects', locale: 'all', depth: 1, limit: 1000, sort: 'order', draft, overrideAccess: true, where: { and: [{ showInPortfolio: { not_equals: false } }, ...(draft ? [] : [{ _status: { equals: 'published' } }])] } })
-  return result.docs.map(project => {
-    const image = typeof project.thumbnail === 'object' ? project.thumbnail : null
-    const partner = project.slug === 'westfalen-help' || isWestfalenHelpUrl(project.url) ? westfalenHelpPartner : undefined
-    return { id: project.id, title: project.title, description: project.description, url: project.url, category: project.category, tags: project.tags?.map(tag => tag.label) || [], order: project.order, image: image?.url, alt: image?.alt, containImage: project.containImage, partner }
-  })
+  return result.docs
+    .filter(project => !isMovedDemoProject(project.slug, project.url))
+    .map(project => {
+      const image = typeof project.thumbnail === 'object' ? project.thumbnail : null
+      const partner = project.slug === 'westfalen-help' || isWestfalenHelpUrl(project.url) ? westfalenHelpPartner : undefined
+      const isHazeKarte = project.slug === 'haze-chill-karte' || isHazeChillKarteUrl(project.url)
+      return {
+        id: project.id,
+        title: project.title,
+        description: project.description,
+        url: project.url,
+        category: project.category,
+        tags: project.tags?.map(tag => tag.label) || [],
+        order: project.order,
+        image: image?.url,
+        alt: image?.alt,
+        containImage: project.containImage,
+        featured: Boolean(project.featured || isHazeKarte),
+        badge: isHazeKarte ? hazeChillKarteBadge : undefined,
+        partner,
+        secondaryLink: isHazeKarte ? hazeChillKarteSecondaryLink : undefined,
+      }
+    })
 }
 
 export const getPortfolio = cache(async (draft = false): Promise<PortfolioProject[]> => {

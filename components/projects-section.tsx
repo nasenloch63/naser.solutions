@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useState, useMemo, useCallback } from "react"
 import { useLanguage } from "@/components/language-provider"
-import { ExternalLink, ArrowUpRight, Grid3x3, List, Filter, Globe, Instagram } from "lucide-react"
+import { ExternalLink, ArrowUpRight, Grid3x3, List, Filter, Globe, Instagram, QrCode } from "lucide-react"
 import { cmsProjectCopy } from "@/lib/cms-project-copy"
 import { demoPartnerProjects, demoPartnerSectionCopy } from "@/lib/demo-partner-projects"
 import { hazeChillProjectCopy } from "@/lib/haze-chill-project-copy"
@@ -229,77 +229,99 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
         </div>
 
         <div className={`grid gap-5 sm:gap-8 ${viewMode === "grid" ? "md:grid-cols-2" : "grid-cols-1"}`}>
-          {filteredProjects.map((project) => (
-            <article
-              key={project.id}
-              className="project-card group relative rounded-3xl border border-border bg-background overflow-hidden"
-            >
-              <a
-                href={project.url}
-                target={project.url.startsWith("/") ? undefined : "_blank"}
-                rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
-                className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-2 focus-visible:-outline-offset-2"
-                aria-label={projectTitle(project)}
-              />
-              {/* Thumbnail */}
-              <div className={`${viewMode === "grid" ? "aspect-video" : "aspect-video sm:aspect-[3/1]"} relative overflow-hidden`}>
-                {project.image && !project.containImage ? (
-                  <StaticThumbnail src={project.image!} alt={localizedText(project.alt, language) || `${project.category === "social" ? imageCopy.social : imageCopy.website}: ${projectTitle(project)}`} />
-                ) : project.image ? (
-                  <LogoThumbnail logo={project.image!} title={projectTitle(project)} />
-                ) : (
-                  <ProjectThumbnail url={project.url} title={projectTitle(project)} />
-                )}
-                <span aria-hidden="true" className="project-card-arrow absolute end-4 top-4 flex size-11 items-center justify-center rounded-full border border-border/50 bg-background/90 text-foreground backdrop-blur-md">
-                  <ArrowUpRight className="size-5 rtl-flip" />
-                </span>
-              </div>
-
-              {/* Content */}
-              <div className={`p-5 sm:p-6 ${viewMode === "list" ? "sm:flex sm:items-center sm:gap-6" : ""}`}>
-                <div className="flex-1">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={localizedText(tag, language)}
-                        className="text-xs px-3 py-1 rounded-full bg-secondary text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-300"
-                      >
-                        {localizedText(tag, language)}
-                      </span>
-                    ))}
-                  </div>
-                  <h3 className="font-display text-xl font-semibold tracking-tight text-foreground mb-2 sm:text-2xl">
-                    {projectTitle(project)}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">{projectDescription(project)}</p>
+          {filteredProjects.map((project) => {
+            const badge = localizedText(project.badge, language)
+            return (
+              <article
+                key={project.id}
+                className={`project-card group relative rounded-3xl border bg-background overflow-hidden ${
+                  project.featured ? "border-primary/45 ring-1 ring-primary/15" : "border-border"
+                }`}
+              >
+                <a
+                  href={project.url}
+                  target={project.url.startsWith("/") ? undefined : "_blank"}
+                  rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
+                  className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-2 focus-visible:-outline-offset-2"
+                  aria-label={projectTitle(project)}
+                />
+                {/* Thumbnail */}
+                <div className={`${viewMode === "grid" ? "aspect-video" : "aspect-video sm:aspect-[3/1]"} relative overflow-hidden`}>
+                  {project.image && !project.containImage ? (
+                    <StaticThumbnail src={project.image!} alt={localizedText(project.alt, language) || `${project.category === "social" ? imageCopy.social : imageCopy.website}: ${projectTitle(project)}`} />
+                  ) : project.image ? (
+                    <LogoThumbnail logo={project.image!} title={projectTitle(project)} />
+                  ) : (
+                    <ProjectThumbnail url={project.url} title={projectTitle(project)} />
+                  )}
+                  {badge && (
+                    <span className="absolute start-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm">
+                      <QrCode className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      <span>{badge}</span>
+                    </span>
+                  )}
+                  <span aria-hidden="true" className="project-card-arrow absolute end-4 top-4 flex size-11 items-center justify-center rounded-full border border-border/50 bg-background/90 text-foreground backdrop-blur-md">
+                    <ArrowUpRight className="size-5 rtl-flip" />
+                  </span>
                 </div>
 
-                <div className={`mt-5 flex flex-wrap items-center justify-between gap-x-5 gap-y-2 shrink-0 text-sm ${viewMode === "list" ? "sm:mt-0 sm:flex-col sm:items-end" : ""}`}>
-                  <div className="flex items-center gap-2 text-primary font-medium">
-                    <span>{project.url === "/CMS" ? cmsCopy.status : t(isInstagramProject(project) ? "ui.instagram" : "ui.website")}</span>
-                    {project.url === "/CMS" ? (
-                      <ArrowUpRight className="h-4 w-4" />
-                    ) : isInstagramProject(project) ? (
-                      <Instagram className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    ) : (
-                      <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                {/* Content */}
+                <div className={`p-5 sm:p-6 ${viewMode === "list" ? "sm:flex sm:items-center sm:gap-6" : ""}`}>
+                  <div className="flex-1">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={localizedText(tag, language)}
+                          className="text-xs px-3 py-1 rounded-full bg-secondary text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-300"
+                        >
+                          {localizedText(tag, language)}
+                        </span>
+                      ))}
+                    </div>
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-foreground mb-2 sm:text-2xl">
+                      {projectTitle(project)}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm">{projectDescription(project)}</p>
+                  </div>
+
+                  <div className={`mt-5 flex flex-wrap items-center justify-between gap-x-5 gap-y-2 shrink-0 text-sm ${viewMode === "list" ? "sm:mt-0 sm:flex-col sm:items-end" : ""}`}>
+                    <div className="flex items-center gap-2 text-primary font-medium">
+                      <span>{project.url === "/CMS" ? cmsCopy.status : t(isInstagramProject(project) ? "ui.instagram" : "ui.website")}</span>
+                      {project.url === "/CMS" ? (
+                        <ArrowUpRight className="h-4 w-4" />
+                      ) : isInstagramProject(project) ? (
+                        <Instagram className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      ) : (
+                        <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      )}
+                    </div>
+                    {project.partner && (
+                      <a
+                        href={project.partner.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative z-20 inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors rounded focus-visible:outline-2 focus-visible:outline-offset-2"
+                      >
+                        <span>{demoPartnerCopy.collaborationLabel} {project.partner.name}</span>
+                        <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      </a>
+                    )}
+                    {project.secondaryLink && (
+                      <a
+                        href={project.secondaryLink.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative z-20 inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors rounded focus-visible:outline-2 focus-visible:outline-offset-2"
+                      >
+                        <span>{localizedText(project.secondaryLink.label, language)}</span>
+                        <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      </a>
                     )}
                   </div>
-                  {project.partner && (
-                    <a
-                      href={project.partner.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="relative z-20 inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors rounded focus-visible:outline-2 focus-visible:outline-offset-2"
-                    >
-                      <span>{demoPartnerCopy.collaborationLabel} {project.partner.name}</span>
-                      <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                    </a>
-                  )}
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            )
+          })}
         </div>
 
         {filteredProjects.length === 0 && (
