@@ -40,54 +40,56 @@
 
 @media (prefers-reduced-motion: reduce) {
   .mobile-menu-shell,
-  .mobile-nav-item,
-  .lang-dropdown-panel {
+  .mobile-nav-item {
     transition: none;
     transform: none;
     filter: none;
   }
 }
 
-/* yasin_ui: Smooth spring dropdown for language switcher */
 .lang-dropdown-panel {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-8px) scale(0.95);
-  filter: blur(4px);
-  transform-origin: top right;
-  transition: opacity 210ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 210ms ease,
-    visibility 0s 260ms;
-}
-
-[dir="rtl"] .lang-dropdown-panel {
-  transform-origin: top left;
+  clip-path: inset(0 0 100% round 1rem);
+  transform: translateY(-5px);
+  transition: clip-path 240ms cubic-bezier(.4, 0, .25, 1), opacity 160ms ease,
+    transform 240ms ease, visibility 0s 240ms;
 }
 
 .lang-dropdown-panel[data-open="true"] {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  clip-path: inset(0 0 0% round 1rem);
+  transform: translateY(0);
+  transition-duration: 360ms, 200ms, 320ms, 0s;
   transition-delay: 0s;
 }
 
-/* yasin_ui: Radial circular theme reveal via View Transitions API */
-::view-transition-old(root),
-::view-transition-new(root) {
+@media (prefers-reduced-motion: reduce) {
+  .lang-dropdown-panel { transition: none; }
+}
+
+:root[data-theme-reveal]::view-transition-old(root),
+:root[data-theme-reveal]::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-::view-transition-old(root) {
-  z-index: 1;
+:root[data-theme-reveal]::view-transition-new(root) {
+  animation: theme-reveal 680ms cubic-bezier(.42, 0, .18, 1) both;
 }
 
-::view-transition-new(root) {
-  z-index: 9999;
+@keyframes theme-reveal {
+  from { clip-path: circle(0 at var(--reveal-x) var(--reveal-y)); }
+  to { clip-path: circle(var(--reveal-radius) at var(--reveal-x) var(--reveal-y)); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-theme-fade] :is(body, nav, section, article, .glass-surface) {
+    transition: background-color 320ms ease-in-out, color 320ms ease-in-out, border-color 320ms ease-in-out;
+  }
 }
 
 :root {

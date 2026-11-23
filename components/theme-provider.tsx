@@ -15,15 +15,10 @@ const ThemeContext = createContext<ThemeContextType>({
   toggleTheme: () => {},
 })
 
-type ViewTransitionDocument = Document & {
-  startViewTransition?: (updateCallback: () => void) => {
-    ready: Promise<void>
-    finished: Promise<void>
-  }
-}
-
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light")
+  const fadeTimer = useRef<number | undefined>(undefined)
+  const activeTransition = useRef<ViewTransition | null>(null)
   const preference = useRef<ThemeOverride | null>(null)
 
   useEffect(() => {
@@ -46,67 +41,52 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     document.addEventListener("visibilitychange", syncTheme)
     return () => {
       window.clearTimeout(timeout)
+      window.clearTimeout(fadeTimer.current)
+      document.documentElement.removeAttribute("data-theme-fade")
       window.removeEventListener("focus", syncTheme)
       document.removeEventListener("visibilitychange", syncTheme)
     }
   }, [])
 
   const toggleTheme = (event?: React.MouseEvent<HTMLElement>) => {
-    const newTheme: Theme = theme === "light" ? "dark" : "light"
+    const newTheme: Theme = (preference.current?.theme ?? theme) === "light" ? "dark" : "light"
     const override: ThemeOverride = { theme: newTheme, expiresAt: nextThemeBoundary(new Date()).getTime() }
     preference.current = override
     try { sessionStorage.setItem(THEME_OVERRIDE_KEY, JSON.stringify(override)) } catch {}
 
-    const doc = document as ViewTransitionDocument
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-
-    if (!doc.startViewTransition || reducedMotion) {
-      setTheme(newTheme)
+    const root = document.documentElement
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const commit = () => {
+      flushSync(() => setTheme(newTheme))
       applyTheme(newTheme)
+    }
+
+    activeTransition.current?.skipTransition()
+    if (reduced || !document.startViewTransition) {
+      root.toggleAttribute("data-theme-fade", !reduced)
+      window.clearTimeout(fadeTimer.current)
+      if (!reduced) fadeTimer.current = window.setTimeout(() => root.removeAttribute("data-theme-fade"), 350)
+      commit()
       return
     }
 
-    // Compute exact origin coordinates from the clicked toggle button
-    let x = window.innerWidth * 0.85
-    let y = 40
-    if (event?.currentTarget) {
-      const rect = event.currentTarget.getBoundingClientRect()
-      x = rect.left + rect.width / 2
-      y = rect.top + rect.height / 2
-    } else if (event && (event.clientX || event.clientY)) {
-      x = event.clientX
-      y = event.clientY
-    }
-
-    const endRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y),
-    )
-
-    const transition = doc.startViewTransition(() => {
-      flushSync(() => {
-        setTheme(newTheme)
-      })
-      applyTheme(newTheme)
+    const rect = event?.currentTarget.getBoundingClientRect()
+    const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2
+    const y = rect ? rect.top + rect.height / 2 : 0
+    const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y))
+    root.style.setProperty("--reveal-x", x + "px")
+    root.style.setProperty("--reveal-y", y + "px")
+    root.style.setProperty("--reveal-radius", Math.ceil(radius) + "px")
+    root.setAttribute("data-theme-reveal", "")
+    const transition = document.startViewTransition(commit)
+    activeTransition.current = transition
+    void transition.ready.catch(() => {}) // A second click can skip the outgoing reveal.
+    void transition.finished.then(() => {
+      if (activeTransition.current === transition) {
+        activeTransition.current = null
+        root.removeAttribute("data-theme-reveal")
+      }
     })
-
-    transition.ready
-      .then(() => {
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `circle(0px at ${x}px ${y}px)`,
-              `circle(${endRadius}px at ${x}px ${y}px)`,
-            ],
-          },
-          {
-            duration: 620,
-            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-            pseudoElement: "::view-transition-new(root)",
-          },
-        )
-      })
-      .catch(() => {})
   }
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>

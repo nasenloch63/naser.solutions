@@ -293,9 +293,29 @@ const baseProfileCopy: Record<Language, Record<string, string>> = {
   }
 }
 
+const businessCardLabels: Record<Language, string> = {
+  de: "Visitenkarte",
+  en: "Business card",
+  fr: "Carte de visite",
+  ar: "بطاقة العمل",
+  th: "นามบัตร",
+  hi: "विज़िटिंग कार्ड",
+  tr: "Kartvizit",
+  sq: "Kartëvizitë",
+  ru: "Визитная карточка",
+  es: "Tarjeta de visita",
+  it: "Biglietto da visita",
+  uk: "Візитна картка",
+  el: "Επαγγελματική κάρτα",
+  pt: "Cartão de visita",
+  zh: "名片",
+  ja: "名刺",
+}
+
 export const profileCopy: Record<Language, Record<string, string>> = Object.fromEntries<Record<string, string>>(
   supportedLanguages.map(language => [language, {
     ...baseProfileCopy[language],
+    "about.businessCard": businessCardLabels[language],
     'services.marketing.title': digitalMarketingCopy[language].title,
     'services.marketing.description': digitalMarketingCopy[language].description,
   }]),

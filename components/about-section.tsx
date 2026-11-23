@@ -165,6 +165,22 @@ export function AboutSection() {
               <p className="font-semibold text-foreground text-lg">Yasin Adam Aissani</p>
               <p className="text-muted-foreground">{t("about.role")}</p>
             </div>
+            <section id="visitenkarte" aria-labelledby="business-card-heading" className="mt-6 scroll-mt-24">
+              <div className="mb-3 flex items-baseline justify-between gap-4">
+                <h3 id="business-card-heading" className="font-display text-xl font-semibold">{t("about.businessCard")}</h3>
+                <a href="/kontakt/visitenkarte.pdf" className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4" aria-label={t("about.businessCard") + " (PDF)"}>
+                  PDF <ExternalLink className="size-4" aria-hidden="true" />
+                </a>
+              </div>
+              <div className="grid gap-3">
+                <Image src="/images/visitenkarte-vorn.webp" width={1146} height={742}
+                  alt="Yasin Adam Aissani · +49 1556 0729886 · info@naser-solutions.de · naser-solutions.de"
+                  className="w-full rounded-xl border border-border" />
+                <Image src="/images/visitenkarte-hinten.webp" width={1146} height={742}
+                  alt="Naser Solutions · Webdesign · Marketing · Social Media · Branding"
+                  className="w-full rounded-xl border border-border" />
+              </div>
+            </section>
           </div>
         </div>
       </div>

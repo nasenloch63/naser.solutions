@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, type RefObject } from "react"
 import type * as ThreeTypes from "three"
 
 const SCALE = 0.039
@@ -123,31 +123,24 @@ function sampleMeshSurface(
 function createStudioEnvironment(
   THREE: typeof ThreeTypes,
   renderer: ThreeTypes.WebGLRenderer,
-  dark: boolean,
 ) {
   const pmrem = new THREE.PMREMGenerator(renderer)
   const envScene = new THREE.Scene()
-  envScene.background = new THREE.Color(dark ? 0x09090b : 0xf4f4f6)
+  envScene.background = new THREE.Color(0xf4f4f6)
 
-  const panelConfigs = dark
-    ? [
-        { pos: [0, 7, 3] as const, rot: [Math.PI / 2.2, 0, 0] as const, scale: [14, 4, 1] as const, color: 0xffffff },
-        { pos: [-7, 2, 4] as const, rot: [0, Math.PI / 2.4, 0] as const, scale: [10, 7, 1] as const, color: 0xd4d4dc },
-        { pos: [7, -1, 3] as const, rot: [0, -Math.PI / 2.4, 0] as const, scale: [10, 6, 1] as const, color: 0xa1a1aa },
-        { pos: [0, -6, 2] as const, rot: [-Math.PI / 2, 0, 0] as const, scale: [12, 5, 1] as const, color: 0x3f3f46 },
-        { pos: [0, 2, -7] as const, rot: [0, 0, 0] as const, scale: [14, 8, 1] as const, color: 0xe4e4e7 },
-      ]
-    : [
-        { pos: [0, 7, 3] as const, rot: [Math.PI / 2.2, 0, 0] as const, scale: [14, 5, 1] as const, color: 0xffffff },
-        { pos: [-7, 2, 4] as const, rot: [0, Math.PI / 2.4, 0] as const, scale: [10, 8, 1] as const, color: 0xffffff },
-        { pos: [7, -1, 3] as const, rot: [0, -Math.PI / 2.4, 0] as const, scale: [10, 7, 1] as const, color: 0xd4d4d8 },
-        { pos: [0, -6, 2] as const, rot: [-Math.PI / 2, 0, 0] as const, scale: [12, 5, 1] as const, color: 0x27272a },
-        { pos: [0, 2, -7] as const, rot: [0, 0, 0] as const, scale: [14, 8, 1] as const, color: 0xfafafa },
-      ]
+  const panelConfigs = [
+    { pos: [0, 7, 3] as const, rot: [Math.PI / 2.2, 0, 0] as const, scale: [14, 5, 1] as const, color: 0xffffff },
+    { pos: [-7, 2, 4] as const, rot: [0, Math.PI / 2.4, 0] as const, scale: [10, 8, 1] as const, color: 0xffffff },
+    { pos: [7, -1, 3] as const, rot: [0, -Math.PI / 2.4, 0] as const, scale: [10, 7, 1] as const, color: 0xd4d4d8 },
+    { pos: [0, -6, 2] as const, rot: [-Math.PI / 2, 0, 0] as const, scale: [12, 5, 1] as const, color: 0x27272a },
+    { pos: [0, 2, -7] as const, rot: [0, 0, 0] as const, scale: [14, 8, 1] as const, color: 0xfafafa },
+  ]
 
+  const panelMaterials: ThreeTypes.MeshBasicMaterial[] = []
   const plane = new THREE.PlaneGeometry(1, 1)
   for (const cfg of panelConfigs) {
     const mat = new THREE.MeshBasicMaterial({ color: cfg.color, side: THREE.DoubleSide })
+    panelMaterials.push(mat)
     const mesh = new THREE.Mesh(plane, mat)
     mesh.position.set(cfg.pos[0], cfg.pos[1], cfg.pos[2])
     mesh.rotation.set(cfg.rot[0], cfg.rot[1], cfg.rot[2])
@@ -156,6 +149,7 @@ function createStudioEnvironment(
   }
 
   const target = pmrem.fromScene(envScene, 0.04)
+  panelMaterials.forEach(material => material.dispose())
   plane.dispose()
   pmrem.dispose()
   return target
@@ -163,22 +157,20 @@ function createStudioEnvironment(
 
 interface NaserLogo3DProps {
   hoverActive?: boolean
-  pointerNorm?: { x: number; y: number }
+  pointer: RefObject<{ x: number; y: number }>
   className?: string
 }
 
 export function NaserLogo3D({
   hoverActive = false,
-  pointerNorm = { x: 0, y: 0 },
+  pointer,
   className = "",
 }: NaserLogo3DProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [webglFailed, setWebglFailed] = useState(false)
   const hoverRef = useRef(hoverActive)
-  const pointerRef = useRef(pointerNorm)
 
-  hoverRef.current = hoverActive
-  pointerRef.current = pointerNorm
+  useEffect(() => { hoverRef.current = hoverActive }, [hoverActive])
 
   useEffect(() => {
     const container = containerRef.current
@@ -203,7 +195,7 @@ export function NaserLogo3D({
         return
       }
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
       renderer.setPixelRatio(dpr)
       renderer.toneMapping = THREE.ACESFilmicToneMapping
       renderer.toneMappingExposure = 1.15
@@ -218,7 +210,7 @@ export function NaserLogo3D({
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
       let dark = document.documentElement.classList.contains("dark")
-      let envRT = createStudioEnvironment(THREE, renderer, dark)
+      const envRT = createStudioEnvironment(THREE, renderer)
       scene.environment = envRT.texture
 
       const keyLight = new THREE.DirectionalLight(0xffffff, dark ? 2.3 : 1.9)
@@ -243,8 +235,8 @@ export function NaserLogo3D({
         bevelThickness: 0.11,
         bevelSize: 0.08,
         bevelOffset: 0,
-        bevelSegments: 10,
-        curveSegments: 44,
+        bevelSegments: 6,
+        curveSegments: 30,
       }
 
       const geometries = shapes.map((shape) => {
@@ -289,11 +281,13 @@ export function NaserLogo3D({
       // 3,800 surface particle grains for ambient hover Dissolve effect
       const PARTICLE_COUNT = 3800
       const { basePositions, velocities, seeds, delays } = sampleMeshSurface(THREE, geometries, PARTICLE_COUNT)
-      const currentPositions = new Float32Array(basePositions)
 
       const particleGeo = new THREE.BufferGeometry()
-      particleGeo.setAttribute("position", new THREE.BufferAttribute(currentPositions, 3))
+      particleGeo.setAttribute("position", new THREE.BufferAttribute(basePositions, 3))
       particleGeo.setAttribute("aSeed", new THREE.BufferAttribute(seeds, 1))
+
+      particleGeo.setAttribute("aVelocity", new THREE.BufferAttribute(velocities, 3))
+      particleGeo.setAttribute("aDelay", new THREE.BufferAttribute(delays, 1))
 
       const particleMat = new THREE.ShaderMaterial({
         transparent: true,
@@ -301,14 +295,23 @@ export function NaserLogo3D({
         uniforms: {
           uColor: { value: new THREE.Color(dark ? 0xf8f8fa : 0x111114) },
           uOpacity: { value: 0 },
+          uProgress: { value: 0 },
+          uTime: { value: 0 },
           uPixelRatio: { value: dpr },
         },
         vertexShader: `
           attribute float aSeed;
+          attribute vec3 aVelocity;
+          attribute float aDelay;
+          uniform float uProgress;
+          uniform float uTime;
           uniform float uPixelRatio;
           varying float vAlpha;
           void main() {
-            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+            float local = clamp((uProgress - aDelay) / (1.0 - aDelay), 0.0, 1.0);
+            float drift = 1.0 - pow(1.0 - local, 3.0);
+            vec3 swirl = vec3(sin(uTime * 1.9 + aSeed), cos(uTime * 1.6 + aSeed), sin(uTime * 1.35 + aSeed * 1.5));
+            vec4 mvPosition = modelViewMatrix * vec4(position + drift * (aVelocity + 0.24 * swirl), 1.0);
             gl_Position = projectionMatrix * mvPosition;
             float size = (9.5 + 7.5 * sin(aSeed * 3.14)) * uPixelRatio;
             gl_PointSize = clamp(size / max(1.0, -mvPosition.z), 1.5, 8.0);
@@ -323,7 +326,7 @@ export function NaserLogo3D({
             vec2 c = gl_PointCoord - vec2(0.5);
             float d = length(c);
             if (d > 0.5) discard;
-            float soft = smoothstep(0.5, 0.14, d);
+            float soft = 1.0 - smoothstep(0.14, 0.5, d);
             gl_FragColor = vec4(uColor, soft * vAlpha * uOpacity);
           }
         `,
@@ -341,6 +344,7 @@ export function NaserLogo3D({
         camera.position.z = w < 480 ? 8.4 : 7.0
         camera.updateProjectionMatrix()
         renderer.setSize(w, h, false)
+        if (reducedMotion.matches) renderer.render(scene, camera)
       }
       resize()
 
@@ -348,10 +352,6 @@ export function NaserLogo3D({
         const nextDark = document.documentElement.classList.contains("dark")
         if (nextDark === dark) return
         dark = nextDark
-        const nextEnv = createStudioEnvironment(THREE, renderer, dark)
-        envRT.dispose()
-        envRT = nextEnv
-        scene.environment = envRT.texture
         bodyMaterial.color.setHex(dark ? 0xededf0 : 0x16161a)
         bodyMaterial.metalness = dark ? 0.88 : 0.68
         bodyMaterial.roughness = dark ? 0.16 : 0.22
@@ -379,6 +379,7 @@ export function NaserLogo3D({
       const intersectionObserver = new IntersectionObserver(
         (entries) => {
           visible = entries[0]?.isIntersecting ?? true
+          syncPlayback()
         },
         { threshold: 0.02 },
       )
@@ -390,56 +391,44 @@ export function NaserLogo3D({
       let currentRotY = -0.22
       let currentRotX = 0.12
 
-      function updateParticles(progress: number, timeSec: number) {
-        const attr = particleGeo.attributes.position as ThreeTypes.BufferAttribute
-        const arr = attr.array as Float32Array
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-          const delay = delays[i]
-          const local = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)))
-          const eased = 1 - Math.pow(1 - local, 3)
-          const seed = seeds[i]
-          const ix = i * 3
-          const swirl = eased * 0.24
-          arr[ix] = basePositions[ix] + velocities[ix] * eased + Math.sin(timeSec * 1.9 + seed) * swirl
-          arr[ix + 1] = basePositions[ix + 1] + velocities[ix + 1] * eased + Math.cos(timeSec * 1.6 + seed) * swirl
-          arr[ix + 2] = basePositions[ix + 2] + velocities[ix + 2] * eased + Math.sin(timeSec * 1.35 + seed * 1.5) * swirl
-        }
-        attr.needsUpdate = true
-      }
+      let elapsed = 0
 
       function renderFrame(now: number) {
-        rafId = window.requestAnimationFrame(renderFrame)
+        rafId = 0
         const dt = Math.min(0.05, (now - prevTime) / 1000)
         prevTime = now
-        if (!visible) return
+        if (!visible || document.hidden) return
 
-        const timeSec = now * 0.001
+        elapsed += dt
+        const timeSec = elapsed
 
         if (!reducedMotion.matches) {
           // Gentle 3/4 architectural breathing sway so the iconic Naser logo stays recognizable at all times
           const swayYaw = -0.22 + Math.sin(timeSec * 0.45) * 0.28
-          const px = pointerRef.current.x
-          const py = pointerRef.current.y
+          const px = pointer.current.x
+          const py = pointer.current.y
           const targetY = swayYaw + px * 0.34
           const targetX = 0.12 + Math.cos(timeSec * 0.36) * 0.08 + py * 0.22
-          currentRotY += (targetY - currentRotY) * Math.min(1, dt * 4.5)
-          currentRotX += (targetX - currentRotX) * Math.min(1, dt * 4.5)
+          currentRotY += (targetY - currentRotY) * (1 - Math.exp(-dt * 4.5))
+          currentRotX += (targetX - currentRotX) * (1 - Math.exp(-dt * 4.5))
 
           pivot.rotation.y = currentRotY
           pivot.rotation.x = currentRotX
           pivot.position.y = Math.sin(timeSec * 0.95) * 0.07
 
-          fillLight.position.x = -3 + px * 3.0
-          fillLight.position.y = 2.5 - py * 2.4
+          const blend = 1 - Math.exp(-dt * 5)
+          fillLight.position.x += (-3 + px * 3 - fillLight.position.x) * blend
+          fillLight.position.y += (2.5 - py * 2.4 - fillLight.position.y) * blend
 
           // Smooth hover-driven Dissolve <-> Gather interpolation
           const targetDissolve = hoverRef.current ? 0.96 : 0
           const rate = hoverRef.current ? 2.2 : 2.5
-          dissolveProgress += (targetDissolve - dissolveProgress) * Math.min(1, dt * rate)
+          dissolveProgress += (targetDissolve - dissolveProgress) * (1 - Math.exp(-dt * rate))
 
           if (dissolveProgress > 0.006) {
             particles.visible = true
-            updateParticles(dissolveProgress, timeSec)
+            particleMat.uniforms.uProgress.value = dissolveProgress
+            particleMat.uniforms.uTime.value = timeSec
             const solidAlpha = Math.max(0.08, 1 - dissolveProgress * 1.25)
             bodyMaterial.opacity = solidAlpha
             edgeMaterial.opacity = (dark ? 0.22 : 0.16) * Math.max(0.2, 1 - dissolveProgress * 0.8)
@@ -454,20 +443,30 @@ export function NaserLogo3D({
         } else {
           pivot.rotation.y = -0.28
           pivot.rotation.x = 0.14
+          pivot.position.y = 0
+          particles.visible = false
+          dissolveProgress = 0
+          bodyMaterial.opacity = 1
+          edgeMaterial.opacity = dark ? 0.22 : 0.16
         }
 
         renderer.render(scene, camera)
+        if (!reducedMotion.matches) rafId = window.requestAnimationFrame(renderFrame)
       }
 
-      if (reducedMotion.matches) {
-        pivot.rotation.y = -0.28
-        pivot.rotation.x = 0.14
-        renderer.render(scene, camera)
-      } else {
-        rafId = window.requestAnimationFrame(renderFrame)
+      function syncPlayback() {
+        window.cancelAnimationFrame(rafId)
+        prevTime = performance.now()
+        if (visible && !document.hidden) renderFrame(prevTime)
       }
+
+      reducedMotion.addEventListener("change", syncPlayback)
+      document.addEventListener("visibilitychange", syncPlayback)
+      syncPlayback()
 
       cleanupFn = () => {
+        reducedMotion.removeEventListener("change", syncPlayback)
+        document.removeEventListener("visibilitychange", syncPlayback)
         if (rafId) window.cancelAnimationFrame(rafId)
         resizeObserver.disconnect()
         themeObserver.disconnect()
@@ -490,7 +489,7 @@ export function NaserLogo3D({
       disposed = true
       cleanupFn?.()
     }
-  }, [])
+  }, [pointer])
 
   if (webglFailed) return null
 

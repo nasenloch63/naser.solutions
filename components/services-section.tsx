@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "@/components/site-link"
 import { useState } from "react"
 import { ArrowUpRight, Globe, Target, AppWindow, Workflow, Server, HeartHandshake, Plus, ReceiptText, CreditCard, Wifi } from "lucide-react"
@@ -116,25 +117,13 @@ export function ServicesSection() {
             <p className="mt-3 text-sm leading-relaxed text-pretty text-muted-foreground">{nfc.description}</p>
           </div>
 
-          {/* Sculpted Physical Obsidian NFC Card Object */}
-          <div aria-hidden="true" className="mx-auto w-full max-w-[260px]">
-            <div className="glass-surface group relative aspect-[1.586/1] w-full overflow-hidden rounded-2xl border border-foreground/20 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-4 text-white shadow-xl shadow-black/25 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1">
-              <div className="flex items-start justify-between">
-                <div
-                  className="size-8 bg-contain bg-left bg-no-repeat opacity-95"
-                  style={{ backgroundImage: "url('/images/inverted-20logo-20png.png')" }}
-                />
-                <Wifi className="size-4 rotate-90 text-white/65" strokeWidth={1.75} />
-              </div>
-              <div className="absolute inset-x-4 bottom-3.5 flex items-end justify-between">
-                <div>
-                  <p className="font-display text-xs font-semibold tracking-tight text-white">Naser Solutions</p>
-                  <p className="text-[9px] tracking-[0.18em] text-white/55 uppercase">NFC Smart Card</p>
-                </div>
-                <span className="h-4 w-6 rounded-[4px] border border-white/25 bg-white/10" />
-              </div>
-            </div>
-          </div>
+          <Image
+            src="/images/nfc-bewertungskarte-cafe.webp"
+            width={900}
+            height={787}
+            alt={nfc.photoAlt}
+            className="w-full max-w-md justify-self-center rounded-2xl"
+          />
 
           <dl className="grid grid-cols-2 gap-3 sm:gap-4">
             <div className="min-w-0 rounded-xl bg-secondary/50 p-4 sm:p-5">
@@ -156,6 +145,37 @@ export function ServicesSection() {
             </div>
           </dl>
         </div>
+
+        <section id="stempelkarten" aria-labelledby="stempelkarten-title" className="mt-4 grid items-center gap-6 rounded-3xl border border-border bg-background p-6 sm:p-8 md:grid-cols-[1fr_auto]">
+          <div className="max-w-xl">
+            <h3 id="stempelkarten-title" className="font-display text-xl font-semibold sm:text-2xl">{nfc.stampTitle}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{nfc.stampDescription}</p>
+          </div>
+          <div aria-hidden="true" className="mx-auto w-full max-w-[260px] md:w-[260px]">
+            <div className="glass-surface group relative aspect-[1.586/1] w-full overflow-hidden rounded-2xl border border-foreground/20 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-4 text-white shadow-xl shadow-black/25 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1">
+              <div className="flex items-start justify-between">
+                <div
+                  className="size-8 bg-contain bg-left bg-no-repeat invert opacity-95"
+                  style={{ backgroundImage: "url('/images/logo-invertable.png')" }}
+                />
+                <Wifi className="size-4 rotate-90 text-white/65" strokeWidth={1.75} />
+              </div>
+              <div className="mt-3 flex gap-2">
+                {[true, true, false, false, false].map((stamped, index) => (
+                  <span key={index} className="grid size-6 place-items-center rounded-full border border-dashed border-white/50 text-sm text-white">
+                    {stamped && "✓"}
+                  </span>
+                ))}
+              </div>
+              <div className="absolute inset-x-4 bottom-3.5">
+                <div>
+                  <p className="font-display text-xs font-semibold tracking-tight text-white">Naser Solutions</p>
+                  <p className="text-[9px] tracking-[0.18em] text-white/55 uppercase">{nfc.stampTitle}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <nav lang="de-DE" dir="ltr" aria-label="Leistungen in Kassel" className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-xs text-muted-foreground sm:text-sm">
           {[

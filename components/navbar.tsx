@@ -54,20 +54,12 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           <Link href="/" onClick={handleSectionNavigation} aria-label="Naser Solutions" className="flex items-center gap-2 min-w-0">
             <div className="relative h-9 w-9 sm:h-14 sm:w-14 flex-shrink-0">
-              {/* Light mode logo */}
               <Image
                 src="/images/logo-invertable.png"
-                alt="Logo von Naser Solutions"
+                alt=""
                 fill
-                className="object-contain dark:hidden"
-                priority
-              />
-              {/* Dark mode logo - using direct URL */}
-              <Image
-                src="/images/inverted-20logo-20png.png"
-                alt="Logo von Naser Solutions"
-                fill
-                className="hidden object-contain dark:block"
+                sizes="(min-width: 640px) 56px, 36px"
+                className="object-contain dark:invert"
                 priority
               />
             </div>

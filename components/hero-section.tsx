@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { ArrowDownRight, ArrowRight } from "lucide-react"
 import Link from "@/components/site-link"
 import { useLanguage } from "@/components/language-provider"
@@ -10,13 +10,14 @@ import { NaserLogo3D } from "@/components/naser-logo-3d"
 export function HeroSection() {
   const { t } = useLanguage()
   const [logoHovered, setLogoHovered] = useState(false)
-  const [pointerNorm, setPointerNorm] = useState({ x: 0, y: 0 })
+  const pointer = useRef({ x: 0, y: 0 })
 
   function handleLeftPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (e.pointerType === "touch") return
     const rect = e.currentTarget.getBoundingClientRect()
     const x = ((e.clientX - rect.left) / Math.max(1, rect.width)) * 2 - 1
     const y = ((e.clientY - rect.top) / Math.max(1, rect.height)) * 2 - 1
-    setPointerNorm({ x, y })
+    pointer.current = { x, y }
   }
 
   return (
@@ -35,7 +36,7 @@ export function HeroSection() {
       >
         <NaserLogo3D
           hoverActive={logoHovered}
-          pointerNorm={pointerNorm}
+          pointer={pointer}
           className={`size-full ${
             logoHovered
               ? "opacity-35 dark:opacity-45"
@@ -47,10 +48,10 @@ export function HeroSection() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[1.08fr_1fr] lg:gap-16 lg:px-8">
         <div
           className="hero-enter min-w-0"
-          onPointerEnter={() => setLogoHovered(true)}
+          onPointerEnter={event => setLogoHovered(event.pointerType !== "touch")}
           onPointerLeave={() => {
             setLogoHovered(false)
-            setPointerNorm({ x: 0, y: 0 })
+            pointer.current = { x: 0, y: 0 }
           }}
           onPointerMove={handleLeftPointerMove}
         >

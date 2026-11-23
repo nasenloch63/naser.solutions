@@ -15,7 +15,7 @@ function LanguageFlag({ language }: { language: Language }) {
 }
 
 export function LanguageSwitcher() {
-  const { language, setLanguage, t, isRTL } = useLanguage()
+  const { language, setLanguage, t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
@@ -44,6 +44,7 @@ export function LanguageSwitcher() {
   }, [isOpen])
 
   const handleSelect = (langCode: Language) => {
+    triggerRef.current?.focus()
     setLanguage(langCode)
     setIsOpen(false)
   }
@@ -74,10 +75,7 @@ export function LanguageSwitcher() {
         data-open={isOpen}
         aria-hidden={!isOpen}
         inert={!isOpen}
-        className={`lang-dropdown-panel glass-surface absolute top-full z-50 mt-2.5 min-w-[200px] overflow-hidden rounded-2xl border border-border/80 bg-popover/92 shadow-2xl shadow-black/20 backdrop-blur-2xl ${
-          isRTL ? "start-0" : "end-0"
-        }`}
-        style={{ insetInlineEnd: isRTL ? "auto" : "0", insetInlineStart: isRTL ? "0" : "auto" }}
+        className="lang-dropdown-panel absolute end-0 top-full z-50 mt-2.5 min-w-[200px] overflow-hidden rounded-2xl border border-border/80 bg-popover/92 shadow-2xl shadow-black/20 backdrop-blur-2xl"
         role="listbox"
         aria-label={t("language.select")}
       >
@@ -138,6 +136,7 @@ export function LanguageSwitcherCompact() {
   }, [isOpen])
 
   const handleSelect = (langCode: Language) => {
+    triggerRef.current?.focus()
     setLanguage(langCode)
     setIsOpen(false)
   }
@@ -165,7 +164,7 @@ export function LanguageSwitcherCompact() {
         data-open={isOpen}
         aria-hidden={!isOpen}
         inert={!isOpen}
-        className="lang-dropdown-panel glass-surface absolute top-full z-50 mt-2.5 min-w-[180px] overflow-hidden rounded-2xl border border-border/80 bg-popover/92 shadow-2xl shadow-black/20 backdrop-blur-2xl"
+        className="lang-dropdown-panel absolute top-full z-50 mt-2.5 min-w-[180px] overflow-hidden rounded-2xl border border-border/80 bg-popover/92 shadow-2xl shadow-black/20 backdrop-blur-2xl"
         style={{ insetInlineEnd: 0 }}
         role="listbox"
         aria-label={t("language.select")}

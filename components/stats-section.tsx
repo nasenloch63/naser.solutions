@@ -26,6 +26,16 @@ const tools: ToolItem[] = [
     ),
   },
   {
+    name: "Google Gemini",
+    description: "AI Models",
+    hoverColorClass: "group-hover:text-[#4285F4]",
+    logo: (
+      <svg viewBox="0 0 24 24" className="size-9" fill="currentColor" aria-hidden="true">
+        <path d="M12 0C13.2 6.4 17.6 10.8 24 12c-6.4 1.2-10.8 5.6-12 12C10.8 17.6 6.4 13.2 0 12 6.4 10.8 10.8 6.4 12 0Z" />
+      </svg>
+    ),
+  },
+  {
     name: "Figma",
     description: "Design",
     hoverColorClass: "group-hover:text-[#F24E1E]",

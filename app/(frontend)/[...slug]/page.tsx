@@ -76,6 +76,7 @@ export default async function CMSPage({ params }: Props) {
     [paymentServicesCopy.de['services.cryptoPayments.title'], paymentServicesCopy.de['services.cryptoPayments.description']],
     [paymentServicesCopy.de['services.sumup.title'], paymentServicesCopy.de['services.sumup.description']],
     [nfcCardsCopy.de.title, nfcCardsCopy.de.description],
+    [nfcCardsCopy.de.stampTitle, nfcCardsCopy.de.stampDescription],
   ]
   const graph: Record<string, unknown>[] = [
     {
