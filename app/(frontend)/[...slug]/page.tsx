@@ -18,6 +18,7 @@ import {
   BUSINESS_EMAIL,
   BUSINESS_PHONE,
   DEFAULT_DESCRIPTION,
+  FOUNDER_ID,
   SITE_NAME,
   SITE_URL,
   SOCIAL_IMAGE,
@@ -27,6 +28,7 @@ import {
   pagePath,
   publicPageMetadata,
   richTextToPlainText,
+  sectionStructuredData,
 } from '@/lib/seo'
 
 type Props = { params: Promise<{ slug?: string[] }> }
@@ -54,7 +56,13 @@ export default async function CMSPage({ params }: Props) {
   if (localService) return <>{preview && <PreviewBanner />}<LocalServicePage service={localService} /></>
   if (isSectionSlug(pageSlug)) {
     const [portfolio, section] = pageSlug === 'projekte' ? await Promise.all([getPortfolio(preview), getPortfolioSection(preview)]) : [[], undefined]
-    return <>{preview && <PreviewBanner />}<SectionPage slug={pageSlug} portfolio={portfolio} portfolioSection={section} /></>
+    return (
+      <>
+        {preview && <PreviewBanner />}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(sectionStructuredData(pageSlug)) }} />
+        <SectionPage slug={pageSlug} portfolio={portfolio} portfolioSection={section} />
+      </>
+    )
   }
   const page = await getPageBySlug(pageSlug, preview)
   if (!page) notFound()
@@ -94,7 +102,7 @@ export default async function CMSPage({ params }: Props) {
         description: DEFAULT_DESCRIPTION,
         email: BUSINESS_EMAIL,
         telephone: BUSINESS_PHONE,
-        founder: { '@type': 'Person', name: 'Yasin Adam Aissani' },
+        founder: { '@type': 'Person', '@id': FOUNDER_ID, name: 'Yasin Adam Aissani' },
         areaServed: { '@type': 'City', name: 'Kassel' },
         knowsAbout: ['Webdesign', 'Webentwicklung', 'Digital Marketing', 'SEO', 'Social Media Marketing', 'Anwendungsentwicklung'],
         sameAs: ['https://instagram.com/naser.solutions', 'https://www.facebook.com/profile.php?id=61588221712388'],

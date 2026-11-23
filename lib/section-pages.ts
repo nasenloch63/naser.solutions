@@ -1,4 +1,5 @@
-export const sectionSlugs = ['ueber-uns', 'leistungen', 'projekte', 'kontakt'] as const
+export const certificatesSlug = 'ueber-uns/zertifikate'
+export const sectionSlugs = ['ueber-uns', certificatesSlug, 'leistungen', 'projekte', 'kontakt'] as const
 export type SectionSlug = typeof sectionSlugs[number]
 
 export function isSectionSlug(slug: string): slug is SectionSlug {

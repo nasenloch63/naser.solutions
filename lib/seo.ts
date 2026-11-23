@@ -1,14 +1,17 @@
 import type { Metadata } from 'next'
 import type { Page } from '@/payload-types'
+import { hexagonCertificate } from './certificates'
 import { localServices } from './local-services'
+import { certificatesSlug, type SectionSlug } from './section-pages'
 
 export const SITE_URL = 'https://www.naser-solutions.de'
 export const SITE_NAME = 'Naser Solutions'
+export const FOUNDER_ID = `${SITE_URL}/ueber-uns#person`
 export const DEFAULT_TITLE = 'Webagentur Kassel & Digital Marketing | Naser Solutions'
 export const DEFAULT_DESCRIPTION =
   'Naser Solutions: deine Webagentur in Kassel für Webdesign, Webentwicklung und Digital Marketing. SEO, Social Media und individuelle Anwendungen aus einer Hand.'
 export function socialImageUrl(path = '/') {
-  return `${SITE_URL}/og${path === '/ueber-uns' ? '/ueber-uns' : ''}?v=3`
+  return `${SITE_URL}/og${path === '/ueber-uns' || path === `/${certificatesSlug}` ? '/ueber-uns' : ''}?v=3`
 }
 export const SOCIAL_IMAGE = socialImageUrl()
 export const BUSINESS_EMAIL = 'info@naser-solutions.de'
@@ -18,6 +21,7 @@ export const SHARE_PAGES: Record<string, { title: string; description: string; h
   ...Object.fromEntries(localServices.map(service => [`/${service.slug}`, { title: service.title, description: service.description, headline: service.heading, label: service.label }])),
   '/': { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, headline: 'Webdesign. Entwicklung. Digital Marketing.', label: 'WEBAGENTUR · KASSEL' },
   '/ueber-uns': { title: 'Über mich – Yasin Adam Aissani | Naser Solutions', description: 'Lerne Yasin Adam Aissani kennen: den Menschen hinter Naser Solutions, seinen Weg in die Webentwicklung und sein persönliches Netzwerk.', headline: 'Der Mensch hinter Naser Solutions.', label: 'YASIN ADAM AISSANI' },
+  [`/${certificatesSlug}`]: { title: 'Zertifikate – Yasin Adam Aissani | Naser Solutions', description: hexagonCertificate.description, headline: 'Zertifikate', label: 'YASIN ADAM AISSANI' },
   '/leistungen': { title: 'Webdesign, Digital Marketing & IT in Kassel | Naser Solutions', description: 'Webdesign, Digital Marketing, SEO, Social Media und Anwendungsentwicklung in Kassel: Entdecke die Leistungen von Naser Solutions für dein Unternehmen.', headline: 'Webdesign. Marketing. Entwicklung.', label: 'UNSERE LEISTUNGEN' },
   '/projekte': { title: 'Projekte & Referenzen | Naser Solutions', description: 'Entdecke Webdesign-Projekte, digitale Markenauftritte und Arbeiten von Naser Solutions.', headline: 'Ideen werden zu digitalen Erlebnissen.', label: 'PROJEKTE & REFERENZEN' },
   '/kontakt': { title: 'Kontakt & Projektanfrage | Naser Solutions', description: 'Sprich mit Yasin Adam Aissani über deine Website-Idee. Persönlicher Kontakt zu Naser Solutions per E-Mail, Telefon oder WhatsApp.', headline: 'Lass uns über dein Projekt sprechen.', label: 'PERSÖNLICHER KONTAKT' },
@@ -83,6 +87,62 @@ export function buildMetadata({
 export function publicPageMetadata(path: string): Metadata {
   const page = SHARE_PAGES[path]
   return buildMetadata({ ...page, path })
+}
+
+export function sectionStructuredData(slug: SectionSlug) {
+  const path = `/${slug}`
+  const url = absoluteUrl(path)
+  const { title, description } = SHARE_PAGES[path]
+  const isCertificatePage = slug === certificatesSlug
+  const isAboutPage = slug === 'ueber-uns'
+  const certificateId = `${url}#hexagon-certificate`
+  const organization = { '@id': `${SITE_URL}/#organization` }
+  const graph: Record<string, unknown>[] = [
+    {
+      '@type': isAboutPage ? 'AboutPage' : slug === 'kontakt' ? 'ContactPage' : 'WebPage',
+      '@id': `${url}#webpage`,
+      url,
+      name: title,
+      description,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      about: organization,
+      ...(isAboutPage ? { mainEntity: { '@id': FOUNDER_ID } } : {}),
+      ...(isCertificatePage ? { inLanguage: 'de', mainEntity: { '@id': certificateId } } : {}),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Startseite', item: absoluteUrl('/') },
+        ...(isCertificatePage ? [{ '@type': 'ListItem', position: 2, name: 'Über uns', item: absoluteUrl('/ueber-uns') }] : []),
+        { '@type': 'ListItem', position: isCertificatePage ? 3 : 2, name: isCertificatePage ? 'Zertifikate' : title, item: url },
+      ],
+    },
+  ]
+
+  if (isAboutPage) {
+    graph.push({
+      '@type': 'Person',
+      '@id': FOUNDER_ID,
+      name: hexagonCertificate.recipient,
+      url,
+      image: absoluteUrl('/images/yasin-adam-aissani-2026.jpg'),
+      worksFor: organization,
+    })
+  }
+
+  if (isCertificatePage) {
+    graph.push({
+      '@type': 'CreativeWork',
+      '@id': certificateId,
+      name: hexagonCertificate.title,
+      description,
+      author: { '@type': 'Organization', name: hexagonCertificate.issuer },
+      about: { '@id': FOUNDER_ID, name: hexagonCertificate.recipient },
+      encoding: { '@type': 'MediaObject', encodingFormat: 'application/pdf', contentUrl: absoluteUrl(hexagonCertificate.pdfPath) },
+    })
+  }
+
+  return { '@context': 'https://schema.org', '@graph': graph }
 }
 
 export function metadataForPage(page: Page): Metadata {
