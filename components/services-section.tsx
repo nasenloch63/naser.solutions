@@ -2,7 +2,7 @@
 
 import Link from "@/components/site-link"
 import { useState } from "react"
-import { ArrowUpRight, Globe, Target, AppWindow, Workflow, Server, HeartHandshake, Plus, ReceiptText, CreditCard } from "lucide-react"
+import { ArrowUpRight, Globe, Target, AppWindow, Workflow, Server, HeartHandshake, Plus, ReceiptText, CreditCard, Wifi } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { serviceCatalog } from "@/lib/service-catalog"
 import { servicePricingCopy } from "@/lib/service-pricing-copy"
@@ -38,21 +38,30 @@ export function ServicesSection() {
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {/* Architectural Asymmetric Bento Grid: 2 flagship pillars on top + 4 capability cards below */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
           {serviceCatalog[language].map((group, index) => {
             const Icon = icons[index]
+            const isHeroPillar = index < 2
             return (
-              <article key={index} className="relative min-w-0 overflow-hidden rounded-2xl border border-border bg-background p-6 text-foreground sm:p-8">
-                <div className="mb-8">
-                  <span className="flex size-11 items-center justify-center rounded-full border border-border">
+              <article
+                key={index}
+                className={`glass-surface relative min-w-0 overflow-hidden rounded-3xl border border-border bg-background p-6 text-foreground transition-[border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-foreground/35 sm:p-8 ${
+                  isHeroPillar ? "lg:col-span-6" : "lg:col-span-6 xl:col-span-3"
+                }`}
+              >
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="flex size-11 items-center justify-center rounded-full border border-border bg-secondary/40">
                     <Icon className="size-5" strokeWidth={1.5} aria-hidden="true" />
                   </span>
                 </div>
-                <h3 className="mb-5 font-display text-2xl font-semibold leading-tight tracking-tight wrap-anywhere">{group.title}</h3>
-                <ul className="divide-y divide-border">
+                <h3 className={`mb-5 font-display font-semibold leading-tight tracking-tight wrap-anywhere ${isHeroPillar ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"}`}>
+                  {group.title}
+                </h3>
+                <ul className="divide-y divide-border/80">
                   {group.items.map(item => (
                     <li key={item} className="flex gap-3 py-3 text-sm leading-relaxed text-muted-foreground">
-                      <span aria-hidden="true" className="mt-2 size-1 shrink-0 rounded-full bg-foreground/40" />
+                      <span aria-hidden="true" className="mt-2 size-1 shrink-0 rounded-full bg-foreground/45" />
                       <span className="min-w-0 wrap-anywhere">{item}</span>
                     </li>
                   ))}
@@ -99,26 +108,47 @@ export function ServicesSection() {
           })}
         </div>
 
-        <div id="nfc-cards" className="mt-4 grid scroll-mt-24 gap-6 rounded-2xl border border-border bg-background p-6 sm:p-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+        <div id="nfc-cards" className="glass-surface mt-4 grid scroll-mt-24 gap-6 rounded-3xl border border-border bg-background p-6 sm:p-8 lg:grid-cols-[1.15fr_0.85fr_1fr] lg:items-center lg:gap-8">
           <div>
-            <h3 className="flex items-center gap-3 font-display text-xl font-semibold">
+            <h3 className="flex items-center gap-3 font-display text-xl font-semibold sm:text-2xl">
               <CreditCard className="size-5 shrink-0" strokeWidth={1.5} aria-hidden="true" />{nfc.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{nfc.description}</p>
+            <p className="mt-3 text-sm leading-relaxed text-pretty text-muted-foreground">{nfc.description}</p>
           </div>
+
+          {/* Sculpted Physical Obsidian NFC Card Object */}
+          <div aria-hidden="true" className="mx-auto w-full max-w-[260px]">
+            <div className="glass-surface group relative aspect-[1.586/1] w-full overflow-hidden rounded-2xl border border-foreground/20 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-4 text-white shadow-xl shadow-black/25 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1">
+              <div className="flex items-start justify-between">
+                <div
+                  className="size-8 bg-contain bg-left bg-no-repeat opacity-95"
+                  style={{ backgroundImage: "url('/images/inverted-20logo-20png.png')" }}
+                />
+                <Wifi className="size-4 rotate-90 text-white/65" strokeWidth={1.75} />
+              </div>
+              <div className="absolute inset-x-4 bottom-3.5 flex items-end justify-between">
+                <div>
+                  <p className="font-display text-xs font-semibold tracking-tight text-white">Naser Solutions</p>
+                  <p className="text-[9px] tracking-[0.18em] text-white/55 uppercase">NFC Smart Card</p>
+                </div>
+                <span className="h-4 w-6 rounded-[4px] border border-white/25 bg-white/10" />
+              </div>
+            </div>
+          </div>
+
           <dl className="grid grid-cols-2 gap-3 sm:gap-4">
             <div className="min-w-0 rounded-xl bg-secondary/50 p-4 sm:p-5">
               <dt className="text-sm font-medium">{nfc.single}</dt>
               <dd className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
                 <span className="text-xs text-muted-foreground">{pricing.from}</span>
-                <span dir="ltr" className="font-display text-2xl font-semibold whitespace-nowrap">20 €</span>
+                <span dir="ltr" className="font-display text-2xl font-semibold tabular-nums whitespace-nowrap">20 €</span>
               </dd>
             </div>
             <div className="min-w-0 rounded-xl border border-border bg-secondary/50 p-4 sm:p-5">
               <dt className="text-sm font-medium">{nfc.bundle}</dt>
               <dd className="mt-3">
                 <span className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  <span dir="ltr" className="font-display text-2xl font-semibold whitespace-nowrap">13 €</span>
+                  <span dir="ltr" className="font-display text-2xl font-semibold tabular-nums whitespace-nowrap">13 €</span>
                   <span className="text-xs text-muted-foreground">{nfc.perCard}</span>
                 </span>
                 <span className="mt-1 block text-xs text-muted-foreground">{nfc.bundleTotal}</span>
@@ -146,9 +176,9 @@ export function ServicesSection() {
           </div>
           <dl className="grid gap-4 md:grid-cols-3">
             {priceExamples.map((example) => (
-              <div key={example.title} className="flex min-w-0 flex-col rounded-2xl border border-border bg-background p-6 sm:p-8 md:p-5 lg:p-7">
+              <div key={example.title} className="flex min-w-0 flex-col rounded-2xl border border-border bg-background p-6 transition-[border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-foreground/30 sm:p-8 md:p-5 lg:p-7">
                 <dt className="flex-1 text-sm font-medium leading-relaxed">{example.title}</dt>
-                <dd dir="ltr" className="mt-8 font-display text-3xl md:text-xl lg:text-2xl xl:text-3xl font-semibold tracking-tight whitespace-nowrap">{example.amount}</dd>
+                <dd dir="ltr" className="mt-8 font-display text-3xl md:text-xl lg:text-2xl xl:text-3xl font-semibold tracking-tight tabular-nums whitespace-nowrap">{example.amount}</dd>
               </div>
             ))}
           </dl>
@@ -159,7 +189,7 @@ export function ServicesSection() {
               </p>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{pricing.note}</p>
             </div>
-            <Link href="/#anfrage" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-4 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4">
+            <Link href="/#anfrage" className="glossy-pill inline-flex min-h-12 shrink-0 items-center justify-center gap-3 px-6 py-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-4">
               {t("hero.cta")}<ArrowUpRight className="size-4 rtl-flip" aria-hidden="true" />
             </Link>
           </div>

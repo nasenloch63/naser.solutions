@@ -40,10 +40,54 @@
 
 @media (prefers-reduced-motion: reduce) {
   .mobile-menu-shell,
-  .mobile-nav-item {
+  .mobile-nav-item,
+  .lang-dropdown-panel {
     transition: none;
     transform: none;
+    filter: none;
   }
+}
+
+/* yasin_ui: Smooth spring dropdown for language switcher */
+.lang-dropdown-panel {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-8px) scale(0.95);
+  filter: blur(4px);
+  transform-origin: top right;
+  transition: opacity 210ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 210ms ease,
+    visibility 0s 260ms;
+}
+
+[dir="rtl"] .lang-dropdown-panel {
+  transform-origin: top left;
+}
+
+.lang-dropdown-panel[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition-delay: 0s;
+}
+
+/* yasin_ui: Radial circular theme reveal via View Transitions API */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
 }
 
 :root {
@@ -248,15 +292,131 @@ section[id] {
 
 @media (hover: hover) and (pointer: fine) {
   .project-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     border-color: var(--muted-foreground);
-    box-shadow: 0 18px 40px -24px color-mix(in oklab, var(--foreground) 30%, transparent);
+    box-shadow: 0 18px 40px -26px color-mix(in oklab, var(--foreground) 26%, transparent);
   }
 
   .project-card:hover .project-card-arrow {
     transform: rotate(45deg);
     background: var(--foreground);
     color: var(--background);
+  }
+}
+
+@layer components {
+  /* yasin_ui: Dissolve-inspired pure-CSS specular pill button */
+  .glossy-pill {
+    position: relative;
+    isolation: isolate;
+    border-radius: 9999px;
+    background: linear-gradient(180deg, #272727 0%, #141414 100%);
+    color: #f8f8f8;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 8px 20px -12px rgba(0, 0, 0, 0.45);
+    transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 180ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .glossy-pill::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.08) 52%,
+      rgba(255, 255, 255, 0.14) 100%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .glossy-pill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+  }
+
+  .dark .glossy-pill {
+    background: linear-gradient(180deg, #ffffff 0%, #e7e7e7 100%);
+    color: #060606;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 24px -14px rgba(255, 255, 255, 0.22);
+  }
+
+  .dark .glossy-pill::before {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(0, 0, 0, 0.14) 100%
+    );
+  }
+
+  .dark .glossy-pill::after {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .glossy-pill:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+  }
+
+  .glossy-pill:active {
+    transform: scale(0.97);
+  }
+
+  /* yasin_ui: Architectural frosted-glass top specular hairline rim */
+  .glass-surface {
+    position: relative;
+  }
+
+  .glass-surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--foreground) 16%, transparent) 0%,
+      color-mix(in oklab, var(--foreground) 4%, transparent) 45%,
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* yasin_ui: One-shot subtle entrance */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-enter {
+    animation: hero-enter 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-enter-delay {
+    animation: hero-enter 620ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+  }
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

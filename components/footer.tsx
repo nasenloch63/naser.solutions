@@ -38,7 +38,7 @@ export function Footer() {
             </div>
             <div className="flex flex-col">
               <span className="font-semibold text-foreground leading-tight">Naser Solutions</span>
-              <span className="text-[10px] text-muted-foreground tracking-widest uppercase">Web Agency</span>
+              <span className="text-[10px] text-muted-foreground tracking-[0.2em] uppercase">Webagency</span>
             </div>
           </Link>
 

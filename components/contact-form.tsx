@@ -3,7 +3,6 @@
 import { useRef, useState, type FormEvent } from "react"
 import Link from "@/components/site-link"
 import { ArrowRight, Check, LoaderCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -76,19 +75,26 @@ export function ContactForm() {
           <Input id="contact-phone" name="phone" type="tel" className="h-11 text-base md:text-base" autoComplete="tel" enterKeyHint="next" maxLength={60} placeholder={t("contact.form.phonePlaceholder")} />
         </div>
         <div className="space-y-2">
-          <Label asChild>
-            <span>{contactServicesHeading(language)}</span>
-          </Label>
-          <div role="group" aria-label={contactServicesHeading(language)} className="flex flex-wrap gap-2">
+          <div className="flex items-center justify-between gap-2">
+            <Label asChild>
+              <span>{contactServicesHeading(language)}</span>
+            </Label>
+            {selectedServices.length > 0 && (
+              <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-foreground px-2 py-0.5 text-[11px] font-semibold tabular-nums text-background">
+                {selectedServices.length}
+              </span>
+            )}
+          </div>
+          <div role="group" aria-label={contactServicesHeading(language)} className="flex flex-wrap gap-1.5 sm:gap-2">
             {contactServiceOptions.map(option => {
               const checked = selectedServices.includes(option.id)
               return (
                 <label
                   key={option.id}
-                  className={`inline-flex min-h-9 cursor-pointer select-none items-center gap-2 rounded-lg border px-2.5 py-1.5 text-xs sm:text-sm transition-colors focus-within:outline-2 focus-within:outline-offset-2 ${
+                  className={`inline-flex min-h-9 cursor-pointer select-none items-center gap-2 rounded-full border px-3 py-1.5 text-xs sm:text-sm transition-[border-color,background-color,color,transform] duration-200 active:scale-[0.96] focus-within:outline-2 focus-within:outline-offset-2 ${
                     checked
-                      ? "border-foreground bg-foreground/10 text-foreground font-medium"
-                      : "border-border/80 bg-background/50 text-muted-foreground hover:border-foreground/40 hover:text-foreground"
+                      ? "border-foreground bg-foreground/12 text-foreground font-medium"
+                      : "border-border/80 bg-background/55 text-muted-foreground hover:border-foreground/40 hover:text-foreground"
                   }`}
                 >
                   <input
@@ -101,13 +107,17 @@ export function ContactForm() {
                   />
                   <span
                     aria-hidden="true"
-                    className={`flex size-4 shrink-0 items-center justify-center rounded border transition-colors ${
+                    className={`flex size-4 shrink-0 items-center justify-center rounded-full border transition-[border-color,background-color,transform] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
                       checked
-                        ? "border-foreground bg-foreground text-background"
-                        : "border-muted-foreground/50 bg-transparent"
+                        ? "scale-100 border-foreground bg-foreground text-background"
+                        : "scale-95 border-muted-foreground/50 bg-transparent"
                     }`}
                   >
-                    {checked && <Check className="size-3 stroke-[2.5]" />}
+                    <Check
+                      className={`size-2.5 stroke-[3] transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+                        checked ? "scale-100 opacity-100" : "scale-50 opacity-0"
+                      }`}
+                    />
                   </span>
                   <span>{contactServiceLabel(language, option.id)}</span>
                 </label>
@@ -117,17 +127,25 @@ export function ContactForm() {
         </div>
         <div className="space-y-2">
           <Label htmlFor="contact-message">{t("contact.form.message")}</Label>
-          <Textarea id="contact-message" name="message" required maxLength={5000} rows={3} className="min-h-24 resize-y text-base md:text-base" placeholder={t("contact.form.messagePlaceholder")} />
+          <Textarea id="contact-message" name="message" required maxLength={5000} rows={3} className="min-h-20 resize-y text-base md:text-base" placeholder={t("contact.form.messagePlaceholder")} />
         </div>
         <div hidden aria-hidden="true">
           <label htmlFor="contact-website">Website</label>
           <input id="contact-website" name="website" autoComplete="off" tabIndex={-1} />
         </div>
         <p className="text-xs text-muted-foreground leading-relaxed">{t("contact.form.privacy")} <Link href="/datenschutz" className="underline underline-offset-2">{t("footer.privacy")}</Link></p>
-        <Button type="submit" className="w-full min-h-11 h-auto whitespace-normal py-3" disabled={status === "loading"}>
-          {status === "loading" ? <LoaderCircle className="size-4 animate-spin" aria-hidden="true" /> : <ArrowRight className="size-4 rtl-flip" aria-hidden="true" />}
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="glossy-pill group inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 whitespace-normal px-6 py-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50"
+        >
+          {status === "loading" ? (
+            <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
+          ) : (
+            <ArrowRight className="size-4 rtl-flip transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+          )}
           {t(status === "loading" ? "contact.form.sending" : "contact.form.submit")}
-        </Button>
+        </button>
       </fieldset>
       <div aria-live="polite" aria-atomic="true">
         {status === "success" && <p role="status" className="text-sm text-green-700 dark:text-green-400">{t("contact.form.success")}</p>}

@@ -49,7 +49,7 @@ export function Navbar() {
   }
 
   return (
-    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl backdrop-saturate-150 border-b border-border/50 shadow-sm supports-[backdrop-filter]:bg-background/40">
+    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 border-b border-border/60 bg-background/88 shadow-[0_1px_0_rgba(255,255,255,0.03)] backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-background/76">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" onClick={handleSectionNavigation} aria-label="Naser Solutions" className="flex items-center gap-2 min-w-0">
@@ -105,17 +105,30 @@ export function Navbar() {
             </a>
             <LanguageSwitcher />
             <button
-              onClick={toggleTheme}
-              className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-secondary transition-colors"
+              onClick={(e) => toggleTheme(e)}
+              className="relative inline-flex size-11 cursor-pointer items-center justify-center rounded-full hover:bg-secondary active:scale-90 transition-[background-color,transform] duration-200"
               aria-label={t("ui.theme")} title={t("ui.theme")}
             >
-              {theme === "dark" ? (
-                <Sun className="h-5 w-5 text-foreground" />
-              ) : (
-                <Moon className="h-5 w-5 text-foreground" />
-              )}
+              <Sun
+                aria-hidden="true"
+                className={`absolute h-5 w-5 text-foreground transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none ${
+                  theme === "dark" ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0"
+                }`}
+              />
+              <Moon
+                aria-hidden="true"
+                className={`absolute h-5 w-5 text-foreground transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none ${
+                  theme === "dark" ? "rotate-90 scale-50 opacity-0" : "rotate-0 scale-100 opacity-100"
+                }`}
+              />
             </button>
-            <Button asChild><Link href="/#anfrage" onClick={handleSectionNavigation}>{t("nav.contact")}</Link></Button>
+            <Link
+              href="/#anfrage"
+              onClick={handleSectionNavigation}
+              className="glossy-pill inline-flex min-h-10 items-center justify-center px-5 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              {t("nav.contact")}
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -131,15 +144,22 @@ export function Navbar() {
             </a>
             <LanguageSwitcherCompact />
             <button
-              onClick={toggleTheme}
-              className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-secondary transition-colors"
+              onClick={(e) => toggleTheme(e)}
+              className="relative inline-flex size-11 cursor-pointer items-center justify-center rounded-full hover:bg-secondary active:scale-90 transition-[background-color,transform] duration-200"
               aria-label={t("ui.theme")} title={t("ui.theme")}
             >
-              {theme === "dark" ? (
-                <Sun className="h-5 w-5 text-foreground" />
-              ) : (
-                <Moon className="h-5 w-5 text-foreground" />
-              )}
+              <Sun
+                aria-hidden="true"
+                className={`absolute h-5 w-5 text-foreground transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none ${
+                  theme === "dark" ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0"
+                }`}
+              />
+              <Moon
+                aria-hidden="true"
+                className={`absolute h-5 w-5 text-foreground transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none ${
+                  theme === "dark" ? "rotate-90 scale-50 opacity-0" : "rotate-0 scale-100 opacity-100"
+                }`}
+              />
             </button>
             <button ref={menuButtonRef} className="relative inline-flex size-11 items-center justify-center rounded-full border border-border/60 bg-background/50 transition-[background-color,transform] duration-200 hover:bg-secondary active:scale-90 motion-reduce:transition-none" aria-label={t("ui.menu")} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen(open => !open)}>
               <Menu aria-hidden="true" className={`absolute size-5 transition-[opacity,transform] duration-300 motion-reduce:transition-none ${isOpen ? "rotate-90 scale-50 opacity-0" : "rotate-0 scale-100 opacity-100"}`} />

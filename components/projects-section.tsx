@@ -9,6 +9,8 @@ import { demoPartnerProjects, demoPartnerSectionCopy } from "@/lib/demo-partner-
 import { hazeChillProjectCopy } from "@/lib/haze-chill-project-copy"
 import { localizedText, selectPortfolio, type PortfolioProject, type PortfolioSection } from "@/lib/portfolio"
 import { projectImageCopy } from "@/lib/project-image-copy"
+import { DissolveCardStack, type StackCardItem } from "@/components/dissolve-card-stack"
+import { DissolveSegmented } from "@/components/dissolve-segmented"
 
 type ProjectCategory = "showcase" | "web" | "design" | "gastro" | "social" | "ecommerce" | "nonprofit"
 
@@ -76,7 +78,7 @@ function ProjectThumbnail({ url, title }: { url: string; title: string }) {
           src={src}
           alt={`${projectImageCopy[language].website}: ${title}`}
           loading="lazy"
-          className={`w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105 ${
+          className={`w-full h-full object-cover object-top transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] ${
             status === "loaded" ? "opacity-100" : "opacity-0"
           }`}
           onLoad={handleLoad}
@@ -108,7 +110,7 @@ function StaticThumbnail({ src, alt }: { src: string; alt: string }) {
         alt={alt}
         fill
         sizes="(min-width: 1280px) 608px, (min-width: 768px) 50vw, 100vw"
-        className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+        className="object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
       />
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
     </div>
@@ -165,67 +167,75 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
   ]
   const categories = categoryOptions.filter((category) => category.value === "all" || selectedProjects.some((project) => project.category === category.value))
 
+  const stackItems: StackCardItem[] = useMemo(() => {
+    return selectedProjects
+      .filter((p) => Boolean(p.image))
+      .slice(0, 5)
+      .map((project) => ({
+        id: String(project.id),
+        title: localizedText(project.title, language),
+        description: localizedText(project.description, language),
+        url: project.url,
+        image: project.image ?? undefined,
+        containImage: Boolean(project.containImage),
+        tags: project.tags.map((tag) => localizedText(tag, language)),
+        ctaLabel:
+          project.url === "/CMS"
+            ? cmsCopy.status
+            : t(isInstagramProject(project) ? "ui.instagram" : "ui.website"),
+      }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedProjects, language, cmsCopy.status])
+
   return (
-    <section id="projekte" aria-labelledby="projects-title" className="relative bg-secondary/30 py-10 sm:py-12 lg:py-16">
+    <section id="projekte" aria-labelledby="projects-title" className="relative border-t border-border bg-secondary/30 py-14 sm:py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 sm:mb-14">
-          <div className="max-w-3xl">
-            <h2 id="projects-title" className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-foreground mb-6 text-balance sm:text-5xl lg:text-7xl">
+        {/* Asymmetric Showcase Header + Interactive Dissolve CardStack */}
+        <div className="mb-12 grid items-center gap-10 lg:mb-16 lg:grid-cols-[1fr_1.08fr] lg:gap-14">
+          <div className="min-w-0">
+            <h2 id="projects-title" className="font-display text-4xl font-semibold leading-[1.04] tracking-tight text-foreground mb-5 text-balance sm:text-5xl lg:text-6xl">
               {section ? localizedText(section.heading, language) : t("projects.title")}
             </h2>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{section ? localizedText(section.description, language) : t("projects.description")}</p>
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed text-pretty max-w-xl">
+              {section ? localizedText(section.description, language) : t("projects.description")}
+            </p>
+            <div aria-live="polite" aria-atomic="true" className="mt-6 inline-flex items-center gap-2 rounded-full border border-border/80 bg-background/70 px-3.5 py-1.5 text-xs font-medium tabular-nums text-muted-foreground backdrop-blur-md">
+              <span className="font-semibold text-foreground">{filteredProjects.length}</span>
+              <span>{t(filteredProjects.length === 1 ? "ui.project" : "ui.projects")}</span>
+            </div>
           </div>
+
+          {stackItems.length > 1 && (
+            <div className="min-w-0">
+              <DissolveCardStack items={stackItems} />
+            </div>
+          )}
         </div>
 
-        {/* Filter and View Controls */}
-        <div className="mb-6 flex flex-col justify-between gap-4 border-y border-border py-4 sm:flex-row sm:items-center">
-          <div className="work-filters flex w-full min-w-0 gap-2 overflow-x-auto pb-1 sm:flex-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
-            {(section?.showFilters === false ? [] : categories).map((category) => (
-              <button
-                key={category.value}
-                onClick={() => setSelectedCategory(category.value)}
-                aria-pressed={selectedCategory === category.value}
-                className={`min-h-11 shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:-outline-offset-2 ${
-                  selectedCategory === category.value
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-background text-muted-foreground hover:bg-secondary hover:text-foreground"
-                }`}
-              >
-                {category.label}
-              </button>
-            ))}
-          </div>
+        {/* Dissolve Sliding Segmented Filter & View Controls */}
+        <div className="mb-8 flex flex-col justify-between gap-4 border-y border-border py-4 sm:flex-row sm:items-center">
+          {section?.showFilters !== false && categories.length > 1 ? (
+            <DissolveSegmented<CategoryFilter>
+              ariaLabel={t("projects.title")}
+              value={selectedCategory}
+              onChange={setSelectedCategory}
+              options={categories}
+            />
+          ) : (
+            <div />
+          )}
 
-          <div className="flex shrink-0 self-end gap-2 bg-background rounded-lg p-1 border border-border sm:self-auto">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={`inline-flex size-11 items-center justify-center rounded transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                viewMode === "grid"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-              aria-label={t("ui.grid")}
-              aria-pressed={viewMode === "grid"}
-            >
-              <Grid3x3 className="h-5 w-5" />
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              className={`inline-flex size-11 items-center justify-center rounded transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                viewMode === "list"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-              aria-label={t("ui.list")}
-              aria-pressed={viewMode === "list"}
-            >
-              <List className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-
-        <div aria-live="polite" aria-atomic="true" className="mb-6 text-sm text-muted-foreground">
-          {filteredProjects.length} {t(filteredProjects.length === 1 ? "ui.project" : "ui.projects")}
+          <DissolveSegmented<ViewMode>
+            compact
+            ariaLabel="View mode"
+            value={viewMode}
+            onChange={setViewMode}
+            className="self-end sm:self-auto"
+            options={[
+              { value: "grid", label: t("ui.grid"), icon: <Grid3x3 className="size-3.5" aria-hidden="true" /> },
+              { value: "list", label: t("ui.list"), icon: <List className="size-3.5" aria-hidden="true" /> },
+            ]}
+          />
         </div>
 
         <div className={`grid gap-5 sm:gap-8 ${viewMode === "grid" ? "md:grid-cols-2" : "grid-cols-1"}`}>

@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import { SiteNavigation } from "@/components/site-navigation"
+import { DissolveToastHost } from "@/components/dissolve-toast"
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL, publicPageMetadata } from "@/lib/seo"
 import "../globals.css"
 import { themeInitScript } from "@/lib/theme"
@@ -46,7 +47,10 @@ export default async function RootLayout({
       <head><script dangerouslySetInnerHTML={{ __html: themeInitScript }} /></head>
       <body className={`font-sans antialiased`}>
         <ThemeProvider>
-          <LanguageProvider initialLanguage={initialLanguage}><SiteNavigation>{children}</SiteNavigation></LanguageProvider>
+          <LanguageProvider initialLanguage={initialLanguage}>
+            <SiteNavigation>{children}</SiteNavigation>
+            <DissolveToastHost />
+          </LanguageProvider>
         </ThemeProvider>
         <Analytics />
       </body>
