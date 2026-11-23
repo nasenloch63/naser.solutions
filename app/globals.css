@@ -221,7 +221,8 @@ section[id] {
   transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), background-color 220ms ease, color 220ms ease;
 }
 
-.project-card:focus-visible .project-card-arrow {
+.project-card:focus-visible .project-card-arrow,
+.project-card:focus-within .project-card-arrow {
   background: var(--foreground);
   color: var(--background);
 }

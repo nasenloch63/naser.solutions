@@ -1,6 +1,10 @@
 import type { Language } from './language'
 
 export type LocalizedText = string | Partial<Record<Language, string>> | null | undefined
+export interface PortfolioPartner {
+  name: string
+  url: string
+}
 export interface PortfolioProject {
   id: number | string
   title: LocalizedText
@@ -12,6 +16,7 @@ export interface PortfolioProject {
   alt?: LocalizedText
   containImage?: boolean | null
   order?: number | null
+  partner?: PortfolioPartner | null
 }
 export interface PortfolioSection {
   id?: string | null

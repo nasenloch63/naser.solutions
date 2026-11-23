@@ -8,6 +8,7 @@ import { supportedLanguages } from '../lib/language'
 import { localizedText } from '../lib/portfolio'
 import { websiteText } from '../lib/website-text'
 import { importKasselUnited } from './import-kassel-united'
+import { importWestfalenHelp } from './import-westfalen-help'
 import { removeCryptoNews } from './remove-crypto-news'
 import { isCmsQuotaExceeded } from '../lib/cms-quota'
 
@@ -93,4 +94,4 @@ async function run() {
     await pool.end()
   }
 }
-try { if (await run() !== false) { await importKasselUnited(); await removeCryptoNews() } process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }
+try { if (await run() !== false) { await importKasselUnited(); await removeCryptoNews(); await importWestfalenHelp() } process.exit(0) } catch (error) { console.error('Portfolio import failed:', error); process.exit(1) }

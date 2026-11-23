@@ -5,6 +5,7 @@ import { useState, useMemo, useCallback } from "react"
 import { useLanguage } from "@/components/language-provider"
 import { ExternalLink, ArrowUpRight, Grid3x3, List, Filter, Globe, Instagram } from "lucide-react"
 import { cmsProjectCopy } from "@/lib/cms-project-copy"
+import { demoPartnerProjects, demoPartnerSectionCopy } from "@/lib/demo-partner-projects"
 import { hazeChillProjectCopy } from "@/lib/haze-chill-project-copy"
 import { localizedText, selectPortfolio, type PortfolioProject, type PortfolioSection } from "@/lib/portfolio"
 import { projectImageCopy } from "@/lib/project-image-copy"
@@ -137,6 +138,7 @@ type CategoryFilter = "all" | ProjectCategory
 export function ProjectsSection({ projects, section }: { projects: PortfolioProject[]; section?: PortfolioSection }) {
   const { t, language } = useLanguage()
   const cmsCopy = cmsProjectCopy[language]
+  const demoPartnerCopy = demoPartnerSectionCopy[language]
   const hazeCopy = hazeChillProjectCopy[language]
   const imageCopy = projectImageCopy[language]
   const isInstagramProject = (project: PortfolioProject) => /^https?:\/\/(?:www\.)?instagram\.com(?:\/|$)/i.test(project.url)
@@ -228,14 +230,17 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
 
         <div className={`grid gap-5 sm:gap-8 ${viewMode === "grid" ? "md:grid-cols-2" : "grid-cols-1"}`}>
           {filteredProjects.map((project) => (
-            <a
+            <article
               key={project.id}
-              href={project.url}
-              target={project.url.startsWith("/") ? undefined : "_blank"}
-              rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
-              className="project-card group relative rounded-3xl border border-border bg-background overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4"
-              aria-label={projectTitle(project)}
+              className="project-card group relative rounded-3xl border border-border bg-background overflow-hidden"
             >
+              <a
+                href={project.url}
+                target={project.url.startsWith("/") ? undefined : "_blank"}
+                rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
+                className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-2 focus-visible:-outline-offset-2"
+                aria-label={projectTitle(project)}
+              />
               {/* Thumbnail */}
               <div className={`${viewMode === "grid" ? "aspect-video" : "aspect-video sm:aspect-[3/1]"} relative overflow-hidden`}>
                 {project.image && !project.containImage ? (
@@ -269,18 +274,31 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
                   <p className="text-muted-foreground leading-relaxed text-sm">{projectDescription(project)}</p>
                 </div>
 
-                <div className="mt-5 flex shrink-0 items-center gap-2 text-sm text-primary font-medium">
-                  <span>{project.url === "/CMS" ? cmsCopy.status : t(isInstagramProject(project) ? "ui.instagram" : "ui.website")}</span>
-                  {project.url === "/CMS" ? (
-                    <ArrowUpRight className="h-4 w-4" />
-                  ) : isInstagramProject(project) ? (
-                    <Instagram className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  ) : (
-                    <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <div className={`mt-5 flex flex-wrap items-center justify-between gap-x-5 gap-y-2 shrink-0 text-sm ${viewMode === "list" ? "sm:mt-0 sm:flex-col sm:items-end" : ""}`}>
+                  <div className="flex items-center gap-2 text-primary font-medium">
+                    <span>{project.url === "/CMS" ? cmsCopy.status : t(isInstagramProject(project) ? "ui.instagram" : "ui.website")}</span>
+                    {project.url === "/CMS" ? (
+                      <ArrowUpRight className="h-4 w-4" />
+                    ) : isInstagramProject(project) ? (
+                      <Instagram className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    ) : (
+                      <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    )}
+                  </div>
+                  {project.partner && (
+                    <a
+                      href={project.partner.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative z-20 inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors rounded focus-visible:outline-2 focus-visible:outline-offset-2"
+                    >
+                      <span>{demoPartnerCopy.collaborationLabel} {project.partner.name}</span>
+                      <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    </a>
                   )}
                 </div>
               </div>
-            </a>
+            </article>
           ))}
         </div>
 
@@ -291,6 +309,88 @@ export function ProjectsSection({ projects, section }: { projects: PortfolioProj
             <p className="text-muted-foreground">{t("ui.retry")}</p>
           </div>
         )}
+
+        {/* Active Demo Sites & Partner Agencies */}
+        <div id="demo-sites" className="mt-14 border-t border-border pt-12 sm:mt-16 sm:pt-14 scroll-mt-24">
+          <div className="mb-8 sm:mb-10 max-w-3xl">
+            <h3 className="font-display text-3xl font-semibold leading-[1.08] tracking-tight text-foreground mb-4 text-balance sm:text-4xl lg:text-5xl">
+              {demoPartnerCopy.heading}
+            </h3>
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+              {demoPartnerCopy.description}
+            </p>
+          </div>
+
+          <div className={`grid gap-5 sm:gap-8 ${viewMode === "grid" ? "md:grid-cols-2" : "grid-cols-1"}`}>
+            {demoPartnerProjects.map((item) => {
+              const title = localizedText(item.title, language)
+              const description = localizedText(item.description, language)
+              const badge = localizedText(item.badge, language)
+              return (
+                <article
+                  key={item.id}
+                  className="project-card group relative rounded-3xl border border-border bg-background overflow-hidden"
+                >
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-2 focus-visible:-outline-offset-2"
+                    aria-label={title}
+                  />
+                  <div className={`${viewMode === "grid" ? "aspect-video" : "aspect-video sm:aspect-[3/1]"} relative overflow-hidden`}>
+                    <StaticThumbnail src={item.image} alt={item.alt} />
+                    {badge && (
+                      <span className="absolute start-4 top-4 inline-flex items-center rounded-full border border-border/50 bg-background/90 px-3 py-1 text-xs font-medium text-foreground backdrop-blur-md">
+                        {badge}
+                      </span>
+                    )}
+                    <span aria-hidden="true" className="project-card-arrow absolute end-4 top-4 flex size-11 items-center justify-center rounded-full border border-border/50 bg-background/90 text-foreground backdrop-blur-md">
+                      <ArrowUpRight className="size-5 rtl-flip" />
+                    </span>
+                  </div>
+
+                  <div className={`p-5 sm:p-6 ${viewMode === "list" ? "sm:flex sm:items-center sm:gap-6" : ""}`}>
+                    <div className="flex-1">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {item.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs px-3 py-1 rounded-full bg-secondary text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-300"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h4 className="font-display text-xl font-semibold tracking-tight text-foreground mb-2 sm:text-2xl">
+                        {title}
+                      </h4>
+                      <p className="text-muted-foreground leading-relaxed text-sm">{description}</p>
+                    </div>
+
+                    <div className={`mt-5 flex flex-wrap items-center justify-between gap-x-5 gap-y-2 shrink-0 text-sm ${viewMode === "list" ? "sm:mt-0 sm:flex-col sm:items-end" : ""}`}>
+                      <div className="flex items-center gap-2 text-primary font-medium">
+                        <span>{t("ui.website")}</span>
+                        <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </div>
+                      {item.partner && (
+                        <a
+                          href={item.partner.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="relative z-20 inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors rounded focus-visible:outline-2 focus-visible:outline-offset-2"
+                        >
+                          <span>{demoPartnerCopy.collaborationLabel} {item.partner.name}</span>
+                          <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        </div>
 
         <div className="mt-12 border-t border-border pt-6 text-center">
           <p className="text-muted-foreground mb-4">{t("projects.moreComingSoon")}</p>
